@@ -6,9 +6,15 @@ import { execFileSync } from 'node:child_process'
 const apiRoot = 'https://intervals.icu/api/v1'
 const archiveDirectory = 'private/garmin/activities'
 const manifestPath = 'private/garmin/manifest.json'
+const overridesPath =
+  'scripts/intervals-activity-overrides.json'
 const keychainAccount = 'ashterism-walks'
 const keychainService = 'intervals.icu'
 const allowedTypes = new Set(['hike', 'walk'])
+
+const activityOverrides = JSON.parse(
+  fs.readFileSync(overridesPath, 'utf8'),
+)
 
 const getApiKey = () => {
   const environmentKey =
@@ -199,14 +205,24 @@ if (!Array.isArray(allActivities)) {
   )
 }
 
-const activities = allActivities.filter(
-  (activity) =>
-    activity.source === 'GARMIN_CONNECT' &&
-    activity.file_type === 'fit' &&
-    allowedTypes.has(
-      String(activity.type).toLowerCase(),
-    ),
-)
+const activities = allActivities
+  .filter(
+    (activity) =>
+      activity.source === 'GARMIN_CONNECT' &&
+      activity.file_type === 'fit' &&
+      allowedTypes.has(
+        String(
+          activityOverrides[activity.id]?.type ??
+          activity.type,
+        ).toLowerCase(),
+      ),
+  )
+  .map((activity) => ({
+    ...activity,
+    type:
+      activityOverrides[activity.id]?.type ??
+      activity.type,
+  }))
 
 const existingByIntervalsId = new Map(
   loadExistingManifest().map((activity) => [
