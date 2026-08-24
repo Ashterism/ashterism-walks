@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Walking and hiking routes recorded around the world." />
+    <title>Ashterism Walks</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="site-header">
+        <div>
+          <p class="site-header__eyebrow">On foot, here and there</p>
+          <h1>Ashterism Walks</h1>
+        </div>
+        <button id="view-all" class="view-all" type="button">View all</button>
+      </header>
+
+      <div class="map-shell">
+        <main id="map" aria-label="Map of walking and hiking routes"></main>
+
+        <aside class="library" aria-label="Walk library">
+          <div class="library__heading">
+            <h2>Recent wanderings</h2>
+            <span id="walk-count">Loading…</span>
+          </div>
+          <ol id="walk-list" class="walk-list"></ol>
+          <p class="library__credit">Activity data provided by Garmin</p>
+        </aside>
+
+        <section id="walk-panel" class="walk-panel" aria-labelledby="walk-title" hidden>
+          <p class="walk-panel__label">Selected route</p>
+          <h2 id="walk-title">Walk</h2>
+          <p id="walk-date" class="walk-panel__date"></p>
+          <dl class="walk-stats">
+            <div><dt>Distance</dt><dd id="walk-distance">–</dd></div>
+            <div><dt>Moving</dt><dd id="walk-moving-time">–</dd></div>
+            <div><dt>Ascent</dt><dd id="walk-ascent">–</dd></div>
+            <div><dt>Descent</dt><dd id="walk-descent">–</dd></div>
+          </dl>
+        </section>
+
+        <p id="map-status" class="map-status" role="status">Loading walks…</p>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "ashterism-walks",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "convert": "node scripts/convert-fit.js",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^8.2.0"
+  },
+  "dependencies": {
+    "@garmin/fitsdk": "^21.213.0",
+    "maplibre-gl": "5.24.0"
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "generatedAt": "2026-08-20T17:58:31.016Z",
+  "walkCount": 6,
+  "skippedWithoutRoute": 5,
+  "walks": [
+    {
+      "id": "24024262303",
+      "activity": "hiking",
+      "name": "Teignbridge Hiking",
+      "date": "2026-08-18T11:11:07Z",
+      "distanceKm": 9.36,
+      "movingTimeSeconds": 8063,
+      "elapsedTimeSeconds": 9887,
+      "ascentM": 314,
+      "descentM": 302,
+      "routeUrl": "/data/routes/24024262303.geojson",
+      "bounds": [
+        -3.7329328805208206,
+        50.60258218087256,
+        -3.6976241134107113,
+        50.61996951699257
+      ],
+      "start": [
+        -3.714356403797865,
+        50.61990162357688
+      ],
+      "finish": [
+        -3.7137654796242714,
+        50.619746977463365
+      ]
+    },
+    {
+      "id": "24011469911",
+      "activity": "hiking",
+      "name": "Torbay Hiking",
+      "date": "2026-08-17T14:46:21Z",
+      "distanceKm": 4.01,
+      "movingTimeSeconds": 3025,
+      "elapsedTimeSeconds": 3025,
+      "ascentM": 144,
+      "descentM": 138,
+      "routeUrl": "/data/routes/24011469911.geojson",
+      "bounds": [
+        -3.5233276337385178,
+        50.476790852844715,
+        -3.504024865105748,
+        50.48468987457454
+      ],
+      "start": [
+        -3.515296094119549,
+        50.479965414851904
+      ],
+      "finish": [
+        -3.523195283487439,
+        50.48079388216138
+      ]
+    },
+    {
+      "id": "24000347730",
+      "activity": "hiking",
+      "name": "Torbay Hiking",
+      "date": "2026-08-16T14:27:14Z",
+      "distanceKm": 4.2,
+      "movingTimeSeconds": 3174,
+      "elapsedTimeSeconds": 3174,
+      "ascentM": 142,
+      "descentM": 141,
+      "routeUrl": "/data/routes/24000347730.geojson",
+      "bounds": [
+        -3.523255717009306,
+        50.47720827162266,
+        -3.505091294646263,
+        50.48435753211379
+      ],
+      "start": [
+        -3.52318556047976,
+        50.48103041946888
+      ],
+      "finish": [
+        -3.5232002288103104,
+        50.48080695793033
+      ]
+    },
+    {
+      "id": "23975856554",
+      "activity": "hiking",
+      "name": "East Hertfordshire Hiking",
+      "date": "2026-08-14T09:39:12Z",
+      "distanceKm": 20.93,
+      "movingTimeSeconds": 15547,
+      "elapsedTimeSeconds": 20422,
+      "ascentM": 242,
+      "descentM": 214,
+      "routeUrl": "/data/routes/23975856554.geojson",
+      "bounds": [
+        0.014388207346200943,
+        51.77600160241127,
+        0.15189609490334988,
+        51.841723434627056
+      ],
+      "start": [
+        0.0360894575715065,
+        51.77600160241127
+      ],
+      "finish": [
+        0.1518640760332346,
+        51.814556596800685
+      ]
+    },
+    {
+      "id": "23788212566",
+      "activity": "walking",
+      "name": "Mialet Walking",
+      "date": "2026-07-30T11:06:26Z",
+      "distanceKm": 8.16,
+      "movingTimeSeconds": 5098,
+      "elapsedTimeSeconds": 5127,
+      "ascentM": 54,
+      "descentM": 55,
+      "routeUrl": "/data/routes/23788212566.geojson",
+      "bounds": [
+        0.9176445566117764,
+        45.54795074276626,
+        0.946428682655096,
+        45.55895073339343
+      ],
+      "start": [
+        0.9177844505757093,
+        45.549247255548835
+      ],
+      "finish": [
+        0.9179152920842171,
+        45.54939368739724
+      ]
+    },
+    {
+      "id": "23654192532",
+      "activity": "hiking",
+      "name": "Teignbridge Hiking",
+      "date": "2026-07-19T11:56:50Z",
+      "distanceKm": 6.55,
+      "movingTimeSeconds": 5510,
+      "elapsedTimeSeconds": 5511,
+      "ascentM": 162,
+      "descentM": 159,
+      "routeUrl": "/data/routes/23654192532.geojson",
+      "bounds": [
+        -3.8880247436463833,
+        50.54064008407295,
+        -3.873783890157938,
+        50.55884541012347
+      ],
+      "start": [
+        -3.8750773016363382,
+        50.544116981327534
+      ],
+      "finish": [
+        -3.8753155153244734,
+        50.544014470651746
+      ]
+    }
+  ]
+}
