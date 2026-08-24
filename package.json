@@ -8,6 +8,7 @@
     "build": "vite build",
     "convert": "node scripts/convert-fit.js",
     "sync": "node scripts/sync-intervals.js && node scripts/convert-fit.js",
+    "sync:latest": "node scripts/sync-intervals.js --refresh-latest && node scripts/convert-fit.js",
     "preview": "vite preview"
   },
   "devDependencies": {

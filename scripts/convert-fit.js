@@ -366,7 +366,6 @@ walks.sort(
 )
 
 const catalogue = {
-  generatedAt: new Date().toISOString(),
   walkCount: walks.length,
   skippedWithoutRoute: skippedCount,
   walks,

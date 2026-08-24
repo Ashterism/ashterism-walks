@@ -5,12 +5,20 @@ import { execFileSync } from 'node:child_process'
 
 const apiRoot = 'https://intervals.icu/api/v1'
 const archiveDirectory = 'private/garmin/activities'
+const historyDirectory = 'private/garmin/history'
 const manifestPath = 'private/garmin/manifest.json'
 const overridesPath =
   'scripts/intervals-activity-overrides.json'
 const keychainAccount = 'ashterism-walks'
 const keychainService = 'intervals.icu'
 const allowedTypes = new Set(['hike', 'walk'])
+const refreshLatest =
+  process.argv.includes('--refresh-latest')
+const archiveStats = {
+  downloaded: 0,
+  refreshed: 0,
+  reused: 0,
+}
 
 const activityOverrides = JSON.parse(
   fs.readFileSync(overridesPath, 'utf8'),
@@ -112,6 +120,7 @@ const safeIdFor = (activity, existingActivity) => {
 const downloadActivity = async (
   activity,
   existingByIntervalsId,
+  refreshIntervalsActivityId,
 ) => {
   const existingActivity =
     existingByIntervalsId.get(String(activity.id))
@@ -133,13 +142,19 @@ const downloadActivity = async (
     filename,
   )
 
-  let buffer
+  const fileExists = fs.existsSync(filePath)
+  const existingBuffer = fileExists
+    ? fs.readFileSync(filePath)
+    : null
+  const shouldRefresh =
+    String(activity.id) ===
+    refreshIntervalsActivityId
 
-  if (fs.existsSync(filePath)) {
-    buffer = fs.readFileSync(filePath)
-  } else {
+  let buffer = existingBuffer
+
+  if (!fileExists || shouldRefresh) {
     const response = await request(
-      `${apiRoot}/activity/${encodeURIComponent(activity.id)}/file`,
+      `${apiRoot}/activity/${encodeURIComponent(activity.id)}/fit-file`,
     )
 
     buffer = Buffer.from(
@@ -152,11 +167,56 @@ const downloadActivity = async (
       )
     }
 
-    const temporaryPath = `${filePath}.${process.pid}.tmp`
-    fs.writeFileSync(temporaryPath, buffer, {
-      mode: 0o600,
-    })
-    fs.renameSync(temporaryPath, filePath)
+    const contentChanged =
+      !existingBuffer ||
+      sha256(existingBuffer) !== sha256(buffer)
+
+    if (
+      existingBuffer &&
+      shouldRefresh &&
+      contentChanged
+    ) {
+      const activityHistoryDirectory = path.join(
+        historyDirectory,
+        id,
+      )
+
+      fs.mkdirSync(activityHistoryDirectory, {
+        recursive: true,
+        mode: 0o700,
+      })
+
+      const previousPath = path.join(
+        activityHistoryDirectory,
+        `${sha256(existingBuffer)}.fit`,
+      )
+
+      if (!fs.existsSync(previousPath)) {
+        fs.writeFileSync(
+          previousPath,
+          existingBuffer,
+          { mode: 0o600 },
+        )
+      }
+    }
+
+    if (contentChanged) {
+      const temporaryPath =
+        `${filePath}.${process.pid}.tmp`
+
+      fs.writeFileSync(temporaryPath, buffer, {
+        mode: 0o600,
+      })
+      fs.renameSync(temporaryPath, filePath)
+    }
+
+    if (fileExists) {
+      archiveStats.refreshed += 1
+    } else {
+      archiveStats.downloaded += 1
+    }
+  } else {
+    archiveStats.reused += 1
   }
 
   if (!isFit(buffer)) {
@@ -179,6 +239,11 @@ const downloadActivity = async (
     movingTimeSeconds: activity.moving_time ?? null,
     elapsedTimeSeconds: activity.elapsed_time ?? null,
     ascentM: activity.total_elevation_gain ?? null,
+    fitVariant:
+      !fileExists || shouldRefresh
+        ? 'intervals-generated'
+        : existingActivity?.fitVariant ??
+          'original',
     filename,
     sha256: sha256(buffer),
   }
@@ -224,6 +289,21 @@ const activities = allActivities
       activity.type,
   }))
 
+const latestActivity = activities.reduce(
+  (latest, activity) =>
+    !latest ||
+    new Date(activity.start_date) >
+      new Date(latest.start_date)
+      ? activity
+      : latest,
+  null,
+)
+
+const refreshIntervalsActivityId =
+  refreshLatest
+    ? String(latestActivity?.id ?? '')
+    : null
+
 const existingByIntervalsId = new Map(
   loadExistingManifest().map((activity) => [
     String(activity.intervalsActivityId),
@@ -259,6 +339,7 @@ for (
         downloadActivity(
           activity,
           existingByIntervalsId,
+          refreshIntervalsActivityId,
         ),
       ),
     ),
@@ -311,4 +392,7 @@ fs.renameSync(
 
 console.log(
   `Private archive and manifest now contain ${manifestActivities.length} activities`,
+)
+console.log(
+  `FIT files: ${archiveStats.downloaded} new, ${archiveStats.refreshed} refreshed, ${archiveStats.reused} reused`,
 )
