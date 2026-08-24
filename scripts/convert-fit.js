@@ -14,7 +14,7 @@ const routesDirectory = 'public/data/routes'
 const indexPath = 'public/data/walks.json'
 
 const activityFilenamePattern =
-  /^(\d+)_ACTIVITY\.fit$/i
+  /^((?:\d+|intervals-\d+))_ACTIVITY\.fit$/i
 
 const semicirclesToDegrees = (value) =>
   value * (180 / 2 ** 31)
@@ -45,7 +45,10 @@ const loadManifest = () => {
 
   return new Map(
     manifest.activities.map((activity) => [
-      String(activity.garminActivityId),
+      String(
+        activity.id ??
+        activity.garminActivityId,
+      ),
       activity,
     ]),
   )
