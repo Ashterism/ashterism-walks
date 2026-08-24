@@ -26,6 +26,8 @@ npm run sync:latest
 
 The previous FIT is preserved under `private/garmin/history/` before a changed version replaces it.
 
+The GitHub Actions workflow also provides an hourly sync and a manual **Run workflow** action. Its `refresh_latest` option forces the latest edited activity to be regenerated. The workflow reads the API key from the `INTERVALS_ICU_API_KEY` repository secret and publishes the Vite build to GitHub Pages.
+
 On macOS the sync reads the Intervals.icu API key from the `ashterism-walks` / `intervals.icu` Keychain entry. An automated server can instead provide the key through the `INTERVALS_ICU_API_KEY` environment variable.
 
 ## Privacy boundary
