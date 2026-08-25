@@ -111,12 +111,11 @@ button { font: inherit; }
 .route-key { display: flex; align-items: center; gap: 5px; }
 .route-key span { width: 9px; height: 9px; border-radius: 50%; background: #267255; }
 .route-key span:nth-child(2) { margin-left: 7px; background: #9f3829; }
-.route-sketch { display: block; width: 100%; height: min(30vw, 300px); min-height: 200px; border-radius: 3px; background-color: #e9e5da; background-image: linear-gradient(rgb(23 56 45 / 5%) 1px, transparent 1px), linear-gradient(90deg, rgb(23 56 45 / 5%) 1px, transparent 1px); background-size: 24px 24px; }
-.route-sketch__outline, .route-sketch__line, .elevation-chart__line { fill: none; stroke-linecap: round; stroke-linejoin: round; }
-.route-sketch__outline { stroke: #fffaf1; stroke-width: 8; }
-.route-sketch__line { stroke: #d7653f; stroke-width: 4; }
-.route-sketch__start { fill: #267255; stroke: #fffaf1; stroke-width: 3; }
-.route-sketch__finish { fill: #9f3829; stroke: #fffaf1; stroke-width: 3; }
+.detail-map { width: 100%; height: min(34vw, 340px); min-height: 220px; border: 1px solid rgb(32 49 41 / 12%); border-radius: 3px; background: #e9e5da; }
+.detail-map__marker { display: block; width: 13px; height: 13px; border: 3px solid #fffaf1; border-radius: 50%; box-shadow: 0 1px 4px rgb(32 49 41 / 30%); }
+.detail-map__marker--start { background: #267255; }
+.detail-map__marker--finish { background: #9f3829; }
+.elevation-chart__line { fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .elevation-chart { overflow: hidden; border-radius: 3px; background: #f0e6d7; }
 .elevation-chart[hidden], .elevation-empty[hidden] { display: none; }
 .elevation-chart svg { display: block; width: 100%; height: min(18vw, 190px); min-height: 140px; }
@@ -164,7 +163,7 @@ button { font: inherit; }
   .detail-stats div:nth-child(n + 3) { border-top: 1px solid rgb(32 49 41 / 12%); }
   .detail-card, .detail-photos { margin-top: 18px; padding-bottom: 20px; }
   .detail-card__heading { align-items: flex-start; flex-direction: column; gap: 6px; margin-bottom: 10px; }
-  .route-sketch { min-height: 180px; height: 48vw; }
+  .detail-map { height: 58vw; min-height: 210px; max-height: 300px; }
   .photo-grid { grid-template-columns: 1fr; }
   .photo-placeholder { aspect-ratio: 16 / 9; }
 }

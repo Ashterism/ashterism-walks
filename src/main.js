@@ -16,27 +16,29 @@ const emptyRoute = {
   geometry: { type: 'LineString', coordinates: [] },
 }
 
+const mapStyle = () => ({
+  version: 8,
+  sources: {
+    openstreetmap: {
+      type: 'raster',
+      tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+      tileSize: 256,
+      attribution: '© OpenStreetMap contributors',
+    },
+  },
+  layers: [
+    {
+      id: 'openstreetmap',
+      type: 'raster',
+      source: 'openstreetmap',
+    },
+  ],
+})
+
 const map = new Map({
   container: 'map',
   attributionControl: false,
-  style: {
-    version: 8,
-    sources: {
-      openstreetmap: {
-        type: 'raster',
-        tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-        tileSize: 256,
-        attribution: '© OpenStreetMap contributors',
-      },
-    },
-    layers: [
-      {
-        id: 'openstreetmap',
-        type: 'raster',
-        source: 'openstreetmap',
-      },
-    ],
-  },
+  style: mapStyle(),
   center: [0, 20],
   zoom: 1.5,
 })
@@ -73,10 +75,7 @@ const elements = {
   detailPace: document.querySelector('#detail-pace'),
   detailAscent: document.querySelector('#detail-ascent'),
   detailDescent: document.querySelector('#detail-descent'),
-  routeOutline: document.querySelector('#detail-route-outline'),
-  routeLine: document.querySelector('#detail-route-line'),
-  routeStart: document.querySelector('#detail-route-start'),
-  routeFinish: document.querySelector('#detail-route-finish'),
+  detailMap: document.querySelector('#detail-map'),
   elevationChart: document.querySelector('#elevation-chart'),
   elevationEmpty: document.querySelector('#elevation-empty'),
   elevationFill: document.querySelector('#detail-elevation-fill'),
@@ -92,6 +91,9 @@ let selectedRoute = null
 let routeRequest = 0
 let startMarker
 let finishMarker
+let detailMap
+let detailStartMarker
+let detailFinishMarker
 
 const setBackgroundInert = (isInert) => {
   for (const element of [
@@ -218,48 +220,69 @@ const sample = (values, maximumPoints) => {
   )
 }
 
-const renderRouteSketch = (coordinates) => {
-  const width = 900
-  const height = 360
-  const padding = 28
-  const meanLatitude =
-    coordinates.reduce((total, coordinate) => total + coordinate[1], 0) /
-    coordinates.length
-  const longitudeScale = Math.cos((meanLatitude * Math.PI) / 180)
-  const projected = coordinates.map(([longitude, latitude]) => [
-    longitude * longitudeScale,
-    latitude,
-  ])
-  const xs = projected.map(([x]) => x)
-  const ys = projected.map(([, y]) => y)
-  const minimumX = Math.min(...xs)
-  const maximumX = Math.max(...xs)
-  const minimumY = Math.min(...ys)
-  const maximumY = Math.max(...ys)
-  const xRange = maximumX - minimumX || 1
-  const yRange = maximumY - minimumY || 1
-  const scale = Math.min(
-    (width - padding * 2) / xRange,
-    (height - padding * 2) / yRange,
-  )
-  const drawnWidth = xRange * scale
-  const drawnHeight = yRange * scale
-  const offsetX = (width - drawnWidth) / 2
-  const offsetY = (height - drawnHeight) / 2
-  const points = projected.map(([x, y]) => [
-    offsetX + (x - minimumX) * scale,
-    height - (offsetY + (y - minimumY) * scale),
-  ])
-  const path = sample(points, 600)
-    .map(([x, y], index) => `${index === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`)
-    .join(' ')
+const detailMarkerElement = (kind) => {
+  const element = document.createElement('span')
+  element.className = `detail-map__marker detail-map__marker--${kind}`
+  element.setAttribute('aria-label', kind === 'start' ? 'Route start' : 'Route finish')
+  return element
+}
 
-  elements.routeOutline.setAttribute('d', path)
-  elements.routeLine.setAttribute('d', path)
-  elements.routeStart.setAttribute('cx', points[0][0])
-  elements.routeStart.setAttribute('cy', points[0][1])
-  elements.routeFinish.setAttribute('cx', points.at(-1)[0])
-  elements.routeFinish.setAttribute('cy', points.at(-1)[1])
+const ensureDetailMap = () => {
+  if (detailMap) return detailMap
+
+  detailMap = new Map({
+    container: elements.detailMap,
+    attributionControl: false,
+    style: mapStyle(),
+    center: [0, 20],
+    zoom: 1.5,
+  })
+  detailMap.addControl(new NavigationControl({ showCompass: false }), 'top-right')
+  detailMap.addControl(new AttributionControl({ compact: true }), 'bottom-right')
+  detailStartMarker = new Marker({ element: detailMarkerElement('start') })
+  detailFinishMarker = new Marker({ element: detailMarkerElement('finish') })
+
+  detailMap.on('load', () => {
+    detailMap.addSource('detail-walk', { type: 'geojson', data: emptyRoute })
+    detailMap.addLayer({
+      id: 'detail-walk-outline',
+      type: 'line',
+      source: 'detail-walk',
+      paint: {
+        'line-color': '#fffaf1',
+        'line-width': 7,
+        'line-opacity': 0.92,
+      },
+      layout: { 'line-cap': 'round', 'line-join': 'round' },
+    })
+    detailMap.addLayer({
+      id: 'detail-walk-line',
+      type: 'line',
+      source: 'detail-walk',
+      paint: { 'line-color': '#d7653f', 'line-width': 4 },
+      layout: { 'line-cap': 'round', 'line-join': 'round' },
+    })
+  })
+
+  return detailMap
+}
+
+const renderDetailMap = (route, walk) => {
+  const routeMap = ensureDetailMap()
+  const update = () => {
+    routeMap.resize()
+    routeMap.getSource('detail-walk').setData(route)
+    detailStartMarker.setLngLat(walk.start).addTo(routeMap)
+    detailFinishMarker.setLngLat(walk.finish).addTo(routeMap)
+    routeMap.fitBounds(boundsFrom(walk.bounds), {
+      padding: window.innerWidth <= 720 ? 28 : 42,
+      duration: 0,
+      maxZoom: 15,
+    })
+  }
+
+  if (routeMap.loaded() && routeMap.getSource('detail-walk')) update()
+  else routeMap.once('load', update)
 }
 
 const distanceBetween = (first, second) => {
@@ -370,7 +393,7 @@ const renderDetail = (walk, route) => {
   )
   elements.detailAscent.textContent = formatHeight(walk.ascentM)
   elements.detailDescent.textContent = formatHeight(walk.descentM)
-  renderRouteSketch(coordinates)
+  renderDetailMap(route, walk)
   renderElevationProfile(coordinates, walk)
   renderPhotos(walk.photos)
 }
@@ -378,8 +401,8 @@ const renderDetail = (walk, route) => {
 const openDetails = ({ updateHistory = true } = {}) => {
   const walk = walks.find((candidate) => candidate.id === selectedId)
   if (!walk || !selectedRoute) return
-  renderDetail(walk, selectedRoute)
   elements.detail.hidden = false
+  renderDetail(walk, selectedRoute)
   setBackgroundInert(true)
   document.body.classList.add('detail-is-open')
   updateUrl(walk.id, { detail: true, push: updateHistory })
