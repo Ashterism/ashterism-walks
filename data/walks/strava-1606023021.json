@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "strava-1597815503",
+  "id": "strava-1606023021",
   "local": {
-    "name": "Hadrian's Wall — day 1, part 2",
+    "name": "Hadrian's Wall — day 5, part 2",
     "activityType": null,
     "visibility": "public",
     "photos": []
@@ -10,18 +10,18 @@
   "sources": {
     "garmin": null,
     "strava": {
-      "activityId": "1597815503",
+      "activityId": "1606023021",
       "status": "archived",
-      "archivedFilename": "strava-1597815503.gpx.gz",
+      "archivedFilename": "strava-1606023021.gpx.gz",
       "snapshot": {
-        "name": "Hadrian's Wall — day 1, part 2",
+        "name": "Hadrian's Wall — day 5, part 2",
         "type": "Hike",
-        "startDate": "2018-05-26T13:37:30.000Z",
+        "startDate": "2018-05-30T13:10:53.000Z",
         "startDateLocal": null,
-        "distanceM": 7200,
-        "movingTimeSeconds": 5032,
-        "elapsedTimeSeconds": 5388,
-        "ascentM": 142,
+        "distanceM": 4520,
+        "movingTimeSeconds": 3040,
+        "elapsedTimeSeconds": 3695,
+        "ascentM": 18.2,
         "descentM": null,
         "weather": {
           "condition": null,
@@ -41,31 +41,31 @@
     }
   },
   "route": {
-    "activeVersion": "9f254bee56c03a6168e098c5a63e17d900601cd571fdfd30cb47f5dee0b8c4da",
+    "activeVersion": "ff040ac34e46dd9b4139876739577e10878158796dc8d23303ddfdd645f5f468",
     "source": "strava",
     "status": "archived",
     "versions": [
       {
-        "checksum": "9f254bee56c03a6168e098c5a63e17d900601cd571fdfd30cb47f5dee0b8c4da",
+        "checksum": "ff040ac34e46dd9b4139876739577e10878158796dc8d23303ddfdd645f5f468",
         "source": "strava",
-        "capturedAt": "2026-08-25T13:08:42.128Z"
+        "capturedAt": "2026-08-25T14:04:07.852Z"
       }
     ],
     "bounds": [
-      -1.805596,
-      54.980715,
-      -1.744889,
-      54.997365
+      -3.21454,
+      54.934108,
+      -3.167076,
+      54.954115
     ],
     "start": [
-      -1.745496,
-      54.980715
+      -3.167076,
+      54.934115
     ],
     "finish": [
-      -1.805596,
-      54.995426
+      -3.21454,
+      54.953083
     ],
-    "descentM": 0
+    "descentM": 11
   },
   "review": []
 }

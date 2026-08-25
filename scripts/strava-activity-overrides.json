@@ -5,26 +5,38 @@
   },
   "1597815027": {
     "type": "Hike",
-    "name": "Hadrian's Wall — stage 1"
+    "name": "Hadrian's Wall — day 1, part 1"
   },
   "1597815503": {
     "type": "Hike",
-    "name": "Hadrian's Wall — stage 2"
+    "name": "Hadrian's Wall — day 1, part 2"
   },
   "1599409414": {
     "type": "Hike",
-    "name": "Hadrian's Wall — stage 3"
+    "name": "Hadrian's Wall — day 2, part 1"
+  },
+  "1600368441": {
+    "type": "Hike",
+    "name": "Hadrian's Wall — day 2, part 2"
+  },
+  "1601685583": {
+    "type": "Hike",
+    "name": "Hadrian's Wall — day 3"
   },
   "1603949806": {
     "type": "Hike",
-    "name": "Hadrian's Wall — stage 4"
+    "name": "Hadrian's Wall — day 4, part 1"
   },
   "1603950758": {
     "type": "Hike",
-    "name": "Hadrian's Wall — stage 5"
+    "name": "Hadrian's Wall — day 4, part 2"
   },
   "1606022787": {
     "type": "Hike",
-    "name": "Hadrian's Wall — stage 6"
+    "name": "Hadrian's Wall — day 5, part 1"
+  },
+  "1606023021": {
+    "type": "Hike",
+    "name": "Hadrian's Wall — day 5, part 2"
   }
 }

@@ -303,6 +303,7 @@ const activityFromRow = (row) => {
     id,
     type: override.type ?? row[columns.type],
     name: (override.name ?? row[columns.name]) || null,
+    nameOverridden: Object.hasOwn(override, 'name'),
     startDate: parseStravaDate(row[columns.date]),
     distanceM: distanceKm == null ? null : Math.round(distanceKm * 1000),
     movingTimeSeconds: numberOrNull(row[columns.moving]),
@@ -451,8 +452,10 @@ for (const activity of activities) {
       local: {
         ...record.local,
         name:
-          record.local.name ??
-          (record.sources.intervals ? null : activity.name),
+          activity.nameOverridden
+            ? activity.name
+            : record.local.name ??
+              (record.sources.intervals ? null : activity.name),
       },
       sources: { ...record.sources, strava: stravaSource },
     }

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "strava-1606022787",
   "local": {
-    "name": "Hadrian's Wall — stage 6",
+    "name": "Hadrian's Wall — day 5, part 1",
     "activityType": null,
     "visibility": "public",
     "photos": []
@@ -14,7 +14,7 @@
       "status": "archived",
       "archivedFilename": "strava-1606022787.gpx.gz",
       "snapshot": {
-        "name": "Hadrian's Wall — stage 6",
+        "name": "Hadrian's Wall — day 5, part 1",
         "type": "Hike",
         "startDate": "2018-05-30T07:49:05.000Z",
         "startDateLocal": null,
