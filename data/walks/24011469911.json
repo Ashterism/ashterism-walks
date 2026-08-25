@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "24011469911",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "24011469911"
+    },
+    "intervals": {
+      "activityId": "i178024401",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "0d291bb84784076a26974cca3ec687b4a866bd7d79f354b689d4467511005337",
+      "snapshot": {
+        "name": "Torbay Hiking",
+        "type": "Hike",
+        "startDate": "2026-08-17T14:46:21Z",
+        "startDateLocal": "2026-08-17T15:46:21",
+        "distanceM": 4008.85,
+        "movingTimeSeconds": 2847,
+        "elapsedTimeSeconds": 3025,
+        "ascentM": 144,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "272f25ec48f8c12215d0f875f95bd622e15a7813528eb6ff2051b6f975839ae1",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "272f25ec48f8c12215d0f875f95bd622e15a7813528eb6ff2051b6f975839ae1",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      -3.5233276337385178,
+      50.476790852844715,
+      -3.504024865105748,
+      50.48468987457454
+    ],
+    "start": [
+      -3.515296094119549,
+      50.479965414851904
+    ],
+    "finish": [
+      -3.523195283487439,
+      50.48079388216138
+    ],
+    "descentM": 138
+  },
+  "review": []
+}

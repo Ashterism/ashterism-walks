@@ -55,14 +55,14 @@ jobs:
       - name: Commit changed route data
         if: github.event_name != 'push'
         run: |
-          if [ -z "$(git status --porcelain -- public/data)" ]; then
+          if [ -z "$(git status --porcelain -- data public/data)" ]; then
             echo "No route changes"
             exit 0
           fi
 
           git config user.name "Ashterism Walks sync"
           git config user.email "actions@users.noreply.github.com"
-          git add public/data
+          git add data public/data
           git commit -m "Update Garmin walking routes"
           git push
 

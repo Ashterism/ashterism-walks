@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "23975856554",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "23975856554"
+    },
+    "intervals": {
+      "activityId": "i178024423",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "44c605297c596eb59bf1acc4b9aba383e1bc9636e46d1689ee84d90057b0665f",
+      "snapshot": {
+        "name": "East Hertfordshire Hiking",
+        "type": "Hike",
+        "startDate": "2026-08-14T09:39:12Z",
+        "startDateLocal": "2026-08-14T10:39:12",
+        "distanceM": 20926.96,
+        "movingTimeSeconds": 14854,
+        "elapsedTimeSeconds": 20422,
+        "ascentM": 242,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "914d19337c3fac6bd405efa21c891e567b710d68e9342b0f9448676a39787bc8",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "914d19337c3fac6bd405efa21c891e567b710d68e9342b0f9448676a39787bc8",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      0.014388207346200943,
+      51.77600160241127,
+      0.15189609490334988,
+      51.841723434627056
+    ],
+    "start": [
+      0.0360894575715065,
+      51.77600160241127
+    ],
+    "finish": [
+      0.1518640760332346,
+      51.814556596800685
+    ],
+    "descentM": 214
+  },
+  "review": []
+}

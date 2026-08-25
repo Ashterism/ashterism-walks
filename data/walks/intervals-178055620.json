@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178055620",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178055620",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "be5e396e253399edef91b3ac774d4b54e76326f5001db8cf96896d9f444e06c8",
+      "snapshot": {
+        "name": "Newham Hiking",
+        "type": "Hike",
+        "startDate": "2024-08-25T09:06:06Z",
+        "startDateLocal": "2024-08-25T10:06:06",
+        "distanceM": 24906.19,
+        "movingTimeSeconds": 16110,
+        "elapsedTimeSeconds": 18763,
+        "ascentM": 337,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "ef07c4ea65ff3da0b3af3b769668387fdf3aeb46856cedcb9994c5943e1cea53",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "ef07c4ea65ff3da0b3af3b769668387fdf3aeb46856cedcb9994c5943e1cea53",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      0.003516795113682747,
+      51.55290216207504,
+      0.11391718871891499,
+      51.69429053552449
+    ],
+    "start": [
+      0.046722739934921265,
+      51.552906604483724
+    ],
+    "finish": [
+      0.11378810741007328,
+      51.69371034018695
+    ],
+    "descentM": 267
+  },
+  "review": []
+}

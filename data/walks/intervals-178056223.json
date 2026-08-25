@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178056223",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178056223",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "4e067c687b78fffc5cc6a29ecb9dbd30bfccd94058a1a52bad4c87c1211a2f9d",
+      "snapshot": {
+        "name": "Craven Hiking",
+        "type": "Hike",
+        "startDate": "2024-10-14T06:13:37Z",
+        "startDateLocal": "2024-10-14T07:13:37",
+        "distanceM": 24047.72,
+        "movingTimeSeconds": 19058,
+        "elapsedTimeSeconds": 25533,
+        "ascentM": 379,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "240b8e33918f88fc6f3f346f631c96b1d6ff703cef9c0c4f41bd7976a221e7a6",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "240b8e33918f88fc6f3f346f631c96b1d6ff703cef9c0c4f41bd7976a221e7a6",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      -2.154459748417139,
+      53.91918039880693,
+      -2.0835703052580357,
+      54.062476409599185
+    ],
+    "start": [
+      -2.0835703052580357,
+      53.92187274992466
+    ],
+    "finish": [
+      -2.152143493294716,
+      54.062476409599185
+    ],
+    "descentM": 554
+  },
+  "review": []
+}

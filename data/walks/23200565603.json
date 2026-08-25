@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "23200565603",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "23200565603"
+    },
+    "intervals": {
+      "activityId": "i178024902",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "3ac458fe92e2383a88dee298d91837786a8b85537bfffaee6b648bb65a1d5368",
+      "snapshot": {
+        "name": "Walking treadmill",
+        "type": "Walk",
+        "startDate": "2026-06-10T14:01:18Z",
+        "startDateLocal": "2026-06-10T18:01:18",
+        "distanceM": 1540.47,
+        "movingTimeSeconds": 1280,
+        "elapsedTimeSeconds": 1860,
+        "ascentM": null,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": null,
+  "review": [
+    "route-unavailable"
+  ]
+}

@@ -6,9 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "catalogue": "node scripts/build-catalogue.js",
     "convert": "node scripts/convert-fit.js",
+    "migrate:canonical": "node scripts/migrate-canonical.js",
+    "rename": "node scripts/rename-walk.js",
+    "visibility": "node scripts/set-walk-visibility.js",
     "sync": "node scripts/sync-intervals.js && node scripts/convert-fit.js",
     "sync:latest": "node scripts/sync-intervals.js --refresh-latest && node scripts/convert-fit.js",
+    "test": "node --test",
     "preview": "vite preview"
   },
   "devDependencies": {

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178055482",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178055482",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "5491119b081c934025b7bdf32244fc052cf98ca54dcefe6882a951612d34dbdd",
+      "snapshot": {
+        "name": "Ko Samui Walking",
+        "type": "Walk",
+        "startDate": "2024-07-11T00:03:47Z",
+        "startDateLocal": "2024-07-11T07:03:47",
+        "distanceM": 8635.8,
+        "movingTimeSeconds": 6309,
+        "elapsedTimeSeconds": 6465,
+        "ascentM": null,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "f4a95b8ea93d9cb3f68e85fdcaaa76146e5c3575bb27b02f15f7e2223afb5baf",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "f4a95b8ea93d9cb3f68e85fdcaaa76146e5c3575bb27b02f15f7e2223afb5baf",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      100.02618539147079,
+      9.472175538539886,
+      100.04914183169603,
+      9.496919335797429
+    ],
+    "start": [
+      100.04576543346047,
+      9.47257786989212
+    ],
+    "finish": [
+      100.04730217158794,
+      9.472175538539886
+    ],
+    "descentM": null
+  },
+  "review": []
+}

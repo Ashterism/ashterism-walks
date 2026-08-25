@@ -1,93 +1,32 @@
 import fs from 'node:fs'
 import path from 'node:path'
 
+import { Decoder, Stream } from '@garmin/fitsdk'
+
 import {
-  Decoder,
-  Stream,
-} from '@garmin/fitsdk'
+  assertSafeWalkId,
+  loadCanonicalRecords,
+  providerStatusFor,
+  preserveRouteAfterInvalidCandidate,
+  readJson,
+  routeVersionPath,
+  sha256,
+  withProviderStatus,
+  writeCanonicalRecord,
+  writeJsonIfChanged,
+} from './lib/canonical-walks.js'
 
-const inputDirectory = 'private/garmin'
-const archiveDirectory =
-  'private/garmin/activities'
+const archiveDirectory = 'private/garmin/activities'
 const manifestPath = 'private/garmin/manifest.json'
-const routesDirectory = 'public/data/routes'
-const indexPath = 'public/data/walks.json'
-
-const activityFilenamePattern =
+const candidateFilenamePattern =
   /^((?:\d+|intervals-\d+))_ACTIVITY\.fit$/i
 
-const semicirclesToDegrees = (value) =>
-  value * (180 / 2 ** 31)
+const semicirclesToDegrees = (value) => value * (180 / 2 ** 31)
 
 const round = (value, decimalPlaces = 2) => {
-  if (!Number.isFinite(value)) {
-    return null
-  }
-
+  if (!Number.isFinite(value)) return null
   const multiplier = 10 ** decimalPlaces
-
-  return (
-    Math.round(value * multiplier) /
-    multiplier
-  )
-}
-
-const loadManifest = () => {
-  if (!fs.existsSync(manifestPath)) {
-    throw new Error(
-      `The private manifest does not exist: ${manifestPath}`,
-    )
-  }
-
-  const manifest = JSON.parse(
-    fs.readFileSync(manifestPath, 'utf8'),
-  )
-
-  return new Map(
-    manifest.activities.map((activity) => [
-      String(
-        activity.id ??
-        activity.garminActivityId,
-      ),
-      activity,
-    ]),
-  )
-}
-
-const collectActivityFiles = (manifest) => {
-  const activityFiles = new Map()
-
-  for (const [activityId, metadata] of manifest) {
-    const filename = String(metadata.filename ?? '')
-    const match = filename.match(
-      activityFilenamePattern,
-    )
-
-    if (
-      !match ||
-      match[1] !== activityId ||
-      path.basename(filename) !== filename
-    ) {
-      throw new Error(
-        `Unsafe private filename for activity ${activityId}`,
-      )
-    }
-
-    const filePath = path.join(
-      archiveDirectory,
-      filename,
-    )
-
-    if (!fs.existsSync(filePath)) {
-      throw new Error(
-        `Private FIT is missing for activity ${activityId}`,
-      )
-    }
-
-    activityFiles.set(activityId, filePath)
-  }
-
-  return activityFiles
+  return Math.round(value * multiplier) / multiplier
 }
 
 const calculateBounds = (coordinates) => {
@@ -97,25 +36,10 @@ const calculateBounds = (coordinates) => {
   let maximumLatitude = -Infinity
 
   for (const [longitude, latitude] of coordinates) {
-    minimumLongitude = Math.min(
-      minimumLongitude,
-      longitude,
-    )
-
-    minimumLatitude = Math.min(
-      minimumLatitude,
-      latitude,
-    )
-
-    maximumLongitude = Math.max(
-      maximumLongitude,
-      longitude,
-    )
-
-    maximumLatitude = Math.max(
-      maximumLatitude,
-      latitude,
-    )
+    minimumLongitude = Math.min(minimumLongitude, longitude)
+    minimumLatitude = Math.min(minimumLatitude, latitude)
+    maximumLongitude = Math.max(maximumLongitude, longitude)
+    maximumLatitude = Math.max(maximumLatitude, latitude)
   }
 
   return [
@@ -126,28 +50,13 @@ const calculateBounds = (coordinates) => {
   ]
 }
 
-const toPublicActivityType = (type) =>
-  String(type).toLowerCase() === 'hike'
-    ? 'hiking'
-    : 'walking'
-
-const convertFitFile = (
-  inputPath,
-  activityId,
-  metadata,
-) => {
+const decodeRouteCandidate = (inputPath) => {
   const fitBuffer = fs.readFileSync(inputPath)
-  const fitStream = Stream.fromBuffer(fitBuffer)
-  const decoder = new Decoder(fitStream)
+  const decoder = new Decoder(Stream.fromBuffer(fitBuffer))
 
-  if (!decoder.isFIT()) {
-    throw new Error('Not a valid FIT file')
-  }
-
+  if (!decoder.isFIT()) throw new Error('Not a valid FIT file')
   if (!decoder.checkIntegrity()) {
-    throw new Error(
-      'Failed its FIT integrity check',
-    )
+    throw new Error('Failed its FIT integrity check')
   }
 
   const { messages, errors } = decoder.read({
@@ -155,18 +64,11 @@ const convertFitFile = (
     convertDateTimesToDates: true,
   })
 
-  if (errors.length > 0) {
-    throw new Error(errors.join('\n'))
-  }
+  if (errors.length > 0) throw new Error(errors.join('\n'))
 
   const session = messages.sessionMesgs?.[0]
   const records = messages.recordMesgs ?? []
-
-  if (!session) {
-    throw new Error(
-      'No activity session was found',
-    )
-  }
+  if (!session) throw new Error('No activity session was found')
 
   const coordinates = records
     .filter(
@@ -176,221 +78,225 @@ const convertFitFile = (
     )
     .map((record) => {
       const coordinate = [
-        semicirclesToDegrees(
-          record.positionLong,
-        ),
-
-        semicirclesToDegrees(
-          record.positionLat,
-        ),
+        semicirclesToDegrees(record.positionLong),
+        semicirclesToDegrees(record.positionLat),
       ]
 
-      if (
-        Number.isFinite(
-          record.enhancedAltitude,
-        )
-      ) {
-        coordinate.push(
-          record.enhancedAltitude,
-        )
+      if (Number.isFinite(record.enhancedAltitude)) {
+        coordinate.push(record.enhancedAltitude)
       }
 
       return coordinate
     })
 
-  if (coordinates.length < 2) {
-    return {
-      status: 'skipped',
-      reason: 'No usable GPS route',
-    }
-  }
-
-  const routeFilename = `${activityId}.geojson`
-
-  const date = metadata.startDate ?? (
-    session.startTime instanceof Date
-      ? session.startTime.toISOString()
-      : null
-  )
-
-  const properties = {
-    id: activityId,
-    activity: toPublicActivityType(metadata.type),
-    name:
-      metadata.name ??
-      session.sportProfileName ??
-      'Walk',
-    date,
-    distanceKm: round(
-      metadata.distanceM / 1000,
-    ) ?? round(
-      session.totalDistance / 1000,
-    ),
-    movingTimeSeconds: round(
-      metadata.movingTimeSeconds,
-      0,
-    ) ?? round(
-      session.totalTimerTime,
-      0,
-    ),
-    elapsedTimeSeconds: round(
-      metadata.elapsedTimeSeconds,
-      0,
-    ) ?? round(
-      session.totalElapsedTime,
-      0,
-    ),
-    ascentM: round(
-      metadata.ascentM,
-      0,
-    ) ?? round(
-      session.totalAscent,
-      0,
-    ),
-    descentM: round(
-      session.totalDescent,
-      0,
-    ),
-  }
-
-  const route = {
-    type: 'Feature',
-    properties,
-
-    geometry: {
-      type: 'LineString',
-      coordinates,
-    },
-  }
-
-  const routePath = path.join(
-    routesDirectory,
-    routeFilename,
-  )
-
-  fs.writeFileSync(
-    routePath,
-    `${JSON.stringify(route, null, 2)}\n`,
-  )
+  if (coordinates.length < 2) return null
 
   return {
-    status: 'converted',
-
-    walk: {
-      ...properties,
-      routeUrl: `/data/routes/${routeFilename}`,
-      bounds: calculateBounds(coordinates),
-      start: coordinates[0].slice(0, 2),
-      finish:
-        coordinates[
-          coordinates.length - 1
-        ].slice(0, 2),
+    feature: {
+      type: 'Feature',
+      properties: {},
+      geometry: { type: 'LineString', coordinates },
     },
+    bounds: calculateBounds(coordinates),
+    start: coordinates[0].slice(0, 2),
+    finish: coordinates.at(-1).slice(0, 2),
+    descentM: round(session.totalDescent, 0),
   }
 }
 
-const assertPublicOutputIsSafe = (value) => {
-  const output = JSON.stringify(value)
+const candidatePathFor = (metadata) => {
+  if (!metadata.candidateFilename) return null
+
+  const match = String(metadata.candidateFilename).match(
+    candidateFilenamePattern,
+  )
 
   if (
-    /[\w.+-]+@[\w.-]+\.[a-z]{2,}/i.test(output) ||
-    output.includes('/Users/')
+    !match ||
+    match[1] !== String(metadata.id) ||
+    path.basename(metadata.candidateFilename) !== metadata.candidateFilename
   ) {
     throw new Error(
-      'Private information was detected in public output',
+      `Unsafe candidate filename for activity ${metadata.id}`,
     )
   }
+
+  const filePath = path.join(archiveDirectory, metadata.candidateFilename)
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`FIT candidate is missing for activity ${metadata.id}`)
+  }
+
+  return filePath
 }
 
-if (!fs.existsSync(inputDirectory)) {
-  throw new Error(
-    `The input directory does not exist: ${inputDirectory}`,
-  )
-}
-
-const manifest = loadManifest()
-const activityFiles = collectActivityFiles(manifest)
-
-fs.mkdirSync(routesDirectory, {
-  recursive: true,
+const newRecordFor = (metadata) => ({
+  schemaVersion: 1,
+  id: assertSafeWalkId(metadata.id),
+  local: {
+    name: null,
+    activityType: null,
+    visibility: 'public',
+  },
+  sources: {
+    garmin: /^\d+$/.test(String(metadata.id))
+      ? { activityId: String(metadata.id) }
+      : null,
+    intervals: {
+      activityId: String(metadata.intervalsActivityId),
+      status: 'active',
+      statusChangedAt: null,
+      fingerprint: null,
+      snapshot: {},
+    },
+  },
+  route: null,
+  review: [],
 })
 
-const walks = []
-let skippedCount = 0
-let failedCount = 0
+if (!fs.existsSync(manifestPath)) {
+  throw new Error(`The private sync manifest does not exist: ${manifestPath}`)
+}
 
-console.log(
-  `Found ${activityFiles.size} unique private activity file(s)`,
+const manifest = readJson(manifestPath)
+const records = loadCanonicalRecords()
+const recordsById = new Map(records.map((record) => [record.id, record]))
+const recordsByIntervalsId = new Map(
+  records.map((record) => [
+    String(record.sources.intervals.activityId),
+    record,
+  ]),
+)
+const observedProviderIds = new Set(
+  manifest.observedIntervalsActivityIds ?? [],
+)
+const eligibleProviderIds = new Set(
+  manifest.activities.map((activity) =>
+    String(activity.intervalsActivityId),
+  ),
 )
 
-for (const [activityId, fitFile] of activityFiles) {
-  const metadata = manifest.get(activityId)
-
-  if (!metadata) {
-    skippedCount += 1
-    console.log(
-      `Skipped activity ${activityId}: Not in the private manifest`,
+if (manifest.completeProviderSnapshot) {
+  for (const existingRecord of records) {
+    const providerActivityId = String(
+      existingRecord.sources.intervals.activityId,
     )
-    continue
+    const status = providerStatusFor(
+      providerActivityId,
+      observedProviderIds,
+      eligibleProviderIds,
+    )
+    const reconciled = withProviderStatus(
+      existingRecord,
+      status,
+      manifest.generatedAt,
+    )
+    recordsById.set(reconciled.id, reconciled)
+    recordsByIntervalsId.set(providerActivityId, reconciled)
   }
+}
 
-  try {
-    const result = convertFitFile(
-      fitFile,
-      activityId,
-      metadata,
-    )
+let convertedCount = 0
+let preservedRouteCount = 0
 
-    if (result.status === 'skipped') {
-      skippedCount += 1
-      console.log(
-        `Skipped activity ${activityId}: ${result.reason}`,
+for (const metadata of manifest.activities) {
+  const providerActivityId = String(metadata.intervalsActivityId)
+  let record =
+    recordsByIntervalsId.get(providerActivityId) ??
+    recordsById.get(String(metadata.id)) ??
+    newRecordFor(metadata)
+  const review = new Set(record.review ?? [])
+  review.delete('source-missing')
+  review.delete('source-no-longer-eligible')
+  const candidatePath = candidatePathFor(metadata)
+  let route = record.route
+
+  if (candidatePath) {
+    const candidate = decodeRouteCandidate(candidatePath)
+
+    if (candidate) {
+      const canonicalText = `${JSON.stringify(candidate.feature, null, 2)}\n`
+      const checksum = sha256(canonicalText)
+      writeJsonIfChanged(
+        routeVersionPath(record.id, checksum),
+        candidate.feature,
       )
-      continue
+
+      const versions = [...(route?.versions ?? [])]
+      if (!versions.some((version) => version.checksum === checksum)) {
+        versions.push({
+          checksum,
+          source: 'intervals',
+          capturedAt: manifest.generatedAt,
+        })
+      }
+
+      route = {
+        activeVersion: checksum,
+        source: 'intervals',
+        status: 'current',
+        versions,
+        bounds: candidate.bounds,
+        start: candidate.start,
+        finish: candidate.finish,
+        descentM: candidate.descentM,
+      }
+      review.delete('route-unavailable')
+      review.delete('source-route-invalid')
+      convertedCount += 1
+    } else if (route?.activeVersion) {
+      route = preserveRouteAfterInvalidCandidate(route)
+      review.add('source-route-invalid')
+      preservedRouteCount += 1
+    } else {
+      review.add('route-unavailable')
+      review.add('source-route-invalid')
     }
-
-    walks.push(result.walk)
-    console.log(`Converted activity ${activityId}`)
-  } catch (error) {
-    failedCount += 1
-    console.error(
-      `Failed activity ${activityId}: ${error.message}`,
-    )
+  } else if (!route?.activeVersion) {
+    review.add('route-unavailable')
   }
+
+  const previousStatus = record.sources.intervals.status
+  record = {
+    ...record,
+    sources: {
+      ...record.sources,
+      intervals: {
+        ...record.sources.intervals,
+        activityId: providerActivityId,
+        status: 'active',
+        statusChangedAt:
+          previousStatus === 'active'
+            ? record.sources.intervals.statusChangedAt
+            : manifest.generatedAt,
+        fingerprint: metadata.providerFingerprint ?? null,
+        snapshot: {
+          name: metadata.name ?? null,
+          type: metadata.type,
+          startDate: metadata.startDate,
+          startDateLocal: metadata.startDateLocal ?? null,
+          distanceM: metadata.distanceM ?? null,
+          movingTimeSeconds: metadata.movingTimeSeconds ?? null,
+          elapsedTimeSeconds: metadata.elapsedTimeSeconds ?? null,
+          ascentM: metadata.ascentM ?? null,
+          source: metadata.source ?? null,
+        },
+      },
+    },
+    route,
+    review: [...review].sort(),
+  }
+
+  recordsById.set(record.id, record)
+  recordsByIntervalsId.set(providerActivityId, record)
 }
 
-walks.sort(
-  (firstWalk, secondWalk) =>
-    new Date(secondWalk.date) -
-    new Date(firstWalk.date),
-)
-
-const catalogue = {
-  walkCount: walks.length,
-  skippedWithoutRoute: skippedCount,
-  walks,
+for (const record of [...recordsById.values()].sort((a, b) =>
+  a.id.localeCompare(b.id),
+)) {
+  writeCanonicalRecord(record)
 }
 
-assertPublicOutputIsSafe(catalogue)
+await import('./build-catalogue.js')
 
-fs.mkdirSync(
-  path.dirname(indexPath),
-  {
-    recursive: true,
-  },
-)
-
-fs.writeFileSync(
-  indexPath,
-  `${JSON.stringify(catalogue, null, 2)}\n`,
-)
-
-console.log('')
-console.log(`Routes converted: ${walks.length}`)
-console.log(`Activities skipped: ${skippedCount}`)
-console.log(`Files failed: ${failedCount}`)
-console.log(`Created ${indexPath}`)
-
-if (failedCount > 0) {
-  process.exitCode = 1
-}
+console.log(`New route versions accepted: ${convertedCount}`)
+console.log(`Cached routes preserved after invalid updates: ${preservedRouteCount}`)

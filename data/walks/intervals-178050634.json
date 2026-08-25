@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178050634",
+  "local": {
+    "name": null,
+    "activityType": "Walk",
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178050634",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "f052c5b4c41c713d11e5724057e331cf88ca5494b8f2c06661862a9ed8c4ad74",
+      "snapshot": {
+        "name": "Test walk",
+        "type": "Walk",
+        "startDate": "2014-07-20T12:00:33Z",
+        "startDateLocal": "2014-07-20T13:00:33",
+        "distanceM": 2172.73,
+        "movingTimeSeconds": 1393,
+        "elapsedTimeSeconds": 19891,
+        "ascentM": 22.371708,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "f8fc9fc1abf796732ff0cb8de56946216a27489d59c921a4e452036aed523907",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "f8fc9fc1abf796732ff0cb8de56946216a27489d59c921a4e452036aed523907",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      -0.13475216925144196,
+      51.5093148406595,
+      -0.035293176770210266,
+      51.520908856764436
+    ],
+    "start": [
+      -0.04541868343949318,
+      51.51620878838003
+    ],
+    "finish": [
+      -0.050384458154439926,
+      51.51702837087214
+    ],
+    "descentM": 251
+  },
+  "review": []
+}

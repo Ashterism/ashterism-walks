@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178055609",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178055609",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "5e8b593e879b77ab77aaad8b0070ce8da9cb01c67ef17bbade28b784ae042284",
+      "snapshot": {
+        "name": "Test activity",
+        "type": "Walk",
+        "startDate": "2024-08-22T19:02:39Z",
+        "startDateLocal": "2024-08-22T20:02:39",
+        "distanceM": null,
+        "movingTimeSeconds": 600,
+        "elapsedTimeSeconds": 600,
+        "ascentM": null,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": null,
+  "review": [
+    "route-unavailable"
+  ]
+}

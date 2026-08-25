@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "23280482418",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "23280482418"
+    },
+    "intervals": {
+      "activityId": "i178024798",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "b620d4609c4ae823631c477ccf7039b1cbb8ad16832e5fcde18a6ab539cecaed",
+      "snapshot": {
+        "name": "Walking",
+        "type": "Walk",
+        "startDate": "2026-06-17T09:58:14Z",
+        "startDateLocal": "2026-06-17T13:58:14",
+        "distanceM": 1862.67,
+        "movingTimeSeconds": 1515,
+        "elapsedTimeSeconds": 1823,
+        "ascentM": null,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": null,
+  "review": [
+    "route-unavailable"
+  ]
+}

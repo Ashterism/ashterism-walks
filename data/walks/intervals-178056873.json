@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178056873",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178056873",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "5dbca7a5b3396a444c61290417172ab046c9a82864f00aaf764e1abd843a832c",
+      "snapshot": {
+        "name": "Mialet long",
+        "type": "Walk",
+        "startDate": "2025-02-16T14:32:47Z",
+        "startDateLocal": "2025-02-16T15:32:47",
+        "distanceM": 7808.3,
+        "movingTimeSeconds": 2631,
+        "elapsedTimeSeconds": 2674,
+        "ascentM": 35,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "b6d414d978947cd6dc0a12ecfbef6eb6ae74364f7d5ef84ce41f011f2e651620",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "b6d414d978947cd6dc0a12ecfbef6eb6ae74364f7d5ef84ce41f011f2e651620",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      0.9178052376955748,
+      45.547866420820355,
+      0.9464431833475828,
+      45.5589540861547
+    ],
+    "start": [
+      0.9178052376955748,
+      45.549284471198916
+    ],
+    "finish": [
+      0.919156651943922,
+      45.54964958690107
+    ],
+    "descentM": 29
+  },
+  "review": []
+}

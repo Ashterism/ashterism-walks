@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178056187",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178056187",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "7bdbde58573333cfd0a2e301c808b0db773b6829a077c01d5793a19ff7553744",
+      "snapshot": {
+        "name": "High Peak Hiking",
+        "type": "Hike",
+        "startDate": "2024-10-10T07:56:14Z",
+        "startDateLocal": "2024-10-10T08:56:14",
+        "distanceM": 27989.34,
+        "movingTimeSeconds": 22973,
+        "elapsedTimeSeconds": 28091,
+        "ascentM": 842,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "d5e2a69d45ac97c5d30a34c2478edf2d806f3b87261425a683786d06e9c4ee43",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "d5e2a69d45ac97c5d30a34c2478edf2d806f3b87261425a683786d06e9c4ee43",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      -1.9178008195012808,
+      53.36439027450979,
+      -1.8171987868845463,
+      53.491378873586655
+    ],
+    "start": [
+      -1.8172137066721916,
+      53.370381658896804
+    ],
+    "finish": [
+      -1.8936068750917912,
+      53.491098918020725
+    ],
+    "descentM": 891
+  },
+  "review": []
+}

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178055672",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178055672",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "4a22592af4e58eb7f0bdd47d8fd43eb945a6281e9e26a86e3d4509d3c4c4047f",
+      "snapshot": {
+        "name": "Greenwich Hiking",
+        "type": "Hike",
+        "startDate": "2024-09-01T09:37:46Z",
+        "startDateLocal": "2024-09-01T10:37:46",
+        "distanceM": 21843.31,
+        "movingTimeSeconds": 14958,
+        "elapsedTimeSeconds": 18323,
+        "ascentM": 92,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "65c4f38cd37f780891bccb7ebeca6a530edd284df8bd62b4ae6beb23af6af9cd",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "65c4f38cd37f780891bccb7ebeca6a530edd284df8bd62b4ae6beb23af6af9cd",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      -0.08134720847010612,
+      51.48049307987094,
+      0.07083269767463207,
+      51.51167149655521
+    ],
+    "start": [
+      0.06950575858354568,
+      51.490490678697824
+    ],
+    "finish": [
+      -0.08129800669848919,
+      51.509691439568996
+    ],
+    "descentM": 76
+  },
+  "review": []
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "23654192532",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "23654192532"
+    },
+    "intervals": {
+      "activityId": "i178024546",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "cf486d9b90099356d815f99c055c558a0139d6c2046d7029c07d463aefdee18f",
+      "snapshot": {
+        "name": "Teignbridge Hiking",
+        "type": "Hike",
+        "startDate": "2026-07-19T11:56:50Z",
+        "startDateLocal": "2026-07-19T12:56:50",
+        "distanceM": 6552.86,
+        "movingTimeSeconds": 4627,
+        "elapsedTimeSeconds": 5512,
+        "ascentM": 162,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "8ac6b1b9db21ff463875d40ff2d3d30918ce9d67f1d51fe09b5ef7578ef80359",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "8ac6b1b9db21ff463875d40ff2d3d30918ce9d67f1d51fe09b5ef7578ef80359",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      -3.8880247436463833,
+      50.54064008407295,
+      -3.873783890157938,
+      50.55884541012347
+    ],
+    "start": [
+      -3.8750773016363382,
+      50.544116981327534
+    ],
+    "finish": [
+      -3.8753155153244734,
+      50.544014470651746
+    ],
+    "descentM": 159
+  },
+  "review": []
+}

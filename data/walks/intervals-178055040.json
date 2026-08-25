@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178055040",
+  "local": {
+    "name": null,
+    "activityType": "Hike",
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178055040",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "7a5a9e3214eed792e6a486c268c118471affe521365594617cfe1fb61e61ca60",
+      "snapshot": {
+        "name": "Dartford Running",
+        "type": "Hike",
+        "startDate": "2019-04-22T10:06:23Z",
+        "startDateLocal": "2019-04-22T11:06:23",
+        "distanceM": 13372.15,
+        "movingTimeSeconds": 9828,
+        "elapsedTimeSeconds": 10517,
+        "ascentM": 47.735874,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "857efba2650a32602f410988781edd70b239a4d5b1b81829075afcc53ea02ada",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "857efba2650a32602f410988781edd70b239a4d5b1b81829075afcc53ea02ada",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      0.20735017955303192,
+      51.367799481377006,
+      0.24692810140550137,
+      51.44437864422798
+    ],
+    "start": [
+      0.2179394569247961,
+      51.44437864422798
+    ],
+    "finish": [
+      0.2111666277050972,
+      51.36785848997533
+    ],
+    "descentM": 537
+  },
+  "review": []
+}

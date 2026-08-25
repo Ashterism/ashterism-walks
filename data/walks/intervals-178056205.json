@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178056205",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178056205",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "7f7385f714865bf2e1d984ec3bae06c004149ccb8c498264bb7328c1eedf0fee",
+      "snapshot": {
+        "name": "Kirklees Hiking",
+        "type": "Hike",
+        "startDate": "2024-10-12T09:35:04Z",
+        "startDateLocal": "2024-10-12T10:35:04",
+        "distanceM": 29480.73,
+        "movingTimeSeconds": 22213,
+        "elapsedTimeSeconds": 27797,
+        "ascentM": 936,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "417642773543d29bc8971934f3ac93d3fd077057925d0bdd4a33fe5d4a3b1059",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "417642773543d29bc8971934f3ac93d3fd077057925d0bdd4a33fe5d4a3b1059",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      -2.0702647045254707,
+      53.60325062647462,
+      -1.9317493122071028,
+      53.75005764886737
+    ],
+    "start": [
+      -1.9317493122071028,
+      53.60332950018346
+    ],
+    "finish": [
+      -2.0585512463003397,
+      53.749756403267384
+    ],
+    "descentM": 864
+  },
+  "review": []
+}

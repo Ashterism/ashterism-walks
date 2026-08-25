@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178057964",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178057964",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "05e59f773cee392ef37b023154a02988644b72e6e15c9725bcc897b3d031b62a",
+      "snapshot": {
+        "name": "South Hams Hiking",
+        "type": "Hike",
+        "startDate": "2025-07-23T17:40:39Z",
+        "startDateLocal": "2025-07-23T18:40:39",
+        "distanceM": 6132.06,
+        "movingTimeSeconds": 4746,
+        "elapsedTimeSeconds": 5814,
+        "ascentM": 278,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "9c2863368d837bdfc1355e8058dd9a9d89a6d42e71c019294f33e2e7c1d118d1",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "9c2863368d837bdfc1355e8058dd9a9d89a6d42e71c019294f33e2e7c1d118d1",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      -3.89334037899971,
+      50.504524894058704,
+      -3.8562307599931955,
+      50.52623343653977
+    ],
+    "start": [
+      -3.8562307599931955,
+      50.52623343653977
+    ],
+    "finish": [
+      -3.8828248623758554,
+      50.51000406034291
+    ],
+    "descentM": 112
+  },
+  "review": []
+}

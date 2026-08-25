@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178054704",
+  "local": {
+    "name": null,
+    "activityType": "Walk",
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178054704",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "e1610050f656350804ff464741804c8eb7a041d36691a0a2d277110dcb484bf5",
+      "snapshot": {
+        "name": "West Midlands Other",
+        "type": "Walk",
+        "startDate": "2017-12-24T11:24:53Z",
+        "startDateLocal": "2017-12-24T11:24:53",
+        "distanceM": 8042.67,
+        "movingTimeSeconds": 3699,
+        "elapsedTimeSeconds": 11069,
+        "ascentM": 263,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "d2fda11319e1987223c3ed13cc89e5ed02da337a0ba76694440f8cc596012b19",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "d2fda11319e1987223c3ed13cc89e5ed02da337a0ba76694440f8cc596012b19",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      -1.8167993053793907,
+      52.42003292776644,
+      -1.7976767476648092,
+      52.442593490704894
+    ],
+    "start": [
+      -1.8147765845060349,
+      52.44200700893998
+    ],
+    "finish": [
+      -1.814782451838255,
+      52.44213407859206
+    ],
+    "descentM": 278
+  },
+  "review": []
+}

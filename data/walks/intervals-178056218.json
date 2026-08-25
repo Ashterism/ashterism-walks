@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178056218",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178056218",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "4b5e2b7e06e4e0081117a9d64894e19c5837a949be1cf9690d95a893647185b0",
+      "snapshot": {
+        "name": "Calderdale Hiking",
+        "type": "Hike",
+        "startDate": "2024-10-13T06:54:51Z",
+        "startDateLocal": "2024-10-13T07:54:51",
+        "distanceM": 33312.51,
+        "movingTimeSeconds": 26229,
+        "elapsedTimeSeconds": 34502,
+        "ascentM": 1094,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "6396ccff994b9eab184ed16411b0b4e9543962d8128a966e16372ce845589372",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "6396ccff994b9eab184ed16411b0b4e9543962d8128a966e16372ce845589372",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      -2.084130886942148,
+      53.75004943460226,
+      -1.998317465186119,
+      53.92212722450495
+    ],
+    "start": [
+      -2.0586540922522545,
+      53.75008120201528
+    ],
+    "finish": [
+      -2.0834342669695616,
+      53.921890100464225
+    ],
+    "descentM": 988
+  },
+  "review": []
+}

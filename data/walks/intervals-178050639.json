@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178050639",
+  "local": {
+    "name": null,
+    "activityType": "Walk",
+    "visibility": "public"
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178050639",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "376464c62c09c54da799ad77428d536687121a66a99af8f506e68e7a6b519da4",
+      "snapshot": {
+        "name": "Sunday wander from TateB",
+        "type": "Walk",
+        "startDate": "2014-08-10T09:01:21Z",
+        "startDateLocal": "2014-08-10T10:01:21",
+        "distanceM": 6653.56,
+        "movingTimeSeconds": 4695,
+        "elapsedTimeSeconds": 32660,
+        "ascentM": 54.117054,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "ab544638a910767ea51f19121249e56477dac7ef0fcdfe9a982e0ba692bfb204",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "ab544638a910767ea51f19121249e56477dac7ef0fcdfe9a982e0ba692bfb204",
+        "source": "intervals",
+        "capturedAt": null
+      }
+    ],
+    "bounds": [
+      -0.12698843143880367,
+      51.490661166608334,
+      -0.053502609953284264,
+      51.519708735868335
+    ],
+    "start": [
+      -0.053502609953284264,
+      51.51732115074992
+    ],
+    "finish": [
+      -0.06903570145368576,
+      51.51186696253717
+    ],
+    "descentM": 349
+  },
+  "review": []
+}
