@@ -1,0 +1,70 @@
+{
+  "type": "Feature",
+  "properties": {
+    "id": "withings-4215888585",
+    "activity": "hiking",
+    "name": "Portugal coast — 13 May 2024",
+    "date": "2024-05-13T08:51:00.000Z",
+    "distanceKm": 13.36,
+    "movingTimeSeconds": 11700,
+    "elapsedTimeSeconds": 11880,
+    "ascentM": null,
+    "descentM": null,
+    "providers": [
+      "Withings",
+      "Google Timeline"
+    ],
+    "provenance": {
+      "status": "estimated",
+      "method": "withings-google-timeline",
+      "metricsSource": "Withings",
+      "routeSource": "Google Timeline",
+      "label": "Estimated route compiled from Withings activity data and Google Timeline."
+    }
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        -8.725119,
+        37.089847
+      ],
+      [
+        -8.728347,
+        37.086399
+      ],
+      [
+        -8.803015,
+        37.066953
+      ],
+      [
+        -8.806017,
+        37.066509
+      ],
+      [
+        -8.809473,
+        37.066625
+      ],
+      [
+        -8.811702,
+        37.065624
+      ],
+      [
+        -8.814294,
+        37.067054
+      ],
+      [
+        -8.816406,
+        37.068235
+      ],
+      [
+        -8.824435,
+        37.06549
+      ],
+      [
+        -8.824039,
+        37.06552
+      ]
+    ]
+  }
+}

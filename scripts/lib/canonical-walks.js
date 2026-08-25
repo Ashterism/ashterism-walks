@@ -7,7 +7,8 @@ export const routeVersionsDirectory = 'data/route-versions'
 export const publicRoutesDirectory = 'public/data/routes'
 export const publicCataloguePath = 'public/data/walks.json'
 
-export const safeWalkIdPattern = /^(?:\d+|intervals-\d+|strava-\d+)$/
+export const safeWalkIdPattern =
+  /^(?:\d+|intervals-\d+|strava-\d+|withings-\d+)$/
 
 export const assertSafeWalkId = (id) => {
   const value = String(id)
@@ -124,6 +125,7 @@ export const providerSnapshotFor = (record) =>
   record.sources.intervals?.snapshot ??
   record.sources.strava?.snapshot ??
   record.sources.garmin?.snapshot ??
+  record.sources.withings?.snapshot ??
   {}
 
 export const findCanonicalActivityMatch = (
@@ -194,6 +196,8 @@ export const resolvePublicFields = (record) => {
     providers.push('Garmin')
   }
   if (record.sources.strava) providers.push('Strava')
+  if (record.sources.withings) providers.push('Withings')
+  if (record.sources.googleTimeline) providers.push('Google Timeline')
 
   return {
     id: record.id,
@@ -215,6 +219,7 @@ export const resolvePublicFields = (record) => {
         : Math.round(snapshot.ascentM),
     descentM: record.route?.descentM ?? null,
     providers,
+    ...(record.provenance ? { provenance: record.provenance } : {}),
   }
 }
 

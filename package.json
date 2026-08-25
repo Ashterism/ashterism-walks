@@ -10,6 +10,7 @@
     "convert": "node scripts/convert-fit.js",
     "import:garmin-export": "node scripts/import-garmin-export.js",
     "import:strava": "node scripts/import-strava.js",
+    "import:withings-timeline": "node scripts/import-withings-timeline.js",
     "migrate:canonical": "node scripts/migrate-canonical.js",
     "rename": "node scripts/rename-walk.js",
     "visibility": "node scripts/set-walk-visibility.js",

@@ -157,3 +157,23 @@ test('provider records match one canonical activity without creating a duplicate
     null,
   )
 })
+
+test('compiled records expose their sources and estimated-route provenance', () => {
+  const compiled = {
+    ...record,
+    id: 'withings-4213159220',
+    sources: {
+      withings: { snapshot: record.sources.intervals.snapshot },
+      googleTimeline: { snapshot: { pointCount: 16 } },
+    },
+    provenance: {
+      status: 'estimated',
+      method: 'withings-google-timeline',
+      label: 'Estimated route compiled from Withings activity data and Google Timeline.',
+    },
+  }
+
+  const publicWalk = resolvePublicFields(compiled)
+  assert.deepEqual(publicWalk.providers, ['Withings', 'Google Timeline'])
+  assert.equal(publicWalk.provenance.status, 'estimated')
+})

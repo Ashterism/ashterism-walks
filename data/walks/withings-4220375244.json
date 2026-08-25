@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "id": "withings-4220375244",
+  "local": {
+    "name": "Portugal coast — 15 May 2024",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "withings": {
+      "activityIds": [
+        "4220375244",
+        "4220472314",
+        "4220789673",
+        "4220896115"
+      ],
+      "status": "archived",
+      "archivedFilename": "activities.csv",
+      "snapshot": {
+        "name": "Portugal coast — 15 May 2024",
+        "type": "Hike",
+        "startDate": "2024-05-15T08:28:00.000Z",
+        "startDateLocal": "2024-05-15T10:28:00+02:00",
+        "distanceM": 20388.9725341796,
+        "movingTimeSeconds": 15599,
+        "elapsedTimeSeconds": 19620,
+        "ascentM": null,
+        "componentCount": 4
+      },
+      "components": [
+        {
+          "activityId": "4220375244",
+          "from": "2024-05-15T10:28:00+02:00",
+          "to": "2024-05-15T11:49:00+02:00",
+          "distanceM": 6755.0810546875,
+          "movingTimeSeconds": 4860
+        },
+        {
+          "activityId": "4220472314",
+          "from": "2024-05-15T11:58:00+02:00",
+          "to": "2024-05-15T12:21:00+02:00",
+          "distanceM": 1595.5999755859,
+          "movingTimeSeconds": 1320
+        },
+        {
+          "activityId": "4220789673",
+          "from": "2024-05-15T13:04:00+02:00",
+          "to": "2024-05-15T14:59:00+02:00",
+          "distanceM": 8488.841796875,
+          "movingTimeSeconds": 6840
+        },
+        {
+          "activityId": "4220896115",
+          "from": "2024-05-15T15:12:00+02:00",
+          "to": "2024-05-15T15:55:00+02:00",
+          "distanceM": 3549.4497070312,
+          "movingTimeSeconds": 2579
+        }
+      ]
+    },
+    "googleTimeline": {
+      "status": "archived",
+      "archivedFilename": "location-history.json",
+      "snapshot": {
+        "startDate": "2024-05-15T08:28:00.000Z",
+        "endDate": "2024-05-15T13:55:00.000Z",
+        "pointCount": 41,
+        "lineDistanceM": 21466
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "6e4faa3bc947e5e95c80ba3d51a90b813bf582c10925c572d3a23b34025e33a4",
+    "source": "google-timeline",
+    "status": "estimated",
+    "versions": [
+      {
+        "checksum": "6e4faa3bc947e5e95c80ba3d51a90b813bf582c10925c572d3a23b34025e33a4",
+        "source": "google-timeline",
+        "capturedAt": "2026-08-25T20:11:32.405Z"
+      }
+    ],
+    "bounds": [
+      -8.995822,
+      37.007379,
+      -8.909162,
+      37.083752
+    ],
+    "start": [
+      -8.936003,
+      37.008856
+    ],
+    "finish": [
+      -8.909162,
+      37.082897
+    ],
+    "descentM": null
+  },
+  "review": [],
+  "provenance": {
+    "status": "estimated",
+    "method": "withings-google-timeline",
+    "metricsSource": "Withings",
+    "routeSource": "Google Timeline",
+    "label": "Estimated route compiled from Withings activity data and Google Timeline."
+  }
+}

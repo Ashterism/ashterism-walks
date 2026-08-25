@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "id": "withings-4227189222",
+  "local": {
+    "name": "Portugal coast — 17 May 2024",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "withings": {
+      "activityIds": [
+        "4227189222",
+        "4227189231"
+      ],
+      "status": "archived",
+      "archivedFilename": "activities.csv",
+      "snapshot": {
+        "name": "Portugal coast — 17 May 2024",
+        "type": "Hike",
+        "startDate": "2024-05-17T09:07:00.000Z",
+        "startDateLocal": "2024-05-17T11:07:00+02:00",
+        "distanceM": 18429.0673828125,
+        "movingTimeSeconds": 16200,
+        "elapsedTimeSeconds": 19920,
+        "ascentM": null,
+        "componentCount": 2
+      },
+      "components": [
+        {
+          "activityId": "4227189222",
+          "from": "2024-05-17T11:07:00+02:00",
+          "to": "2024-05-17T13:41:00+02:00",
+          "distanceM": 9528.107421875,
+          "movingTimeSeconds": 8760
+        },
+        {
+          "activityId": "4227189231",
+          "from": "2024-05-17T14:31:00+02:00",
+          "to": "2024-05-17T16:39:00+02:00",
+          "distanceM": 8900.9599609375,
+          "movingTimeSeconds": 7440
+        }
+      ]
+    },
+    "googleTimeline": {
+      "status": "archived",
+      "archivedFilename": "location-history.json",
+      "snapshot": {
+        "startDate": "2024-05-17T09:07:00.000Z",
+        "endDate": "2024-05-17T14:39:00.000Z",
+        "pointCount": 45,
+        "lineDistanceM": 19086
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "db8744efb7524df8b0309ad18f1822fae2cd4d5587cf4c6324ee3ed7164dfe42",
+    "source": "google-timeline",
+    "status": "estimated",
+    "versions": [
+      {
+        "checksum": "db8744efb7524df8b0309ad18f1822fae2cd4d5587cf4c6324ee3ed7164dfe42",
+        "source": "google-timeline",
+        "capturedAt": "2026-08-25T20:11:32.405Z"
+      }
+    ],
+    "bounds": [
+      -8.904234,
+      37.190684,
+      -8.835575,
+      37.29589
+    ],
+    "start": [
+      -8.895218,
+      37.190684
+    ],
+    "finish": [
+      -8.864423,
+      37.29589
+    ],
+    "descentM": null
+  },
+  "review": [],
+  "provenance": {
+    "status": "estimated",
+    "method": "withings-google-timeline",
+    "metricsSource": "Withings",
+    "routeSource": "Google Timeline",
+    "label": "Estimated route compiled from Withings activity data and Google Timeline."
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "walkCount": 87,
+  "walkCount": 93,
   "skippedWithoutRoute": 8,
   "walks": [
     {
@@ -959,6 +959,234 @@
       "finish": [
         100.04753795452416,
         9.472675435245037
+      ]
+    },
+    {
+      "id": "withings-4227189222",
+      "activity": "hiking",
+      "name": "Portugal coast — 17 May 2024",
+      "date": "2024-05-17T09:07:00.000Z",
+      "distanceKm": 18.43,
+      "movingTimeSeconds": 16200,
+      "elapsedTimeSeconds": 19920,
+      "ascentM": null,
+      "descentM": null,
+      "providers": [
+        "Withings",
+        "Google Timeline"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "withings-google-timeline",
+        "metricsSource": "Withings",
+        "routeSource": "Google Timeline",
+        "label": "Estimated route compiled from Withings activity data and Google Timeline."
+      },
+      "photos": [],
+      "routeUrl": "/data/routes/withings-4227189222.geojson?v=db8744efb7524df8b0309ad18f1822fae2cd4d5587cf4c6324ee3ed7164dfe42",
+      "bounds": [
+        -8.904234,
+        37.190684,
+        -8.835575,
+        37.29589
+      ],
+      "start": [
+        -8.895218,
+        37.190684
+      ],
+      "finish": [
+        -8.864423,
+        37.29589
+      ]
+    },
+    {
+      "id": "withings-4223438614",
+      "activity": "hiking",
+      "name": "Portugal coast — 16 May 2024",
+      "date": "2024-05-16T09:00:00.000Z",
+      "distanceKm": 17.95,
+      "movingTimeSeconds": 14940,
+      "elapsedTimeSeconds": 21480,
+      "ascentM": null,
+      "descentM": null,
+      "providers": [
+        "Withings",
+        "Google Timeline"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "withings-google-timeline",
+        "metricsSource": "Withings",
+        "routeSource": "Google Timeline",
+        "label": "Estimated route compiled from Withings activity data and Google Timeline."
+      },
+      "photos": [],
+      "routeUrl": "/data/routes/withings-4223438614.geojson?v=73ec69cb66b58c0d4f5c1ec0e0c5f02ccd432278c07e4b69e9604372d98dca80",
+      "bounds": [
+        -8.916339,
+        37.083763,
+        -8.894109,
+        37.190142
+      ],
+      "start": [
+        -8.910592,
+        37.083763
+      ],
+      "finish": [
+        -8.895029,
+        37.190142
+      ]
+    },
+    {
+      "id": "withings-4220375244",
+      "activity": "hiking",
+      "name": "Portugal coast — 15 May 2024",
+      "date": "2024-05-15T08:28:00.000Z",
+      "distanceKm": 20.39,
+      "movingTimeSeconds": 15599,
+      "elapsedTimeSeconds": 19620,
+      "ascentM": null,
+      "descentM": null,
+      "providers": [
+        "Withings",
+        "Google Timeline"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "withings-google-timeline",
+        "metricsSource": "Withings",
+        "routeSource": "Google Timeline",
+        "label": "Estimated route compiled from Withings activity data and Google Timeline."
+      },
+      "photos": [],
+      "routeUrl": "/data/routes/withings-4220375244.geojson?v=6e4faa3bc947e5e95c80ba3d51a90b813bf582c10925c572d3a23b34025e33a4",
+      "bounds": [
+        -8.995822,
+        37.007379,
+        -8.909162,
+        37.083752
+      ],
+      "start": [
+        -8.936003,
+        37.008856
+      ],
+      "finish": [
+        -8.909162,
+        37.082897
+      ]
+    },
+    {
+      "id": "withings-4218007972",
+      "activity": "hiking",
+      "name": "Portugal coast — 14 May 2024",
+      "date": "2024-05-14T08:54:00.000Z",
+      "distanceKm": 17.71,
+      "movingTimeSeconds": 17461,
+      "elapsedTimeSeconds": 22860,
+      "ascentM": null,
+      "descentM": null,
+      "providers": [
+        "Withings",
+        "Google Timeline"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "withings-google-timeline",
+        "metricsSource": "Withings",
+        "routeSource": "Google Timeline",
+        "label": "Estimated route compiled from Withings activity data and Google Timeline."
+      },
+      "photos": [],
+      "routeUrl": "/data/routes/withings-4218007972.geojson?v=f9468379452dd486fdb21c51a37e5647272842eaf68e004f877289e52b20771f",
+      "bounds": [
+        -8.934783,
+        37.007286,
+        -8.828964,
+        37.066066
+      ],
+      "start": [
+        -8.828964,
+        37.066066
+      ],
+      "finish": [
+        -8.934039,
+        37.007533
+      ]
+    },
+    {
+      "id": "withings-4215888585",
+      "activity": "hiking",
+      "name": "Portugal coast — 13 May 2024",
+      "date": "2024-05-13T08:51:00.000Z",
+      "distanceKm": 13.36,
+      "movingTimeSeconds": 11700,
+      "elapsedTimeSeconds": 11880,
+      "ascentM": null,
+      "descentM": null,
+      "providers": [
+        "Withings",
+        "Google Timeline"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "withings-google-timeline",
+        "metricsSource": "Withings",
+        "routeSource": "Google Timeline",
+        "label": "Estimated route compiled from Withings activity data and Google Timeline."
+      },
+      "photos": [],
+      "routeUrl": "/data/routes/withings-4215888585.geojson?v=a970980a588715f05267ba9eb0f2e8133d1d33a19b1dbcb6f86bf2de6e35b5c8",
+      "bounds": [
+        -8.824435,
+        37.06549,
+        -8.725119,
+        37.089847
+      ],
+      "start": [
+        -8.725119,
+        37.089847
+      ],
+      "finish": [
+        -8.824039,
+        37.06552
+      ]
+    },
+    {
+      "id": "withings-4213159220",
+      "activity": "hiking",
+      "name": "Portugal coast — 12 May 2024",
+      "date": "2024-05-12T09:38:00.000Z",
+      "distanceKm": 8.95,
+      "movingTimeSeconds": 7621,
+      "elapsedTimeSeconds": 8220,
+      "ascentM": null,
+      "descentM": null,
+      "providers": [
+        "Withings",
+        "Google Timeline"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "withings-google-timeline",
+        "metricsSource": "Withings",
+        "routeSource": "Google Timeline",
+        "label": "Estimated route compiled from Withings activity data and Google Timeline."
+      },
+      "photos": [],
+      "routeUrl": "/data/routes/withings-4213159220.geojson?v=8363896ebad33686751239f650247713b97aa606a869e2ff9fe34f7703a862ce",
+      "bounds": [
+        -8.726196,
+        37.083143,
+        -8.668853,
+        37.095368
+      ],
+      "start": [
+        -8.669923,
+        37.095368
+      ],
+      "finish": [
+        -8.726196,
+        37.089439
       ]
     },
     {

@@ -204,6 +204,12 @@ const renderList = () => {
       meta.textContent = `${formatDate(walk.date)} · ${walk.distanceKm} km`
 
       button.append(name, meta)
+      if (walk.provenance?.status === 'estimated') {
+        const provenance = document.createElement('span')
+        provenance.className = 'walk-list__provenance'
+        provenance.textContent = 'Estimated route'
+        button.append(provenance)
+      }
       button.addEventListener('click', () => selectWalk(walk.id))
       item.append(button)
       return item
@@ -423,7 +429,9 @@ const renderDetail = (walk, route) => {
   )
   elements.detailAscent.textContent = formatHeight(walk.ascentM)
   elements.detailDescent.textContent = formatHeight(walk.descentM)
-  elements.detailSource.textContent = `Activity data from ${walk.providers.join(' and ')} · archived by Ashterism`
+  elements.detailSource.textContent =
+    walk.provenance?.label ??
+    `Activity data from ${walk.providers.join(' and ')} · archived by Ashterism`
   renderDetailMap(route, walk)
   renderElevationProfile(coordinates, walk)
   renderPhotos(walk.photos)

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "id": "withings-4215888585",
+  "local": {
+    "name": "Portugal coast — 13 May 2024",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "withings": {
+      "activityIds": [
+        "4215888585"
+      ],
+      "status": "archived",
+      "archivedFilename": "activities.csv",
+      "snapshot": {
+        "name": "Portugal coast — 13 May 2024",
+        "type": "Hike",
+        "startDate": "2024-05-13T08:51:00.000Z",
+        "startDateLocal": "2024-05-13T10:51:00+02:00",
+        "distanceM": 13363.1875,
+        "movingTimeSeconds": 11700,
+        "elapsedTimeSeconds": 11880,
+        "ascentM": null,
+        "componentCount": 1
+      },
+      "components": [
+        {
+          "activityId": "4215888585",
+          "from": "2024-05-13T10:51:00+02:00",
+          "to": "2024-05-13T14:09:00+02:00",
+          "distanceM": 13363.1875,
+          "movingTimeSeconds": 11700
+        }
+      ]
+    },
+    "googleTimeline": {
+      "status": "archived",
+      "archivedFilename": "location-history.json",
+      "snapshot": {
+        "startDate": "2024-05-13T08:51:00.000Z",
+        "endDate": "2024-05-13T12:09:00.000Z",
+        "pointCount": 10,
+        "lineDistanceM": 9570
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "a970980a588715f05267ba9eb0f2e8133d1d33a19b1dbcb6f86bf2de6e35b5c8",
+    "source": "google-timeline",
+    "status": "estimated",
+    "versions": [
+      {
+        "checksum": "a970980a588715f05267ba9eb0f2e8133d1d33a19b1dbcb6f86bf2de6e35b5c8",
+        "source": "google-timeline",
+        "capturedAt": "2026-08-25T20:11:32.405Z"
+      }
+    ],
+    "bounds": [
+      -8.824435,
+      37.06549,
+      -8.725119,
+      37.089847
+    ],
+    "start": [
+      -8.725119,
+      37.089847
+    ],
+    "finish": [
+      -8.824039,
+      37.06552
+    ],
+    "descentM": null
+  },
+  "review": [],
+  "provenance": {
+    "status": "estimated",
+    "method": "withings-google-timeline",
+    "metricsSource": "Withings",
+    "routeSource": "Google Timeline",
+    "label": "Estimated route compiled from Withings activity data and Google Timeline."
+  }
+}

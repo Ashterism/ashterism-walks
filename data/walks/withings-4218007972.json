@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "id": "withings-4218007972",
+  "local": {
+    "name": "Portugal coast — 14 May 2024",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "withings": {
+      "activityIds": [
+        "4218007972",
+        "4218224846",
+        "4218408802"
+      ],
+      "status": "archived",
+      "archivedFilename": "activities.csv",
+      "snapshot": {
+        "name": "Portugal coast — 14 May 2024",
+        "type": "Hike",
+        "startDate": "2024-05-14T08:54:00.000Z",
+        "startDateLocal": "2024-05-14T10:54:00+02:00",
+        "distanceM": 17711.31860351568,
+        "movingTimeSeconds": 17461,
+        "elapsedTimeSeconds": 22860,
+        "ascentM": null,
+        "componentCount": 3
+      },
+      "components": [
+        {
+          "activityId": "4218007972",
+          "from": "2024-05-14T10:54:00+02:00",
+          "to": "2024-05-14T13:00:00+02:00",
+          "distanceM": 6881.8901367188,
+          "movingTimeSeconds": 7441
+        },
+        {
+          "activityId": "4218224846",
+          "from": "2024-05-14T13:10:00+02:00",
+          "to": "2024-05-14T13:18:00+02:00",
+          "distanceM": 546.28002929688,
+          "movingTimeSeconds": 480
+        },
+        {
+          "activityId": "4218408802",
+          "from": "2024-05-14T14:34:00+02:00",
+          "to": "2024-05-14T17:15:00+02:00",
+          "distanceM": 10283.1484375,
+          "movingTimeSeconds": 9540
+        }
+      ]
+    },
+    "googleTimeline": {
+      "status": "archived",
+      "archivedFilename": "location-history.json",
+      "snapshot": {
+        "startDate": "2024-05-14T08:54:00.000Z",
+        "endDate": "2024-05-14T15:15:00.000Z",
+        "pointCount": 38,
+        "lineDistanceM": 16500
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "f9468379452dd486fdb21c51a37e5647272842eaf68e004f877289e52b20771f",
+    "source": "google-timeline",
+    "status": "estimated",
+    "versions": [
+      {
+        "checksum": "f9468379452dd486fdb21c51a37e5647272842eaf68e004f877289e52b20771f",
+        "source": "google-timeline",
+        "capturedAt": "2026-08-25T20:11:32.405Z"
+      }
+    ],
+    "bounds": [
+      -8.934783,
+      37.007286,
+      -8.828964,
+      37.066066
+    ],
+    "start": [
+      -8.828964,
+      37.066066
+    ],
+    "finish": [
+      -8.934039,
+      37.007533
+    ],
+    "descentM": null
+  },
+  "review": [],
+  "provenance": {
+    "status": "estimated",
+    "method": "withings-google-timeline",
+    "metricsSource": "Withings",
+    "routeSource": "Google Timeline",
+    "label": "Estimated route compiled from Withings activity data and Google Timeline."
+  }
+}
