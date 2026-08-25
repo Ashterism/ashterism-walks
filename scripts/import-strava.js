@@ -31,7 +31,9 @@ const cataloguePath = path.join(exportDirectory, 'activities.csv')
 const privateActivitiesDirectory = 'private/strava/activities'
 const privateMediaDirectory = 'private/strava/media'
 const privateManifestPath = 'private/strava/manifest.json'
+const overridesPath = 'scripts/strava-activity-overrides.json'
 const allowedTypes = new Set(['Walk', 'Hike'])
+const activityOverrides = JSON.parse(fs.readFileSync(overridesPath, 'utf8'))
 
 if (!fs.existsSync(cataloguePath)) {
   throw new Error('The Strava export does not contain activities.csv')
@@ -290,6 +292,7 @@ const copyIfChanged = (source, destination) => {
 const activityFromRow = (row) => {
   const id = String(row[columns.id]).trim()
   if (!/^\d+$/.test(id)) throw new Error(`Unsafe Strava activity ID: ${id}`)
+  const override = activityOverrides[id] ?? {}
   const distanceKm = numberOrNull(row[columns.distanceKm])
   const media = String(row[columns.media] ?? '')
     .split('|')
@@ -298,8 +301,8 @@ const activityFromRow = (row) => {
 
   return {
     id,
-    type: row[columns.type],
-    name: row[columns.name] || null,
+    type: override.type ?? row[columns.type],
+    name: (override.name ?? row[columns.name]) || null,
     startDate: parseStravaDate(row[columns.date]),
     distanceM: distanceKm == null ? null : Math.round(distanceKm * 1000),
     movingTimeSeconds: numberOrNull(row[columns.moving]),
@@ -327,7 +330,12 @@ const activityFromRow = (row) => {
 }
 
 const activities = csvRows
-  .filter((row) => allowedTypes.has(row[columns.type]))
+  .filter((row) =>
+    allowedTypes.has(
+      activityOverrides[String(row[columns.id]).trim()]?.type ??
+        row[columns.type],
+    ),
+  )
   .map(activityFromRow)
 const importedAt = new Date().toISOString()
 const records = loadCanonicalRecords()

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-1599409414",
+  "local": {
+    "name": "Hadrian's Wall — stage 3",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "1599409414",
+      "status": "archived",
+      "archivedFilename": "strava-1599409414.gpx.gz",
+      "snapshot": {
+        "name": "Hadrian's Wall — stage 3",
+        "type": "Hike",
+        "startDate": "2018-05-27T08:29:22.000Z",
+        "startDateLocal": null,
+        "distanceM": 17500,
+        "movingTimeSeconds": 11697,
+        "elapsedTimeSeconds": 13122,
+        "ascentM": 264.8,
+        "descentM": null,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "37c0fa8683f3a7e81ae6e22f4b0439e79f559c126f240f38b2fce03b66fc0c71",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "37c0fa8683f3a7e81ae6e22f4b0439e79f559c126f240f38b2fce03b66fc0c71",
+        "source": "strava",
+        "capturedAt": "2026-08-25T13:08:42.128Z"
+      }
+    ],
+    "bounds": [
+      -2.021369,
+      54.995565,
+      -1.792141,
+      55.0131
+    ],
+    "start": [
+      -1.805252,
+      54.995565
+    ],
+    "finish": [
+      -2.021369,
+      55.012468
+    ],
+    "descentM": 167
+  },
+  "review": []
+}

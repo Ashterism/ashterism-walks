@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-946090100",
+  "local": {
+    "name": "Morning Trek",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "946090100",
+      "status": "archived",
+      "archivedFilename": "strava-946090100.fit.gz",
+      "snapshot": {
+        "name": "Morning Trek",
+        "type": "Hike",
+        "startDate": "2017-04-17T09:09:17.000Z",
+        "startDateLocal": null,
+        "distanceM": 12970,
+        "movingTimeSeconds": 12257,
+        "elapsedTimeSeconds": 12285,
+        "ascentM": 216.3,
+        "descentM": null,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "448a5a57588f6f8c601fd801c2620e6ff50bf5e63fcd85552c9445e0ff5fcd2c",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "448a5a57588f6f8c601fd801c2620e6ff50bf5e63fcd85552c9445e0ff5fcd2c",
+        "source": "strava",
+        "capturedAt": "2026-08-25T13:08:42.128Z"
+      }
+    ],
+    "bounds": [
+      0.1672904659062624,
+      51.3129457924515,
+      0.2143128588795662,
+      51.369542917236686
+    ],
+    "start": [
+      0.1799364946782589,
+      51.3129457924515
+    ],
+    "finish": [
+      0.20429573021829128,
+      51.362650226801634
+    ],
+    "descentM": 227
+  },
+  "review": []
+}
