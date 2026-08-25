@@ -45,7 +45,7 @@ for (const record of loadCanonicalRecords()) {
   walks.push({
     ...properties,
     photos: record.local.photos ?? [],
-    routeUrl: `/data/routes/${record.id}.geojson`,
+    routeUrl: `/data/routes/${record.id}.geojson?v=${activeVersion}`,
     bounds: record.route.bounds,
     start: record.route.start,
     finish: record.route.finish,

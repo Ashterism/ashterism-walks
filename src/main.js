@@ -492,7 +492,7 @@ const showAllWalks = () => {
 map.on('load', async () => {
   try {
     showStatus('Loading walks…')
-    const catalogue = await fetchJson('/data/walks.json')
+    const catalogue = await fetchJson(`/data/walks.json?v=${Date.now()}`)
     walks = catalogue.walks
     if (walks.length === 0) throw new Error('The walk catalogue is empty')
 
