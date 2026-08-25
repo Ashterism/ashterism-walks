@@ -148,7 +148,17 @@ const fetchJson = async (url) => {
 const routePadding = () =>
   window.innerWidth <= 720
     ? { top: 70, right: 35, bottom: 270, left: 35 }
-    : { top: 70, right: 70, bottom: 70, left: 440 }
+    : {
+        top: 70,
+        right: 70,
+        bottom: 70,
+        left: Math.ceil(elements.library.getBoundingClientRect().right + 28),
+      }
+
+const allWalksPadding = () =>
+  window.innerWidth <= 720
+    ? { top: 35, right: 35, bottom: 170, left: 35 }
+    : routePadding()
 
 const boundsFrom = ([west, south, east, north]) =>
   new LngLatBounds([west, south], [east, north])
@@ -470,7 +480,7 @@ const showAllWalks = () => {
   const bounds = new LngLatBounds()
   walks.forEach((walk) => bounds.extend(walk.start))
   map.fitBounds(bounds, {
-    padding: window.innerWidth <= 720 ? 70 : 110,
+    padding: allWalksPadding(),
     duration: 900,
     maxZoom: 8,
   })
