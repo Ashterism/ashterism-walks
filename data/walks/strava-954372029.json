@@ -3,12 +3,26 @@
   "id": "strava-954372029",
   "local": {
     "name": "MiniTrek",
-    "activityType": null,
+    "activityType": "Hike",
     "visibility": "public",
     "photos": []
   },
   "sources": {
-    "garmin": null,
+    "garmin": {
+      "activityId": "1693632099",
+      "status": "archived",
+      "archivedFilename": null,
+      "snapshot": {
+        "name": "Erith Ward Other",
+        "type": "Hike",
+        "startDate": "2017-04-23T08:22:04.000Z",
+        "startDateLocal": "2017-04-23T09:22:04.000",
+        "distanceM": 12919.1103515625,
+        "movingTimeSeconds": 10843.8876953125,
+        "elapsedTimeSeconds": 10844.4033203125,
+        "ascentM": 181.91015148162842
+      }
+    },
     "strava": {
       "activityId": "954372029",
       "status": "archived",

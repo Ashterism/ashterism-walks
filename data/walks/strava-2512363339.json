@@ -3,12 +3,26 @@
   "id": "strava-2512363339",
   "local": {
     "name": "Morning Activity",
-    "activityType": null,
+    "activityType": "Hike",
     "visibility": "public",
     "photos": []
   },
   "sources": {
-    "garmin": null,
+    "garmin": {
+      "activityId": "3821793892",
+      "status": "archived",
+      "archivedFilename": null,
+      "snapshot": {
+        "name": "Rother Other",
+        "type": "Hike",
+        "startDate": "2019-07-07T09:53:19.000Z",
+        "startDateLocal": "2019-07-07T10:53:19.000",
+        "distanceM": 20431.240234375,
+        "movingTimeSeconds": 15009,
+        "elapsedTimeSeconds": 21244.076171875,
+        "ascentM": 457.9181966409087
+      }
+    },
     "strava": {
       "activityId": "2512363339",
       "status": "archived",

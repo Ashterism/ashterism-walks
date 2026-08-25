@@ -99,6 +99,48 @@ test('Strava-only records resolve through the same public model', () => {
   assert.deepEqual(publicWalk.providers, ['Strava'])
 })
 
+test('Garmin-only records resolve through the same public model', () => {
+  const record = {
+    schemaVersion: 1,
+    id: '123',
+    local: {
+      name: 'Epping Forest Hiking',
+      activityType: 'Hike',
+      visibility: 'public',
+      photos: [],
+    },
+    sources: {
+      garmin: {
+        activityId: '123',
+        snapshot: {
+          name: 'Epping Forest Other',
+          type: 'Hike',
+          startDate: '2019-11-16T10:29:37.000Z',
+          distanceM: 6344.89,
+          movingTimeSeconds: 7356.97,
+          elapsedTimeSeconds: 7356.97,
+          ascentM: 90,
+        },
+      },
+    },
+    route: { descentM: 92 },
+    review: [],
+  }
+
+  assert.deepEqual(resolvePublicFields(record), {
+    id: '123',
+    activity: 'hiking',
+    name: 'Epping Forest Hiking',
+    date: '2019-11-16T10:29:37.000Z',
+    distanceKm: 6.34,
+    movingTimeSeconds: 7356.97,
+    elapsedTimeSeconds: 7356.97,
+    ascentM: 90,
+    descentM: 92,
+    providers: ['Garmin'],
+  })
+})
+
 test('provider records match one canonical activity without creating a duplicate', () => {
   assert.equal(
     findCanonicalActivityMatch([record], {

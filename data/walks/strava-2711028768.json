@@ -3,12 +3,26 @@
   "id": "strava-2711028768",
   "local": {
     "name": "Morning Activity",
-    "activityType": null,
+    "activityType": "Hike",
     "visibility": "public",
     "photos": []
   },
   "sources": {
-    "garmin": null,
+    "garmin": {
+      "activityId": "4061334394",
+      "status": "archived",
+      "archivedFilename": null,
+      "snapshot": {
+        "name": "Tonbridge and Malling Other",
+        "type": "Hike",
+        "startDate": "2019-09-15T09:32:35.000Z",
+        "startDateLocal": "2019-09-15T10:32:35.000",
+        "distanceM": 16476.099609375,
+        "movingTimeSeconds": 12118,
+        "elapsedTimeSeconds": 16066.8779296875,
+        "ascentM": 209.40830612182617
+      }
+    },
     "strava": {
       "activityId": "2711028768",
       "status": "archived",

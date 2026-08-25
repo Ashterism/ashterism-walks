@@ -3,12 +3,26 @@
   "id": "strava-946090100",
   "local": {
     "name": "Morning Trek",
-    "activityType": null,
+    "activityType": "Hike",
     "visibility": "public",
     "photos": []
   },
   "sources": {
-    "garmin": null,
+    "garmin": {
+      "activityId": "1682547478",
+      "status": "archived",
+      "archivedFilename": null,
+      "snapshot": {
+        "name": "Otford Other",
+        "type": "Hike",
+        "startDate": "2017-04-17T09:09:17.000Z",
+        "startDateLocal": "2017-04-17T10:09:17.000",
+        "distanceM": 12972.0302734375,
+        "movingTimeSeconds": 12257.884765625,
+        "elapsedTimeSeconds": 12285.4951171875,
+        "ascentM": 202.01700973510742
+      }
+    },
     "strava": {
       "activityId": "946090100",
       "status": "archived",

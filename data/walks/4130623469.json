@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "4130623469",
+  "local": {
+    "name": "Waverley Hiking",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "4130623469",
+      "status": "archived",
+      "archivedFilename": "4130623469_ACTIVITY.fit",
+      "snapshot": {
+        "name": "Waverley Other",
+        "type": "Hike",
+        "startDate": "2019-10-06T10:15:22.000Z",
+        "startDateLocal": "2019-10-06T11:15:22.000",
+        "distanceM": 13376.9697265625,
+        "movingTimeSeconds": 10200,
+        "elapsedTimeSeconds": 16010.4150390625,
+        "ascentM": 143.7267189025879
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "c1ccf57582922a703d517eacf9cbeb3729348b6fd6036297d6e2161625005f4c",
+    "source": "garmin",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "c1ccf57582922a703d517eacf9cbeb3729348b6fd6036297d6e2161625005f4c",
+        "source": "garmin",
+        "capturedAt": "2026-08-25T16:50:15.127Z"
+      }
+    ],
+    "bounds": [
+      -0.7195410411804914,
+      51.08670732937753,
+      -0.6288625113666058,
+      51.133681861683726
+    ],
+    "start": [
+      -0.6470191385596991,
+      51.13362570293248
+    ],
+    "finish": [
+      -0.718965707346797,
+      51.08884991146624
+    ],
+    "descentM": 690
+  },
+  "review": []
+}

@@ -121,7 +121,10 @@ export const publicActivityType = (type) =>
     : 'walking'
 
 export const providerSnapshotFor = (record) =>
-  record.sources.intervals?.snapshot ?? record.sources.strava?.snapshot ?? {}
+  record.sources.intervals?.snapshot ??
+  record.sources.strava?.snapshot ??
+  record.sources.garmin?.snapshot ??
+  {}
 
 export const findCanonicalActivityMatch = (
   records,

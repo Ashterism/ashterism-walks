@@ -3,12 +3,26 @@
   "id": "strava-1333301173",
   "local": {
     "name": "Thames Path pt.1",
-    "activityType": null,
+    "activityType": "Hike",
     "visibility": "public",
     "photos": []
   },
   "sources": {
-    "garmin": null,
+    "garmin": {
+      "activityId": "2404628999",
+      "status": "archived",
+      "archivedFilename": null,
+      "snapshot": {
+        "name": "Woolwich Riverside Ward Other",
+        "type": "Hike",
+        "startDate": "2017-12-30T11:10:26.000Z",
+        "startDateLocal": "2017-12-30T11:10:26.000",
+        "distanceM": 18148.779296875,
+        "movingTimeSeconds": 11897,
+        "elapsedTimeSeconds": 18751.927734375,
+        "ascentM": 45.96646964550018
+      }
+    },
     "strava": {
       "activityId": "1333301173",
       "status": "archived",

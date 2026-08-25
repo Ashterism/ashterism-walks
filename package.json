@@ -8,6 +8,7 @@
     "build": "vite build",
     "catalogue": "node scripts/build-catalogue.js",
     "convert": "node scripts/convert-fit.js",
+    "import:garmin-export": "node scripts/import-garmin-export.js",
     "import:strava": "node scripts/import-strava.js",
     "migrate:canonical": "node scripts/migrate-canonical.js",
     "rename": "node scripts/rename-walk.js",

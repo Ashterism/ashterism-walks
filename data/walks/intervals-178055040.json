@@ -2,13 +2,27 @@
   "schemaVersion": 1,
   "id": "intervals-178055040",
   "local": {
-    "name": null,
+    "name": "Dartford Hiking",
     "activityType": "Hike",
     "visibility": "public",
     "photos": []
   },
   "sources": {
-    "garmin": null,
+    "garmin": {
+      "activityId": "3595253285",
+      "status": "archived",
+      "archivedFilename": null,
+      "snapshot": {
+        "name": "Dartford Running",
+        "type": "Hike",
+        "startDate": "2019-04-22T10:06:23.000Z",
+        "startDateLocal": "2019-04-22T11:06:23.000",
+        "distanceM": 13373.648640000003,
+        "movingTimeSeconds": 9815,
+        "elapsedTimeSeconds": 10515.812,
+        "ascentM": 72.5600391824
+      }
+    },
     "intervals": {
       "activityId": "i178055040",
       "status": "active",

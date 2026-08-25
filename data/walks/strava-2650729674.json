@@ -3,12 +3,26 @@
   "id": "strava-2650729674",
   "local": {
     "name": "Battle walk",
-    "activityType": null,
+    "activityType": "Hike",
     "visibility": "public",
     "photos": []
   },
   "sources": {
-    "garmin": null,
+    "garmin": {
+      "activityId": "3988691994",
+      "status": "archived",
+      "archivedFilename": null,
+      "snapshot": {
+        "name": "Rother Other",
+        "type": "Hike",
+        "startDate": "2019-08-25T09:28:29.000Z",
+        "startDateLocal": "2019-08-25T10:28:29.000",
+        "distanceM": 21208.150390625,
+        "movingTimeSeconds": 15522,
+        "elapsedTimeSeconds": 22695.96484375,
+        "ascentM": 1412
+      }
+    },
     "strava": {
       "activityId": "2650729674",
       "status": "archived",

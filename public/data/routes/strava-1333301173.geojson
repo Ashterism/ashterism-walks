@@ -11,6 +11,7 @@
     "ascentM": 109,
     "descentM": 119,
     "providers": [
+      "Garmin",
       "Strava"
     ]
   },

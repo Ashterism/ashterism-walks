@@ -3,12 +3,26 @@
   "id": "strava-1343703760",
   "local": {
     "name": "Peddars way pt.3",
-    "activityType": null,
+    "activityType": "Hike",
     "visibility": "public",
     "photos": []
   },
   "sources": {
-    "garmin": null,
+    "garmin": {
+      "activityId": "2417871978",
+      "status": "archived",
+      "archivedFilename": null,
+      "snapshot": {
+        "name": "Castle Acre Other",
+        "type": "Hike",
+        "startDate": "2018-01-06T08:30:17.000Z",
+        "startDateLocal": "2018-01-06T08:30:17.000",
+        "distanceM": 37131.98828125,
+        "movingTimeSeconds": 23270,
+        "elapsedTimeSeconds": 24764.55078125,
+        "ascentM": 236.7432520389557
+      }
+    },
     "strava": {
       "activityId": "1343703760",
       "status": "archived",

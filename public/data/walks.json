@@ -1,5 +1,5 @@
 {
-  "walkCount": 79,
+  "walkCount": 87,
   "skippedWithoutRoute": 8,
   "walks": [
     {
@@ -1682,6 +1682,96 @@
       ]
     },
     {
+      "id": "4257786853",
+      "activity": "hiking",
+      "name": "Epping Forest Hiking",
+      "date": "2019-11-16T10:29:37.000Z",
+      "distanceKm": 6.34,
+      "movingTimeSeconds": 5138,
+      "elapsedTimeSeconds": 7356.97314453125,
+      "ascentM": 90,
+      "descentM": 313,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/4257786853.geojson?v=ad54d3e98cee7e546604649a071e37941856c551b1e0620fdc2b3250f33e7e63",
+      "bounds": [
+        0.03982585854828358,
+        51.64949697442353,
+        0.0532828364521265,
+        51.681435042992234
+      ],
+      "start": [
+        0.042324503883719444,
+        51.64949697442353
+      ],
+      "finish": [
+        0.051663536578416824,
+        51.681435042992234
+      ]
+    },
+    {
+      "id": "4197566297",
+      "activity": "hiking",
+      "name": "Mole Valley Hiking",
+      "date": "2019-10-27T10:32:29.000Z",
+      "distanceKm": 16.8,
+      "movingTimeSeconds": 13255,
+      "elapsedTimeSeconds": 17872.08984375,
+      "ascentM": 275,
+      "descentM": 932,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/4197566297.geojson?v=8ba99432647882c9f6e9fadf6d3f29eadfed33f66abb2ea942ca02583876de0a",
+      "bounds": [
+        -0.4488329775631428,
+        51.17303716018796,
+        -0.31815508380532265,
+        51.22366653755307
+      ],
+      "start": [
+        -0.32033815048635006,
+        51.181173054501414
+      ],
+      "finish": [
+        -0.44727327302098274,
+        51.21951003558934
+      ]
+    },
+    {
+      "id": "4130623469",
+      "activity": "hiking",
+      "name": "Waverley Hiking",
+      "date": "2019-10-06T10:15:22.000Z",
+      "distanceKm": 13.38,
+      "movingTimeSeconds": 10200,
+      "elapsedTimeSeconds": 16010.4150390625,
+      "ascentM": 144,
+      "descentM": 690,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/4130623469.geojson?v=c1ccf57582922a703d517eacf9cbeb3729348b6fd6036297d6e2161625005f4c",
+      "bounds": [
+        -0.7195410411804914,
+        51.08670732937753,
+        -0.6288625113666058,
+        51.133681861683726
+      ],
+      "start": [
+        -0.6470191385596991,
+        51.13362570293248
+      ],
+      "finish": [
+        -0.718965707346797,
+        51.08884991146624
+      ]
+    },
+    {
       "id": "strava-2711028768",
       "activity": "hiking",
       "name": "Morning Activity",
@@ -1692,6 +1782,7 @@
       "ascentM": 306,
       "descentM": 841,
       "providers": [
+        "Garmin",
         "Strava"
       ],
       "photos": [],
@@ -1722,6 +1813,7 @@
       "ascentM": 323,
       "descentM": 1211,
       "providers": [
+        "Garmin",
         "Strava"
       ],
       "photos": [],
@@ -1752,6 +1844,7 @@
       "ascentM": 386,
       "descentM": 897,
       "providers": [
+        "Garmin",
         "Strava"
       ],
       "photos": [],
@@ -1782,6 +1875,7 @@
       "ascentM": 516,
       "descentM": 894,
       "providers": [
+        "Garmin",
         "Strava"
       ],
       "photos": [],
@@ -1802,9 +1896,99 @@
       ]
     },
     {
+      "id": "3776337976",
+      "activity": "hiking",
+      "name": "Colchester Hiking",
+      "date": "2019-06-23T08:50:47.000Z",
+      "distanceKm": 14.03,
+      "movingTimeSeconds": 10760,
+      "elapsedTimeSeconds": 18734.703125,
+      "ascentM": 33,
+      "descentM": 427,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/3776337976.geojson?v=c6f3a177f76e5a950b5fc39c60606f50733d91ba68d2ce0beba39c7f458c20c5",
+      "bounds": [
+        0.9243921563029289,
+        51.83785401284695,
+        0.9958744514733553,
+        51.88812917098403
+      ],
+      "start": [
+        0.9572216402739286,
+        51.85617048293352
+      ],
+      "finish": [
+        0.9243921563029289,
+        51.88812917098403
+      ]
+    },
+    {
+      "id": "3731138378",
+      "activity": "hiking",
+      "name": "Wycombe Hiking",
+      "date": "2019-06-09T09:03:14.000Z",
+      "distanceKm": 21.87,
+      "movingTimeSeconds": 15336,
+      "elapsedTimeSeconds": 21147.642578125,
+      "ascentM": 192,
+      "descentM": 886,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/3731138378.geojson?v=8f3a20205502c3069bee6af47de17a30b72e09c0485b909538980a0fa78f3a5b",
+      "bounds": [
+        -0.873233126476407,
+        51.54422211460769,
+        -0.7687853928655386,
+        51.580570405349135
+      ],
+      "start": [
+        -0.7706659566611052,
+        51.570843206718564
+      ],
+      "finish": [
+        -0.7687922660261393,
+        51.57128602266312
+      ]
+    },
+    {
+      "id": "3650564645",
+      "activity": "hiking",
+      "name": "South Oxfordshire Hiking",
+      "date": "2019-05-12T10:19:43.000Z",
+      "distanceKm": 18.65,
+      "movingTimeSeconds": 13673,
+      "elapsedTimeSeconds": 19965.23046875,
+      "ascentM": 207,
+      "descentM": 780,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/3650564645.geojson?v=71cd194109543a1eab8857a7b8c3966dd9be8c1974b409d092b58fee9174e12b",
+      "bounds": [
+        -0.9627997130155563,
+        51.49643613025546,
+        -0.8818410895764828,
+        51.551747219637036
+      ],
+      "start": [
+        -0.8818410895764828,
+        51.5104716271162
+      ],
+      "finish": [
+        -0.9156852029263973,
+        51.54188741929829
+      ]
+    },
+    {
       "id": "intervals-178055040",
       "activity": "hiking",
-      "name": "Dartford Running",
+      "name": "Dartford Hiking",
       "date": "2019-04-22T10:06:23Z",
       "distanceKm": 13.37,
       "movingTimeSeconds": 9828,
@@ -1830,6 +2014,36 @@
       "finish": [
         0.2111666277050972,
         51.36785848997533
+      ]
+    },
+    {
+      "id": "2911878024",
+      "activity": "hiking",
+      "name": "Lewes Hiking",
+      "date": "2018-07-29T09:45:07.000Z",
+      "distanceKm": 23.47,
+      "movingTimeSeconds": 16897,
+      "elapsedTimeSeconds": 27108.150390625,
+      "ascentM": 437,
+      "descentM": 874,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/2911878024.geojson?v=a98d045a749cb5dde155e4bf9b1595bc084fa6f2c2c8f4df0d7b9c8c58f14dff",
+      "bounds": [
+        0.0616973452270031,
+        50.756438383832574,
+        0.1618414744734764,
+        50.85399686358869
+      ],
+      "start": [
+        0.06229321472346783,
+        50.85399686358869
+      ],
+      "finish": [
+        0.10015578009188175,
+        50.77280187048018
       ]
     },
     {
@@ -2103,6 +2317,36 @@
       ]
     },
     {
+      "id": "2681263423",
+      "activity": "hiking",
+      "name": "Greenwich Hiking",
+      "date": "2018-05-07T10:20:21.000Z",
+      "distanceKm": 17.35,
+      "movingTimeSeconds": 11569,
+      "elapsedTimeSeconds": 14275.5986328125,
+      "ascentM": 179,
+      "descentM": 822,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/2681263423.geojson?v=8c3d871e44296aa43ac448f1d924a2aac32fd034101bf2aa33377f27e9d8a896",
+      "bounds": [
+        0.021448200568556786,
+        51.430906327441335,
+        0.07552614435553551,
+        51.4946486055851
+      ],
+      "start": [
+        0.06293929181993008,
+        51.49454525671899
+      ],
+      "finish": [
+        0.021483320742845535,
+        51.43115057609975
+      ]
+    },
+    {
       "id": "strava-1343703760",
       "activity": "hiking",
       "name": "Peddars way pt.3",
@@ -2113,6 +2357,7 @@
       "ascentM": 313,
       "descentM": 341,
       "providers": [
+        "Garmin",
         "Strava"
       ],
       "photos": [],
@@ -2203,6 +2448,7 @@
       "ascentM": 109,
       "descentM": 119,
       "providers": [
+        "Garmin",
         "Strava"
       ],
       "photos": [],
@@ -2263,6 +2509,7 @@
       "ascentM": 194,
       "descentM": 143,
       "providers": [
+        "Garmin",
         "Strava"
       ],
       "photos": [],
@@ -2293,6 +2540,7 @@
       "ascentM": 216,
       "descentM": 227,
       "providers": [
+        "Garmin",
         "Strava"
       ],
       "photos": [],

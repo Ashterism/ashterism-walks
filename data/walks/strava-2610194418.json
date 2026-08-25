@@ -3,12 +3,26 @@
   "id": "strava-2610194418",
   "local": {
     "name": "Morning Activity",
-    "activityType": null,
+    "activityType": "Hike",
     "visibility": "public",
     "photos": []
   },
   "sources": {
-    "garmin": null,
+    "garmin": {
+      "activityId": "3939599795",
+      "status": "archived",
+      "archivedFilename": null,
+      "snapshot": {
+        "name": "Mid Sussex Other",
+        "type": "Hike",
+        "startDate": "2019-08-11T09:22:18.000Z",
+        "startDateLocal": "2019-08-11T10:22:18.000",
+        "distanceM": 18087.630859375,
+        "movingTimeSeconds": 13817,
+        "elapsedTimeSeconds": 20972.4375,
+        "ascentM": 324.98853302001953
+      }
+    },
     "strava": {
       "activityId": "2610194418",
       "status": "archived",

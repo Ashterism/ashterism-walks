@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "3650564645",
+  "local": {
+    "name": "South Oxfordshire Hiking",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "3650564645",
+      "status": "archived",
+      "archivedFilename": "3650564645_ACTIVITY.fit",
+      "snapshot": {
+        "name": "South Oxfordshire Other",
+        "type": "Hike",
+        "startDate": "2019-05-12T10:19:43.000Z",
+        "startDateLocal": "2019-05-12T11:19:43.000",
+        "distanceM": 18648.16015625,
+        "movingTimeSeconds": 13673,
+        "elapsedTimeSeconds": 19965.23046875,
+        "ascentM": 207.13645553588867
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "71cd194109543a1eab8857a7b8c3966dd9be8c1974b409d092b58fee9174e12b",
+    "source": "garmin",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "71cd194109543a1eab8857a7b8c3966dd9be8c1974b409d092b58fee9174e12b",
+        "source": "garmin",
+        "capturedAt": "2026-08-25T16:50:15.127Z"
+      }
+    ],
+    "bounds": [
+      -0.9627997130155563,
+      51.49643613025546,
+      -0.8818410895764828,
+      51.551747219637036
+    ],
+    "start": [
+      -0.8818410895764828,
+      51.5104716271162
+    ],
+    "finish": [
+      -0.9156852029263973,
+      51.54188741929829
+    ],
+    "descentM": 780
+  },
+  "review": []
+}
