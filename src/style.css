@@ -65,6 +65,7 @@ button { font: inherit; }
 .walk-list { margin: 0; padding: 0 9px 8px; overflow: auto; list-style: none; }
 .walk-list__button { display: block; width: 100%; padding: 11px 10px; border: 0; border-radius: 10px; background: transparent; color: inherit; text-align: left; cursor: pointer; }
 .walk-list__button:hover { background: rgb(215 101 63 / 8%); }
+.walk-list__button:focus-visible { outline: 2px solid #d7653f; outline-offset: -2px; }
 .walk-list__button[aria-pressed="true"] { background: #17382d; color: #fffaf1; }
 .walk-list__name, .walk-list__meta { display: block; }
 .walk-list__name { overflow: hidden; font-size: .91rem; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }

@@ -211,6 +211,25 @@ const renderList = () => {
   )
 }
 
+const syncListSelection = ({ focus = false } = {}) => {
+  const buttons = elements.list.querySelectorAll('[data-walk-id]')
+  let selectedButton = null
+
+  for (const button of buttons) {
+    const isSelected = button.dataset.walkId === selectedId
+    button.setAttribute('aria-pressed', String(isSelected))
+    if (isSelected) selectedButton = button
+  }
+
+  if (!selectedButton) return
+  selectedButton.scrollIntoView({
+    behavior: 'smooth',
+    block: 'nearest',
+    inline: 'nearest',
+  })
+  if (focus) selectedButton.focus({ preventScroll: true })
+}
+
 const updateUrl = (id, { detail = false, push = false } = {}) => {
   const url = new URL(window.location.href)
   if (id) url.searchParams.set('walk', id)
@@ -430,14 +449,17 @@ const closeDetails = ({ updateHistory = true } = {}) => {
   elements.moreDetails.focus({ preventScroll: true })
 }
 
-const selectWalk = async (id, { updateHistory = true } = {}) => {
+const selectWalk = async (
+  id,
+  { updateHistory = true, focusList = false } = {},
+) => {
   const walk = walks.find((candidate) => candidate.id === id)
   if (!walk) return
 
   const request = ++routeRequest
   selectedId = walk.id
   selectedRoute = null
-  renderList()
+  syncListSelection({ focus: focusList })
   updateDetails(walk)
   showStatus('Loading route…')
   map.getSource('walk').setData(emptyRoute)
@@ -470,7 +492,7 @@ const showAllWalks = () => {
   routeRequest += 1
   selectedId = null
   selectedRoute = null
-  renderList()
+  syncListSelection()
   elements.detail.hidden = true
   setBackgroundInert(false)
   document.body.classList.remove('detail-is-open')
@@ -555,7 +577,7 @@ map.on('load', async () => {
     })
     map.on('click', 'walk-starts', (event) => {
       const id = event.features?.[0]?.properties?.id
-      if (id) selectWalk(String(id))
+      if (id) selectWalk(String(id), { focusList: true })
     })
 
     elements.viewAll.addEventListener('click', showAllWalks)
@@ -566,6 +588,7 @@ map.on('load', async () => {
     const requestedId = searchParams.get('walk')
     const initialWalk =
       walks.find((walk) => walk.id === requestedId) ?? walks[0]
+    renderList()
     await selectWalk(initialWalk.id, {
       updateHistory: Boolean(requestedId),
     })
