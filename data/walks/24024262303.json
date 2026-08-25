@@ -27,6 +27,36 @@
         "ascentM": 314,
         "source": "GARMIN_CONNECT"
       }
+    },
+    "strava": {
+      "activityId": "19795429279",
+      "status": "archived",
+      "archivedFilename": "24024262303.fit.gz",
+      "snapshot": {
+        "name": "Lunch Hike",
+        "type": "Hike",
+        "startDate": "2026-08-18T11:11:07.000Z",
+        "startDateLocal": null,
+        "distanceM": 9350,
+        "movingTimeSeconds": 7478,
+        "elapsedTimeSeconds": 9887,
+        "ascentM": 314,
+        "descentM": 302,
+        "weather": {
+          "condition": "3.0",
+          "temperatureC": 23.1,
+          "apparentTemperatureC": 21.1,
+          "humidity": 0.7,
+          "windSpeed": 4.4,
+          "windGust": 9.8,
+          "windBearing": 294,
+          "precipitationIntensity": 0,
+          "precipitationProbability": 0.44,
+          "precipitationType": "5.0",
+          "cloudCover": 0.99
+        },
+        "mediaCount": 0
+      }
     }
   },
   "route": {
@@ -38,6 +68,11 @@
         "checksum": "a18ddb1b423620a4b7cc387c1f563e252fcc6b62286cacab9c5cbad129650142",
         "source": "intervals",
         "capturedAt": null
+      },
+      {
+        "checksum": "d7f1d63b7b08102afb8641da17390f28f4f3234a826b547fc71eba41371e78e1",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
       }
     ],
     "bounds": [

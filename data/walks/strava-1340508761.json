@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-1340508761",
+  "local": {
+    "name": "Peddars Way Pt.1",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "1340508761",
+      "status": "archived",
+      "archivedFilename": "strava-1340508761.fit.gz",
+      "snapshot": {
+        "name": "Peddars Way Pt.1",
+        "type": "Hike",
+        "startDate": "2018-01-04T09:13:31.000Z",
+        "startDateLocal": null,
+        "distanceM": 26920,
+        "movingTimeSeconds": 18333,
+        "elapsedTimeSeconds": 21241,
+        "ascentM": 171.8,
+        "descentM": null,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 2
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "7fc2106ee06cf922ab853daf35d8d6fb95b1fe1c5d9f7c29f799069df1c58d22",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "7fc2106ee06cf922ab853daf35d8d6fb95b1fe1c5d9f7c29f799069df1c58d22",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      0.7903720624744892,
+      52.39058202132583,
+      0.8605112414807081,
+      52.57137564942241
+    ],
+    "start": [
+      0.8551080152392387,
+      52.390611693263054
+    ],
+    "finish": [
+      0.811863262206316,
+      52.57137564942241
+    ],
+    "descentM": 148
+  },
+  "review": []
+}

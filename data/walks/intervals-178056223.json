@@ -25,6 +25,36 @@
         "ascentM": 379,
         "source": "GARMIN_CONNECT"
       }
+    },
+    "strava": {
+      "activityId": "12652991394",
+      "status": "archived",
+      "archivedFilename": "intervals-178056223.fit.gz",
+      "snapshot": {
+        "name": "Morning Hike",
+        "type": "Hike",
+        "startDate": "2024-10-14T06:13:37.000Z",
+        "startDateLocal": null,
+        "distanceM": 24040,
+        "movingTimeSeconds": 20504,
+        "elapsedTimeSeconds": 25533,
+        "ascentM": 379,
+        "descentM": 554,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 3
+      }
     }
   },
   "route": {
@@ -36,6 +66,11 @@
         "checksum": "240b8e33918f88fc6f3f346f631c96b1d6ff703cef9c0c4f41bd7976a221e7a6",
         "source": "intervals",
         "capturedAt": null
+      },
+      {
+        "checksum": "27b5f82bf2dcd6d01b0c8b034bf9676a1deb2fc1dd0863c939d73adaa75c520c",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
       }
     ],
     "bounds": [

@@ -9,7 +9,11 @@
     "movingTimeSeconds": 949,
     "elapsedTimeSeconds": 989,
     "ascentM": null,
-    "descentM": null
+    "descentM": null,
+    "providers": [
+      "Garmin",
+      "Strava"
+    ]
   },
   "geometry": {
     "type": "LineString",

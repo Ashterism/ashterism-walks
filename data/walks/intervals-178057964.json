@@ -25,6 +25,36 @@
         "ascentM": 278,
         "source": "GARMIN_CONNECT"
       }
+    },
+    "strava": {
+      "activityId": "15213805214",
+      "status": "archived",
+      "archivedFilename": "intervals-178057964.fit.gz",
+      "snapshot": {
+        "name": "Evening Hike",
+        "type": "Hike",
+        "startDate": "2025-07-23T17:40:39.000Z",
+        "startDateLocal": null,
+        "distanceM": 6130,
+        "movingTimeSeconds": 5300,
+        "elapsedTimeSeconds": 5814,
+        "ascentM": 278,
+        "descentM": 112,
+        "weather": {
+          "condition": "1.0",
+          "temperatureC": 19.5,
+          "apparentTemperatureC": 17.8,
+          "humidity": 0.63,
+          "windSpeed": 5.5,
+          "windGust": 10.1,
+          "windBearing": 335,
+          "precipitationIntensity": 0,
+          "precipitationProbability": 0.55,
+          "precipitationType": "5.0",
+          "cloudCover": 0.3
+        },
+        "mediaCount": 0
+      }
     }
   },
   "route": {
@@ -36,6 +66,11 @@
         "checksum": "9c2863368d837bdfc1355e8058dd9a9d89a6d42e71c019294f33e2e7c1d118d1",
         "source": "intervals",
         "capturedAt": null
+      },
+      {
+        "checksum": "0af536da86567e47e7cb6f18a518747f3abd4d3f4f57d532ce046e6372716bdf",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
       }
     ],
     "bounds": [

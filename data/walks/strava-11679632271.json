@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-11679632271",
+  "local": {
+    "name": "Afternoon Walk",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "11679632271",
+      "status": "archived",
+      "archivedFilename": "strava-11679632271.fit.gz",
+      "snapshot": {
+        "name": "Afternoon Walk",
+        "type": "Walk",
+        "startDate": "2024-06-18T09:04:31.000Z",
+        "startDateLocal": null,
+        "distanceM": 4100,
+        "movingTimeSeconds": 3170,
+        "elapsedTimeSeconds": 4134,
+        "ascentM": 40.5,
+        "descentM": 23.9,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "6abb4f68f4c75e635e9b077ed0fcc39cd680675d9a77b73c987f25292761e036",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "6abb4f68f4c75e635e9b077ed0fcc39cd680675d9a77b73c987f25292761e036",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      100.03804058767855,
+      9.472406962886453,
+      100.04915331490338,
+      9.485780037939548
+    ],
+    "start": [
+      100.04834085702896,
+      9.472649618983269
+    ],
+    "finish": [
+      100.04707024432719,
+      9.478281252086163
+    ],
+    "descentM": 23.9
+  },
+  "review": []
+}

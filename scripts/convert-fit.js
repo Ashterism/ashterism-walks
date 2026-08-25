@@ -19,7 +19,7 @@ import {
 const archiveDirectory = 'private/garmin/activities'
 const manifestPath = 'private/garmin/manifest.json'
 const candidateFilenamePattern =
-  /^((?:\d+|intervals-\d+))_ACTIVITY\.fit$/i
+  /^((?:\d+|intervals-\d+|strava-\d+))_ACTIVITY\.fit$/i
 
 const semicirclesToDegrees = (value) => value * (180 / 2 ** 31)
 
@@ -162,10 +162,12 @@ const manifest = readJson(manifestPath)
 const records = loadCanonicalRecords()
 const recordsById = new Map(records.map((record) => [record.id, record]))
 const recordsByIntervalsId = new Map(
-  records.map((record) => [
-    String(record.sources.intervals.activityId),
-    record,
-  ]),
+  records
+    .filter((record) => record.sources.intervals?.activityId != null)
+    .map((record) => [
+      String(record.sources.intervals.activityId),
+      record,
+    ]),
 )
 const observedProviderIds = new Set(
   manifest.observedIntervalsActivityIds ?? [],
@@ -177,7 +179,9 @@ const eligibleProviderIds = new Set(
 )
 
 if (manifest.completeProviderSnapshot) {
-  for (const existingRecord of records) {
+  for (const existingRecord of records.filter(
+    (record) => record.sources.intervals?.activityId != null,
+  )) {
     const providerActivityId = String(
       existingRecord.sources.intervals.activityId,
     )
@@ -256,18 +260,24 @@ for (const metadata of manifest.activities) {
     review.add('route-unavailable')
   }
 
-  const previousStatus = record.sources.intervals.status
+  const previousIntervals = record.sources.intervals
+  const previousStatus = previousIntervals?.status
   record = {
     ...record,
     sources: {
       ...record.sources,
+      garmin:
+        record.sources.garmin ??
+        (metadata.garminActivityId
+          ? { activityId: String(metadata.garminActivityId) }
+          : null),
       intervals: {
-        ...record.sources.intervals,
+        ...previousIntervals,
         activityId: providerActivityId,
         status: 'active',
         statusChangedAt:
           previousStatus === 'active'
-            ? record.sources.intervals.statusChangedAt
+            ? previousIntervals.statusChangedAt
             : manifest.generatedAt,
         fingerprint: metadata.providerFingerprint ?? null,
         snapshot: {

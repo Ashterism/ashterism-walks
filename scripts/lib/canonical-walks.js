@@ -7,7 +7,7 @@ export const routeVersionsDirectory = 'data/route-versions'
 export const publicRoutesDirectory = 'public/data/routes'
 export const publicCataloguePath = 'public/data/walks.json'
 
-export const safeWalkIdPattern = /^(?:\d+|intervals-\d+)$/
+export const safeWalkIdPattern = /^(?:\d+|intervals-\d+|strava-\d+)$/
 
 export const assertSafeWalkId = (id) => {
   const value = String(id)
@@ -120,6 +120,54 @@ export const publicActivityType = (type) =>
     ? 'hiking'
     : 'walking'
 
+export const providerSnapshotFor = (record) =>
+  record.sources.intervals?.snapshot ?? record.sources.strava?.snapshot ?? {}
+
+export const findCanonicalActivityMatch = (
+  records,
+  { startDate, distanceM },
+) => {
+  const candidateTime = new Date(startDate).getTime()
+  if (!Number.isFinite(candidateTime)) return null
+
+  const matches = records
+    .map((record) => {
+      const snapshot = providerSnapshotFor(record)
+      const recordTime = new Date(
+        snapshot.startDate ?? snapshot.startDateLocal,
+      ).getTime()
+      const recordDistance = Number(snapshot.distanceM)
+      const timeDifferenceSeconds = Math.abs(candidateTime - recordTime) / 1000
+      const distanceDifferenceRatio =
+        Number.isFinite(recordDistance) && recordDistance > 0
+          ? Math.abs(Number(distanceM) - recordDistance) / recordDistance
+          : Infinity
+
+      return { record, timeDifferenceSeconds, distanceDifferenceRatio }
+    })
+    .filter(
+      (match) =>
+        match.timeDifferenceSeconds <= 300 &&
+        match.distanceDifferenceRatio <= 0.1,
+    )
+    .sort(
+      (first, second) =>
+        first.timeDifferenceSeconds - second.timeDifferenceSeconds ||
+        first.distanceDifferenceRatio - second.distanceDifferenceRatio,
+    )
+
+  if (matches.length === 0) return null
+  if (
+    matches.length > 1 &&
+    matches[0].timeDifferenceSeconds === matches[1].timeDifferenceSeconds &&
+    matches[0].distanceDifferenceRatio === matches[1].distanceDifferenceRatio
+  ) {
+    return null
+  }
+
+  return matches[0].record
+}
+
 export const providerStatusFor = (
   providerActivityId,
   observedProviderIds,
@@ -131,10 +179,18 @@ export const providerStatusFor = (
 }
 
 export const resolvePublicFields = (record) => {
-  const snapshot = record.sources.intervals.snapshot
+  const snapshot = providerSnapshotFor(record)
   const activity = publicActivityType(
     record.local.activityType ?? snapshot.type,
   )
+  const providers = []
+  if (
+    record.sources.garmin ||
+    record.sources.intervals?.snapshot?.source === 'GARMIN_CONNECT'
+  ) {
+    providers.push('Garmin')
+  }
+  if (record.sources.strava) providers.push('Strava')
 
   return {
     id: record.id,
@@ -155,6 +211,7 @@ export const resolvePublicFields = (record) => {
         ? null
         : Math.round(snapshot.ascentM),
     descentM: record.route?.descentM ?? null,
+    providers,
   }
 }
 

@@ -25,6 +25,36 @@
         "ascentM": null,
         "source": "GARMIN_CONNECT"
       }
+    },
+    "strava": {
+      "activityId": "11724345273",
+      "status": "archived",
+      "archivedFilename": "intervals-178055332.fit.gz",
+      "snapshot": {
+        "name": "Morning Walk",
+        "type": "Walk",
+        "startDate": "2024-06-24T01:00:04.000Z",
+        "startDateLocal": null,
+        "distanceM": 1730,
+        "movingTimeSeconds": 961,
+        "elapsedTimeSeconds": 989,
+        "ascentM": 19.6,
+        "descentM": 19.4,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
     }
   },
   "route": {
@@ -36,6 +66,11 @@
         "checksum": "18973aa428081f0df4c5a65b5de630cf45af75b85909352af61374f71784fd3c",
         "source": "intervals",
         "capturedAt": null
+      },
+      {
+        "checksum": "adcdbf248f8fcccf7ade0fc9bcb163bdc47f2dffe277250ea59352e5e825115d",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
       }
     ],
     "bounds": [

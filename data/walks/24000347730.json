@@ -27,6 +27,36 @@
         "ascentM": 142,
         "source": "GARMIN_CONNECT"
       }
+    },
+    "strava": {
+      "activityId": "19768499057",
+      "status": "archived",
+      "archivedFilename": "24000347730.fit.gz",
+      "snapshot": {
+        "name": "Afternoon Hike",
+        "type": "Hike",
+        "startDate": "2026-08-16T14:27:14.000Z",
+        "startDateLocal": null,
+        "distanceM": 4200,
+        "movingTimeSeconds": 3128,
+        "elapsedTimeSeconds": 3174,
+        "ascentM": 142,
+        "descentM": 141,
+        "weather": {
+          "condition": "3.0",
+          "temperatureC": 22.5,
+          "apparentTemperatureC": 21.1,
+          "humidity": 0.71,
+          "windSpeed": 3.6,
+          "windGust": 5.6,
+          "windBearing": 146,
+          "precipitationIntensity": 0,
+          "precipitationProbability": 0,
+          "precipitationType": "1.0",
+          "cloudCover": 1
+        },
+        "mediaCount": 0
+      }
     }
   },
   "route": {
@@ -38,6 +68,11 @@
         "checksum": "2649f709b6ef99fd3a05d50a47035d1993af8184cd948992fdfdc5dc519d3b49",
         "source": "intervals",
         "capturedAt": null
+      },
+      {
+        "checksum": "77f167e25cfb53ce8d9eafbfb38861a5fb86c3f5e8b982e69a7d115b50c26405",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
       }
     ],
     "bounds": [

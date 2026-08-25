@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-2512363339",
+  "local": {
+    "name": "Morning Activity",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "2512363339",
+      "status": "archived",
+      "archivedFilename": "strava-2512363339.fit.gz",
+      "snapshot": {
+        "name": "Morning Activity",
+        "type": "Hike",
+        "startDate": "2019-07-07T09:53:19.000Z",
+        "startDateLocal": null,
+        "distanceM": 20430,
+        "movingTimeSeconds": 15703,
+        "elapsedTimeSeconds": 21245,
+        "ascentM": 515.9,
+        "descentM": 894,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "6746619c13357b45ff128db689eb7101853de1e297259db350732fd42c7c06f7",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "6746619c13357b45ff128db689eb7101853de1e297259db350732fd42c7c06f7",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      0.5775394476950169,
+      50.854836059734225,
+      0.7075969129800797,
+      50.93408594839275
+    ],
+    "start": [
+      0.7027022168040276,
+      50.934018809348345
+    ],
+    "finish": [
+      0.577980000525713,
+      50.857029017060995
+    ],
+    "descentM": 894
+  },
+  "review": []
+}

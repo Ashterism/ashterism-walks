@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-1333301173",
+  "local": {
+    "name": "Thames Path pt.1",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "1333301173",
+      "status": "archived",
+      "archivedFilename": "strava-1333301173.fit.gz",
+      "snapshot": {
+        "name": "Thames Path pt.1",
+        "type": "Hike",
+        "startDate": "2017-12-30T11:10:26.000Z",
+        "startDateLocal": null,
+        "distanceM": 18140,
+        "movingTimeSeconds": 12818,
+        "elapsedTimeSeconds": 18753,
+        "ascentM": 109.2,
+        "descentM": null,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 4
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "82ee138aa796e7e7ad4e1f5395a99bcb2a1a5d5d6ddb2e98242a840995468afb",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "82ee138aa796e7e7ad4e1f5395a99bcb2a1a5d5d6ddb2e98242a840995468afb",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      -0.05092676728963852,
+      51.483176881447434,
+      0.0704767182469368,
+      51.51682955212891
+    ],
+    "start": [
+      0.06915388628840446,
+      51.49032672867179
+    ],
+    "finish": [
+      -0.05033710040152073,
+      51.51682360097766
+    ],
+    "descentM": 119
+  },
+  "review": []
+}

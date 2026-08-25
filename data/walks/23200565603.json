@@ -27,6 +27,36 @@
         "ascentM": null,
         "source": "GARMIN_CONNECT"
       }
+    },
+    "strava": {
+      "activityId": "18865526956",
+      "status": "archived",
+      "archivedFilename": "23200565603.fit.gz",
+      "snapshot": {
+        "name": "Evening Walk",
+        "type": "Walk",
+        "startDate": "2026-06-10T14:01:18.000Z",
+        "startDateLocal": null,
+        "distanceM": 1540,
+        "movingTimeSeconds": 1860,
+        "elapsedTimeSeconds": 1860,
+        "ascentM": 0,
+        "descentM": 0,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
     }
   },
   "route": null,

@@ -25,6 +25,36 @@
         "ascentM": 47.735874,
         "source": "GARMIN_CONNECT"
       }
+    },
+    "strava": {
+      "activityId": "2322766152",
+      "status": "archived",
+      "archivedFilename": "intervals-178055040.fit.gz",
+      "snapshot": {
+        "name": "Lunch walk",
+        "type": "Walk",
+        "startDate": "2019-04-22T10:06:23.000Z",
+        "startDateLocal": null,
+        "distanceM": 13370,
+        "movingTimeSeconds": 9934,
+        "elapsedTimeSeconds": 10517,
+        "ascentM": 57.9,
+        "descentM": 537,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
     }
   },
   "route": {
@@ -36,6 +66,11 @@
         "checksum": "857efba2650a32602f410988781edd70b239a4d5b1b81829075afcc53ea02ada",
         "source": "intervals",
         "capturedAt": null
+      },
+      {
+        "checksum": "66d684018dc481268798537e4b2c72a3ae5004fb94784233e6351d3c7d22c10c",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
       }
     ],
     "bounds": [

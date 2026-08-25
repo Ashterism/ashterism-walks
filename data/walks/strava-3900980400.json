@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-3900980400",
+  "local": {
+    "name": "Crinan",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "3900980400",
+      "status": "archived",
+      "archivedFilename": "strava-3900980400.fit.gz",
+      "snapshot": {
+        "name": "Crinan",
+        "type": "Walk",
+        "startDate": "2020-08-11T10:38:38.000Z",
+        "startDateLocal": null,
+        "distanceM": 3220,
+        "movingTimeSeconds": 3131,
+        "elapsedTimeSeconds": 5320,
+        "ascentM": 57.3,
+        "descentM": 58,
+        "weather": {
+          "condition": "2.0",
+          "temperatureC": 16.5,
+          "apparentTemperatureC": 16.5,
+          "humidity": 0.87,
+          "windSpeed": 1.8,
+          "windGust": 2.1,
+          "windBearing": 95,
+          "precipitationIntensity": 0,
+          "precipitationProbability": 0,
+          "precipitationType": null,
+          "cloudCover": 0.66
+        },
+        "mediaCount": 0
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "2ace0c2942edf6bdc83329ef343a83e6caaed325e73ab07338bdee191253fc90",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "2ace0c2942edf6bdc83329ef343a83e6caaed325e73ab07338bdee191253fc90",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      -5.556919667869806,
+      56.085148667916656,
+      -5.54778004065156,
+      56.09113753773272
+    ],
+    "start": [
+      -5.55686074309051,
+      56.090966714546084
+    ],
+    "finish": [
+      -5.556786730885506,
+      56.091115744784474
+    ],
+    "descentM": 58
+  },
+  "review": []
+}

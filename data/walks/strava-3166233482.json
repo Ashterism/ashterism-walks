@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-3166233482",
+  "local": {
+    "name": "Farnham to Godalming",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "3166233482",
+      "status": "archived",
+      "archivedFilename": "strava-3166233482.gpx",
+      "snapshot": {
+        "name": "Farnham to Godalming",
+        "type": "Hike",
+        "startDate": "2020-03-08T10:53:38.000Z",
+        "startDateLocal": null,
+        "distanceM": 22620,
+        "movingTimeSeconds": 17056,
+        "elapsedTimeSeconds": 21200,
+        "ascentM": 229.9,
+        "descentM": 247.4,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "53db02afe153696b178a313755cb7376aad8d7f3185cab89b2dc81ed412fefd3",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "53db02afe153696b178a313755cb7376aad8d7f3185cab89b2dc81ed412fefd3",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      -0.791787,
+      51.183715,
+      -0.616052,
+      51.21829
+    ],
+    "start": [
+      -0.791787,
+      51.214282
+    ],
+    "finish": [
+      -0.616211,
+      51.185168
+    ],
+    "descentM": 247.4
+  },
+  "review": []
+}

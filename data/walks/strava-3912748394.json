@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-3912748394",
+  "local": {
+    "name": "Glenbranter",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "3912748394",
+      "status": "archived",
+      "archivedFilename": "strava-3912748394.fit.gz",
+      "snapshot": {
+        "name": "Glenbranter",
+        "type": "Walk",
+        "startDate": "2020-08-14T14:18:45.000Z",
+        "startDateLocal": null,
+        "distanceM": 6990,
+        "movingTimeSeconds": 5076,
+        "elapsedTimeSeconds": 6470,
+        "ascentM": 287.5,
+        "descentM": 302.5,
+        "weather": {
+          "condition": "2.0",
+          "temperatureC": 24,
+          "apparentTemperatureC": 24.2,
+          "humidity": 0.64,
+          "windSpeed": 0.9,
+          "windGust": 1.2,
+          "windBearing": 307,
+          "precipitationIntensity": 0,
+          "precipitationProbability": 0,
+          "precipitationType": null,
+          "cloudCover": 0.8
+        },
+        "mediaCount": 6
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "eded7d03f9abd4f7c5256e4706af05770facc06f6ab7151cae5c2bf73938e865",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "eded7d03f9abd4f7c5256e4706af05770facc06f6ab7151cae5c2bf73938e865",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      -5.055438447743654,
+      56.12534450367093,
+      -5.039856657385826,
+      56.138735096901655
+    ],
+    "start": [
+      -5.040289079770446,
+      56.1346453987062
+    ],
+    "finish": [
+      -5.040157902985811,
+      56.13453366793692
+    ],
+    "descentM": 302.5
+  },
+  "review": []
+}

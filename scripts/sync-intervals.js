@@ -4,6 +4,7 @@ import path from 'node:path'
 import { execFileSync } from 'node:child_process'
 
 import {
+  findCanonicalActivityMatch,
   loadCanonicalRecords,
   providerFingerprint,
   routeVersionPath,
@@ -80,10 +81,12 @@ const isFit = (buffer) =>
 
 const existingRecords = loadCanonicalRecords()
 const existingByIntervalsId = new Map(
-  existingRecords.map((record) => [
-    String(record.sources.intervals.activityId),
-    record,
-  ]),
+  existingRecords
+    .filter((record) => record.sources.intervals?.activityId != null)
+    .map((record) => [
+      String(record.sources.intervals.activityId),
+      record,
+    ]),
 )
 
 const safeIdFor = (activity, existingRecord) => {
@@ -195,7 +198,12 @@ const manifestActivities = []
 
 for (const activity of eligibleActivities) {
   const intervalsActivityId = String(activity.id)
-  const existingRecord = existingByIntervalsId.get(intervalsActivityId)
+  const existingRecord =
+    existingByIntervalsId.get(intervalsActivityId) ??
+    findCanonicalActivityMatch(existingRecords, {
+      startDate: activity.start_date ?? activity.start_date_local,
+      distanceM: activity.distance ?? null,
+    })
   const id = safeIdFor(activity, existingRecord)
   const fingerprint = providerFingerprint(
     activity,
@@ -208,7 +216,7 @@ for (const activity of eligibleActivities) {
   const forceThisActivity =
     refreshLatest && activity.id === latestActivity?.id
   const providerChanged =
-    existingRecord?.sources.intervals.fingerprint != null &&
+    existingRecord?.sources.intervals?.fingerprint != null &&
     existingRecord.sources.intervals.fingerprint !== fingerprint
   const shouldDownload =
     !existingRecord ||
@@ -225,6 +233,9 @@ for (const activity of eligibleActivities) {
   manifestActivities.push({
     id,
     intervalsActivityId,
+    garminActivityId: /^\d+$/.test(String(activity.external_id ?? ''))
+      ? String(activity.external_id)
+      : null,
     providerFingerprint: fingerprint,
     type: activity.effectiveType,
     startDate: activity.start_date ?? activity.start_date_local,

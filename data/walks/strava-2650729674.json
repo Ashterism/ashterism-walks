@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-2650729674",
+  "local": {
+    "name": "Battle walk",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "2650729674",
+      "status": "archived",
+      "archivedFilename": "strava-2650729674.fit.gz",
+      "snapshot": {
+        "name": "Battle walk",
+        "type": "Hike",
+        "startDate": "2019-08-25T09:28:29.000Z",
+        "startDateLocal": null,
+        "distanceM": 21200,
+        "movingTimeSeconds": 16892,
+        "elapsedTimeSeconds": 22696,
+        "ascentM": 323.3,
+        "descentM": 1211,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 5
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "6b4b2745fe862c4fcd631969af04236379f689430068f2e7d08bf560fb5ae5cd",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "6b4b2745fe862c4fcd631969af04236379f689430068f2e7d08bf560fb5ae5cd",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      0.4838948976248503,
+      50.88329924270511,
+      0.5760427750647068,
+      50.93174412846565
+    ],
+    "start": [
+      0.5004692729562521,
+      50.888317823410034
+    ],
+    "finish": [
+      0.492697237059474,
+      50.91166184283793
+    ],
+    "descentM": 1211
+  },
+  "review": []
+}

@@ -27,6 +27,36 @@
         "ascentM": null,
         "source": "GARMIN_CONNECT"
       }
+    },
+    "strava": {
+      "activityId": "18878641795",
+      "status": "archived",
+      "archivedFilename": "23212228462.fit.gz",
+      "snapshot": {
+        "name": "Afternoon Walk",
+        "type": "Walk",
+        "startDate": "2026-06-11T13:43:47.000Z",
+        "startDateLocal": null,
+        "distanceM": 1440,
+        "movingTimeSeconds": 1551,
+        "elapsedTimeSeconds": 1551,
+        "ascentM": 0,
+        "descentM": 0,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
     }
   },
   "route": null,

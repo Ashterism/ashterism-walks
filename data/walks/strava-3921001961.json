@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-3921001961",
+  "local": {
+    "name": "Wee beach walk and swim",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "3921001961",
+      "status": "archived",
+      "archivedFilename": "strava-3921001961.fit.gz",
+      "snapshot": {
+        "name": "Wee beach walk and swim",
+        "type": "Walk",
+        "startDate": "2020-08-15T10:29:38.000Z",
+        "startDateLocal": null,
+        "distanceM": 2580,
+        "movingTimeSeconds": 2064,
+        "elapsedTimeSeconds": 3095,
+        "ascentM": 63.9,
+        "descentM": 90.6,
+        "weather": {
+          "condition": "2.0",
+          "temperatureC": 17.5,
+          "apparentTemperatureC": 17.5,
+          "humidity": 0.78,
+          "windSpeed": 2.5,
+          "windGust": 3,
+          "windBearing": 92,
+          "precipitationIntensity": 0,
+          "precipitationProbability": 0,
+          "precipitationType": null,
+          "cloudCover": 0.57
+        },
+        "mediaCount": 0
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "f8ad39d130ec3b824e18f2193d889b22d56b22e89b72a1733f18802770dec9e3",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "f8ad39d130ec3b824e18f2193d889b22d56b22e89b72a1733f18802770dec9e3",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      -5.14022558927536,
+      55.843854462727904,
+      -5.1273625530302525,
+      55.8511386718601
+    ],
+    "start": [
+      -5.128178698942065,
+      55.843894360587
+    ],
+    "finish": [
+      -5.1273672468960285,
+      55.843854462727904
+    ],
+    "descentM": 90.6
+  },
+  "review": []
+}

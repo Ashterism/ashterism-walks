@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-3912748170",
+  "local": {
+    "name": "Glen Nant",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "3912748170",
+      "status": "archived",
+      "archivedFilename": "strava-3912748170.fit.gz",
+      "snapshot": {
+        "name": "Glen Nant",
+        "type": "Walk",
+        "startDate": "2020-08-14T10:44:40.000Z",
+        "startDateLocal": null,
+        "distanceM": 3720,
+        "movingTimeSeconds": 3289,
+        "elapsedTimeSeconds": 6856,
+        "ascentM": 79.5,
+        "descentM": 81.5,
+        "weather": {
+          "condition": "3.0",
+          "temperatureC": 18.3,
+          "apparentTemperatureC": 18.5,
+          "humidity": 0.87,
+          "windSpeed": 0.9,
+          "windGust": 1,
+          "windBearing": 291,
+          "precipitationIntensity": 0,
+          "precipitationProbability": 0,
+          "precipitationType": null,
+          "cloudCover": 0.99
+        },
+        "mediaCount": 4
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "3defd9ec2d0a2a2b04c23f1da2c15fd6328da7a1aef8281c98928ff18c372f89",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "3defd9ec2d0a2a2b04c23f1da2c15fd6328da7a1aef8281c98928ff18c372f89",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      -5.227040061727166,
+      56.396134877577424,
+      -5.210567358881235,
+      56.40354037284851
+    ],
+    "start": [
+      -5.210928283631802,
+      56.396282482892275
+    ],
+    "finish": [
+      -5.210567358881235,
+      56.396135464310646
+    ],
+    "descentM": 81.5
+  },
+  "review": []
+}

@@ -27,6 +27,36 @@
         "ascentM": null,
         "source": "GARMIN_CONNECT"
       }
+    },
+    "strava": {
+      "activityId": "18955579441",
+      "status": "archived",
+      "archivedFilename": "23280482418.fit.gz",
+      "snapshot": {
+        "name": "Afternoon Walk - 2.5k",
+        "type": "Walk",
+        "startDate": "2026-06-17T09:58:14.000Z",
+        "startDateLocal": null,
+        "distanceM": 1860,
+        "movingTimeSeconds": 1823,
+        "elapsedTimeSeconds": 1823,
+        "ascentM": 0,
+        "descentM": 0,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
     }
   },
   "route": null,

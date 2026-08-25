@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-3921002124",
+  "local": {
+    "name": "Wee walk and Seals!",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "3921002124",
+      "status": "archived",
+      "archivedFilename": "strava-3921002124.fit.gz",
+      "snapshot": {
+        "name": "Wee walk and Seals!",
+        "type": "Walk",
+        "startDate": "2020-08-15T13:12:11.000Z",
+        "startDateLocal": null,
+        "distanceM": 3020,
+        "movingTimeSeconds": 2167,
+        "elapsedTimeSeconds": 3948,
+        "ascentM": 85.5,
+        "descentM": 91.6,
+        "weather": {
+          "condition": "2.0",
+          "temperatureC": 19.5,
+          "apparentTemperatureC": 19.5,
+          "humidity": 0.75,
+          "windSpeed": 1.9,
+          "windGust": 2.5,
+          "windBearing": 78,
+          "precipitationIntensity": 0,
+          "precipitationProbability": 0,
+          "precipitationType": null,
+          "cloudCover": 0.68
+        },
+        "mediaCount": 2
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "b53ac467435edc124fbb43edf807d204d747dfcbdcf97445d4110ffe8b81ff48",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "b53ac467435edc124fbb43edf807d204d747dfcbdcf97445d4110ffe8b81ff48",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      -5.107397111132741,
+      55.776830753311515,
+      -5.0540656596422195,
+      55.84150183014572
+    ],
+    "start": [
+      -5.094968844205141,
+      55.782606806606054
+    ],
+    "finish": [
+      -5.062126871198416,
+      55.84150183014572
+    ],
+    "descentM": 91.6
+  },
+  "review": []
+}

@@ -83,6 +83,7 @@ const elements = {
   elevationRange: document.querySelector('#detail-elevation-range'),
   profileDistance: document.querySelector('#detail-profile-distance'),
   photoGrid: document.querySelector('#detail-photo-grid'),
+  detailSource: document.querySelector('#detail-source'),
 }
 
 let walks = []
@@ -403,6 +404,7 @@ const renderDetail = (walk, route) => {
   )
   elements.detailAscent.textContent = formatHeight(walk.ascentM)
   elements.detailDescent.textContent = formatHeight(walk.descentM)
+  elements.detailSource.textContent = `Activity data from ${walk.providers.join(' and ')} · archived by Ashterism`
   renderDetailMap(route, walk)
   renderElevationProfile(coordinates, walk)
   renderPhotos(walk.photos)

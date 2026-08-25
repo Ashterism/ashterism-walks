@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-954372029",
+  "local": {
+    "name": "MiniTrek",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "954372029",
+      "status": "archived",
+      "archivedFilename": "strava-954372029.fit.gz",
+      "snapshot": {
+        "name": "MiniTrek",
+        "type": "Hike",
+        "startDate": "2017-04-23T08:22:04.000Z",
+        "startDateLocal": null,
+        "distanceM": 12920,
+        "movingTimeSeconds": 9757,
+        "elapsedTimeSeconds": 10844,
+        "ascentM": 193.7,
+        "descentM": null,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "35b7e48dbcd2169c2d0caa8edad192d22477d38e379327bd85d2d7e987f10b3a",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "35b7e48dbcd2169c2d0caa8edad192d22477d38e379327bd85d2d7e987f10b3a",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      0.07383953779935837,
+      51.45885720849037,
+      0.1782631315290928,
+      51.489361049607396
+    ],
+    "start": [
+      0.17690526321530342,
+      51.482117073610425
+    ],
+    "finish": [
+      0.08014893159270287,
+      51.45936733111739
+    ],
+    "descentM": 143
+  },
+  "review": []
+}
