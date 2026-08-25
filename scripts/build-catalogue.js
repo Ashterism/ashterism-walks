@@ -44,6 +44,7 @@ for (const record of loadCanonicalRecords()) {
 
   walks.push({
     ...properties,
+    photos: record.local.photos ?? [],
     routeUrl: `/data/routes/${record.id}.geojson`,
     bounds: record.route.bounds,
     start: record.route.start,
@@ -66,4 +67,3 @@ writeJsonIfChanged(publicCataloguePath, catalogue)
 
 console.log(`Published routes: ${walks.length}`)
 console.log(`Activities without a route: ${skippedWithoutRoute}`)
-

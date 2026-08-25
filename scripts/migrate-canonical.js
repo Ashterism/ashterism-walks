@@ -73,6 +73,7 @@ for (const activity of manifest.activities) {
       name: null,
       activityType: overriddenType,
       visibility: 'public',
+      photos: [],
     },
     sources: {
       garmin: /^\d+$/.test(id) ? { activityId: id } : null,

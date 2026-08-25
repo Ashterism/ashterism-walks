@@ -12,6 +12,7 @@
       "elapsedTimeSeconds": 3353,
       "ascentM": 32,
       "descentM": 40,
+      "photos": [],
       "routeUrl": "/data/routes/24098515780.geojson",
       "bounds": [
         0.9176344145089388,
@@ -38,6 +39,7 @@
       "elapsedTimeSeconds": 9887,
       "ascentM": 314,
       "descentM": 302,
+      "photos": [],
       "routeUrl": "/data/routes/24024262303.geojson",
       "bounds": [
         -3.7329328805208206,
@@ -64,6 +66,7 @@
       "elapsedTimeSeconds": 3025,
       "ascentM": 144,
       "descentM": 138,
+      "photos": [],
       "routeUrl": "/data/routes/24011469911.geojson",
       "bounds": [
         -3.5233276337385178,
@@ -90,6 +93,7 @@
       "elapsedTimeSeconds": 3174,
       "ascentM": 142,
       "descentM": 141,
+      "photos": [],
       "routeUrl": "/data/routes/24000347730.geojson",
       "bounds": [
         -3.523255717009306,
@@ -109,13 +113,14 @@
     {
       "id": "23975856554",
       "activity": "hiking",
-      "name": "East Hertfordshire Hiking",
+      "name": "Roydon to Sawbridge",
       "date": "2026-08-14T09:39:12Z",
       "distanceKm": 20.93,
       "movingTimeSeconds": 14854,
       "elapsedTimeSeconds": 20422,
       "ascentM": 242,
       "descentM": 214,
+      "photos": [],
       "routeUrl": "/data/routes/23975856554.geojson",
       "bounds": [
         0.014388207346200943,
@@ -142,6 +147,7 @@
       "elapsedTimeSeconds": 5127,
       "ascentM": 54,
       "descentM": 55,
+      "photos": [],
       "routeUrl": "/data/routes/23788212566.geojson",
       "bounds": [
         0.9176445566117764,
@@ -168,6 +174,7 @@
       "elapsedTimeSeconds": 5512,
       "ascentM": 162,
       "descentM": 159,
+      "photos": [],
       "routeUrl": "/data/routes/23654192532.geojson",
       "bounds": [
         -3.8880247436463833,
@@ -194,6 +201,7 @@
       "elapsedTimeSeconds": 3244,
       "ascentM": 37,
       "descentM": 198,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178057969.geojson",
       "bounds": [
         -3.881821548566222,
@@ -220,6 +228,7 @@
       "elapsedTimeSeconds": 5814,
       "ascentM": 278,
       "descentM": 112,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178057964.geojson",
       "bounds": [
         -3.89334037899971,
@@ -246,6 +255,7 @@
       "elapsedTimeSeconds": 2674,
       "ascentM": 35,
       "descentM": 29,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178056873.geojson",
       "bounds": [
         0.9178052376955748,
@@ -272,6 +282,7 @@
       "elapsedTimeSeconds": 25533,
       "ascentM": 379,
       "descentM": 554,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178056223.geojson",
       "bounds": [
         -2.154459748417139,
@@ -298,6 +309,7 @@
       "elapsedTimeSeconds": 34502,
       "ascentM": 1094,
       "descentM": 988,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178056218.geojson",
       "bounds": [
         -2.084130886942148,
@@ -324,6 +336,7 @@
       "elapsedTimeSeconds": 27797,
       "ascentM": 936,
       "descentM": 864,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178056205.geojson",
       "bounds": [
         -2.0702647045254707,
@@ -350,6 +363,7 @@
       "elapsedTimeSeconds": 21089,
       "ascentM": 591,
       "descentM": 603,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178056202.geojson",
       "bounds": [
         -1.931474469602108,
@@ -376,6 +390,7 @@
       "elapsedTimeSeconds": 28091,
       "ascentM": 842,
       "descentM": 891,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178056187.geojson",
       "bounds": [
         -1.9178008195012808,
@@ -402,6 +417,7 @@
       "elapsedTimeSeconds": 18323,
       "ascentM": 92,
       "descentM": 76,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055672.geojson",
       "bounds": [
         -0.08134720847010612,
@@ -428,6 +444,7 @@
       "elapsedTimeSeconds": 18763,
       "ascentM": 337,
       "descentM": 267,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055620.geojson",
       "bounds": [
         0.003516795113682747,
@@ -454,6 +471,7 @@
       "elapsedTimeSeconds": 6465,
       "ascentM": null,
       "descentM": null,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055482.geojson",
       "bounds": [
         100.02618539147079,
@@ -480,6 +498,7 @@
       "elapsedTimeSeconds": 5797,
       "ascentM": null,
       "descentM": null,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055466.geojson",
       "bounds": [
         100.01989494077861,
@@ -506,6 +525,7 @@
       "elapsedTimeSeconds": 4992,
       "ascentM": null,
       "descentM": null,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055460.geojson",
       "bounds": [
         100.03893661312759,
@@ -532,6 +552,7 @@
       "elapsedTimeSeconds": 3523,
       "ascentM": null,
       "descentM": null,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055446.geojson",
       "bounds": [
         100.00519501045346,
@@ -558,6 +579,7 @@
       "elapsedTimeSeconds": 5960,
       "ascentM": null,
       "descentM": null,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055422.geojson",
       "bounds": [
         100.02616695128381,
@@ -584,6 +606,7 @@
       "elapsedTimeSeconds": 4937,
       "ascentM": null,
       "descentM": null,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055392.geojson",
       "bounds": [
         100.0226860307157,
@@ -610,6 +633,7 @@
       "elapsedTimeSeconds": 4672,
       "ascentM": null,
       "descentM": null,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055388.geojson",
       "bounds": [
         100.03897994756699,
@@ -636,6 +660,7 @@
       "elapsedTimeSeconds": 3550,
       "ascentM": null,
       "descentM": null,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055374.geojson",
       "bounds": [
         100.00518746674061,
@@ -662,6 +687,7 @@
       "elapsedTimeSeconds": 6112,
       "ascentM": null,
       "descentM": null,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055367.geojson",
       "bounds": [
         100.02616602927446,
@@ -688,6 +714,7 @@
       "elapsedTimeSeconds": 989,
       "ascentM": null,
       "descentM": null,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055332.geojson",
       "bounds": [
         100.04515347070992,
@@ -714,6 +741,7 @@
       "elapsedTimeSeconds": 4185,
       "ascentM": null,
       "descentM": null,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055317.geojson",
       "bounds": [
         100.00519727356732,
@@ -740,6 +768,7 @@
       "elapsedTimeSeconds": 6397,
       "ascentM": null,
       "descentM": null,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055308.geojson",
       "bounds": [
         100.02619218081236,
@@ -766,6 +795,7 @@
       "elapsedTimeSeconds": 5771,
       "ascentM": null,
       "descentM": null,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055278.geojson",
       "bounds": [
         100.01628099940717,
@@ -792,6 +822,7 @@
       "elapsedTimeSeconds": 10517,
       "ascentM": 48,
       "descentM": 537,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178055040.geojson",
       "bounds": [
         0.20735017955303192,
@@ -818,6 +849,7 @@
       "elapsedTimeSeconds": 11069,
       "ascentM": 263,
       "descentM": 278,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178054704.geojson",
       "bounds": [
         -1.8167993053793907,
@@ -844,6 +876,7 @@
       "elapsedTimeSeconds": 32660,
       "ascentM": 54,
       "descentM": 349,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178050639.geojson",
       "bounds": [
         -0.12698843143880367,
@@ -870,6 +903,7 @@
       "elapsedTimeSeconds": 19891,
       "ascentM": 22,
       "descentM": 251,
+      "photos": [],
       "routeUrl": "/data/routes/intervals-178050634.geojson",
       "bounds": [
         -0.13475216925144196,

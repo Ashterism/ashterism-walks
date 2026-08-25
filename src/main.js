@@ -48,6 +48,8 @@ map.addControl(
 )
 
 const elements = {
+  mapCanvas: document.querySelector('#map'),
+  library: document.querySelector('.library'),
   panel: document.querySelector('#walk-panel'),
   list: document.querySelector('#walk-list'),
   title: document.querySelector('#walk-title'),
@@ -59,15 +61,52 @@ const elements = {
   count: document.querySelector('#walk-count'),
   status: document.querySelector('#map-status'),
   viewAll: document.querySelector('#view-all'),
+  moreDetails: document.querySelector('#walk-more'),
+  detail: document.querySelector('#walk-detail'),
+  detailBack: document.querySelector('#detail-back'),
+  detailKind: document.querySelector('#detail-kind'),
+  detailTitle: document.querySelector('#detail-title'),
+  detailDate: document.querySelector('#detail-date'),
+  detailDistance: document.querySelector('#detail-distance'),
+  detailMoving: document.querySelector('#detail-moving'),
+  detailElapsed: document.querySelector('#detail-elapsed'),
+  detailPace: document.querySelector('#detail-pace'),
+  detailAscent: document.querySelector('#detail-ascent'),
+  detailDescent: document.querySelector('#detail-descent'),
+  routeOutline: document.querySelector('#detail-route-outline'),
+  routeLine: document.querySelector('#detail-route-line'),
+  routeStart: document.querySelector('#detail-route-start'),
+  routeFinish: document.querySelector('#detail-route-finish'),
+  elevationChart: document.querySelector('#elevation-chart'),
+  elevationEmpty: document.querySelector('#elevation-empty'),
+  elevationFill: document.querySelector('#detail-elevation-fill'),
+  elevationLine: document.querySelector('#detail-elevation-line'),
+  elevationRange: document.querySelector('#detail-elevation-range'),
+  profileDistance: document.querySelector('#detail-profile-distance'),
+  photoGrid: document.querySelector('#detail-photo-grid'),
 }
 
 let walks = []
 let selectedId = null
+let selectedRoute = null
 let routeRequest = 0
 let startMarker
 let finishMarker
 
+const setBackgroundInert = (isInert) => {
+  for (const element of [
+    elements.mapCanvas,
+    elements.library,
+    elements.panel,
+  ]) {
+    element.inert = isInert
+    if (isInert) element.setAttribute('aria-hidden', 'true')
+    else element.removeAttribute('aria-hidden')
+  }
+}
+
 const formatDuration = (totalSeconds) => {
+  if (!Number.isFinite(totalSeconds)) return '–'
   const hours = Math.floor(totalSeconds / 3600)
   const minutes = Math.round((totalSeconds % 3600) / 60)
   return hours === 0 ? `${minutes} min` : `${hours} hr ${minutes} min`
@@ -80,6 +119,23 @@ const formatDate = (dateString, long = false) =>
     year: 'numeric',
     ...(long ? { weekday: 'long' } : {}),
   }).format(new Date(dateString))
+
+const formatDistance = (distanceKm) =>
+  Number.isFinite(distanceKm) ? `${distanceKm} km` : '–'
+
+const formatHeight = (height) =>
+  Number.isFinite(height) ? `${Math.round(height)} m` : '–'
+
+const formatPace = (movingTimeSeconds, distanceKm) => {
+  if (!Number.isFinite(movingTimeSeconds) || !Number.isFinite(distanceKm) || distanceKm <= 0) {
+    return '–'
+  }
+
+  const secondsPerKilometre = Math.round(movingTimeSeconds / distanceKm)
+  const minutes = Math.floor(secondsPerKilometre / 60)
+  const seconds = String(secondsPerKilometre % 60).padStart(2, '0')
+  return `${minutes}:${seconds} / km`
+}
 
 const fetchJson = async (url) => {
   const response = await fetch(url)
@@ -105,12 +161,14 @@ const hideStatus = () => {
 }
 
 const updateDetails = (walk) => {
-  elements.title.textContent = walk.name || (walk.activity === 'hiking' ? 'Hike' : 'Walk')
+  elements.title.textContent =
+    walk.name || (walk.activity === 'hiking' ? 'Hike' : 'Walk')
   elements.date.textContent = formatDate(walk.date, true)
-  elements.distance.textContent = `${walk.distanceKm} km`
+  elements.distance.textContent = formatDistance(walk.distanceKm)
   elements.movingTime.textContent = formatDuration(walk.movingTimeSeconds)
-  elements.ascent.textContent = `${walk.ascentM} m`
-  elements.descent.textContent = `${walk.descentM} m`
+  elements.ascent.textContent = formatHeight(walk.ascentM)
+  elements.descent.textContent = formatHeight(walk.descentM)
+  elements.moreDetails.disabled = true
   elements.panel.hidden = false
 }
 
@@ -140,10 +198,201 @@ const renderList = () => {
   )
 }
 
-const updateUrl = (id) => {
+const updateUrl = (id, { detail = false, push = false } = {}) => {
   const url = new URL(window.location.href)
-  url.searchParams.set('walk', id)
-  window.history.replaceState({}, '', url)
+  if (id) url.searchParams.set('walk', id)
+  else url.searchParams.delete('walk')
+
+  if (detail) url.searchParams.set('view', 'details')
+  else url.searchParams.delete('view')
+
+  window.history[push ? 'pushState' : 'replaceState']({}, '', url)
+}
+
+const sample = (values, maximumPoints) => {
+  if (values.length <= maximumPoints) return values
+  const step = (values.length - 1) / (maximumPoints - 1)
+  return Array.from(
+    { length: maximumPoints },
+    (_, index) => values[Math.round(index * step)],
+  )
+}
+
+const renderRouteSketch = (coordinates) => {
+  const width = 900
+  const height = 360
+  const padding = 28
+  const meanLatitude =
+    coordinates.reduce((total, coordinate) => total + coordinate[1], 0) /
+    coordinates.length
+  const longitudeScale = Math.cos((meanLatitude * Math.PI) / 180)
+  const projected = coordinates.map(([longitude, latitude]) => [
+    longitude * longitudeScale,
+    latitude,
+  ])
+  const xs = projected.map(([x]) => x)
+  const ys = projected.map(([, y]) => y)
+  const minimumX = Math.min(...xs)
+  const maximumX = Math.max(...xs)
+  const minimumY = Math.min(...ys)
+  const maximumY = Math.max(...ys)
+  const xRange = maximumX - minimumX || 1
+  const yRange = maximumY - minimumY || 1
+  const scale = Math.min(
+    (width - padding * 2) / xRange,
+    (height - padding * 2) / yRange,
+  )
+  const drawnWidth = xRange * scale
+  const drawnHeight = yRange * scale
+  const offsetX = (width - drawnWidth) / 2
+  const offsetY = (height - drawnHeight) / 2
+  const points = projected.map(([x, y]) => [
+    offsetX + (x - minimumX) * scale,
+    height - (offsetY + (y - minimumY) * scale),
+  ])
+  const path = sample(points, 600)
+    .map(([x, y], index) => `${index === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`)
+    .join(' ')
+
+  elements.routeOutline.setAttribute('d', path)
+  elements.routeLine.setAttribute('d', path)
+  elements.routeStart.setAttribute('cx', points[0][0])
+  elements.routeStart.setAttribute('cy', points[0][1])
+  elements.routeFinish.setAttribute('cx', points.at(-1)[0])
+  elements.routeFinish.setAttribute('cy', points.at(-1)[1])
+}
+
+const distanceBetween = (first, second) => {
+  const toRadians = (degrees) => (degrees * Math.PI) / 180
+  const latitude1 = toRadians(first[1])
+  const latitude2 = toRadians(second[1])
+  const latitudeDelta = latitude2 - latitude1
+  const longitudeDelta = toRadians(second[0] - first[0])
+  const haversine =
+    Math.sin(latitudeDelta / 2) ** 2 +
+    Math.cos(latitude1) *
+      Math.cos(latitude2) *
+      Math.sin(longitudeDelta / 2) ** 2
+  return 6371 * 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine))
+}
+
+const renderElevationProfile = (coordinates, walk) => {
+  let distanceKm = 0
+  const elevationPoints = []
+
+  coordinates.forEach((coordinate, index) => {
+    if (index > 0) distanceKm += distanceBetween(coordinates[index - 1], coordinate)
+    if (Number.isFinite(coordinate[2])) {
+      elevationPoints.push({ distanceKm, altitude: coordinate[2] })
+    }
+  })
+
+  if (elevationPoints.length < 2) {
+    elements.elevationChart.hidden = true
+    elements.elevationEmpty.hidden = false
+    elements.elevationRange.textContent = ''
+    return
+  }
+
+  elements.elevationChart.hidden = false
+  elements.elevationEmpty.hidden = true
+  const altitudes = elevationPoints.map((point) => point.altitude)
+  const minimumAltitude = Math.min(...altitudes)
+  const maximumAltitude = Math.max(...altitudes)
+  const altitudeRange = maximumAltitude - minimumAltitude || 1
+  const width = 1000
+  const height = 220
+  const topPadding = 12
+  const bottomPadding = 8
+  const usableHeight = height - topPadding - bottomPadding
+  const points = sample(elevationPoints, 500).map((point) => [
+    (point.distanceKm / distanceKm) * width,
+    topPadding +
+      (1 - (point.altitude - minimumAltitude) / altitudeRange) * usableHeight,
+  ])
+  const line = points
+    .map(([x, y], index) => `${index === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`)
+    .join(' ')
+  const fill = `${line} L${width},${height} L0,${height} Z`
+
+  elements.elevationLine.setAttribute('d', line)
+  elements.elevationFill.setAttribute('d', fill)
+  elements.elevationRange.textContent = `${Math.round(minimumAltitude)}–${Math.round(maximumAltitude)} m altitude`
+  elements.profileDistance.textContent = formatDistance(walk.distanceKm)
+}
+
+const renderPhotos = (photos = []) => {
+  if (photos.length > 0) {
+    elements.photoGrid.replaceChildren(
+      ...photos.map((photo, index) => {
+        const figure = document.createElement('figure')
+        const image = document.createElement('img')
+        image.src = photo.url
+        image.alt = photo.alt ?? `Photograph ${index + 1} from this walk`
+        image.loading = 'lazy'
+        figure.append(image)
+        if (photo.caption) {
+          const caption = document.createElement('figcaption')
+          caption.textContent = photo.caption
+          figure.append(caption)
+        }
+        return figure
+      }),
+    )
+    return
+  }
+
+  elements.photoGrid.replaceChildren(
+    ...Array.from({ length: 3 }, (_, index) => {
+      const placeholder = document.createElement('div')
+      placeholder.className = 'photo-placeholder'
+      const label = document.createElement('span')
+      label.textContent = `Photo ${String(index + 1).padStart(2, '0')}`
+      const note = document.createElement('p')
+      note.textContent = 'A moment from the walk will live here.'
+      placeholder.append(label, note)
+      return placeholder
+    }),
+  )
+}
+
+const renderDetail = (walk, route) => {
+  const coordinates = route.geometry.coordinates
+  elements.detailKind.textContent = walk.activity === 'hiking' ? 'Hiking' : 'Walking'
+  elements.detailTitle.textContent = walk.name
+  elements.detailDate.textContent = formatDate(walk.date, true)
+  elements.detailDistance.textContent = formatDistance(walk.distanceKm)
+  elements.detailMoving.textContent = formatDuration(walk.movingTimeSeconds)
+  elements.detailElapsed.textContent = formatDuration(walk.elapsedTimeSeconds)
+  elements.detailPace.textContent = formatPace(
+    walk.movingTimeSeconds,
+    walk.distanceKm,
+  )
+  elements.detailAscent.textContent = formatHeight(walk.ascentM)
+  elements.detailDescent.textContent = formatHeight(walk.descentM)
+  renderRouteSketch(coordinates)
+  renderElevationProfile(coordinates, walk)
+  renderPhotos(walk.photos)
+}
+
+const openDetails = ({ updateHistory = true } = {}) => {
+  const walk = walks.find((candidate) => candidate.id === selectedId)
+  if (!walk || !selectedRoute) return
+  renderDetail(walk, selectedRoute)
+  elements.detail.hidden = false
+  setBackgroundInert(true)
+  document.body.classList.add('detail-is-open')
+  updateUrl(walk.id, { detail: true, push: updateHistory })
+  elements.detail.scrollTop = 0
+  elements.detailBack.focus({ preventScroll: true })
+}
+
+const closeDetails = ({ updateHistory = true } = {}) => {
+  elements.detail.hidden = true
+  setBackgroundInert(false)
+  document.body.classList.remove('detail-is-open')
+  if (updateHistory && selectedId) updateUrl(selectedId)
+  elements.moreDetails.focus({ preventScroll: true })
 }
 
 const selectWalk = async (id, { updateHistory = true } = {}) => {
@@ -152,6 +401,7 @@ const selectWalk = async (id, { updateHistory = true } = {}) => {
 
   const request = ++routeRequest
   selectedId = walk.id
+  selectedRoute = null
   renderList()
   updateDetails(walk)
   showStatus('Loading route…')
@@ -163,6 +413,8 @@ const selectWalk = async (id, { updateHistory = true } = {}) => {
     const route = await fetchJson(walk.routeUrl)
     if (request !== routeRequest) return
 
+    selectedRoute = route
+    elements.moreDetails.disabled = false
     map.getSource('walk').setData(route)
     startMarker.setLngLat(walk.start).addTo(map)
     finishMarker.setLngLat(walk.finish).addTo(map)
@@ -182,7 +434,11 @@ const selectWalk = async (id, { updateHistory = true } = {}) => {
 const showAllWalks = () => {
   routeRequest += 1
   selectedId = null
+  selectedRoute = null
   renderList()
+  elements.detail.hidden = true
+  setBackgroundInert(false)
+  document.body.classList.remove('detail-is-open')
   elements.panel.hidden = true
   map.getSource('walk').setData(emptyRoute)
   startMarker.remove()
@@ -195,10 +451,7 @@ const showAllWalks = () => {
     duration: 900,
     maxZoom: 8,
   })
-
-  const url = new URL(window.location.href)
-  url.searchParams.delete('walk')
-  window.history.replaceState({}, '', url)
+  updateUrl(null)
 }
 
 map.on('load', async () => {
@@ -208,7 +461,9 @@ map.on('load', async () => {
     walks = catalogue.walks
     if (walks.length === 0) throw new Error('The walk catalogue is empty')
 
-    elements.count.textContent = `${walks.length} mapped ${walks.length === 1 ? 'route' : 'routes'}`
+    elements.count.textContent = `${walks.length} mapped ${
+      walks.length === 1 ? 'route' : 'routes'
+    }`
 
     map.addSource('walk-starts', {
       type: 'geojson',
@@ -240,7 +495,11 @@ map.on('load', async () => {
       type: 'line',
       source: 'walk',
       layout: { 'line-cap': 'round', 'line-join': 'round' },
-      paint: { 'line-color': '#fffaf1', 'line-width': 9, 'line-opacity': 0.95 },
+      paint: {
+        'line-color': '#fffaf1',
+        'line-width': 9,
+        'line-opacity': 0.95,
+      },
     })
     map.addLayer({
       id: 'walk-route',
@@ -253,19 +512,43 @@ map.on('load', async () => {
     startMarker = new Marker({ color: '#267255' })
     finishMarker = new Marker({ color: '#9f3829' })
 
-    map.on('mouseenter', 'walk-starts', () => { map.getCanvas().style.cursor = 'pointer' })
-    map.on('mouseleave', 'walk-starts', () => { map.getCanvas().style.cursor = '' })
+    map.on('mouseenter', 'walk-starts', () => {
+      map.getCanvas().style.cursor = 'pointer'
+    })
+    map.on('mouseleave', 'walk-starts', () => {
+      map.getCanvas().style.cursor = ''
+    })
     map.on('click', 'walk-starts', (event) => {
       const id = event.features?.[0]?.properties?.id
       if (id) selectWalk(String(id))
     })
 
     elements.viewAll.addEventListener('click', showAllWalks)
-    const requestedId = new URLSearchParams(window.location.search).get('walk')
-    const initialWalk = walks.find((walk) => walk.id === requestedId) ?? walks[0]
-    await selectWalk(initialWalk.id, { updateHistory: Boolean(requestedId) })
+    elements.moreDetails.addEventListener('click', () => openDetails())
+    elements.detailBack.addEventListener('click', () => closeDetails())
+
+    const searchParams = new URLSearchParams(window.location.search)
+    const requestedId = searchParams.get('walk')
+    const initialWalk =
+      walks.find((walk) => walk.id === requestedId) ?? walks[0]
+    await selectWalk(initialWalk.id, {
+      updateHistory: Boolean(requestedId),
+    })
+
+    if (searchParams.get('view') === 'details') {
+      openDetails({ updateHistory: false })
+    }
   } catch (error) {
     console.error(error)
     showStatus('The walks could not be loaded.')
+  }
+})
+
+window.addEventListener('popstate', () => {
+  const view = new URLSearchParams(window.location.search).get('view')
+  if (view === 'details' && selectedRoute) {
+    openDetails({ updateHistory: false })
+  } else if (!elements.detail.hidden) {
+    closeDetails({ updateHistory: false })
   }
 })

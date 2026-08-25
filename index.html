@@ -38,9 +38,83 @@
             <div><dt>Ascent</dt><dd id="walk-ascent">–</dd></div>
             <div><dt>Descent</dt><dd id="walk-descent">–</dd></div>
           </dl>
+          <button id="walk-more" class="walk-panel__more" type="button" disabled>
+            See walk details
+          </button>
         </section>
 
         <p id="map-status" class="map-status" role="status">Loading walks…</p>
+
+        <article id="walk-detail" class="walk-detail" aria-labelledby="detail-title" hidden>
+          <div class="walk-detail__bar">
+            <button id="detail-back" class="detail-back" type="button">← Back to the map</button>
+            <span>Walk journal</span>
+          </div>
+
+          <div class="walk-detail__content">
+            <header class="walk-detail__hero">
+              <p id="detail-kind" class="walk-detail__kind">Walk</p>
+              <h2 id="detail-title">Walk details</h2>
+              <p id="detail-date" class="walk-detail__date"></p>
+
+              <dl class="detail-stats">
+                <div><dt>Distance</dt><dd id="detail-distance">–</dd></div>
+                <div><dt>Moving time</dt><dd id="detail-moving">–</dd></div>
+                <div><dt>Elapsed time</dt><dd id="detail-elapsed">–</dd></div>
+                <div><dt>Average pace</dt><dd id="detail-pace">–</dd></div>
+                <div><dt>Ascent</dt><dd id="detail-ascent">–</dd></div>
+                <div><dt>Descent</dt><dd id="detail-descent">–</dd></div>
+              </dl>
+            </header>
+
+            <section class="detail-card detail-card--route" aria-labelledby="route-heading">
+              <div class="detail-card__heading">
+                <div>
+                  <p class="detail-card__eyebrow">The route</p>
+                  <h3 id="route-heading">From start to finish</h3>
+                </div>
+                <p class="route-key"><span></span> Start <span></span> Finish</p>
+              </div>
+              <svg class="route-sketch" viewBox="0 0 900 360" role="img" aria-label="Route trace">
+                <path id="detail-route-outline" class="route-sketch__outline"></path>
+                <path id="detail-route-line" class="route-sketch__line"></path>
+                <circle id="detail-route-start" class="route-sketch__start" r="8"></circle>
+                <circle id="detail-route-finish" class="route-sketch__finish" r="8"></circle>
+              </svg>
+            </section>
+
+            <section class="detail-card detail-card--elevation" aria-labelledby="elevation-heading">
+              <div class="detail-card__heading">
+                <div>
+                  <p class="detail-card__eyebrow">Elevation</p>
+                  <h3 id="elevation-heading">The ups and downs</h3>
+                </div>
+                <p id="detail-elevation-range" class="elevation-range"></p>
+              </div>
+              <div id="elevation-chart" class="elevation-chart">
+                <svg viewBox="0 0 1000 220" role="img" aria-label="Elevation profile">
+                  <path id="detail-elevation-fill" class="elevation-chart__fill"></path>
+                  <path id="detail-elevation-line" class="elevation-chart__line"></path>
+                </svg>
+                <div class="elevation-chart__axis"><span>Start</span><span id="detail-profile-distance"></span><span>Finish</span></div>
+              </div>
+              <p id="elevation-empty" class="elevation-empty" hidden>No elevation samples were recorded for this walk.</p>
+            </section>
+
+            <section class="detail-photos" aria-labelledby="photos-heading">
+              <div class="detail-card__heading">
+                <div>
+                  <p class="detail-card__eyebrow">Along the way</p>
+                  <h3 id="photos-heading">Photographs</h3>
+                </div>
+                <p class="photo-note">Photo archive coming next</p>
+              </div>
+              <div id="detail-photo-grid" class="photo-grid"></div>
+            </section>
+
+            <p class="walk-detail__source">Recorded with Garmin · synced through Intervals.icu · archived by Ashterism</p>
+          </div>
+        </article>
       </div>
     </div>
     <script type="module" src="/src/main.js"></script>

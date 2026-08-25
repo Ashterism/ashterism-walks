@@ -4,7 +4,8 @@
   "local": {
     "name": null,
     "activityType": null,
-    "visibility": "public"
+    "visibility": "public",
+    "photos": []
   },
   "sources": {
     "garmin": {

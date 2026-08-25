@@ -59,6 +59,7 @@ Ashterism is the system of record. Garmin and Intervals.icu are linked providers
 - `data/walks/` contains one canonical, public-safe JSON object per activity.
 - `data/route-versions/` contains immutable route versions addressed by checksum.
 - `public/data/` is generated from the canonical records and active route versions.
+- Each walk has an Ashterism-owned `photos` list ready for externally hosted image URLs and captions; it is empty until the photo archive is connected.
 - A valid changed route from Intervals becomes the active version; previous versions remain stored.
 - An empty or invalid replacement route cannot overwrite the last valid route.
 - An activity missing from a successful provider response is marked for review but remains published.

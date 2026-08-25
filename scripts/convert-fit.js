@@ -136,6 +136,7 @@ const newRecordFor = (metadata) => ({
     name: null,
     activityType: null,
     visibility: 'public',
+    photos: [],
   },
   sources: {
     garmin: /^\d+$/.test(String(metadata.id))

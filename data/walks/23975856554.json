@@ -2,9 +2,10 @@
   "schemaVersion": 1,
   "id": "23975856554",
   "local": {
-    "name": null,
+    "name": "Roydon to Sawbridge",
     "activityType": null,
-    "visibility": "public"
+    "visibility": "public",
+    "photos": []
   },
   "sources": {
     "garmin": {
