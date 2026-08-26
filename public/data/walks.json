@@ -1,7 +1,37 @@
 {
-  "walkCount": 100,
+  "walkCount": 101,
   "skippedWithoutRoute": 8,
   "walks": [
+    {
+      "id": "24124781263",
+      "activity": "hiking",
+      "name": "Champs-Romain Hiking",
+      "date": "2026-08-26T12:45:06Z",
+      "distanceKm": 8.51,
+      "movingTimeSeconds": 5730,
+      "elapsedTimeSeconds": 5865,
+      "ascentM": 243,
+      "descentM": 245,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24124781263.geojson?v=4c8675652928cb718e43b5a77069c152319cbfbb7d4c4af615fb47c93bb032bf",
+      "bounds": [
+        0.7595186121761799,
+        45.516620613634586,
+        0.7818486727774143,
+        45.53763957694173
+      ],
+      "start": [
+        0.7763525750488043,
+        45.5335311871022
+      ],
+      "finish": [
+        0.7762702647596598,
+        45.53317252546549
+      ]
+    },
     {
       "id": "24098515780",
       "activity": "hiking",
