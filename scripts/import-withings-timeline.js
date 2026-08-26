@@ -151,11 +151,24 @@ const distanceBetween = (first, second) => {
   )
 }
 
-const routeCandidate = (startTime, endTime, expectedDistanceM) => {
+const routeCandidate = (
+  startTime,
+  endTime,
+  expectedDistanceM,
+  componentWindows = null,
+) => {
   const tolerance = 5 * 60_000
   const selected = timelinePoints.filter(
-    (point) =>
-      point.time >= startTime - tolerance && point.time <= endTime + tolerance,
+    (point) => {
+      if (componentWindows) {
+        return componentWindows.some(
+          (window) =>
+            point.time >= window.startTime - tolerance &&
+            point.time <= window.endTime + tolerance,
+        )
+      }
+      return point.time >= startTime - tolerance && point.time <= endTime + tolerance
+    },
   )
   const unique = selected.filter(
     (point, index) =>
@@ -267,7 +280,17 @@ for (const configuredWalk of configuration.walks) {
     throw new Error(`Withings metrics are incomplete for ${configuredWalk.id}`)
   }
 
-  const candidate = routeCandidate(startTime, endTime, distanceM)
+  const candidate = routeCandidate(
+    startTime,
+    endTime,
+    distanceM,
+    configuredWalk.timelineMode === 'components'
+      ? components.map(({ row }) => ({
+          startTime: new Date(row.from).getTime(),
+          endTime: new Date(row.to).getTime(),
+        }))
+      : null,
+  )
   const snapshot = {
     name: configuredWalk.name,
     type: configuredWalk.activityType,
@@ -440,7 +463,7 @@ for (const walk of manifestWalks) {
     `${walk.matchedExisting ? 'link' : 'new '} ${walk.id} | ${walk.pointCount} points | ${(walk.withingsDistanceM / 1000).toFixed(2)} km Withings | ${(walk.routeLineDistanceM / 1000).toFixed(2)} km route`,
   )
 }
-console.log(`Compiled Portugal walks: ${manifestWalks.length}`)
+console.log(`Configured Withings/Timeline walks: ${manifestWalks.length}`)
 console.log(`Linked to existing walks: ${linkedCount}`)
 console.log(`New canonical walks: ${createdCount}`)
 if (!apply) console.log('Dry run only; rerun with --apply to write the import')

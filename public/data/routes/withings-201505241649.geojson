@@ -1,0 +1,105 @@
+{
+  "type": "Feature",
+  "properties": {
+    "id": "withings-201505241649",
+    "activity": "hiking",
+    "name": "Surrey walk — 24 May 2015",
+    "date": "2015-05-24T14:49:00.000Z",
+    "distanceKm": 11.5,
+    "movingTimeSeconds": 9540,
+    "elapsedTimeSeconds": 10500,
+    "ascentM": 0,
+    "descentM": null,
+    "providers": [
+      "Withings",
+      "Google Timeline"
+    ],
+    "provenance": {
+      "status": "estimated",
+      "method": "withings-google-timeline",
+      "metricsSource": "Withings",
+      "routeSource": "Google Timeline",
+      "label": "Estimated route compiled from Withings activity data and Google Timeline."
+    },
+    "notes": "Estimated historical walk reconstructed from a Withings walking record and Google Timeline breadcrumbs. A later fragment from the same evening was excluded because its Timeline movement was inconsistent with walking.",
+    "references": [
+      {
+        "label": "Fishermen’s Trail — Rota Vicentina",
+        "url": "https://rotavicentina.com/en/fishermens-trail/"
+      }
+    ]
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        -0.385852,
+        51.179616
+      ],
+      [
+        -0.383442,
+        51.179583
+      ],
+      [
+        -0.383361,
+        51.179491
+      ],
+      [
+        -0.381398,
+        51.187024
+      ],
+      [
+        -0.38867,
+        51.191723
+      ],
+      [
+        -0.387802,
+        51.191008
+      ],
+      [
+        -0.38403,
+        51.189834
+      ],
+      [
+        -0.382322,
+        51.193543
+      ],
+      [
+        -0.379276,
+        51.193462
+      ],
+      [
+        -0.379287,
+        51.193451
+      ],
+      [
+        -0.380956,
+        51.199224
+      ],
+      [
+        -0.384955,
+        51.199926
+      ],
+      [
+        -0.389632,
+        51.203938
+      ],
+      [
+        -0.377096,
+        51.20214
+      ],
+      [
+        -0.367823,
+        51.192348
+      ],
+      [
+        -0.337205,
+        51.136153
+      ],
+      [
+        -0.332693,
+        51.134136
+      ]
+    ]
+  }
+}

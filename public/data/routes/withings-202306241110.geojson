@@ -1,0 +1,217 @@
+{
+  "type": "Feature",
+  "properties": {
+    "id": "withings-202306241110",
+    "activity": "hiking",
+    "name": "Kent walk — 24 June 2023",
+    "date": "2023-06-24T09:10:00.000Z",
+    "distanceKm": 14.55,
+    "movingTimeSeconds": 12163,
+    "elapsedTimeSeconds": 18900,
+    "ascentM": null,
+    "descentM": null,
+    "providers": [
+      "Withings",
+      "Google Timeline"
+    ],
+    "provenance": {
+      "status": "estimated",
+      "method": "withings-google-timeline",
+      "metricsSource": "Withings",
+      "routeSource": "Google Timeline",
+      "label": "Estimated route compiled from Withings activity data and Google Timeline."
+    },
+    "notes": "Estimated historical walk reconstructed from three Withings walking fragments and Google Timeline breadcrumbs. Breaks between the recorded fragments are retained in elapsed time.",
+    "references": [
+      {
+        "label": "Fishermen’s Trail — Rota Vicentina",
+        "url": "https://rotavicentina.com/en/fishermens-trail/"
+      }
+    ]
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        0.378489,
+        51.383244
+      ],
+      [
+        0.374211,
+        51.386851
+      ],
+      [
+        0.37494,
+        51.391467
+      ],
+      [
+        0.380021,
+        51.392442
+      ],
+      [
+        0.384738,
+        51.393769
+      ],
+      [
+        0.387506,
+        51.396657
+      ],
+      [
+        0.387991,
+        51.394723
+      ],
+      [
+        0.388284,
+        51.39754
+      ],
+      [
+        0.395896,
+        51.397682
+      ],
+      [
+        0.401788,
+        51.399156
+      ],
+      [
+        0.404738,
+        51.398291
+      ],
+      [
+        0.408468,
+        51.398725
+      ],
+      [
+        0.407492,
+        51.39558
+      ],
+      [
+        0.404563,
+        51.395437
+      ],
+      [
+        0.400231,
+        51.393069
+      ],
+      [
+        0.402538,
+        51.395303
+      ],
+      [
+        0.39963,
+        51.390692
+      ],
+      [
+        0.398339,
+        51.390941
+      ],
+      [
+        0.399201,
+        51.390404
+      ],
+      [
+        0.408139,
+        51.389713
+      ],
+      [
+        0.404063,
+        51.390011
+      ],
+      [
+        0.410799,
+        51.389552
+      ],
+      [
+        0.417971,
+        51.390156
+      ],
+      [
+        0.42553,
+        51.389395
+      ],
+      [
+        0.432959,
+        51.389195
+      ],
+      [
+        0.440854,
+        51.389731
+      ],
+      [
+        0.438691,
+        51.385481
+      ],
+      [
+        0.440501,
+        51.383848
+      ],
+      [
+        0.44266,
+        51.382585
+      ],
+      [
+        0.448153,
+        51.379902
+      ],
+      [
+        0.452477,
+        51.378895
+      ],
+      [
+        0.460065,
+        51.37915
+      ],
+      [
+        0.457499,
+        51.378292
+      ],
+      [
+        0.466987,
+        51.379847
+      ],
+      [
+        0.4706,
+        51.381842
+      ],
+      [
+        0.471605,
+        51.382249
+      ],
+      [
+        0.482612,
+        51.386852
+      ],
+      [
+        0.481146,
+        51.371983
+      ],
+      [
+        0.483977,
+        51.372569
+      ],
+      [
+        0.490078,
+        51.375301
+      ],
+      [
+        0.494788,
+        51.379645
+      ],
+      [
+        0.499144,
+        51.384329
+      ],
+      [
+        0.502684,
+        51.38935
+      ],
+      [
+        0.505526,
+        51.389833
+      ],
+      [
+        0.507184,
+        51.389065
+      ]
+    ]
+  }
+}

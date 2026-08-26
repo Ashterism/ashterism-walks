@@ -1,0 +1,117 @@
+{
+  "type": "Feature",
+  "properties": {
+    "id": "withings-202211121141",
+    "activity": "hiking",
+    "name": "South Devon walk — 12 November 2022",
+    "date": "2022-11-12T10:41:00.000Z",
+    "distanceKm": 6.18,
+    "movingTimeSeconds": 6463,
+    "elapsedTimeSeconds": 6660,
+    "ascentM": null,
+    "descentM": null,
+    "providers": [
+      "Withings",
+      "Google Timeline"
+    ],
+    "provenance": {
+      "status": "estimated",
+      "method": "withings-google-timeline",
+      "metricsSource": "Withings",
+      "routeSource": "Google Timeline",
+      "label": "Estimated route compiled from Withings activity data and Google Timeline."
+    },
+    "notes": "Estimated historical walk reconstructed from two Withings walking fragments and Google Timeline breadcrumbs.",
+    "references": [
+      {
+        "label": "Fishermen’s Trail — Rota Vicentina",
+        "url": "https://rotavicentina.com/en/fishermens-trail/"
+      }
+    ]
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        -3.671691,
+        50.432726
+      ],
+      [
+        -3.68326,
+        50.43008
+      ],
+      [
+        -3.68314,
+        50.43031
+      ],
+      [
+        -3.684046,
+        50.428474
+      ],
+      [
+        -3.683726,
+        50.42947
+      ],
+      [
+        -3.682718,
+        50.4255
+      ],
+      [
+        -3.680135,
+        50.422369
+      ],
+      [
+        -3.676856,
+        50.421378
+      ],
+      [
+        -3.674255,
+        50.420065
+      ],
+      [
+        -3.675361,
+        50.41792
+      ],
+      [
+        -3.671981,
+        50.41688
+      ],
+      [
+        -3.668095,
+        50.414441
+      ],
+      [
+        -3.674725,
+        50.417258
+      ],
+      [
+        -3.671731,
+        50.416767
+      ],
+      [
+        -3.674927,
+        50.420356
+      ],
+      [
+        -3.680747,
+        50.423199
+      ],
+      [
+        -3.68218,
+        50.424854
+      ],
+      [
+        -3.683124,
+        50.428632
+      ],
+      [
+        -3.683841,
+        50.430929
+      ],
+      [
+        -3.690718,
+        50.431575
+      ]
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "id": "withings-202306241110",
+  "local": {
+    "name": "Kent walk — 24 June 2023",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": [],
+    "notes": "Estimated historical walk reconstructed from three Withings walking fragments and Google Timeline breadcrumbs. Breaks between the recorded fragments are retained in elapsed time.",
+    "references": [
+      {
+        "label": "Fishermen’s Trail — Rota Vicentina",
+        "url": "https://rotavicentina.com/en/fishermens-trail/"
+      }
+    ]
+  },
+  "sources": {
+    "withings": {
+      "activityIds": [
+        "202306241110",
+        "202306241400",
+        "202306241552"
+      ],
+      "status": "archived",
+      "archivedFilename": "activities.csv",
+      "snapshot": {
+        "name": "Kent walk — 24 June 2023",
+        "type": "Hike",
+        "startDate": "2023-06-24T09:10:00.000Z",
+        "startDateLocal": "2023-06-24T11:10:00+02:00",
+        "distanceM": 14548.677978515701,
+        "movingTimeSeconds": 12163,
+        "elapsedTimeSeconds": 18900,
+        "ascentM": null,
+        "componentCount": 3
+      },
+      "components": [
+        {
+          "activityId": "202306241110",
+          "from": "2023-06-24T11:10:00+02:00",
+          "to": "2023-06-24T12:46:00+02:00",
+          "distanceM": 6792.763671875,
+          "movingTimeSeconds": 5703
+        },
+        {
+          "activityId": "202306241400",
+          "from": "2023-06-24T14:00:00+02:00",
+          "to": "2023-06-24T15:32:00+02:00",
+          "distanceM": 5689.4252929688,
+          "movingTimeSeconds": 4932
+        },
+        {
+          "activityId": "202306241552",
+          "from": "2023-06-24T15:52:00+02:00",
+          "to": "2023-06-24T16:25:00+02:00",
+          "distanceM": 2066.4890136719,
+          "movingTimeSeconds": 1528
+        }
+      ]
+    },
+    "googleTimeline": {
+      "status": "archived",
+      "archivedFilename": "location-history.json",
+      "snapshot": {
+        "startDate": "2023-06-24T09:10:00.000Z",
+        "endDate": "2023-06-24T14:25:00.000Z",
+        "pointCount": 45,
+        "lineDistanceM": 18573
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "a824f14b7c85f0c9a148eee345f2d7eb463d737061946da7221307ae25b40927",
+    "source": "google-timeline",
+    "status": "estimated",
+    "versions": [
+      {
+        "checksum": "a824f14b7c85f0c9a148eee345f2d7eb463d737061946da7221307ae25b40927",
+        "source": "google-timeline",
+        "capturedAt": "2026-08-26T08:24:34.763Z"
+      }
+    ],
+    "bounds": [
+      0.374211,
+      51.371983,
+      0.507184,
+      51.399156
+    ],
+    "start": [
+      0.378489,
+      51.383244
+    ],
+    "finish": [
+      0.507184,
+      51.389065
+    ],
+    "descentM": null
+  },
+  "review": [],
+  "provenance": {
+    "status": "estimated",
+    "method": "withings-google-timeline",
+    "metricsSource": "Withings",
+    "routeSource": "Google Timeline",
+    "label": "Estimated route compiled from Withings activity data and Google Timeline."
+  }
+}

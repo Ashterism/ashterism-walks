@@ -1,0 +1,165 @@
+{
+  "type": "Feature",
+  "properties": {
+    "id": "withings-202404281135",
+    "activity": "hiking",
+    "name": "Surrey and Berkshire walk — 28 April 2024",
+    "date": "2024-04-28T09:35:00.000Z",
+    "distanceKm": 16.12,
+    "movingTimeSeconds": 12060,
+    "elapsedTimeSeconds": 15900,
+    "ascentM": null,
+    "descentM": null,
+    "providers": [
+      "Withings",
+      "Google Timeline"
+    ],
+    "provenance": {
+      "status": "estimated",
+      "method": "withings-google-timeline",
+      "metricsSource": "Withings",
+      "routeSource": "Google Timeline",
+      "label": "Estimated route compiled from Withings activity data and Google Timeline."
+    },
+    "notes": "Estimated historical walk reconstructed from two Withings walking fragments and Google Timeline breadcrumbs. Earlier London walking and transit fragments from the same day were excluded.",
+    "references": [
+      {
+        "label": "Fishermen’s Trail — Rota Vicentina",
+        "url": "https://rotavicentina.com/en/fishermens-trail/"
+      }
+    ]
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        -0.633552,
+        51.392179
+      ],
+      [
+        -0.636606,
+        51.393648
+      ],
+      [
+        -0.635496,
+        51.396166
+      ],
+      [
+        -0.634566,
+        51.397925
+      ],
+      [
+        -0.629795,
+        51.399494
+      ],
+      [
+        -0.628599,
+        51.404325
+      ],
+      [
+        -0.619644,
+        51.404087
+      ],
+      [
+        -0.618071,
+        51.406622
+      ],
+      [
+        -0.622488,
+        51.409725
+      ],
+      [
+        -0.617176,
+        51.412897
+      ],
+      [
+        -0.615441,
+        51.415047
+      ],
+      [
+        -0.611284,
+        51.415822
+      ],
+      [
+        -0.608492,
+        51.414875
+      ],
+      [
+        -0.602107,
+        51.416717
+      ],
+      [
+        -0.596745,
+        51.415382
+      ],
+      [
+        -0.592826,
+        51.418053
+      ],
+      [
+        -0.594897,
+        51.423906
+      ],
+      [
+        -0.597225,
+        51.426544
+      ],
+      [
+        -0.597176,
+        51.426514
+      ],
+      [
+        -0.597219,
+        51.433556
+      ],
+      [
+        -0.600543,
+        51.435571
+      ],
+      [
+        -0.599293,
+        51.441865
+      ],
+      [
+        -0.5928,
+        51.446627
+      ],
+      [
+        -0.596075,
+        51.45165
+      ],
+      [
+        -0.598862,
+        51.453979
+      ],
+      [
+        -0.606552,
+        51.453599
+      ],
+      [
+        -0.606296,
+        51.464454
+      ],
+      [
+        -0.605211,
+        51.470331
+      ],
+      [
+        -0.604566,
+        51.474904
+      ],
+      [
+        -0.603805,
+        51.479435
+      ],
+      [
+        -0.605601,
+        51.480875
+      ],
+      [
+        -0.605734,
+        51.481775
+      ]
+    ]
+  }
+}

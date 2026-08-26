@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "id": "withings-202211121141",
+  "local": {
+    "name": "South Devon walk — 12 November 2022",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": [],
+    "notes": "Estimated historical walk reconstructed from two Withings walking fragments and Google Timeline breadcrumbs.",
+    "references": [
+      {
+        "label": "Fishermen’s Trail — Rota Vicentina",
+        "url": "https://rotavicentina.com/en/fishermens-trail/"
+      }
+    ]
+  },
+  "sources": {
+    "withings": {
+      "activityIds": [
+        "202211121141",
+        "202211121233"
+      ],
+      "status": "archived",
+      "archivedFilename": "activities.csv",
+      "snapshot": {
+        "name": "South Devon walk — 12 November 2022",
+        "type": "Hike",
+        "startDate": "2022-11-12T10:41:00.000Z",
+        "startDateLocal": "2022-11-12T11:41:00+01:00",
+        "distanceM": 6179.6889648437,
+        "movingTimeSeconds": 6463,
+        "elapsedTimeSeconds": 6660,
+        "ascentM": null,
+        "componentCount": 2
+      },
+      "components": [
+        {
+          "activityId": "202211121141",
+          "from": "2022-11-12T11:41:00+01:00",
+          "to": "2022-11-12T12:21:00+01:00",
+          "distanceM": 2512.6044921875,
+          "movingTimeSeconds": 2995
+        },
+        {
+          "activityId": "202211121233",
+          "from": "2022-11-12T12:33:00+01:00",
+          "to": "2022-11-12T13:32:00+01:00",
+          "distanceM": 3667.0844726562,
+          "movingTimeSeconds": 3468
+        }
+      ]
+    },
+    "googleTimeline": {
+      "status": "archived",
+      "archivedFilename": "location-history.json",
+      "snapshot": {
+        "startDate": "2022-11-12T10:41:00.000Z",
+        "endDate": "2022-11-12T12:32:00.000Z",
+        "pointCount": 20,
+        "lineDistanceM": 6611
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "9f1f0ac7868fb3ac4879976942db6e3adee19afbb06122a191f6fcb2beb9edda",
+    "source": "google-timeline",
+    "status": "estimated",
+    "versions": [
+      {
+        "checksum": "9f1f0ac7868fb3ac4879976942db6e3adee19afbb06122a191f6fcb2beb9edda",
+        "source": "google-timeline",
+        "capturedAt": "2026-08-26T08:24:34.763Z"
+      }
+    ],
+    "bounds": [
+      -3.690718,
+      50.414441,
+      -3.668095,
+      50.432726
+    ],
+    "start": [
+      -3.671691,
+      50.432726
+    ],
+    "finish": [
+      -3.690718,
+      50.431575
+    ],
+    "descentM": null
+  },
+  "review": [],
+  "provenance": {
+    "status": "estimated",
+    "method": "withings-google-timeline",
+    "metricsSource": "Withings",
+    "routeSource": "Google Timeline",
+    "label": "Estimated route compiled from Withings activity data and Google Timeline."
+  }
+}

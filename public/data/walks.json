@@ -1,5 +1,5 @@
 {
-  "walkCount": 93,
+  "walkCount": 98,
   "skippedWithoutRoute": 8,
   "walks": [
     {
@@ -1244,6 +1244,186 @@
       "finish": [
         -8.726196,
         37.089439
+      ]
+    },
+    {
+      "id": "withings-202404281135",
+      "activity": "hiking",
+      "name": "Surrey and Berkshire walk — 28 April 2024",
+      "date": "2024-04-28T09:35:00.000Z",
+      "distanceKm": 16.12,
+      "movingTimeSeconds": 12060,
+      "elapsedTimeSeconds": 15900,
+      "ascentM": null,
+      "descentM": null,
+      "providers": [
+        "Withings",
+        "Google Timeline"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "withings-google-timeline",
+        "metricsSource": "Withings",
+        "routeSource": "Google Timeline",
+        "label": "Estimated route compiled from Withings activity data and Google Timeline."
+      },
+      "notes": "Estimated historical walk reconstructed from two Withings walking fragments and Google Timeline breadcrumbs. Earlier London walking and transit fragments from the same day were excluded.",
+      "references": [
+        {
+          "label": "Fishermen’s Trail — Rota Vicentina",
+          "url": "https://rotavicentina.com/en/fishermens-trail/"
+        }
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/withings-202404281135.geojson?v=398b5b9103aeead9fcf114109af68ac130c429c8ddaa40e212cc6afa45d0dcfe",
+      "bounds": [
+        -0.636606,
+        51.392179,
+        -0.5928,
+        51.481775
+      ],
+      "start": [
+        -0.633552,
+        51.392179
+      ],
+      "finish": [
+        -0.605734,
+        51.481775
+      ]
+    },
+    {
+      "id": "withings-202404131124",
+      "activity": "hiking",
+      "name": "Bedfordshire walk — 13 April 2024",
+      "date": "2024-04-13T09:24:00.000Z",
+      "distanceKm": 9.9,
+      "movingTimeSeconds": 7440,
+      "elapsedTimeSeconds": 7680,
+      "ascentM": null,
+      "descentM": null,
+      "providers": [
+        "Withings",
+        "Google Timeline"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "withings-google-timeline",
+        "metricsSource": "Withings",
+        "routeSource": "Google Timeline",
+        "label": "Estimated route compiled from Withings activity data and Google Timeline."
+      },
+      "notes": "Estimated historical walk reconstructed from a Withings walking record and Google Timeline breadcrumbs. An earlier London walking fragment from the same day was excluded.",
+      "references": [
+        {
+          "label": "Fishermen’s Trail — Rota Vicentina",
+          "url": "https://rotavicentina.com/en/fishermens-trail/"
+        }
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/withings-202404131124.geojson?v=e9b1b4d4a2339670ea33f3aecb316b1c153bcedd848e0654a0df52e6b646ad22",
+      "bounds": [
+        -0.459541,
+        51.905968,
+        -0.391073,
+        51.963742
+      ],
+      "start": [
+        -0.459541,
+        51.905968
+      ],
+      "finish": [
+        -0.391073,
+        51.963742
+      ]
+    },
+    {
+      "id": "withings-202306241110",
+      "activity": "hiking",
+      "name": "Kent walk — 24 June 2023",
+      "date": "2023-06-24T09:10:00.000Z",
+      "distanceKm": 14.55,
+      "movingTimeSeconds": 12163,
+      "elapsedTimeSeconds": 18900,
+      "ascentM": null,
+      "descentM": null,
+      "providers": [
+        "Withings",
+        "Google Timeline"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "withings-google-timeline",
+        "metricsSource": "Withings",
+        "routeSource": "Google Timeline",
+        "label": "Estimated route compiled from Withings activity data and Google Timeline."
+      },
+      "notes": "Estimated historical walk reconstructed from three Withings walking fragments and Google Timeline breadcrumbs. Breaks between the recorded fragments are retained in elapsed time.",
+      "references": [
+        {
+          "label": "Fishermen’s Trail — Rota Vicentina",
+          "url": "https://rotavicentina.com/en/fishermens-trail/"
+        }
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/withings-202306241110.geojson?v=a824f14b7c85f0c9a148eee345f2d7eb463d737061946da7221307ae25b40927",
+      "bounds": [
+        0.374211,
+        51.371983,
+        0.507184,
+        51.399156
+      ],
+      "start": [
+        0.378489,
+        51.383244
+      ],
+      "finish": [
+        0.507184,
+        51.389065
+      ]
+    },
+    {
+      "id": "withings-202211121141",
+      "activity": "hiking",
+      "name": "South Devon walk — 12 November 2022",
+      "date": "2022-11-12T10:41:00.000Z",
+      "distanceKm": 6.18,
+      "movingTimeSeconds": 6463,
+      "elapsedTimeSeconds": 6660,
+      "ascentM": null,
+      "descentM": null,
+      "providers": [
+        "Withings",
+        "Google Timeline"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "withings-google-timeline",
+        "metricsSource": "Withings",
+        "routeSource": "Google Timeline",
+        "label": "Estimated route compiled from Withings activity data and Google Timeline."
+      },
+      "notes": "Estimated historical walk reconstructed from two Withings walking fragments and Google Timeline breadcrumbs.",
+      "references": [
+        {
+          "label": "Fishermen’s Trail — Rota Vicentina",
+          "url": "https://rotavicentina.com/en/fishermens-trail/"
+        }
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/withings-202211121141.geojson?v=9f1f0ac7868fb3ac4879976942db6e3adee19afbb06122a191f6fcb2beb9edda",
+      "bounds": [
+        -3.690718,
+        50.414441,
+        -3.668095,
+        50.432726
+      ],
+      "start": [
+        -3.671691,
+        50.432726
+      ],
+      "finish": [
+        -3.690718,
+        50.431575
       ]
     },
     {
@@ -2873,6 +3053,51 @@
       "finish": [
         -0.12705028988420963,
         51.51087169535458
+      ]
+    },
+    {
+      "id": "withings-201505241649",
+      "activity": "hiking",
+      "name": "Surrey walk — 24 May 2015",
+      "date": "2015-05-24T14:49:00.000Z",
+      "distanceKm": 11.5,
+      "movingTimeSeconds": 9540,
+      "elapsedTimeSeconds": 10500,
+      "ascentM": 0,
+      "descentM": null,
+      "providers": [
+        "Withings",
+        "Google Timeline"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "withings-google-timeline",
+        "metricsSource": "Withings",
+        "routeSource": "Google Timeline",
+        "label": "Estimated route compiled from Withings activity data and Google Timeline."
+      },
+      "notes": "Estimated historical walk reconstructed from a Withings walking record and Google Timeline breadcrumbs. A later fragment from the same evening was excluded because its Timeline movement was inconsistent with walking.",
+      "references": [
+        {
+          "label": "Fishermen’s Trail — Rota Vicentina",
+          "url": "https://rotavicentina.com/en/fishermens-trail/"
+        }
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/withings-201505241649.geojson?v=8457845665c01027c97026b308025d78a0e6d63d194e45711614b7b9568bb6e5",
+      "bounds": [
+        -0.389632,
+        51.134136,
+        -0.332693,
+        51.203938
+      ],
+      "start": [
+        -0.385852,
+        51.179616
+      ],
+      "finish": [
+        -0.332693,
+        51.134136
       ]
     },
     {
