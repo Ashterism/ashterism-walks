@@ -21,9 +21,33 @@
 
         <aside class="library" aria-label="Walk library">
           <div class="library__heading">
-            <h2>Recent wanderings</h2>
+            <h2>Wanderings</h2>
             <span id="walk-count">Loading…</span>
           </div>
+          <details id="walk-filters" class="walk-filters">
+            <summary>
+              <span>Filter</span>
+              <span id="filter-status">All walks</span>
+            </summary>
+            <div class="walk-filters__controls">
+              <label>
+                <span>Year</span>
+                <select id="filter-year">
+                  <option value="all">All years</option>
+                </select>
+              </label>
+              <label>
+                <span>Length</span>
+                <select id="filter-length">
+                  <option value="all">Any length</option>
+                  <option value="under-5">Under 5 km</option>
+                  <option value="5-10">5–10 km</option>
+                  <option value="10-20">10–20 km</option>
+                  <option value="20-plus">20 km or more</option>
+                </select>
+              </label>
+            </div>
+          </details>
           <ol id="walk-list" class="walk-list"></ol>
           <p class="library__credit">Activity archive compiled by Ashterism</p>
         </aside>

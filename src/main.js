@@ -54,6 +54,10 @@ const elements = {
   library: document.querySelector('.library'),
   panel: document.querySelector('#walk-panel'),
   list: document.querySelector('#walk-list'),
+  filters: document.querySelector('#walk-filters'),
+  filterYear: document.querySelector('#filter-year'),
+  filterLength: document.querySelector('#filter-length'),
+  filterStatus: document.querySelector('#filter-status'),
   title: document.querySelector('#walk-title'),
   date: document.querySelector('#walk-date'),
   distance: document.querySelector('#walk-distance'),
@@ -90,6 +94,7 @@ const elements = {
 }
 
 let walks = []
+let visibleWalks = []
 let selectedId = null
 let selectedRoute = null
 let routeRequest = 0
@@ -151,7 +156,12 @@ const fetchJson = async (url) => {
 
 const routePadding = () =>
   window.innerWidth <= 720
-    ? { top: 70, right: 35, bottom: 270, left: 35 }
+    ? {
+        top: 70,
+        right: 35,
+        bottom: Math.ceil(elements.library.getBoundingClientRect().height + 140),
+        left: 35,
+      }
     : {
         top: 70,
         right: 70,
@@ -161,7 +171,12 @@ const routePadding = () =>
 
 const allWalksPadding = () =>
   window.innerWidth <= 720
-    ? { top: 35, right: 35, bottom: 170, left: 35 }
+    ? {
+        top: 35,
+        right: 35,
+        bottom: Math.ceil(elements.library.getBoundingClientRect().height + 40),
+        left: 35,
+      }
     : routePadding()
 
 const boundsFrom = ([west, south, east, north]) =>
@@ -188,9 +203,57 @@ const updateDetails = (walk) => {
   elements.panel.hidden = false
 }
 
+const matchesLengthFilter = (walk, filter) => {
+  const distance = walk.distanceKm
+  if (!Number.isFinite(distance) || filter === 'all') return filter === 'all'
+  if (filter === 'under-5') return distance < 5
+  if (filter === '5-10') return distance >= 5 && distance < 10
+  if (filter === '10-20') return distance >= 10 && distance < 20
+  return filter === '20-plus' && distance >= 20
+}
+
+const walkStartFeatures = (candidates) => ({
+  type: 'FeatureCollection',
+  features: candidates.map((walk) => ({
+    type: 'Feature',
+    properties: { id: walk.id },
+    geometry: { type: 'Point', coordinates: walk.start },
+  })),
+})
+
+const updateWalkCount = () => {
+  const filtered = visibleWalks.length !== walks.length
+  const routeLabel = visibleWalks.length === 1 ? 'route' : 'routes'
+  elements.count.textContent = filtered
+    ? `${visibleWalks.length} of ${walks.length} ${routeLabel}`
+    : `${walks.length} mapped ${walks.length === 1 ? 'route' : 'routes'}`
+}
+
+const updateFilterStatus = () => {
+  const activeFilters = []
+  if (elements.filterYear.value !== 'all') {
+    activeFilters.push(elements.filterYear.value)
+  }
+  if (elements.filterLength.value !== 'all') {
+    activeFilters.push(
+      elements.filterLength.selectedOptions[0]?.textContent ?? 'Length',
+    )
+  }
+  elements.filterStatus.textContent =
+    activeFilters.length > 0 ? activeFilters.join(' · ') : 'All walks'
+}
+
 const renderList = () => {
+  if (visibleWalks.length === 0) {
+    const empty = document.createElement('li')
+    empty.className = 'walk-list__empty'
+    empty.textContent = 'No walks match these filters.'
+    elements.list.replaceChildren(empty)
+    return
+  }
+
   elements.list.replaceChildren(
-    ...walks.map((walk) => {
+    ...visibleWalks.map((walk) => {
       const item = document.createElement('li')
       const button = document.createElement('button')
       button.type = 'button'
@@ -218,6 +281,40 @@ const renderList = () => {
       return item
     }),
   )
+}
+
+const clearSelection = () => {
+  routeRequest += 1
+  selectedId = null
+  selectedRoute = null
+  elements.panel.hidden = true
+  map.getSource('walk').setData(emptyRoute)
+  startMarker.remove()
+  finishMarker.remove()
+  updateUrl(null)
+}
+
+const applyFilters = () => {
+  const year = elements.filterYear.value
+  const length = elements.filterLength.value
+  visibleWalks = walks.filter(
+    (walk) =>
+      (year === 'all' || String(new Date(walk.date).getFullYear()) === year) &&
+      matchesLengthFilter(walk, length),
+  )
+
+  updateFilterStatus()
+  updateWalkCount()
+  renderList()
+  map.getSource('walk-starts').setData(walkStartFeatures(visibleWalks))
+
+  if (selectedId && !visibleWalks.some((walk) => walk.id === selectedId)) {
+    clearSelection()
+  } else {
+    syncListSelection()
+  }
+
+  if (visibleWalks.length > 0) showAllWalks()
 }
 
 const syncListSelection = ({ focus = false } = {}) => {
@@ -535,8 +632,13 @@ const showAllWalks = () => {
   startMarker.remove()
   finishMarker.remove()
 
+  if (visibleWalks.length === 0) {
+    updateUrl(null)
+    return
+  }
+
   const bounds = new LngLatBounds()
-  walks.forEach((walk) => bounds.extend(walk.start))
+  visibleWalks.forEach((walk) => bounds.extend(walk.start))
   map.fitBounds(bounds, {
     padding: allWalksPadding(),
     duration: 900,
@@ -551,21 +653,25 @@ map.on('load', async () => {
     const catalogue = await fetchJson(`/data/walks.json?v=${Date.now()}`)
     walks = catalogue.walks
     if (walks.length === 0) throw new Error('The walk catalogue is empty')
+    visibleWalks = walks
 
-    elements.count.textContent = `${walks.length} mapped ${
-      walks.length === 1 ? 'route' : 'routes'
-    }`
+    updateWalkCount()
+
+    const years = [...new Set(walks.map((walk) => new Date(walk.date).getFullYear()))]
+      .filter(Number.isFinite)
+      .sort((first, second) => second - first)
+    elements.filterYear.append(
+      ...years.map((year) => {
+        const option = document.createElement('option')
+        option.value = String(year)
+        option.textContent = String(year)
+        return option
+      }),
+    )
 
     map.addSource('walk-starts', {
       type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features: walks.map((walk) => ({
-          type: 'Feature',
-          properties: { id: walk.id },
-          geometry: { type: 'Point', coordinates: walk.start },
-        })),
-      },
+      data: walkStartFeatures(walks),
     })
 
     map.addLayer({
@@ -615,6 +721,8 @@ map.on('load', async () => {
     })
 
     elements.viewAll.addEventListener('click', showAllWalks)
+    elements.filterYear.addEventListener('change', applyFilters)
+    elements.filterLength.addEventListener('change', applyFilters)
     elements.moreDetails.addEventListener('click', () => openDetails())
     elements.detailBack.addEventListener('click', () => closeDetails())
 

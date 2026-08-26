@@ -62,7 +62,21 @@ button { font: inherit; }
 .library__heading h2 { margin: 0; font-family: Georgia, serif; font-size: 1.16rem; font-weight: 500; }
 .library__heading span { color: #69766f; font-size: .74rem; }
 
+.walk-filters { margin: 0 18px 7px; border-top: 1px solid rgb(32 49 41 / 10%); border-bottom: 1px solid rgb(32 49 41 / 10%); }
+.walk-filters summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; color: #596860; cursor: pointer; font-size: .66rem; font-weight: 750; letter-spacing: .06em; list-style: none; text-transform: uppercase; }
+.walk-filters summary::-webkit-details-marker { display: none; }
+.walk-filters summary::before { width: 6px; height: 6px; margin-right: -4px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; content: ''; transform: rotate(45deg) translateY(-1px); transition: transform 160ms ease; }
+.walk-filters[open] summary::before { transform: rotate(225deg) translate(-1px, -1px); }
+.walk-filters summary:focus-visible { outline: 2px solid #d7653f; outline-offset: 3px; }
+.walk-filters summary span:first-child { margin-right: auto; }
+.walk-filters summary span:last-child { overflow: hidden; color: #87918c; font-size: .59rem; font-weight: 650; letter-spacing: 0; text-overflow: ellipsis; text-transform: none; white-space: nowrap; }
+.walk-filters__controls { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 1px 0 10px; }
+.walk-filters__controls label > span { display: block; margin-bottom: 4px; color: #78827d; font-size: .58rem; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; }
+.walk-filters select { width: 100%; min-width: 0; padding: 6px 22px 6px 7px; border: 1px solid rgb(32 49 41 / 18%); border-radius: 6px; background: rgb(255 255 255 / 50%); color: #30433a; font-size: .68rem; }
+.walk-filters select:focus { border-color: #d7653f; outline: 1px solid #d7653f; }
+
 .walk-list { margin: 0; padding: 0 9px 8px; overflow: auto; list-style: none; }
+.walk-list__empty { padding: 18px 10px; color: #78827d; font-family: Georgia, serif; font-size: .8rem; font-style: italic; }
 .walk-list__button { display: block; width: 100%; padding: 11px 10px; border: 0; border-radius: 10px; background: transparent; color: inherit; text-align: left; cursor: pointer; }
 .walk-list__button:hover { background: rgb(215 101 63 / 8%); }
 .walk-list__button:focus-visible { outline: 2px solid #d7653f; outline-offset: -2px; }
@@ -150,6 +164,10 @@ button { font: inherit; }
   .library__heading { padding: 10px 12px 5px; }
   .library__heading h2 { font-size: .95rem; }
   .walk-list { display: flex; gap: 5px; padding: 0 7px 8px; overflow-x: auto; }
+  .library:has(.walk-filters[open]) { height: 210px; }
+  .walk-filters { margin: 0 12px 5px; }
+  .walk-filters summary { padding: 6px 0; }
+  .walk-filters__controls { padding-bottom: 8px; }
   .walk-list li { flex: 0 0 170px; }
   .walk-list__button { padding: 8px; }
   .walk-list__name { font-size: .78rem; }
