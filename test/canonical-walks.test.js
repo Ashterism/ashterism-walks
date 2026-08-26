@@ -177,3 +177,40 @@ test('compiled records expose their sources and estimated-route provenance', () 
   assert.deepEqual(publicWalk.providers, ['Withings', 'Google Timeline'])
   assert.equal(publicWalk.provenance.status, 'estimated')
 })
+
+test('Ashterism-owned notes and references are published when present', () => {
+  const noted = {
+    ...record,
+    local: {
+      ...record.local,
+      notes: 'Walked with a friend.',
+      references: [{ label: 'Trail information', url: 'https://example.com/trail' }],
+    },
+  }
+
+  const publicWalk = resolvePublicFields(noted)
+  assert.equal(publicWalk.notes, 'Walked with a friend.')
+  assert.deepEqual(publicWalk.references, [
+    { label: 'Trail information', url: 'https://example.com/trail' },
+  ])
+})
+
+test('official route metadata can supply estimated elevation and attribution', () => {
+  const refined = {
+    ...record,
+    sources: {
+      ...record.sources,
+      intervals: {
+        ...record.sources.intervals,
+        snapshot: { ...record.sources.intervals.snapshot, ascentM: null },
+      },
+      rotaVicentina: { routeId: '801765498' },
+    },
+    route: { ...record.route, ascentM: 417, descentM: 416 },
+  }
+
+  const publicWalk = resolvePublicFields(refined)
+  assert.equal(publicWalk.ascentM, 417)
+  assert.equal(publicWalk.descentM, 416)
+  assert.ok(publicWalk.providers.includes('Rota Vicentina'))
+})

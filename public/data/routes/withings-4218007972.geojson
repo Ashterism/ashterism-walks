@@ -20,7 +20,14 @@
       "metricsSource": "Withings",
       "routeSource": "Google Timeline",
       "label": "Estimated route compiled from Withings activity data and Google Timeline."
-    }
+    },
+    "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina.",
+    "references": [
+      {
+        "label": "Fishermen’s Trail — Rota Vicentina",
+        "url": "https://rotavicentina.com/en/fishermens-trail/"
+      }
+    ]
   },
   "geometry": {
     "type": "LineString",

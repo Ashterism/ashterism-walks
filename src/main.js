@@ -83,6 +83,9 @@ const elements = {
   elevationRange: document.querySelector('#detail-elevation-range'),
   profileDistance: document.querySelector('#detail-profile-distance'),
   photoGrid: document.querySelector('#detail-photo-grid'),
+  detailNotes: document.querySelector('#detail-notes'),
+  detailNotesCopy: document.querySelector('#detail-notes-copy'),
+  detailReferences: document.querySelector('#detail-references'),
   detailSource: document.querySelector('#detail-source'),
 }
 
@@ -415,6 +418,28 @@ const renderPhotos = (photos = []) => {
   )
 }
 
+const renderNotes = (notes, references = []) => {
+  const hasNotes = typeof notes === 'string' && notes.trim() !== ''
+  const safeReferences = references.filter(
+    (reference) => reference?.label && reference?.url,
+  )
+  elements.detailNotes.hidden = !hasNotes && safeReferences.length === 0
+  elements.detailNotesCopy.hidden = !hasNotes
+  elements.detailNotesCopy.textContent = hasNotes ? notes : ''
+  elements.detailReferences.replaceChildren(
+    ...safeReferences.map((reference) => {
+      const item = document.createElement('li')
+      const link = document.createElement('a')
+      link.href = reference.url
+      link.textContent = reference.label
+      link.target = '_blank'
+      link.rel = 'noopener noreferrer'
+      item.append(link)
+      return item
+    }),
+  )
+}
+
 const renderDetail = (walk, route) => {
   const coordinates = route.geometry.coordinates
   elements.detailKind.textContent = walk.activity === 'hiking' ? 'Hiking' : 'Walking'
@@ -435,6 +460,7 @@ const renderDetail = (walk, route) => {
   renderDetailMap(route, walk)
   renderElevationProfile(coordinates, walk)
   renderPhotos(walk.photos)
+  renderNotes(walk.notes, walk.references)
 }
 
 const openDetails = ({ updateHistory = true } = {}) => {

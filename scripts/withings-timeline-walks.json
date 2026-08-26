@@ -1,5 +1,12 @@
 {
   "schemaVersion": 1,
+  "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina.",
+  "references": [
+    {
+      "label": "Fishermen’s Trail — Rota Vicentina",
+      "url": "https://rotavicentina.com/en/fishermens-trail/"
+    }
+  ],
   "walks": [
     {
       "id": "withings-4213159220",
@@ -22,6 +29,17 @@
       "id": "withings-4215888585",
       "name": "Portugal coast — 13 May 2024",
       "activityType": "Hike",
+      "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina. This stage followed the official Salema–Luz section in reverse, from Luz to Salema.",
+      "references": [
+        {
+          "label": "Fishermen’s Trail — Rota Vicentina",
+          "url": "https://rotavicentina.com/en/fishermens-trail/"
+        },
+        {
+          "label": "Official Salema–Luz stage",
+          "url": "https://rotavicentina.com/en/walking/salema-luz-2/"
+        }
+      ],
       "components": [
         {
           "activityId": "4215888585",

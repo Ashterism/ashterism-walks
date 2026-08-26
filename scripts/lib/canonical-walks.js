@@ -198,6 +198,7 @@ export const resolvePublicFields = (record) => {
   if (record.sources.strava) providers.push('Strava')
   if (record.sources.withings) providers.push('Withings')
   if (record.sources.googleTimeline) providers.push('Google Timeline')
+  if (record.sources.rotaVicentina) providers.push('Rota Vicentina')
 
   return {
     id: record.id,
@@ -214,12 +215,16 @@ export const resolvePublicFields = (record) => {
     movingTimeSeconds: snapshot.movingTimeSeconds,
     elapsedTimeSeconds: snapshot.elapsedTimeSeconds,
     ascentM:
-      snapshot.ascentM == null
+      snapshot.ascentM == null && record.route?.ascentM == null
         ? null
-        : Math.round(snapshot.ascentM),
+        : Math.round(snapshot.ascentM ?? record.route.ascentM),
     descentM: record.route?.descentM ?? null,
     providers,
     ...(record.provenance ? { provenance: record.provenance } : {}),
+    ...(record.local.notes ? { notes: record.local.notes } : {}),
+    ...(record.local.references?.length
+      ? { references: record.local.references }
+      : {}),
   }
 }
 

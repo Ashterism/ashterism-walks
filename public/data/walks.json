@@ -982,6 +982,13 @@
         "routeSource": "Google Timeline",
         "label": "Estimated route compiled from Withings activity data and Google Timeline."
       },
+      "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina.",
+      "references": [
+        {
+          "label": "Fishermen’s Trail — Rota Vicentina",
+          "url": "https://rotavicentina.com/en/fishermens-trail/"
+        }
+      ],
       "photos": [],
       "routeUrl": "/data/routes/withings-4227189222.geojson?v=db8744efb7524df8b0309ad18f1822fae2cd4d5587cf4c6324ee3ed7164dfe42",
       "bounds": [
@@ -1020,6 +1027,13 @@
         "routeSource": "Google Timeline",
         "label": "Estimated route compiled from Withings activity data and Google Timeline."
       },
+      "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina.",
+      "references": [
+        {
+          "label": "Fishermen’s Trail — Rota Vicentina",
+          "url": "https://rotavicentina.com/en/fishermens-trail/"
+        }
+      ],
       "photos": [],
       "routeUrl": "/data/routes/withings-4223438614.geojson?v=73ec69cb66b58c0d4f5c1ec0e0c5f02ccd432278c07e4b69e9604372d98dca80",
       "bounds": [
@@ -1058,6 +1072,13 @@
         "routeSource": "Google Timeline",
         "label": "Estimated route compiled from Withings activity data and Google Timeline."
       },
+      "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina.",
+      "references": [
+        {
+          "label": "Fishermen’s Trail — Rota Vicentina",
+          "url": "https://rotavicentina.com/en/fishermens-trail/"
+        }
+      ],
       "photos": [],
       "routeUrl": "/data/routes/withings-4220375244.geojson?v=6e4faa3bc947e5e95c80ba3d51a90b813bf582c10925c572d3a23b34025e33a4",
       "bounds": [
@@ -1096,6 +1117,13 @@
         "routeSource": "Google Timeline",
         "label": "Estimated route compiled from Withings activity data and Google Timeline."
       },
+      "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina.",
+      "references": [
+        {
+          "label": "Fishermen’s Trail — Rota Vicentina",
+          "url": "https://rotavicentina.com/en/fishermens-trail/"
+        }
+      ],
       "photos": [],
       "routeUrl": "/data/routes/withings-4218007972.geojson?v=f9468379452dd486fdb21c51a37e5647272842eaf68e004f877289e52b20771f",
       "bounds": [
@@ -1121,24 +1149,36 @@
       "distanceKm": 13.36,
       "movingTimeSeconds": 11700,
       "elapsedTimeSeconds": 11880,
-      "ascentM": null,
-      "descentM": null,
+      "ascentM": 417,
+      "descentM": 416,
       "providers": [
         "Withings",
-        "Google Timeline"
+        "Google Timeline",
+        "Rota Vicentina"
       ],
       "provenance": {
         "status": "estimated",
-        "method": "withings-google-timeline",
+        "method": "withings-google-timeline-rota-vicentina",
         "metricsSource": "Withings",
-        "routeSource": "Google Timeline",
-        "label": "Estimated route compiled from Withings activity data and Google Timeline."
+        "routeSource": "Official Rota Vicentina GPX matched to Google Timeline anchors",
+        "label": "Estimated route compiled from Withings activity data, Google Timeline anchors and official Rota Vicentina trail geometry."
       },
+      "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina. This stage followed the official Salema–Luz section in reverse, from Luz to Salema.",
+      "references": [
+        {
+          "label": "Fishermen’s Trail — Rota Vicentina",
+          "url": "https://rotavicentina.com/en/fishermens-trail/"
+        },
+        {
+          "label": "Official Salema–Luz stage",
+          "url": "https://rotavicentina.com/en/walking/salema-luz-2/"
+        }
+      ],
       "photos": [],
-      "routeUrl": "/data/routes/withings-4215888585.geojson?v=a970980a588715f05267ba9eb0f2e8133d1d33a19b1dbcb6f86bf2de6e35b5c8",
+      "routeUrl": "/data/routes/withings-4215888585.geojson?v=2c4f600bf10e1e4c2638c7ef943364a808b948d1966df9a8c76ed59516689dc9",
       "bounds": [
-        -8.824435,
-        37.06549,
+        -8.824039,
+        37.064284,
         -8.725119,
         37.089847
       ],
@@ -1172,6 +1212,13 @@
         "routeSource": "Google Timeline",
         "label": "Estimated route compiled from Withings activity data and Google Timeline."
       },
+      "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina.",
+      "references": [
+        {
+          "label": "Fishermen’s Trail — Rota Vicentina",
+          "url": "https://rotavicentina.com/en/fishermens-trail/"
+        }
+      ],
       "photos": [],
       "routeUrl": "/data/routes/withings-4213159220.geojson?v=8363896ebad33686751239f650247713b97aa606a869e2ff9fe34f7703a862ce",
       "bounds": [

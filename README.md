@@ -60,6 +60,14 @@ Restore the provider's name with:
 npm run rename -- 24098515780 --clear
 ```
 
+Add an Ashterism-owned note to a walk with:
+
+```sh
+npm run notes -- 24098515780 "Walked with Sam; muddy after the bridge."
+```
+
+Use `--clear` in place of the note to remove it. Notes are shown near the bottom of the walk detail page and are not overwritten by provider syncs.
+
 Hide a walk from the published map without deleting its record or route:
 
 ```sh
@@ -81,7 +89,7 @@ Ashterism is the system of record. Garmin, Intervals.icu, Strava, Withings and G
 - An activity missing from a successful provider response is marked for review but remains published.
 - An activity whose provider type changes away from walk/hike is marked for review but remains published.
 - A failed provider request stops the sync before reconciliation, so an outage cannot remove or alter existing walks.
-- Local names, activity-type corrections and visibility always win over provider values.
+- Local names, notes, activity-type corrections and visibility always win over provider values.
 - Provider distance, timing, ascent and valid route edits update the corresponding source snapshot.
 - Reconstructed routes retain an explicit estimated status, their contributing source IDs and a public provenance label.
 

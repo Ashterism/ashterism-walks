@@ -295,6 +295,9 @@ for (const configuredWalk of configuration.walks) {
         activityType: configuredWalk.activityType,
         visibility: 'public',
         photos: [],
+        notes: configuredWalk.notes ?? configuration.notes ?? null,
+        references:
+          configuredWalk.references ?? configuration.references ?? [],
       },
       sources: {},
       route: null,
@@ -366,6 +369,13 @@ for (const configuredWalk of configuration.walks) {
       ...record.local,
       name: record.local.name ?? configuredWalk.name,
       activityType: record.local.activityType ?? configuredWalk.activityType,
+      notes:
+        record.local.notes ?? configuredWalk.notes ?? configuration.notes ?? null,
+      references:
+        record.local.references ??
+        configuredWalk.references ??
+        configuration.references ??
+        [],
     },
     sources: {
       ...record.sources,
@@ -373,13 +383,16 @@ for (const configuredWalk of configuration.walks) {
       googleTimeline: googleTimelineSource,
     },
     route,
-    provenance: {
-      status: 'estimated',
-      method: 'withings-google-timeline',
-      metricsSource: 'Withings',
-      routeSource: 'Google Timeline',
-      label: provenanceLabel,
-    },
+    provenance:
+      useCompiledRoute || !record.provenance
+        ? {
+            status: 'estimated',
+            method: 'withings-google-timeline',
+            metricsSource: 'Withings',
+            routeSource: 'Google Timeline',
+            label: provenanceLabel,
+          }
+        : record.provenance,
     review: [...review].sort(),
   }
   recordIndex.set(id, record)

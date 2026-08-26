@@ -5,7 +5,14 @@
     "name": "Portugal coast — 14 May 2024",
     "activityType": "Hike",
     "visibility": "public",
-    "photos": []
+    "photos": [],
+    "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina.",
+    "references": [
+      {
+        "label": "Fishermen’s Trail — Rota Vicentina",
+        "url": "https://rotavicentina.com/en/fishermens-trail/"
+      }
+    ]
   },
   "sources": {
     "withings": {
