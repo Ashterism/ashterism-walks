@@ -1,0 +1,109 @@
+{
+  "type": "Feature",
+  "properties": {
+    "id": "withings-201911091354",
+    "activity": "hiking",
+    "name": "Kinsale walk",
+    "date": "2019-11-09T12:54:08.000Z",
+    "distanceKm": 7.01,
+    "movingTimeSeconds": null,
+    "elapsedTimeSeconds": 7260,
+    "ascentM": 86,
+    "descentM": null,
+    "providers": [
+      "Withings",
+      "Google Timeline"
+    ],
+    "provenance": {
+      "status": "estimated",
+      "method": "withings-google-timeline",
+      "metricsSource": "Withings",
+      "routeSource": "Google Timeline",
+      "label": "Estimated route compiled from Withings activity data and Google Timeline."
+    },
+    "notes": "Estimated historical walk in and around Kinsale, reconstructed from three Withings walking fragments and Google Timeline breadcrumbs. Separate walking fragments in Cork city earlier that day were excluded.",
+    "references": [
+      {
+        "label": "Fishermen’s Trail — Rota Vicentina",
+        "url": "https://rotavicentina.com/en/fishermens-trail/"
+      }
+    ]
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        -8.52166,
+        51.705778
+      ],
+      [
+        -8.523656,
+        51.706342
+      ],
+      [
+        -8.524449,
+        51.705807
+      ],
+      [
+        -8.520796,
+        51.704398
+      ],
+      [
+        -8.518651,
+        51.701222
+      ],
+      [
+        -8.518268,
+        51.698776
+      ],
+      [
+        -8.520959,
+        51.697203
+      ],
+      [
+        -8.528603,
+        51.694358
+      ],
+      [
+        -8.531974,
+        51.69572
+      ],
+      [
+        -8.535353,
+        51.698052
+      ],
+      [
+        -8.531929,
+        51.702021
+      ],
+      [
+        -8.530166,
+        51.70534
+      ],
+      [
+        -8.526616,
+        51.705375
+      ],
+      [
+        -8.522316,
+        51.705722
+      ],
+      [
+        -8.515791,
+        51.706713
+      ],
+      [
+        -8.516849,
+        51.705121
+      ],
+      [
+        -8.516644,
+        51.705174
+      ],
+      [
+        -8.520603,
+        51.705607
+      ]
+    ]
+  }
+}

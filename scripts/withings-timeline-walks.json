@@ -252,6 +252,44 @@
           "to": "2024-04-28T16:00:00+02:00"
         }
       ]
+    },
+    {
+      "id": "withings-201911091354",
+      "name": "Kinsale walk",
+      "activityType": "Hike",
+      "timelineMode": "components",
+      "notes": "Estimated historical walk in and around Kinsale, reconstructed from three Withings walking fragments and Google Timeline breadcrumbs. Separate walking fragments in Cork city earlier that day were excluded.",
+      "components": [
+        {
+          "activityId": "201911091354",
+          "from": "2019-11-09T13:54:08+01:00",
+          "to": "2019-11-09T14:34:08+01:00"
+        },
+        {
+          "activityId": "201911091445",
+          "from": "2019-11-09T14:45:08+01:00",
+          "to": "2019-11-09T15:21:08+01:00"
+        },
+        {
+          "activityId": "201911091545",
+          "from": "2019-11-09T15:45:27+01:00",
+          "to": "2019-11-09T15:55:08+01:00"
+        }
+      ]
+    },
+    {
+      "id": "withings-201911101507",
+      "name": "Blarney Castle grounds",
+      "activityType": "Hike",
+      "timelineMode": "components",
+      "notes": "Estimated historical walk through the woodland grounds around Blarney Castle, reconstructed from a Withings walking record and Google Timeline breadcrumbs.",
+      "components": [
+        {
+          "activityId": "201911101507",
+          "from": "2019-11-10T15:07:16+01:00",
+          "to": "2019-11-10T16:10:16+01:00"
+        }
+      ]
     }
   ]
 }
