@@ -6,11 +6,15 @@
     "activityType": "Hike",
     "visibility": "public",
     "photos": [],
-    "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina.",
+    "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina. This stage followed the official Sagres–Salema section in reverse, from Salema to Sagres.",
     "references": [
       {
         "label": "Fishermen’s Trail — Rota Vicentina",
         "url": "https://rotavicentina.com/en/fishermens-trail/"
+      },
+      {
+        "label": "Official Sagres–Salema stage",
+        "url": "https://rotavicentina.com/en/walking/sagres-salema-2/"
       }
     ]
   },
@@ -67,24 +71,44 @@
         "pointCount": 38,
         "lineDistanceM": 16500
       }
+    },
+    "rotaVicentina": {
+      "status": "reference",
+      "routeId": "801765497",
+      "name": "Sagres » Salema",
+      "direction": "reverse",
+      "url": "https://rotavicentina.com/en/walking/sagres-salema-2/",
+      "snapshot": {
+        "pointCount": 419,
+        "matchedPointCount": 408,
+        "routeDistanceM": 18652,
+        "startAnchorDifferenceM": 19,
+        "finishAnchorDifferenceM": 188,
+        "sourceChecksum": "10665c9548da8636b9da630958e6d0741c6805d14d7edaa2a75d3a3e8d96563a"
+      }
     }
   },
   "route": {
-    "activeVersion": "f9468379452dd486fdb21c51a37e5647272842eaf68e004f877289e52b20771f",
-    "source": "google-timeline",
+    "activeVersion": "160c4dc955497fea52cfeac877093dbbec6793392584584213b38719e54c6b7d",
+    "source": "rota-vicentina",
     "status": "estimated",
     "versions": [
       {
         "checksum": "f9468379452dd486fdb21c51a37e5647272842eaf68e004f877289e52b20771f",
         "source": "google-timeline",
         "capturedAt": "2026-08-25T20:11:32.405Z"
+      },
+      {
+        "checksum": "160c4dc955497fea52cfeac877093dbbec6793392584584213b38719e54c6b7d",
+        "source": "rota-vicentina",
+        "capturedAt": "2026-08-26T08:02:23.088Z"
       }
     ],
     "bounds": [
-      -8.934783,
-      37.007286,
+      -8.934039,
+      37.007533,
       -8.828964,
-      37.066066
+      37.066752
     ],
     "start": [
       -8.828964,
@@ -94,14 +118,15 @@
       -8.934039,
       37.007533
     ],
-    "descentM": null
+    "ascentM": 528,
+    "descentM": 543
   },
   "review": [],
   "provenance": {
     "status": "estimated",
-    "method": "withings-google-timeline",
+    "method": "withings-google-timeline-rota-vicentina",
     "metricsSource": "Withings",
-    "routeSource": "Google Timeline",
-    "label": "Estimated route compiled from Withings activity data and Google Timeline."
+    "routeSource": "Official Rota Vicentina GPX matched to Google Timeline anchors",
+    "label": "Estimated route compiled from Withings activity data, Google Timeline anchors and official Rota Vicentina trail geometry."
   }
 }

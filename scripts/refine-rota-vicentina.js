@@ -10,12 +10,41 @@ import {
 } from './lib/canonical-walks.js'
 
 const apply = process.argv.includes('--apply')
-const gpxArgument = process.argv.slice(2).find((value) => !value.startsWith('--'))
-if (!gpxArgument) {
-  throw new Error('Usage: node scripts/refine-rota-vicentina.js /path/to/salema-luz.gpx [--apply]')
+const inputs = process.argv.slice(2).filter((value) => !value.startsWith('--'))
+const stages = {
+  'withings-4213159220': {
+    routeId: '801765500',
+    name: 'Luz » Lagos',
+    direction: 'reverse',
+    url: 'https://rotavicentina.com/en/walking/luz-lagos-2/',
+    archiveFilename: 'luz-lagos.gpx',
+    notes: 'Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina. This stage followed the official Luz–Lagos section in reverse, from Lagos to Luz.',
+  },
+  'withings-4215888585': {
+    routeId: '801765498',
+    name: 'Salema » Luz',
+    direction: 'reverse',
+    url: 'https://rotavicentina.com/en/walking/salema-luz-2/',
+    archiveFilename: 'salema-luz.gpx',
+    notes: 'Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina. This stage followed the official Salema–Luz section in reverse, from Luz to Salema.',
+  },
+  'withings-4218007972': {
+    routeId: '801765497',
+    name: 'Sagres » Salema',
+    direction: 'reverse',
+    url: 'https://rotavicentina.com/en/walking/sagres-salema-2/',
+    archiveFilename: 'sagres-salema.gpx',
+    notes: 'Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina. This stage followed the official Sagres–Salema section in reverse, from Salema to Sagres.',
+  },
 }
 
-const id = 'withings-4215888585'
+const [id, gpxArgument] = inputs
+const stage = stages[id]
+if (!stage || !gpxArgument) {
+  throw new Error(
+    'Usage: node scripts/refine-rota-vicentina.js <walk-id> /path/to/official-stage.gpx [--apply]',
+  )
+}
 const record = loadCanonicalRecords().find((walk) => walk.id === id)
 if (!record) throw new Error(`Unknown walk: ${id}`)
 
@@ -86,14 +115,28 @@ if (!versions.some((version) => version.checksum === checksum)) {
 }
 const updated = {
   ...record,
+  local: {
+    ...record.local,
+    notes: stage.notes,
+    references: [
+      {
+        label: 'Fishermen’s Trail — Rota Vicentina',
+        url: 'https://rotavicentina.com/en/fishermens-trail/',
+      },
+      {
+        label: `Official ${stage.name.replace(' » ', '–')} stage`,
+        url: stage.url,
+      },
+    ],
+  },
   sources: {
     ...record.sources,
     rotaVicentina: {
       status: 'reference',
-      routeId: '801765498',
-      name: 'Salema » Luz',
-      direction: 'reverse',
-      url: 'https://rotavicentina.com/en/walking/salema-luz-2/',
+      routeId: stage.routeId,
+      name: stage.name,
+      direction: stage.direction,
+      url: stage.url,
       snapshot: {
         pointCount: coordinates.length,
         matchedPointCount: trimmed.length,
@@ -127,7 +170,7 @@ const updated = {
 if (apply) {
   writeJsonIfChanged(routeVersionPath(id, checksum), feature)
   writeCanonicalRecord(updated)
-  const archivePath = 'private/rota-vicentina/salema-luz.gpx'
+  const archivePath = `private/rota-vicentina/${stage.archiveFilename}`
   fs.mkdirSync(path.dirname(archivePath), { recursive: true, mode: 0o700 })
   fs.copyFileSync(gpxPath, archivePath)
   fs.chmodSync(archivePath, 0o600)

@@ -1104,33 +1104,38 @@
       "distanceKm": 17.71,
       "movingTimeSeconds": 17461,
       "elapsedTimeSeconds": 22860,
-      "ascentM": null,
-      "descentM": null,
+      "ascentM": 528,
+      "descentM": 543,
       "providers": [
         "Withings",
-        "Google Timeline"
+        "Google Timeline",
+        "Rota Vicentina"
       ],
       "provenance": {
         "status": "estimated",
-        "method": "withings-google-timeline",
+        "method": "withings-google-timeline-rota-vicentina",
         "metricsSource": "Withings",
-        "routeSource": "Google Timeline",
-        "label": "Estimated route compiled from Withings activity data and Google Timeline."
+        "routeSource": "Official Rota Vicentina GPX matched to Google Timeline anchors",
+        "label": "Estimated route compiled from Withings activity data, Google Timeline anchors and official Rota Vicentina trail geometry."
       },
-      "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina.",
+      "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina. This stage followed the official Sagres–Salema section in reverse, from Salema to Sagres.",
       "references": [
         {
           "label": "Fishermen’s Trail — Rota Vicentina",
           "url": "https://rotavicentina.com/en/fishermens-trail/"
+        },
+        {
+          "label": "Official Sagres–Salema stage",
+          "url": "https://rotavicentina.com/en/walking/sagres-salema-2/"
         }
       ],
       "photos": [],
-      "routeUrl": "/data/routes/withings-4218007972.geojson?v=f9468379452dd486fdb21c51a37e5647272842eaf68e004f877289e52b20771f",
+      "routeUrl": "/data/routes/withings-4218007972.geojson?v=160c4dc955497fea52cfeac877093dbbec6793392584584213b38719e54c6b7d",
       "bounds": [
-        -8.934783,
-        37.007286,
+        -8.934039,
+        37.007533,
         -8.828964,
-        37.066066
+        37.066752
       ],
       "start": [
         -8.828964,
@@ -1199,33 +1204,38 @@
       "distanceKm": 8.95,
       "movingTimeSeconds": 7621,
       "elapsedTimeSeconds": 8220,
-      "ascentM": null,
-      "descentM": null,
+      "ascentM": 428,
+      "descentM": 461,
       "providers": [
         "Withings",
-        "Google Timeline"
+        "Google Timeline",
+        "Rota Vicentina"
       ],
       "provenance": {
         "status": "estimated",
-        "method": "withings-google-timeline",
+        "method": "withings-google-timeline-rota-vicentina",
         "metricsSource": "Withings",
-        "routeSource": "Google Timeline",
-        "label": "Estimated route compiled from Withings activity data and Google Timeline."
+        "routeSource": "Official Rota Vicentina GPX matched to Google Timeline anchors",
+        "label": "Estimated route compiled from Withings activity data, Google Timeline anchors and official Rota Vicentina trail geometry."
       },
-      "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina.",
+      "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina. This stage followed the official Luz–Lagos section in reverse, from Lagos to Luz.",
       "references": [
         {
           "label": "Fishermen’s Trail — Rota Vicentina",
           "url": "https://rotavicentina.com/en/fishermens-trail/"
+        },
+        {
+          "label": "Official Luz–Lagos stage",
+          "url": "https://rotavicentina.com/en/walking/luz-lagos-2/"
         }
       ],
       "photos": [],
-      "routeUrl": "/data/routes/withings-4213159220.geojson?v=8363896ebad33686751239f650247713b97aa606a869e2ff9fe34f7703a862ce",
+      "routeUrl": "/data/routes/withings-4213159220.geojson?v=d0175ac9fcb458039868a4972bf0d1c6b9330312f87cb0140782f78d7db6f33b",
       "bounds": [
         -8.726196,
-        37.083143,
-        -8.668853,
-        37.095368
+        37.080109,
+        -8.668031,
+        37.095583
       ],
       "start": [
         -8.669923,
