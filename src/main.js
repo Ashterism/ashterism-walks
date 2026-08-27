@@ -157,7 +157,13 @@ const fetchJson = async (url) => {
 const routePadding = () =>
   window.innerWidth <= 720
     ? {
-        top: 70,
+        top: elements.panel.hidden
+          ? 70
+          : Math.ceil(
+              elements.panel.getBoundingClientRect().bottom -
+                elements.mapCanvas.getBoundingClientRect().top +
+                24,
+            ),
         right: 35,
         bottom: Math.ceil(elements.library.getBoundingClientRect().height + 140),
         left: 35,
@@ -632,13 +638,21 @@ const showAllWalks = () => {
   startMarker.remove()
   finishMarker.remove()
 
-  if (visibleWalks.length === 0) {
+  if (window.innerWidth <= 720) {
+    elements.list.scrollTo({ left: 0, behavior: 'smooth' })
+  }
+
+  const overviewWalks = visibleWalks.filter(
+    (walk) => walk.includeInOverview !== false,
+  )
+
+  if (overviewWalks.length === 0) {
     updateUrl(null)
     return
   }
 
   const bounds = new LngLatBounds()
-  visibleWalks.forEach((walk) => bounds.extend(walk.start))
+  overviewWalks.forEach((walk) => bounds.extend(walk.start))
   map.fitBounds(bounds, {
     padding: allWalksPadding(),
     duration: 900,

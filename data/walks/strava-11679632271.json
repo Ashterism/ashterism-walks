@@ -5,7 +5,8 @@
     "name": "Afternoon Walk",
     "activityType": null,
     "visibility": "public",
-    "photos": []
+    "photos": [],
+    "includeInOverview": false
   },
   "sources": {
     "garmin": null,

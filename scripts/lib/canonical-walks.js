@@ -6,6 +6,7 @@ export const canonicalDirectory = 'data/walks'
 export const routeVersionsDirectory = 'data/route-versions'
 export const publicRoutesDirectory = 'public/data/routes'
 export const publicCataloguePath = 'public/data/walks.json'
+export const publicTripsPath = 'public/data/trips.json'
 
 export const safeWalkIdPattern =
   /^(?:\d+|intervals-\d+|strava-\d+|withings-\d+)$/

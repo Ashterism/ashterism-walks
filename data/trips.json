@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "trips": [
+    {
+      "id": "pennine-way-introduction",
+      "name": "Pennine Way introduction",
+      "description": "Five consecutive walks introducing the Pennine Way.",
+      "tags": [
+        "long-distance trail",
+        "multi-day",
+        "pennine way"
+      ],
+      "walkIds": [
+        "intervals-178056187",
+        "intervals-178056202",
+        "intervals-178056205",
+        "intervals-178056218",
+        "intervals-178056223"
+      ]
+    },
+    {
+      "id": "hadrians-wall",
+      "name": "Hadrian's Wall",
+      "description": "A five-day walk along Hadrian's Wall.",
+      "tags": [
+        "hadrian's wall",
+        "long-distance trail",
+        "multi-day",
+        "national trail"
+      ],
+      "walkIds": [
+        "strava-1597815027",
+        "strava-1597815503",
+        "strava-1599409414",
+        "strava-1600368441",
+        "strava-1601685583",
+        "strava-1603949806",
+        "strava-1603950758",
+        "strava-1606022787",
+        "strava-1606023021"
+      ]
+    },
+    {
+      "id": "peddars-way",
+      "name": "Peddars Way",
+      "description": "A three-day walk along Peddars Way.",
+      "tags": [
+        "long-distance trail",
+        "multi-day",
+        "national trail",
+        "peddars way"
+      ],
+      "walkIds": [
+        "strava-1340508761",
+        "strava-1341939136",
+        "strava-1343703760"
+      ]
+    },
+    {
+      "id": "fishermens-trail-portugal",
+      "name": "Fishermen's Trail — Portugal",
+      "description": "Six days on the Fishermen's Trail along the Algarve coast.",
+      "tags": [
+        "coastal",
+        "fishermen's trail",
+        "long-distance trail",
+        "multi-day"
+      ],
+      "walkIds": [
+        "withings-4213159220",
+        "withings-4215888585",
+        "withings-4218007972",
+        "withings-4220375244",
+        "withings-4223438614",
+        "withings-4227189222"
+      ]
+    }
+  ]
+}

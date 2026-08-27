@@ -13,6 +13,7 @@
     "import:withings-timeline": "node scripts/import-withings-timeline.js",
     "migrate:canonical": "node scripts/migrate-canonical.js",
     "notes": "node scripts/set-walk-notes.js",
+    "overview": "node scripts/set-walk-overview.js",
     "rename": "node scripts/rename-walk.js",
     "visibility": "node scripts/set-walk-visibility.js",
     "sync": "node scripts/sync-intervals.js && node scripts/convert-fit.js",

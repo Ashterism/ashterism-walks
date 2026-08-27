@@ -355,6 +355,12 @@
         "Garmin",
         "Strava"
       ],
+      "tags": [
+        "long-distance trail",
+        "multi-day",
+        "pennine way"
+      ],
+      "tripId": "pennine-way-introduction",
       "photos": [],
       "routeUrl": "/data/routes/intervals-178056223.geojson?v=240b8e33918f88fc6f3f346f631c96b1d6ff703cef9c0c4f41bd7976a221e7a6",
       "bounds": [
@@ -386,6 +392,12 @@
         "Garmin",
         "Strava"
       ],
+      "tags": [
+        "long-distance trail",
+        "multi-day",
+        "pennine way"
+      ],
+      "tripId": "pennine-way-introduction",
       "photos": [],
       "routeUrl": "/data/routes/intervals-178056218.geojson?v=6396ccff994b9eab184ed16411b0b4e9543962d8128a966e16372ce845589372",
       "bounds": [
@@ -417,6 +429,12 @@
         "Garmin",
         "Strava"
       ],
+      "tags": [
+        "long-distance trail",
+        "multi-day",
+        "pennine way"
+      ],
+      "tripId": "pennine-way-introduction",
       "photos": [],
       "routeUrl": "/data/routes/intervals-178056205.geojson?v=417642773543d29bc8971934f3ac93d3fd077057925d0bdd4a33fe5d4a3b1059",
       "bounds": [
@@ -448,6 +466,12 @@
         "Garmin",
         "Strava"
       ],
+      "tags": [
+        "long-distance trail",
+        "multi-day",
+        "pennine way"
+      ],
+      "tripId": "pennine-way-introduction",
       "photos": [],
       "routeUrl": "/data/routes/intervals-178056202.geojson?v=8482fb4455fefd3c0957f46df7ae6d957d663402efe4888000fe64a40eb80af0",
       "bounds": [
@@ -479,6 +503,12 @@
         "Garmin",
         "Strava"
       ],
+      "tags": [
+        "long-distance trail",
+        "multi-day",
+        "pennine way"
+      ],
+      "tripId": "pennine-way-introduction",
       "photos": [],
       "routeUrl": "/data/routes/intervals-178056187.geojson?v=d5e2a69d45ac97c5d30a34c2478edf2d806f3b87261425a683786d06e9c4ee43",
       "bounds": [
@@ -572,6 +602,7 @@
         "Garmin",
         "Strava"
       ],
+      "includeInOverview": false,
       "photos": [],
       "routeUrl": "/data/routes/intervals-178055482.geojson?v=f4a95b8ea93d9cb3f68e85fdcaaa76146e5c3575bb27b02f15f7e2223afb5baf",
       "bounds": [
@@ -603,6 +634,7 @@
         "Garmin",
         "Strava"
       ],
+      "includeInOverview": false,
       "photos": [],
       "routeUrl": "/data/routes/intervals-178055466.geojson?v=b92bf2cffa0ad2e81d6c26735829899d2347c3bcf0aed86ceb18bad8a8008922",
       "bounds": [
@@ -634,6 +666,7 @@
         "Garmin",
         "Strava"
       ],
+      "includeInOverview": false,
       "photos": [],
       "routeUrl": "/data/routes/intervals-178055460.geojson?v=8568d25193a1b0ada19f3a68b1b531096e379fa218b4133be41bc8acd2c6fcc3",
       "bounds": [
@@ -665,6 +698,7 @@
         "Garmin",
         "Strava"
       ],
+      "includeInOverview": false,
       "photos": [],
       "routeUrl": "/data/routes/intervals-178055446.geojson?v=a84bd612c36f63955c4cd8faf2bc3c0e96049054fd0d896b3b1b4fa488e2b123",
       "bounds": [
@@ -696,6 +730,7 @@
         "Garmin",
         "Strava"
       ],
+      "includeInOverview": false,
       "photos": [],
       "routeUrl": "/data/routes/intervals-178055422.geojson?v=781194608b7d9a23a746608024413a1d71ff1de1f57f142688f6025a3c02ff65",
       "bounds": [
@@ -727,6 +762,7 @@
         "Garmin",
         "Strava"
       ],
+      "includeInOverview": false,
       "photos": [],
       "routeUrl": "/data/routes/intervals-178055392.geojson?v=1963da049a3a496218e9c3e0236804fe8c57c5e59109a0ba92cd80186da8692e",
       "bounds": [
@@ -758,6 +794,7 @@
         "Garmin",
         "Strava"
       ],
+      "includeInOverview": false,
       "photos": [],
       "routeUrl": "/data/routes/intervals-178055388.geojson?v=21592c25063f6e4cac69fda03ac4b22904f9cff8f50ace6fad13f1df9731611a",
       "bounds": [
@@ -789,6 +826,7 @@
         "Garmin",
         "Strava"
       ],
+      "includeInOverview": false,
       "photos": [],
       "routeUrl": "/data/routes/intervals-178055374.geojson?v=cdcd6252bd91c532f5108a8a602cc934d84d6546c004ee65eaa05b5e8443db64",
       "bounds": [
@@ -820,6 +858,7 @@
         "Garmin",
         "Strava"
       ],
+      "includeInOverview": false,
       "photos": [],
       "routeUrl": "/data/routes/intervals-178055367.geojson?v=04e45876209ab9876f9cf09b7cf9511e97794a186c737a59131a756b6f2b9c0c",
       "bounds": [
@@ -851,6 +890,7 @@
         "Garmin",
         "Strava"
       ],
+      "includeInOverview": false,
       "photos": [],
       "routeUrl": "/data/routes/intervals-178055332.geojson?v=18973aa428081f0df4c5a65b5de630cf45af75b85909352af61374f71784fd3c",
       "bounds": [
@@ -882,6 +922,7 @@
         "Garmin",
         "Strava"
       ],
+      "includeInOverview": false,
       "photos": [],
       "routeUrl": "/data/routes/intervals-178055317.geojson?v=c6710728f8c0970bb5fd6ac72dd70f7e79ce4adc2c97229dd7b06cf66718c955",
       "bounds": [
@@ -913,6 +954,7 @@
         "Garmin",
         "Strava"
       ],
+      "includeInOverview": false,
       "photos": [],
       "routeUrl": "/data/routes/intervals-178055308.geojson?v=e040841b775dfae1744ed71e8c75be53262632baab449ac7ec8056bfedc2106f",
       "bounds": [
@@ -943,6 +985,7 @@
       "providers": [
         "Strava"
       ],
+      "includeInOverview": false,
       "photos": [],
       "routeUrl": "/data/routes/strava-11679632271.geojson?v=6abb4f68f4c75e635e9b077ed0fcc39cd680675d9a77b73c987f25292761e036",
       "bounds": [
@@ -974,6 +1017,7 @@
         "Garmin",
         "Strava"
       ],
+      "includeInOverview": false,
       "photos": [],
       "routeUrl": "/data/routes/intervals-178055278.geojson?v=491491952310f32bef9d929663c3beb5d80aa70cbbc61094b963e096e8c6a7c3",
       "bounds": [
@@ -1019,6 +1063,13 @@
           "url": "https://rotavicentina.com/en/fishermens-trail/"
         }
       ],
+      "tags": [
+        "coastal",
+        "fishermen's trail",
+        "long-distance trail",
+        "multi-day"
+      ],
+      "tripId": "fishermens-trail-portugal",
       "photos": [],
       "routeUrl": "/data/routes/withings-4227189222.geojson?v=db8744efb7524df8b0309ad18f1822fae2cd4d5587cf4c6324ee3ed7164dfe42",
       "bounds": [
@@ -1064,6 +1115,13 @@
           "url": "https://rotavicentina.com/en/fishermens-trail/"
         }
       ],
+      "tags": [
+        "coastal",
+        "fishermen's trail",
+        "long-distance trail",
+        "multi-day"
+      ],
+      "tripId": "fishermens-trail-portugal",
       "photos": [],
       "routeUrl": "/data/routes/withings-4223438614.geojson?v=73ec69cb66b58c0d4f5c1ec0e0c5f02ccd432278c07e4b69e9604372d98dca80",
       "bounds": [
@@ -1109,6 +1167,13 @@
           "url": "https://rotavicentina.com/en/fishermens-trail/"
         }
       ],
+      "tags": [
+        "coastal",
+        "fishermen's trail",
+        "long-distance trail",
+        "multi-day"
+      ],
+      "tripId": "fishermens-trail-portugal",
       "photos": [],
       "routeUrl": "/data/routes/withings-4220375244.geojson?v=6e4faa3bc947e5e95c80ba3d51a90b813bf582c10925c572d3a23b34025e33a4",
       "bounds": [
@@ -1159,6 +1224,13 @@
           "url": "https://rotavicentina.com/en/walking/sagres-salema-2/"
         }
       ],
+      "tags": [
+        "coastal",
+        "fishermen's trail",
+        "long-distance trail",
+        "multi-day"
+      ],
+      "tripId": "fishermens-trail-portugal",
       "photos": [],
       "routeUrl": "/data/routes/withings-4218007972.geojson?v=160c4dc955497fea52cfeac877093dbbec6793392584584213b38719e54c6b7d",
       "bounds": [
@@ -1209,6 +1281,13 @@
           "url": "https://rotavicentina.com/en/walking/salema-luz-2/"
         }
       ],
+      "tags": [
+        "coastal",
+        "fishermen's trail",
+        "long-distance trail",
+        "multi-day"
+      ],
+      "tripId": "fishermens-trail-portugal",
       "photos": [],
       "routeUrl": "/data/routes/withings-4215888585.geojson?v=2c4f600bf10e1e4c2638c7ef943364a808b948d1966df9a8c76ed59516689dc9",
       "bounds": [
@@ -1259,6 +1338,13 @@
           "url": "https://rotavicentina.com/en/walking/luz-lagos-2/"
         }
       ],
+      "tags": [
+        "coastal",
+        "fishermen's trail",
+        "long-distance trail",
+        "multi-day"
+      ],
+      "tripId": "fishermens-trail-portugal",
       "photos": [],
       "routeUrl": "/data/routes/withings-4213159220.geojson?v=d0175ac9fcb458039868a4972bf0d1c6b9330312f87cb0140782f78d7db6f33b",
       "bounds": [
@@ -2644,6 +2730,13 @@
       "providers": [
         "Strava"
       ],
+      "tags": [
+        "hadrian's wall",
+        "long-distance trail",
+        "multi-day",
+        "national trail"
+      ],
+      "tripId": "hadrians-wall",
       "photos": [],
       "routeUrl": "/data/routes/strava-1606023021.geojson?v=ff040ac34e46dd9b4139876739577e10878158796dc8d23303ddfdd645f5f468",
       "bounds": [
@@ -2674,6 +2767,13 @@
       "providers": [
         "Strava"
       ],
+      "tags": [
+        "hadrian's wall",
+        "long-distance trail",
+        "multi-day",
+        "national trail"
+      ],
+      "tripId": "hadrians-wall",
       "photos": [],
       "routeUrl": "/data/routes/strava-1606022787.geojson?v=9f371a283c9ac9d1b96cab1e517bb4884084075ca832aef14d5376bdf3cb3329",
       "bounds": [
@@ -2704,6 +2804,13 @@
       "providers": [
         "Strava"
       ],
+      "tags": [
+        "hadrian's wall",
+        "long-distance trail",
+        "multi-day",
+        "national trail"
+      ],
+      "tripId": "hadrians-wall",
       "photos": [],
       "routeUrl": "/data/routes/strava-1603950758.geojson?v=d5dd513e24a69bd4544838e1251b4acea617553338bca8c0a9877f33e817f032",
       "bounds": [
@@ -2734,6 +2841,13 @@
       "providers": [
         "Strava"
       ],
+      "tags": [
+        "hadrian's wall",
+        "long-distance trail",
+        "multi-day",
+        "national trail"
+      ],
+      "tripId": "hadrians-wall",
       "photos": [],
       "routeUrl": "/data/routes/strava-1603949806.geojson?v=bc0304d3f9702ac95527ba939f865822aca60be8a8cdf821084707bfce1cf17a",
       "bounds": [
@@ -2764,6 +2878,13 @@
       "providers": [
         "Strava"
       ],
+      "tags": [
+        "hadrian's wall",
+        "long-distance trail",
+        "multi-day",
+        "national trail"
+      ],
+      "tripId": "hadrians-wall",
       "photos": [],
       "routeUrl": "/data/routes/strava-1601685583.geojson?v=90afda3ebf3f3d9d426be59750696ad1809d3452218e5fafd69c70f1d3f12bcc",
       "bounds": [
@@ -2794,6 +2915,13 @@
       "providers": [
         "Strava"
       ],
+      "tags": [
+        "hadrian's wall",
+        "long-distance trail",
+        "multi-day",
+        "national trail"
+      ],
+      "tripId": "hadrians-wall",
       "photos": [],
       "routeUrl": "/data/routes/strava-1600368441.geojson?v=366097789149dfeb40afb9b749a7208dcabe2da9f3d37ddd42533eb9310aa348",
       "bounds": [
@@ -2824,6 +2952,13 @@
       "providers": [
         "Strava"
       ],
+      "tags": [
+        "hadrian's wall",
+        "long-distance trail",
+        "multi-day",
+        "national trail"
+      ],
+      "tripId": "hadrians-wall",
       "photos": [],
       "routeUrl": "/data/routes/strava-1599409414.geojson?v=37c0fa8683f3a7e81ae6e22f4b0439e79f559c126f240f38b2fce03b66fc0c71",
       "bounds": [
@@ -2854,6 +2989,13 @@
       "providers": [
         "Strava"
       ],
+      "tags": [
+        "hadrian's wall",
+        "long-distance trail",
+        "multi-day",
+        "national trail"
+      ],
+      "tripId": "hadrians-wall",
       "photos": [],
       "routeUrl": "/data/routes/strava-1597815503.geojson?v=9f254bee56c03a6168e098c5a63e17d900601cd571fdfd30cb47f5dee0b8c4da",
       "bounds": [
@@ -2884,6 +3026,13 @@
       "providers": [
         "Strava"
       ],
+      "tags": [
+        "hadrian's wall",
+        "long-distance trail",
+        "multi-day",
+        "national trail"
+      ],
+      "tripId": "hadrians-wall",
       "photos": [],
       "routeUrl": "/data/routes/strava-1597815027.geojson?v=35b8f1b18ab3dc66fa1b3f6c6b226a20069a2b3882801150493c5d862555879f",
       "bounds": [
@@ -2945,6 +3094,13 @@
         "Garmin",
         "Strava"
       ],
+      "tags": [
+        "long-distance trail",
+        "multi-day",
+        "national trail",
+        "peddars way"
+      ],
+      "tripId": "peddars-way",
       "photos": [],
       "routeUrl": "/data/routes/strava-1343703760.geojson?v=4af0003ef9b98f1a31b997f410d42f9be067c21b7ee93e165c44be60fc795d6a",
       "bounds": [
@@ -2975,6 +3131,13 @@
       "providers": [
         "Strava"
       ],
+      "tags": [
+        "long-distance trail",
+        "multi-day",
+        "national trail",
+        "peddars way"
+      ],
+      "tripId": "peddars-way",
       "photos": [],
       "routeUrl": "/data/routes/strava-1341939136.geojson?v=1ee9a9fab8edf00c68eef6141008b80dcfd845836bb516ef1a172e66587263f4",
       "bounds": [
@@ -3005,6 +3168,13 @@
       "providers": [
         "Strava"
       ],
+      "tags": [
+        "long-distance trail",
+        "multi-day",
+        "national trail",
+        "peddars way"
+      ],
+      "tripId": "peddars-way",
       "photos": [],
       "routeUrl": "/data/routes/strava-1340508761.geojson?v=7fc2106ee06cf922ab853daf35d8d6fb95b1fe1c5d9f7c29f799069df1c58d22",
       "bounds": [
