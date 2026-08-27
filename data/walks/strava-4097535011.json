@@ -5,7 +5,19 @@
     "name": "Lunch Walk",
     "activityType": null,
     "visibility": "public",
-    "photos": []
+    "photos": [],
+    "metrics": {
+      "distanceM": 3940,
+      "movingTimeSeconds": 3235,
+      "elapsedTimeSeconds": 3672,
+      "ascentM": 83,
+      "descentM": 80
+    },
+    "routeEdit": {
+      "type": "crop",
+      "endTime": "2020-09-22T11:31:01.000Z",
+      "reason": "Removed the recorded car journey from Bridgetown to Collaton St Mary"
+    }
   },
   "sources": {
     "garmin": null,
@@ -41,31 +53,42 @@
     }
   },
   "route": {
-    "activeVersion": "7d988ecfaa6ed8c13a5b2bf876e338197ef9b465ad647714fd88d266e8be9ca8",
-    "source": "strava",
-    "status": "archived",
+    "activeVersion": "86b6fe83b46759fa7593e79c587ec82eb09115a2fb79ea634305740112960959",
+    "source": "local-crop",
+    "status": "edited",
     "versions": [
       {
         "checksum": "7d988ecfaa6ed8c13a5b2bf876e338197ef9b465ad647714fd88d266e8be9ca8",
         "source": "strava",
         "capturedAt": "2026-08-25T12:53:17.061Z"
+      },
+      {
+        "checksum": "86b6fe83b46759fa7593e79c587ec82eb09115a2fb79ea634305740112960959",
+        "source": "local-crop",
+        "capturedAt": "2026-08-27T08:52:34.876Z"
       }
     ],
     "bounds": [
       -3.6863290797919035,
       50.42038315907121,
-      -3.601162154227495,
-      50.43333328329027
+      -3.670163992792368,
+      50.43064503930509
     ],
     "start": [
       -3.6827846243977547,
       50.43058879673481
     ],
     "finish": [
-      -3.601162154227495,
-      50.42933972552419
+      -3.6847428046166897,
+      50.42918072082102
     ],
-    "descentM": 66.1
+    "descentM": 80,
+    "ascentM": 83
   },
-  "review": []
+  "review": [],
+  "provenance": {
+    "status": "edited",
+    "method": "manual-crop",
+    "label": "Strava activity · cropped by Ashterism"
+  }
 }

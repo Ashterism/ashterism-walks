@@ -186,6 +186,8 @@ export const providerStatusFor = (
 
 export const resolvePublicFields = (record) => {
   const snapshot = providerSnapshotFor(record)
+  const localMetrics = record.local.metrics ?? {}
+  const distanceM = localMetrics.distanceM ?? snapshot.distanceM
   const activity = publicActivityType(
     record.local.activityType ?? snapshot.type,
   )
@@ -210,16 +212,23 @@ export const resolvePublicFields = (record) => {
       (activity === 'hiking' ? 'Hike' : 'Walk'),
     date: snapshot.startDate ?? snapshot.startDateLocal,
     distanceKm:
-      snapshot.distanceM == null
+      distanceM == null
         ? null
-        : Math.round((snapshot.distanceM / 1000) * 100) / 100,
-    movingTimeSeconds: snapshot.movingTimeSeconds,
-    elapsedTimeSeconds: snapshot.elapsedTimeSeconds,
+        : Math.round((distanceM / 1000) * 100) / 100,
+    movingTimeSeconds:
+      localMetrics.movingTimeSeconds ?? snapshot.movingTimeSeconds,
+    elapsedTimeSeconds:
+      localMetrics.elapsedTimeSeconds ?? snapshot.elapsedTimeSeconds,
     ascentM:
-      snapshot.ascentM == null && record.route?.ascentM == null
+      localMetrics.ascentM == null &&
+      snapshot.ascentM == null &&
+      record.route?.ascentM == null
         ? null
-        : Math.round(snapshot.ascentM ?? record.route.ascentM),
-    descentM: record.route?.descentM ?? null,
+        : Math.round(
+            localMetrics.ascentM ?? snapshot.ascentM ?? record.route.ascentM,
+          ),
+    descentM:
+      localMetrics.descentM ?? record.route?.descentM ?? null,
     providers,
     ...(record.provenance ? { provenance: record.provenance } : {}),
     ...(record.local.notes ? { notes: record.local.notes } : {}),

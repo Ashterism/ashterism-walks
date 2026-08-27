@@ -8,6 +8,7 @@
     "build": "vite build",
     "catalogue": "node scripts/build-catalogue.js",
     "convert": "node scripts/convert-fit.js",
+    "crop": "node scripts/crop-fit-route.js",
     "import:garmin-export": "node scripts/import-garmin-export.js",
     "import:strava": "node scripts/import-strava.js",
     "import:withings-timeline": "node scripts/import-withings-timeline.js",

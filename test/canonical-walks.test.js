@@ -45,6 +45,35 @@ test('local names win while provider measurements remain authoritative', () => {
   assert.deepEqual(publicWalk.providers, [])
 })
 
+test('local corrected metrics win after a manual route edit', () => {
+  const correctedRecord = {
+    ...record,
+    local: {
+      name: 'Cropped walk',
+      activityType: null,
+      visibility: 'public',
+      photos: [],
+      metrics: {
+        distanceM: 3940,
+        movingTimeSeconds: 3235,
+        elapsedTimeSeconds: 3672,
+        ascentM: 83,
+        descentM: 80,
+      },
+    },
+  }
+
+  assert.deepEqual(resolvePublicFields(correctedRecord), {
+    ...resolvePublicFields(record),
+    name: 'Cropped walk',
+    distanceKm: 3.94,
+    movingTimeSeconds: 3235,
+    elapsedTimeSeconds: 3672,
+    ascentM: 83,
+    descentM: 80,
+  })
+})
+
 test('missing provider records are retained and flagged for review', () => {
   const missing = withProviderStatus(record, 'missing', '2026-01-02T00:00:00Z')
   assert.equal(missing.sources.intervals.status, 'missing')

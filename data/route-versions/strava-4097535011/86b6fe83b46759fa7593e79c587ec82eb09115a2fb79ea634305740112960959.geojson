@@ -1,24 +1,6 @@
 {
   "type": "Feature",
-  "properties": {
-    "id": "strava-4097535011",
-    "activity": "walking",
-    "name": "Lunch Walk",
-    "date": "2020-09-22T10:29:49.000Z",
-    "distanceKm": 3.94,
-    "movingTimeSeconds": 3235,
-    "elapsedTimeSeconds": 3672,
-    "ascentM": 83,
-    "descentM": 80,
-    "providers": [
-      "Strava"
-    ],
-    "provenance": {
-      "status": "edited",
-      "method": "manual-crop",
-      "label": "Strava activity · cropped by Ashterism"
-    }
-  },
+  "properties": {},
   "geometry": {
     "type": "LineString",
     "coordinates": [
