@@ -30,6 +30,25 @@ The GitHub Actions workflow also provides an hourly sync and a manual **Run work
 
 On macOS the sync reads the Intervals.icu API key from the `ashterism-walks` / `intervals.icu` Keychain entry. An automated server can instead provide the key through the `INTERVALS_ICU_API_KEY` environment variable.
 
+## Generate private training context
+
+Create a compact 14-day JSON snapshot for exercise coaching with the same
+Intervals.icu authentication used by the walk sync:
+
+```sh
+npm run training-context
+```
+
+The export is written to `private/training-context.json`. It contains a summary,
+recent activities, current and daily fitness/fatigue/load, and any available
+wellness values such as resting heart rate, HRV, sleep, soreness and readiness.
+Missing wellness metrics are omitted rather than guessed.
+
+Use `-- --days 30` to change the window (up to 90 days), or `-- --stdout` to
+send the JSON to another local tool. The file stays under the ignored `private/`
+directory: the site is hosted on public GitHub Pages, so this data must not be
+placed in `public/` without adding an authenticated backend.
+
 ## Import reconstructed historical walks
 
 Some historical walks have statistics in Withings but no route recording. A Google Timeline export can supply a sparse coordinate trace for the same period. Preview the configured reconstruction without writing anything:

@@ -1,7 +1,6 @@
 import crypto from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
-import { execFileSync } from 'node:child_process'
 
 import {
   findCanonicalActivityMatch,
@@ -9,14 +8,15 @@ import {
   providerFingerprint,
   routeVersionPath,
 } from './lib/canonical-walks.js'
+import {
+  intervalsApiRoot,
+  requestIntervals,
+} from './lib/intervals-api.js'
 
-const apiRoot = 'https://intervals.icu/api/v1'
 const archiveDirectory = 'private/garmin/activities'
 const historyDirectory = 'private/garmin/history'
 const manifestPath = 'private/garmin/manifest.json'
 const overridesPath = 'scripts/intervals-activity-overrides.json'
-const keychainAccount = 'ashterism-walks'
-const keychainService = 'intervals.icu'
 const allowedTypes = new Set(['hike', 'walk'])
 const refreshLatest = process.argv.includes('--refresh-latest')
 const archiveStats = { downloaded: 0, refreshed: 0, reused: 0 }
@@ -24,53 +24,6 @@ const archiveStats = { downloaded: 0, refreshed: 0, reused: 0 }
 const activityOverrides = JSON.parse(
   fs.readFileSync(overridesPath, 'utf8'),
 )
-
-const getApiKey = () => {
-  const environmentKey = process.env.INTERVALS_ICU_API_KEY?.trim()
-  if (environmentKey) return environmentKey
-
-  if (process.platform === 'darwin') {
-    try {
-      return execFileSync(
-        'security',
-        [
-          'find-generic-password',
-          '-a',
-          keychainAccount,
-          '-s',
-          keychainService,
-          '-w',
-        ],
-        { encoding: 'utf8' },
-      ).trim()
-    } catch {
-      // Automated environments use the environment variable above.
-    }
-  }
-
-  throw new Error(
-    'Intervals API key unavailable. Set INTERVALS_ICU_API_KEY or store it in the configured macOS Keychain entry.',
-  )
-}
-
-const authorization = `Basic ${Buffer.from(
-  `API_KEY:${getApiKey()}`,
-).toString('base64')}`
-
-const request = async (url) => {
-  const response = await fetch(url, {
-    headers: {
-      Authorization: authorization,
-      Accept: 'application/json, application/octet-stream',
-    },
-  })
-
-  if (!response.ok) {
-    throw new Error(`Intervals request failed with HTTP ${response.status}`)
-  }
-
-  return response
-}
 
 const sha256 = (buffer) =>
   crypto.createHash('sha256').update(buffer).digest('hex')
@@ -109,8 +62,8 @@ const archiveFitCandidate = async (activity, id) => {
   const existingBuffer = fs.existsSync(filePath)
     ? fs.readFileSync(filePath)
     : null
-  const response = await request(
-    `${apiRoot}/activity/${encodeURIComponent(activity.id)}/fit-file`,
+  const response = await requestIntervals(
+    `${intervalsApiRoot}/activity/${encodeURIComponent(activity.id)}/fit-file`,
   )
   const buffer = Buffer.from(await response.arrayBuffer())
 
@@ -153,11 +106,11 @@ const archiveFitCandidate = async (activity, id) => {
 const tomorrow = new Date()
 tomorrow.setUTCDate(tomorrow.getUTCDate() + 1)
 
-const activitiesUrl = new URL(`${apiRoot}/athlete/0/activities`)
+const activitiesUrl = new URL(`${intervalsApiRoot}/athlete/0/activities`)
 activitiesUrl.searchParams.set('oldest', '2000-01-01')
 activitiesUrl.searchParams.set('newest', tomorrow.toISOString().slice(0, 10))
 
-const activitiesResponse = await request(activitiesUrl)
+const activitiesResponse = await requestIntervals(activitiesUrl)
 const allActivities = await activitiesResponse.json()
 
 if (!Array.isArray(allActivities)) {

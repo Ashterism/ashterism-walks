@@ -19,6 +19,7 @@
     "visibility": "node scripts/set-walk-visibility.js",
     "sync": "node scripts/sync-intervals.js && node scripts/convert-fit.js",
     "sync:latest": "node scripts/sync-intervals.js --refresh-latest && node scripts/convert-fit.js",
+    "training-context": "node scripts/training-context.js",
     "test": "node --test",
     "preview": "vite preview"
   },
