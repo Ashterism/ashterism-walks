@@ -1,5 +1,5 @@
 {
-  "walkCount": 103,
+  "walkCount": 104,
   "skippedWithoutRoute": 8,
   "walks": [
     {
@@ -307,6 +307,57 @@
       "finish": [
         -3.8753155153244734,
         50.544014470651746
+      ]
+    },
+    {
+      "id": "withings-202508110129",
+      "activity": "hiking",
+      "name": "Mount Ijen",
+      "date": "2025-08-11",
+      "distanceKm": 10.02,
+      "movingTimeSeconds": 14032,
+      "elapsedTimeSeconds": 20305,
+      "ascentM": 547,
+      "descentM": 583,
+      "providers": [
+        "Garmin",
+        "Withings (companion recording)",
+        "Google Timeline",
+        "OpenStreetMap"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "companion-withings-garmin-monitoring-google-timeline-openstreetmap",
+        "metricsSource": "Garmin monitoring and reconstructed trail geometry",
+        "routeSource": "OpenStreetMap GPS-surveyed trails anchored by companion Withings GPS and Google Timeline",
+        "label": "Estimated route reconstructed from companion Withings GPS, Garmin monitoring, Google Timeline and OpenStreetMap trail geometry."
+      },
+      "notes": "Night hike from Paltuding up Mount Ijen, down into the crater for the blue fire, back to the rim and along to a sunrise viewpoint, then down to Paltuding. The route is reconstructed from private watch and Timeline evidence using mapped trail geometry.",
+      "references": [
+        {
+          "label": "Mount Ijen trail map — OpenStreetMap",
+          "url": "https://www.openstreetmap.org/#map=15/-8.0612/114.2384"
+        },
+        {
+          "label": "OpenStreetMap copyright and licence",
+          "url": "https://www.openstreetmap.org/copyright"
+        }
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/withings-202508110129.geojson?v=fbd655f68af839bb214825fe992af0811c65ca7f386b3056c3766da545eaadf3",
+      "bounds": [
+        114.2242675,
+        -8.0731404,
+        114.248118,
+        -8.054513
+      ],
+      "start": [
+        114.2242675,
+        -8.0731404
+      ],
+      "finish": [
+        114.2242675,
+        -8.0731404
       ]
     },
     {

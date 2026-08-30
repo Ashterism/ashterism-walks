@@ -207,6 +207,38 @@ test('compiled records expose their sources and estimated-route provenance', () 
   assert.equal(publicWalk.provenance.status, 'estimated')
 })
 
+test('companion and reconstruction sources are described publicly', () => {
+  const publicWalk = resolvePublicFields({
+    id: 'withings-202508110129',
+    local: {
+      name: 'Mount Ijen',
+      activityType: 'Hike',
+      date: '2025-08-11',
+      metrics: { distanceM: 10023 },
+    },
+    sources: {
+      companionWithings: {
+        snapshot: {
+          startDate: '2025-08-10T18:29:20.000Z',
+          distanceM: 9903,
+        },
+      },
+      garminMonitoring: {},
+      googleTimeline: {},
+      openStreetMap: {},
+    },
+  })
+
+  assert.equal(publicWalk.distanceKm, 10.02)
+  assert.equal(publicWalk.date, '2025-08-11')
+  assert.deepEqual(publicWalk.providers, [
+    'Garmin',
+    'Withings (companion recording)',
+    'Google Timeline',
+    'OpenStreetMap',
+  ])
+})
+
 test('Ashterism-owned notes and references are published when present', () => {
   const noted = {
     ...record,

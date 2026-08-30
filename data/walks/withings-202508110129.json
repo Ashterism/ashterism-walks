@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "id": "withings-202508110129",
+  "local": {
+    "name": "Mount Ijen",
+    "activityType": "Hike",
+    "date": "2025-08-11",
+    "visibility": "public",
+    "photos": [],
+    "notes": "Night hike from Paltuding up Mount Ijen, down into the crater for the blue fire, back to the rim and along to a sunrise viewpoint, then down to Paltuding. The route is reconstructed from private watch and Timeline evidence using mapped trail geometry.",
+    "references": [
+      {
+        "label": "Mount Ijen trail map — OpenStreetMap",
+        "url": "https://www.openstreetmap.org/#map=15/-8.0612/114.2384"
+      },
+      {
+        "label": "OpenStreetMap copyright and licence",
+        "url": "https://www.openstreetmap.org/copyright"
+      }
+    ],
+    "metrics": {
+      "distanceM": 10023,
+      "movingTimeSeconds": 14032,
+      "elapsedTimeSeconds": 20305,
+      "ascentM": 547,
+      "descentM": 583
+    }
+  },
+  "sources": {
+    "companionWithings": {
+      "status": "private-source-reviewed",
+      "snapshot": {
+        "name": "Mount Ijen",
+        "type": "Hike",
+        "startDate": "2025-08-10T18:29:20.000Z",
+        "startDateLocal": "2025-08-11T01:29:20+07:00",
+        "recordedActivityStartDate": "2025-08-10T19:40:04.000Z",
+        "recordedActivityEndDate": "2025-08-11T00:07:45.000Z",
+        "distanceM": 9902.52734375,
+        "movingTimeSeconds": 12120,
+        "elapsedTimeSeconds": 16061,
+        "steps": 13814,
+        "recordedGpsPointCount": 2256,
+        "denseGpsPointCount": 2255,
+        "denseGpsLineDistanceM": 2578
+      }
+    },
+    "garminMonitoring": {
+      "status": "archived-in-private-garmin-export",
+      "snapshot": {
+        "startDate": "2025-08-10T18:29:20.000Z",
+        "endDate": "2025-08-11T00:07:45.000Z",
+        "steps": 18226,
+        "stepDistanceEstimateM": 14761,
+        "movingTimeSeconds": 14032,
+        "elapsedTimeSeconds": 20305,
+        "ascentM": 547,
+        "descentM": 583,
+        "maximumHeartRate": 170
+      }
+    },
+    "googleTimeline": {
+      "status": "archived",
+      "archivedFilename": "location-history.json",
+      "snapshot": {
+        "visitStartDate": "2025-08-10T18:29:20.653Z",
+        "visitEndDate": "2025-08-10T22:40:31.002Z",
+        "sunriseAnchorPointCount": 6,
+        "sunriseAnchor": [
+          114.246519,
+          -8.054384
+        ]
+      }
+    },
+    "openStreetMap": {
+      "status": "reference",
+      "sourceRetrievedDate": "2026-08-30",
+      "licence": "Open Database License",
+      "ways": [
+        {
+          "id": "488089675",
+          "name": "Track to Kawah Ijen Crater"
+        },
+        {
+          "id": "47504584",
+          "name": "Blue Fire Trek"
+        },
+        {
+          "id": "220191413",
+          "name": "Sunrise View Trek"
+        }
+      ],
+      "snapshot": {
+        "pointCount": 887,
+        "routeDistanceM": 10023,
+        "sunriseAnchorDifferenceM": 15
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "fbd655f68af839bb214825fe992af0811c65ca7f386b3056c3766da545eaadf3",
+    "source": "openstreetmap-reconstruction",
+    "status": "estimated",
+    "versions": [
+      {
+        "checksum": "fbd655f68af839bb214825fe992af0811c65ca7f386b3056c3766da545eaadf3",
+        "source": "openstreetmap-reconstruction",
+        "capturedAt": "2026-08-30T14:32:16.363Z"
+      }
+    ],
+    "bounds": [
+      114.2242675,
+      -8.0731404,
+      114.248118,
+      -8.054513
+    ],
+    "start": [
+      114.2242675,
+      -8.0731404
+    ],
+    "finish": [
+      114.2242675,
+      -8.0731404
+    ],
+    "ascentM": 547,
+    "descentM": 583
+  },
+  "review": [],
+  "provenance": {
+    "status": "estimated",
+    "method": "companion-withings-garmin-monitoring-google-timeline-openstreetmap",
+    "metricsSource": "Garmin monitoring and reconstructed trail geometry",
+    "routeSource": "OpenStreetMap GPS-surveyed trails anchored by companion Withings GPS and Google Timeline",
+    "label": "Estimated route reconstructed from companion Withings GPS, Garmin monitoring, Google Timeline and OpenStreetMap trail geometry."
+  }
+}

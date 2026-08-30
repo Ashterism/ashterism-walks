@@ -126,6 +126,7 @@ export const providerSnapshotFor = (record) =>
   record.sources.intervals?.snapshot ??
   record.sources.strava?.snapshot ??
   record.sources.garmin?.snapshot ??
+  record.sources.companionWithings?.snapshot ??
   record.sources.withings?.snapshot ??
   {}
 
@@ -194,14 +195,19 @@ export const resolvePublicFields = (record) => {
   const providers = []
   if (
     record.sources.garmin ||
+    record.sources.garminMonitoring ||
     record.sources.intervals?.snapshot?.source === 'GARMIN_CONNECT'
   ) {
     providers.push('Garmin')
   }
   if (record.sources.strava) providers.push('Strava')
   if (record.sources.withings) providers.push('Withings')
+  if (record.sources.companionWithings) {
+    providers.push('Withings (companion recording)')
+  }
   if (record.sources.googleTimeline) providers.push('Google Timeline')
   if (record.sources.rotaVicentina) providers.push('Rota Vicentina')
+  if (record.sources.openStreetMap) providers.push('OpenStreetMap')
 
   return {
     id: record.id,
@@ -210,7 +216,7 @@ export const resolvePublicFields = (record) => {
       record.local.name ??
       snapshot.name ??
       (activity === 'hiking' ? 'Hike' : 'Walk'),
-    date: snapshot.startDate ?? snapshot.startDateLocal,
+    date: record.local.date ?? snapshot.startDate ?? snapshot.startDateLocal,
     distanceKm:
       distanceM == null
         ? null

@@ -10,6 +10,7 @@
     "convert": "node scripts/convert-fit.js",
     "crop": "node scripts/crop-fit-route.js",
     "import:garmin-export": "node scripts/import-garmin-export.js",
+    "import:ijen": "node scripts/import-ijen-reconstruction.js",
     "import:strava": "node scripts/import-strava.js",
     "import:withings-timeline": "node scripts/import-withings-timeline.js",
     "migrate:canonical": "node scripts/migrate-canonical.js",
