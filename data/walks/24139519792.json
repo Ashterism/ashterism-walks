@@ -4,7 +4,7 @@
   "local": {
     "name": null,
     "activityType": null,
-    "visibility": "public",
+    "visibility": "hidden",
     "photos": []
   },
   "sources": {
