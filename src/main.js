@@ -10,6 +10,10 @@ import {
 
 import 'maplibre-gl/dist/maplibre-gl.css'
 
+import { setupAccountMenu } from './auth.js'
+
+await setupAccountMenu()
+
 const emptyRoute = {
   type: 'Feature',
   properties: {},

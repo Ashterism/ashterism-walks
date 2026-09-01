@@ -114,9 +114,21 @@ Ashterism is the system of record. Garmin, Intervals.icu, Strava, Withings and G
 
 This separation means the public archive and its history remain usable if Intervals.icu is unavailable or replaced later.
 
+## Optional sign-in
+
+The map and all public walks remain available without an account. The subtle account menu in the site header provides an optional Ashterix sign-in for features that need extra permission, such as private photographs later.
+
+Authentication uses the `Ashterism Walks` project in ZITADEL and the browser-safe Authorization Code with PKCE flow. The application has no client secret: its client ID is public by design. Only users assigned to the project can complete sign-in. Current roles are:
+
+- `private_photos` — may view protected photographs when the photo service is connected.
+- `admin` — reserved for future editing and administration.
+
+The browser session and its roles may be used to adapt the interface, but they are not the security boundary. The future NAS-backed photo API must validate the access token and required role itself before returning any protected metadata or image bytes. Private photographs and their private metadata must never be copied into `public/` or the public walk catalogue.
+
 ## Privacy boundary
 
 - Raw FIT files, source exports, manifests and previous versions remain under `private/` and are ignored by Git.
 - Canonical records and route versions are public-safe and versioned in Git.
 - Public filenames use numeric Garmin IDs or neutral provider-prefixed IDs.
 - Generated routes contain route geometry and selected activity statistics, not heart-rate streams, email addresses or original private filenames.
+- Public photo URLs may be recorded in canonical walks. Protected photo metadata will instead be requested from the authenticated photo service when it exists.
