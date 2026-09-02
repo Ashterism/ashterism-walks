@@ -125,6 +125,8 @@ Authentication uses the `Ashterism Walks` project in ZITADEL and the browser-saf
 
 The browser session and its roles may be used to adapt the interface, but they are not the security boundary. The future NAS-backed photo API must validate the access token and required role itself before returning any protected metadata or image bytes. Private photographs and their private metadata must never be copied into `public/` or the public walk catalogue.
 
+Signed-in users also see a `Walk books` entry in the account menu. Its first version is a deliberately simple book → walk → detail layout. The committed site contains only the interface preview: real book metadata and photographed pages must come from the authenticated private service, not the GitHub Pages bundle.
+
 ## Privacy boundary
 
 - Raw FIT files, source exports, manifests and previous versions remain under `private/` and are ignored by Git.

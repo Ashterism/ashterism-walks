@@ -53,10 +53,11 @@ export const setupAccountMenu = async () => {
   const button = document.querySelector('#account-menu-button')
   const panel = document.querySelector('#account-menu-panel')
   const status = document.querySelector('#account-status')
+  const walkBooks = document.querySelector('#account-walk-books')
   const signIn = document.querySelector('#account-sign-in')
   const signOut = document.querySelector('#account-sign-out')
 
-  if (!button || !panel || !status || !signIn || !signOut) return null
+  if (!button || !panel || !status || !walkBooks || !signIn || !signOut) return null
 
   const configured = ZITADEL_CLIENT_ID !== ''
   const manager = configured ? createManager() : null
@@ -78,6 +79,7 @@ export const setupAccountMenu = async () => {
         : 'Not signed in'
       : 'Sign-in is being connected'
     signIn.hidden = authenticated || !configured
+    walkBooks.hidden = !authenticated
     signOut.hidden = !authenticated
   }
 
@@ -102,6 +104,11 @@ export const setupAccountMenu = async () => {
     authError = null
     status.textContent = 'Opening Ashterix sign-in…'
     await manager.signinRedirect({ state: { returnTo: window.location.href } })
+  })
+
+  walkBooks.addEventListener('click', () => {
+    close()
+    document.dispatchEvent(new CustomEvent('walk-books:open'))
   })
 
   signOut.addEventListener('click', async () => {

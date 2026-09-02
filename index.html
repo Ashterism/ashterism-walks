@@ -27,6 +27,7 @@
             ><span aria-hidden="true"></span></button>
             <div id="account-menu-panel" class="account-menu__panel" role="menu" hidden>
               <p id="account-status" class="account-menu__status">Not signed in</p>
+              <button id="account-walk-books" type="button" role="menuitem" hidden>Walk books</button>
               <button id="account-sign-in" type="button" role="menuitem">Sign in</button>
               <button id="account-sign-out" type="button" role="menuitem" hidden>Sign out</button>
             </div>
@@ -161,6 +162,68 @@
             </section>
 
             <p id="detail-source" class="walk-detail__source">Activity data archived by Ashterism</p>
+          </div>
+        </article>
+
+        <article id="book-library" class="book-library" aria-labelledby="book-library-title" hidden>
+          <div class="book-library__bar">
+            <button id="book-library-back" class="detail-back" type="button">← Back to the map</button>
+            <span>Private collection</span>
+          </div>
+
+          <div class="book-library__content">
+            <header class="book-library__hero">
+              <p class="detail-card__eyebrow">For future wanderings</p>
+              <h2 id="book-library-title">Walk books</h2>
+              <p>Routes saved from walking books, ready to browse when deciding where to go next.</p>
+            </header>
+
+            <section class="book-library__preview" aria-labelledby="book-preview-title">
+              <div class="book-library__preview-heading">
+                <div>
+                  <p class="detail-card__eyebrow">Simple layout preview</p>
+                  <h3 id="book-preview-title">One book, then its walks</h3>
+                </div>
+                <span>Private storage connects next</span>
+              </div>
+
+              <div class="book-browser">
+                <details class="book-entry" open>
+                  <summary>
+                    <span class="book-cover-placeholder" aria-hidden="true">Book cover</span>
+                    <span class="book-entry__summary-copy">
+                      <strong>Walking book</strong>
+                      <small>Open a book to see its walks</small>
+                    </span>
+                  </summary>
+                  <div class="book-entry__walks">
+                    <button type="button" aria-pressed="true">
+                      <strong>Walk title</strong>
+                      <span>Location · distance · walk number</span>
+                    </button>
+                    <button type="button" disabled>
+                      <strong>Another walk</strong>
+                      <span>More routes from this book</span>
+                    </button>
+                  </div>
+                </details>
+
+                <section class="book-walk-preview" aria-label="Selected walk preview">
+                  <div class="book-page-placeholder" aria-hidden="true">
+                    <span>Photographed book page</span>
+                  </div>
+                  <div>
+                    <p class="detail-card__eyebrow">Selected walk</p>
+                    <h3>Walk title</h3>
+                    <dl>
+                      <div><dt>Distance</dt><dd>From the book</dd></div>
+                      <div><dt>Start</dt><dd>Place or grid reference</dd></div>
+                    </dl>
+                    <p>Notes, route description and any useful details will sit here without opening another pop-up.</p>
+                  </div>
+                </section>
+              </div>
+            </section>
           </div>
         </article>
       </div>
