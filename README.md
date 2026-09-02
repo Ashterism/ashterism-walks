@@ -125,6 +125,8 @@ Authentication uses the `Ashterism Walks` project in ZITADEL and the browser-saf
 
 The browser session and its roles may be used to adapt the interface, but they are not the security boundary. The future NAS-backed photo API must validate the access token and required role itself before returning any protected metadata or image bytes. Private photographs and their private metadata must never be copied into `public/` or the public walk catalogue.
 
+The sign-in request also asks ZITADEL for the `Ashterix Media` project audience (`389018638520205980`) and project-role claims. This lets the same browser-safe Walks login produce an access token intended for the NAS media API. The API still validates that audience and enforces `walks.private_photos`, `media.editor`, or `media.admin` itself.
+
 Signed-in users also see a `Walk books` entry in the account menu. Its first version is a deliberately simple book → walk → detail layout. The committed site contains only the interface preview: real book metadata and photographed pages must come from the authenticated private service, not the GitHub Pages bundle.
 
 ## Privacy boundary

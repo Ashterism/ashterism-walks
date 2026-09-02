@@ -3,6 +3,18 @@ import { UserManager, WebStorageStateStore } from 'oidc-client-ts'
 export const ZITADEL_AUTHORITY = 'https://ashterix-mkjzns.eu1.zitadel.cloud'
 export const ZITADEL_PROJECT_ID = '388903513951875876'
 export const ZITADEL_CLIENT_ID = '388904162139747950'
+export const ZITADEL_MEDIA_PROJECT_ID = '389018638520205980'
+export const ZITADEL_MEDIA_AUDIENCE_SCOPE =
+  `urn:zitadel:iam:org:project:id:${ZITADEL_MEDIA_PROJECT_ID}:aud`
+export const ZITADEL_PROJECT_ROLES_SCOPE = 'urn:zitadel:iam:org:projects:roles'
+
+export const OIDC_SCOPE = [
+  'openid',
+  'profile',
+  'email',
+  ZITADEL_MEDIA_AUDIENCE_SCOPE,
+  ZITADEL_PROJECT_ROLES_SCOPE,
+].join(' ')
 
 const roleClaim = 'urn:zitadel:iam:org:project:roles'
 
@@ -41,7 +53,7 @@ const createManager = () =>
     redirect_uri: `${window.location.origin}/`,
     post_logout_redirect_uri: `${window.location.origin}/`,
     response_type: 'code',
-    scope: 'openid profile email',
+    scope: OIDC_SCOPE,
     automaticSilentRenew: false,
     monitorSession: false,
     loadUserInfo: true,
