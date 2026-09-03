@@ -37,6 +37,18 @@ test('reads Zitadel project roles from the standard claim', () => {
   )
 })
 
+test('reads Zitadel roles when the claim is returned as an array', () => {
+  assert.deepEqual(
+    rolesFromProfile({
+      'urn:zitadel:iam:org:project:roles': [
+        { 'walks.private_photos': { organization: 'ashterix' } },
+        { 'media.editor': { organization: 'ashterix' } },
+      ],
+    }),
+    ['walks.private_photos', 'media.editor'],
+  )
+})
+
 test('only restores same-origin URLs after authentication', () => {
   const origin = 'https://walks.ashterism.com'
   assert.equal(

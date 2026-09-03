@@ -20,7 +20,15 @@ const roleClaim = 'urn:zitadel:iam:org:project:roles'
 
 export const rolesFromProfile = (profile = {}) => {
   const roles = profile[roleClaim] ?? profile.roles ?? {}
-  if (Array.isArray(roles)) return roles.map(String)
+  if (Array.isArray(roles)) {
+    return roles.flatMap((entry) =>
+      typeof entry === 'string'
+        ? [entry]
+        : entry && typeof entry === 'object'
+          ? Object.keys(entry)
+          : [],
+    )
+  }
   if (roles && typeof roles === 'object') return Object.keys(roles)
   return []
 }

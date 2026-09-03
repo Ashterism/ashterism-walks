@@ -33,6 +33,8 @@ button { font: inherit; }
 .site-header h1 { margin: 0; font-family: Georgia, serif; font-size: clamp(1.4rem, 2.4vw, 1.75rem); font-weight: 500; letter-spacing: -.03em; }
 
 .site-header__actions { display: flex; align-items: center; gap: 7px; }
+.site-header > div:first-child { min-width: 0; }
+.site-header h1 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .view-all {
   padding: 7px 12px;
@@ -262,4 +264,12 @@ button { font: inherit; }
   .book-library__preview-heading { align-items: start; flex-direction: column; gap: 5px; }
   .book-browser { grid-template-columns: 1fr; }
   .book-entry__walks { max-height: 42vh; overflow-y: auto; }
+}
+
+@media (max-width: 360px) {
+  .site-header { padding-right: 9px; padding-left: 9px; }
+  .site-header h1 { font-size: 1.15rem; }
+  .view-all { padding-right: 9px; padding-left: 9px; }
+  .book-library__bar { gap: 8px; overflow: hidden; }
+  .book-library__bar > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 }

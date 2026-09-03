@@ -607,6 +607,8 @@ const openBookLibrary = async () => {
   document.body.classList.add('book-library-is-open')
   elements.bookLibrary.scrollTop = 0
   elements.bookLibraryBack.focus({ preventScroll: true })
+  window.scrollTo(0, 0)
+  requestAnimationFrame(() => window.scrollTo(0, 0))
   await bookLibrary.load()
 }
 
