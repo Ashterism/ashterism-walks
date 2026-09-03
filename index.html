@@ -191,6 +191,17 @@
               <div id="book-browser" class="book-browser" hidden></div>
             </section>
           </div>
+
+          <dialog id="book-page-viewer" class="book-page-viewer" aria-labelledby="book-page-viewer-title">
+            <div class="book-page-viewer__bar">
+              <p id="book-page-viewer-title">Book page</p>
+              <button id="book-page-viewer-close" type="button" aria-label="Close full-size page">Close</button>
+            </div>
+            <div class="book-page-viewer__stage">
+              <p id="book-page-viewer-status" class="book-library__loading">Loading full-size page…</p>
+              <img id="book-page-viewer-image" alt="" hidden />
+            </div>
+          </dialog>
         </article>
       </div>
     </div>

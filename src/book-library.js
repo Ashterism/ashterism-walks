@@ -33,12 +33,81 @@ export const setupBookLibrary = ({ root, getAccessToken }) => {
 
   const status = root.querySelector('#book-library-status')
   const browser = root.querySelector('#book-browser')
+  const pageViewer = root.querySelector('#book-page-viewer')
+  const pageViewerTitle = root.querySelector('#book-page-viewer-title')
+  const pageViewerStatus = root.querySelector('#book-page-viewer-status')
+  const pageViewerImage = root.querySelector('#book-page-viewer-image')
+  const pageViewerClose = root.querySelector('#book-page-viewer-close')
   let loaded = false
-  let objectUrls = []
+  let overviewObjectUrls = []
+  let walkObjectUrls = []
+  let fullSizeUrl = null
+  let viewerRequest = 0
+
+  const closePageViewer = () => {
+    viewerRequest += 1
+    if (pageViewer?.open) pageViewer.close()
+    if (fullSizeUrl) URL.revokeObjectURL(fullSizeUrl)
+    fullSizeUrl = null
+    pageViewerImage.removeAttribute('src')
+    pageViewerImage.hidden = true
+  }
+
+  const openPageViewer = async (page, alt) => {
+    closePageViewer()
+    const request = ++viewerRequest
+    pageViewerTitle.textContent = page.label || 'Book page'
+    pageViewerStatus.textContent = 'Loading full-size page…'
+    pageViewerStatus.hidden = false
+    pageViewer.showModal()
+
+    try {
+      const response = await fetchPrivate(page.contentPath, getAccessToken())
+      const url = URL.createObjectURL(await response.blob())
+      if (request !== viewerRequest) {
+        URL.revokeObjectURL(url)
+        return
+      }
+      fullSizeUrl = url
+      pageViewerImage.src = fullSizeUrl
+      pageViewerImage.alt = alt
+      pageViewerImage.hidden = false
+      pageViewerStatus.hidden = true
+    } catch (error) {
+      pageViewerStatus.textContent = error.message
+    }
+  }
+
+  pageViewerClose?.addEventListener('click', closePageViewer)
+  pageViewer?.addEventListener('close', closePageViewer)
+  pageViewer?.addEventListener('click', (event) => {
+    if (event.target === pageViewer) closePageViewer()
+  })
 
   const clearObjectUrls = () => {
-    objectUrls.forEach((url) => URL.revokeObjectURL(url))
-    objectUrls = []
+    closePageViewer()
+    overviewObjectUrls.forEach((url) => URL.revokeObjectURL(url))
+    walkObjectUrls.forEach((url) => URL.revokeObjectURL(url))
+    overviewObjectUrls = []
+    walkObjectUrls = []
+  }
+
+  const loadPageFigure = async (page, alt, urlGroup) => {
+    const response = await fetchPrivate(page.displayPath, getAccessToken())
+    const url = URL.createObjectURL(await response.blob())
+    urlGroup.push(url)
+    const figure = element('figure', '')
+    const button = element('button', 'book-page-button')
+    button.type = 'button'
+    button.setAttribute('aria-label', `Open ${page.label || 'book page'} full size`)
+    const image = element('img', '')
+    image.src = url
+    image.alt = alt
+    image.loading = 'lazy'
+    button.append(image, element('span', 'book-page-button__hint', 'View full size'))
+    button.addEventListener('click', () => openPageViewer(page, alt))
+    figure.append(button, element('figcaption', '', page.label))
+    return figure
   }
 
   const showError = (message) => {
@@ -49,7 +118,9 @@ export const setupBookLibrary = ({ root, getAccessToken }) => {
 
   const renderWalk = async (book, walk, detail, buttons) => {
     buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.walkNumber === String(walk.number))))
-    clearObjectUrls()
+    closePageViewer()
+    walkObjectUrls.forEach((url) => URL.revokeObjectURL(url))
+    walkObjectUrls = []
     detail.replaceChildren()
 
     const copy = element('div', 'book-walk-preview__copy')
@@ -76,20 +147,24 @@ export const setupBookLibrary = ({ root, getAccessToken }) => {
     detail.append(copy, pages)
 
     try {
-      const token = getAccessToken()
-      const pageImages = await Promise.all(walk.pages.map(async (page) => {
-        const response = await fetchPrivate(page.displayPath, token)
-        const url = URL.createObjectURL(await response.blob())
-        objectUrls.push(url)
-        const figure = element('figure', '')
-        const image = element('img', '')
-        image.src = url
-        image.alt = `${walk.title}, ${page.label}`
-        image.loading = 'lazy'
-        figure.append(image, element('figcaption', '', page.label))
-        return figure
-      }))
+      const pageImages = await Promise.all(walk.pages.map((page) => loadPageFigure(page, `${walk.title}, ${page.label}`, walkObjectUrls)))
       pages.replaceChildren(...pageImages)
+    } catch (error) {
+      pages.replaceChildren(element('p', 'book-library__error', error.message))
+    }
+  }
+
+  const renderFrontMatter = async (book, overview) => {
+    const frontPages = book.frontMatter?.slice(0, 2) || []
+    if (!frontPages.length) {
+      overview.hidden = true
+      return
+    }
+
+    const pages = overview.querySelector('.book-overview__pages')
+    try {
+      const figures = await Promise.all(frontPages.map((page) => loadPageFigure(page, `${book.title}, ${page.label}`, overviewObjectUrls)))
+      pages.replaceChildren(...figures)
     } catch (error) {
       pages.replaceChildren(element('p', 'book-library__error', error.message))
     }
@@ -120,10 +195,20 @@ export const setupBookLibrary = ({ root, getAccessToken }) => {
       return button
     })
 
+    const overview = element('section', 'book-overview')
+    const overviewHeading = element('div', 'book-overview__heading')
+    const overviewCopy = element('div', '')
+    overviewCopy.append(element('p', 'detail-card__eyebrow', 'At a glance'), element('h3', '', 'Book maps & index'))
+    overviewHeading.append(overviewCopy, element('span', '', 'Select a page to view it full size'))
+    const overviewPages = element('div', 'book-overview__pages')
+    overviewPages.append(element('p', 'book-library__loading', 'Loading the book maps…'))
+    overview.append(overviewHeading, overviewPages)
+
     bookEntry.append(summary, list)
-    browser.replaceChildren(bookEntry, detail)
+    browser.replaceChildren(overview, bookEntry, detail)
     browser.hidden = false
     status.hidden = true
+    renderFrontMatter(book, overview)
     renderWalk(book, book.walks[0], detail, buttons)
   }
 

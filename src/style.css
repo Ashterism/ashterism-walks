@@ -11,7 +11,8 @@ button { font: inherit; }
 #app { display: grid; grid-template-rows: auto 1fr; }
 
 .site-header {
-  z-index: 3;
+  position: relative;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -192,6 +193,12 @@ button { font: inherit; }
 .book-browser { display: grid; grid-template-columns: minmax(230px, .75fr) minmax(0, 1.5fr); gap: 18px; align-items: start; }
 .book-browser[hidden] { display: none; }
 .book-entry, .book-walk-preview { border: 1px solid rgb(32 49 41 / 14%); border-radius: 12px; background: #fffaf1; box-shadow: 0 8px 24px rgb(23 56 45 / 8%); }
+.book-overview { grid-column: 1 / -1; padding-bottom: 20px; border-bottom: 1px solid rgb(32 49 41 / 15%); }
+.book-overview__heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 12px; }
+.book-overview__heading h3 { margin: 0; font-family: Georgia, serif; font-size: 1.5rem; font-weight: 500; letter-spacing: -.03em; }
+.book-overview__heading > span { color: #78827d; font-size: .66rem; }
+.book-overview__pages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.book-overview__pages figure { min-width: 0; margin: 0; }
 .book-entry { overflow: hidden; }
 .book-entry summary { display: grid; grid-template-columns: 52px 1fr; gap: 11px; align-items: center; padding: 12px; cursor: pointer; list-style: none; }
 .book-entry summary::-webkit-details-marker { display: none; }
@@ -214,8 +221,20 @@ button { font: inherit; }
 .book-walk-preview { display: grid; gap: 18px; padding: 16px; }
 .book-walk-preview__pages { display: grid; gap: 12px; }
 .book-walk-preview__pages figure { margin: 0; }
-.book-walk-preview__pages img { display: block; width: 100%; height: auto; border-radius: 4px; background: #eee8dc; }
+.book-walk-preview__pages img, .book-overview__pages img { display: block; width: 100%; height: auto; border-radius: 4px; background: #eee8dc; }
 .book-walk-preview__pages figcaption { margin-top: 5px; color: #78827d; font-family: Georgia, serif; font-size: .68rem; font-style: italic; }
+.book-overview__pages figcaption { margin-top: 5px; color: #78827d; font-family: Georgia, serif; font-size: .68rem; font-style: italic; }
+.book-page-button { position: relative; display: block; width: 100%; padding: 0; overflow: hidden; border: 0; border-radius: 4px; background: #eee8dc; color: #fffaf1; cursor: zoom-in; }
+.book-page-button:focus-visible { outline: 3px solid #d7653f; outline-offset: 3px; }
+.book-page-button__hint { position: absolute; right: 8px; bottom: 8px; padding: 5px 8px; border-radius: 999px; background: rgb(23 56 45 / 88%); font-size: .6rem; font-weight: 800; letter-spacing: .03em; opacity: 0; transform: translateY(3px); transition: opacity 140ms ease, transform 140ms ease; }
+.book-page-button:hover .book-page-button__hint, .book-page-button:focus-visible .book-page-button__hint { opacity: 1; transform: none; }
+.book-page-viewer { width: min(96vw, 1500px); max-width: none; height: 94vh; max-height: none; padding: 0; overflow: hidden; border: 0; border-radius: 12px; background: #151b18; color: #fffaf1; box-shadow: 0 22px 70px rgb(0 0 0 / 42%); }
+.book-page-viewer::backdrop { background: rgb(8 18 14 / 80%); backdrop-filter: blur(3px); }
+.book-page-viewer__bar { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: 7px 10px 7px 16px; background: #17382d; }
+.book-page-viewer__bar p { margin: 0; overflow: hidden; font-family: Georgia, serif; font-size: .82rem; text-overflow: ellipsis; white-space: nowrap; }
+.book-page-viewer__bar button { padding: 7px 11px; border: 1px solid rgb(255 250 241 / 38%); border-radius: 999px; background: transparent; color: inherit; cursor: pointer; font-size: .7rem; font-weight: 750; }
+.book-page-viewer__stage { display: grid; height: calc(94vh - 48px); padding: 12px; overflow: auto; place-items: center; }
+.book-page-viewer__stage img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; }
 .book-walk-preview h3 { margin: 0; font-family: Georgia, serif; font-size: 1.45rem; font-weight: 500; }
 .book-walk-preview dl { margin: 14px 0; border-top: 1px solid rgb(32 49 41 / 14%); }
 .book-walk-preview dl div { display: grid; grid-template-columns: 70px 1fr; gap: 8px; padding: 8px 0; border-bottom: 1px solid rgb(32 49 41 / 10%); }
@@ -262,8 +281,13 @@ button { font: inherit; }
   .book-library__bar { padding: 6px 12px; }
   .book-library__content { width: min(100% - 22px, 980px); padding-top: 18px; }
   .book-library__preview-heading { align-items: start; flex-direction: column; gap: 5px; }
+  .book-overview__heading { align-items: start; flex-direction: column; gap: 5px; }
+  .book-overview__pages { grid-template-columns: 1fr; }
   .book-browser { grid-template-columns: 1fr; }
   .book-entry__walks { max-height: 42vh; overflow-y: auto; }
+  .book-page-button__hint { opacity: 1; transform: none; }
+  .book-page-viewer { width: 100vw; height: 100dvh; border-radius: 0; }
+  .book-page-viewer__stage { height: calc(100dvh - 48px); padding: 8px; }
 }
 
 @media (max-width: 360px) {
