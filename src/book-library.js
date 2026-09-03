@@ -116,11 +116,21 @@ export const setupBookLibrary = ({ root, getAccessToken }) => {
     browser.hidden = true
   }
 
-  const renderWalk = async (book, walk, detail, buttons) => {
-    buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.walkNumber === String(walk.number))))
+  const selectSection = (buttons, section) => {
+    buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.bookSection === section)))
+  }
+
+  const clearPagePreviews = () => {
     closePageViewer()
+    overviewObjectUrls.forEach((url) => URL.revokeObjectURL(url))
     walkObjectUrls.forEach((url) => URL.revokeObjectURL(url))
+    overviewObjectUrls = []
     walkObjectUrls = []
+  }
+
+  const renderWalk = async (book, walk, detail, buttons) => {
+    selectSection(buttons, `walk-${walk.number}`)
+    clearPagePreviews()
     detail.replaceChildren()
 
     const copy = element('div', 'book-walk-preview__copy')
@@ -154,14 +164,26 @@ export const setupBookLibrary = ({ root, getAccessToken }) => {
     }
   }
 
-  const renderFrontMatter = async (book, overview) => {
+  const renderFrontMatter = async (book, detail, buttons) => {
+    selectSection(buttons, 'maps-index')
+    clearPagePreviews()
+    detail.replaceChildren()
+
     const frontPages = book.frontMatter?.slice(0, 2) || []
     if (!frontPages.length) {
-      overview.hidden = true
+      detail.append(element('p', 'book-library__error', 'The book maps are not available yet.'))
       return
     }
 
-    const pages = overview.querySelector('.book-overview__pages')
+    const copy = element('div', 'book-walk-preview__copy')
+    copy.append(element('p', 'detail-card__eyebrow', 'Front of the book'))
+    copy.append(element('h3', '', 'Book maps & index'))
+    copy.append(element('p', 'book-section-intro', 'The walk index and the overview map showing all 28 routes.'))
+    const pages = element('div', 'book-walk-preview__pages')
+    pages.setAttribute('aria-live', 'polite')
+    pages.append(element('p', 'book-library__loading', 'Loading the book maps…'))
+    detail.append(copy, pages)
+
     try {
       const figures = await Promise.all(frontPages.map((page) => loadPageFigure(page, `${book.title}, ${page.label}`, overviewObjectUrls)))
       pages.replaceChildren(...figures)
@@ -179,37 +201,37 @@ export const setupBookLibrary = ({ root, getAccessToken }) => {
     const summary = element('summary', '')
     summary.append(element('span', 'book-cover-placeholder', 'Cover coming soon'))
     const summaryCopy = element('span', 'book-entry__summary-copy')
-    summaryCopy.append(element('strong', '', book.title), element('small', '', `${book.walks.length} walks`))
+    summaryCopy.append(element('strong', '', book.title), element('small', '', `${book.walks.length} walks + maps & index`))
     summary.append(summaryCopy)
 
     const list = element('div', 'book-entry__walks')
     const detail = element('section', 'book-walk-preview')
-    detail.setAttribute('aria-label', 'Selected walk')
-    const buttons = book.walks.map((walk) => {
+    detail.setAttribute('aria-label', 'Selected book section')
+    const buttons = []
+
+    const frontMatterButton = element('button', 'book-entry__front-matter')
+    frontMatterButton.type = 'button'
+    frontMatterButton.dataset.bookSection = 'maps-index'
+    frontMatterButton.append(element('strong', '', 'Book maps & index'), element('span', '', 'Contents · All walks overview'))
+    frontMatterButton.addEventListener('click', () => renderFrontMatter(book, detail, buttons))
+    list.append(frontMatterButton)
+    buttons.push(frontMatterButton)
+
+    book.walks.forEach((walk) => {
       const button = element('button', '')
       button.type = 'button'
-      button.dataset.walkNumber = walk.number
+      button.dataset.bookSection = `walk-${walk.number}`
       button.append(element('strong', '', `${walk.number}. ${walk.title}`), element('span', '', `${walk.distance} · ${walk.start}`))
       button.addEventListener('click', () => renderWalk(book, walk, detail, buttons))
       list.append(button)
-      return button
+      buttons.push(button)
     })
 
-    const overview = element('section', 'book-overview')
-    const overviewHeading = element('div', 'book-overview__heading')
-    const overviewCopy = element('div', '')
-    overviewCopy.append(element('p', 'detail-card__eyebrow', 'At a glance'), element('h3', '', 'Book maps & index'))
-    overviewHeading.append(overviewCopy, element('span', '', 'Select a page to view it full size'))
-    const overviewPages = element('div', 'book-overview__pages')
-    overviewPages.append(element('p', 'book-library__loading', 'Loading the book maps…'))
-    overview.append(overviewHeading, overviewPages)
-
     bookEntry.append(summary, list)
-    browser.replaceChildren(overview, bookEntry, detail)
+    browser.replaceChildren(bookEntry, detail)
     browser.hidden = false
     status.hidden = true
-    renderFrontMatter(book, overview)
-    renderWalk(book, book.walks[0], detail, buttons)
+    renderFrontMatter(book, detail, buttons)
   }
 
   const load = async () => {
