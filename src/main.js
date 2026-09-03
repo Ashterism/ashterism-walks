@@ -11,6 +11,7 @@ import {
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 import { setupAccountMenu } from './auth.js'
+import { setupBookLibrary } from './book-library.js'
 
 const account = await setupAccountMenu()
 
@@ -98,6 +99,11 @@ const elements = {
   bookLibrary: document.querySelector('#book-library'),
   bookLibraryBack: document.querySelector('#book-library-back'),
 }
+
+const bookLibrary = setupBookLibrary({
+  root: elements.bookLibrary,
+  getAccessToken: () => account?.getAccessToken(),
+})
 
 let walks = []
 let visibleWalks = []
@@ -592,7 +598,7 @@ const closeDetails = ({ updateHistory = true } = {}) => {
   elements.moreDetails.focus({ preventScroll: true })
 }
 
-const openBookLibrary = () => {
+const openBookLibrary = async () => {
   if (!account?.isSignedIn()) return
   elements.detail.hidden = true
   elements.bookLibrary.hidden = false
@@ -601,6 +607,7 @@ const openBookLibrary = () => {
   document.body.classList.add('book-library-is-open')
   elements.bookLibrary.scrollTop = 0
   elements.bookLibraryBack.focus({ preventScroll: true })
+  await bookLibrary.load()
 }
 
 const closeBookLibrary = () => {
@@ -608,6 +615,7 @@ const closeBookLibrary = () => {
   setBackgroundInert(false)
   document.body.classList.remove('book-library-is-open')
   document.querySelector('#account-menu-button')?.focus({ preventScroll: true })
+  bookLibrary.clearObjectUrls?.()
   map.resize()
 }
 

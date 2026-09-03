@@ -181,48 +181,13 @@
             <section class="book-library__preview" aria-labelledby="book-preview-title">
               <div class="book-library__preview-heading">
                 <div>
-                  <p class="detail-card__eyebrow">Simple layout preview</p>
-                  <h3 id="book-preview-title">One book, then its walks</h3>
+                  <p class="detail-card__eyebrow">Private bookcase</p>
+                  <h3 id="book-preview-title">Choose a walk</h3>
                 </div>
-                <span>Private storage connects next</span>
+                <span>Pages remain on the Ashterix media server</span>
               </div>
-
-              <div class="book-browser">
-                <details class="book-entry" open>
-                  <summary>
-                    <span class="book-cover-placeholder" aria-hidden="true">Book cover</span>
-                    <span class="book-entry__summary-copy">
-                      <strong>Walking book</strong>
-                      <small>Open a book to see its walks</small>
-                    </span>
-                  </summary>
-                  <div class="book-entry__walks">
-                    <button type="button" aria-pressed="true">
-                      <strong>Walk title</strong>
-                      <span>Location · distance · walk number</span>
-                    </button>
-                    <button type="button" disabled>
-                      <strong>Another walk</strong>
-                      <span>More routes from this book</span>
-                    </button>
-                  </div>
-                </details>
-
-                <section class="book-walk-preview" aria-label="Selected walk preview">
-                  <div class="book-page-placeholder" aria-hidden="true">
-                    <span>Photographed book page</span>
-                  </div>
-                  <div>
-                    <p class="detail-card__eyebrow">Selected walk</p>
-                    <h3>Walk title</h3>
-                    <dl>
-                      <div><dt>Distance</dt><dd>From the book</dd></div>
-                      <div><dt>Start</dt><dd>Place or grid reference</dd></div>
-                    </dl>
-                    <p>Notes, route description and any useful details will sit here without opening another pop-up.</p>
-                  </div>
-                </section>
-              </div>
+              <p id="book-library-status" class="book-library__status">Loading your private walk books…</p>
+              <div id="book-browser" class="book-browser" hidden></div>
             </section>
           </div>
         </article>
