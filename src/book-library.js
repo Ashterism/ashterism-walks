@@ -1,5 +1,5 @@
 export const MEDIA_API_BASE_URL = 'https://media.ashterism.com'
-export const BOOK_CATALOGUE_ASSET_ID = 'a8927d75-17bb-4931-9fd9-787eb04fbd59'
+export const BOOK_CATALOGUE_ASSET_ID = '0e1d6348-cf2a-48b9-b615-3bf44e45d85c'
 
 const cataloguePath = `/v1/assets/${BOOK_CATALOGUE_ASSET_ID}/content`
 
@@ -39,6 +39,7 @@ export const setupBookLibrary = ({ root, getAccessToken }) => {
   const pageViewerImage = root.querySelector('#book-page-viewer-image')
   const pageViewerClose = root.querySelector('#book-page-viewer-close')
   let loaded = false
+  let coverObjectUrls = []
   let overviewObjectUrls = []
   let walkObjectUrls = []
   let fullSizeUrl = null
@@ -86,8 +87,10 @@ export const setupBookLibrary = ({ root, getAccessToken }) => {
 
   const clearObjectUrls = () => {
     closePageViewer()
+    coverObjectUrls.forEach((url) => URL.revokeObjectURL(url))
     overviewObjectUrls.forEach((url) => URL.revokeObjectURL(url))
     walkObjectUrls.forEach((url) => URL.revokeObjectURL(url))
+    coverObjectUrls = []
     overviewObjectUrls = []
     walkObjectUrls = []
   }
@@ -192,46 +195,77 @@ export const setupBookLibrary = ({ root, getAccessToken }) => {
     }
   }
 
+  const loadCover = async (book, container) => {
+    if (!book.cover) return
+    try {
+      const path = book.cover.thumbPath || book.cover.displayPath || book.cover.contentPath
+      const response = await fetchPrivate(path, getAccessToken())
+      const url = URL.createObjectURL(await response.blob())
+      coverObjectUrls.push(url)
+      const image = element('img', 'book-cover')
+      image.src = url
+      image.alt = `Cover of ${book.title}`
+      container.replaceChildren(image)
+    } catch {
+      // The title and walks remain usable if a cover cannot be loaded.
+    }
+  }
+
   const render = (catalogue) => {
-    const book = catalogue.books?.[0]
-    if (!book) throw new Error('No walk book is available yet.')
+    const books = catalogue.books || []
+    if (!books.length) throw new Error('No walk book is available yet.')
 
-    const bookEntry = element('details', 'book-entry')
-    bookEntry.open = true
-    const summary = element('summary', '')
-    summary.append(element('span', 'book-cover-placeholder', 'Cover coming soon'))
-    const summaryCopy = element('span', 'book-entry__summary-copy')
-    summaryCopy.append(element('strong', '', book.title), element('small', '', `${book.walks.length} walks + maps & index`))
-    summary.append(summaryCopy)
-
-    const list = element('div', 'book-entry__walks')
+    const bookList = element('div', 'book-list')
     const detail = element('section', 'book-walk-preview')
     detail.setAttribute('aria-label', 'Selected book section')
-    const buttons = []
 
-    const frontMatterButton = element('button', 'book-entry__front-matter')
-    frontMatterButton.type = 'button'
-    frontMatterButton.dataset.bookSection = 'maps-index'
-    frontMatterButton.append(element('strong', '', 'Book maps & index'), element('span', '', 'Contents · All walks overview'))
-    frontMatterButton.addEventListener('click', () => renderFrontMatter(book, detail, buttons))
-    list.append(frontMatterButton)
-    buttons.push(frontMatterButton)
+    books.forEach((book, bookIndex) => {
+      const bookEntry = element('details', 'book-entry')
+      bookEntry.open = bookIndex === 0
+      const summary = element('summary', '')
+      const cover = element('span', 'book-cover-placeholder', book.cover ? 'Loading cover' : 'Cover coming soon')
+      summary.append(cover)
+      const summaryCopy = element('span', 'book-entry__summary-copy')
+      summaryCopy.append(element('strong', '', book.title), element('small', '', `${book.walks.length} walks + maps & index`))
+      summary.append(summaryCopy)
 
-    book.walks.forEach((walk) => {
-      const button = element('button', '')
-      button.type = 'button'
-      button.dataset.bookSection = `walk-${walk.number}`
-      button.append(element('strong', '', `${walk.number}. ${walk.title}`), element('span', '', `${walk.distance} · ${walk.start}`))
-      button.addEventListener('click', () => renderWalk(book, walk, detail, buttons))
-      list.append(button)
-      buttons.push(button)
+      const list = element('div', 'book-entry__walks')
+      const buttons = []
+      const frontMatterButton = element('button', 'book-entry__front-matter')
+      frontMatterButton.type = 'button'
+      frontMatterButton.dataset.bookSection = 'maps-index'
+      frontMatterButton.append(element('strong', '', 'Book maps & index'), element('span', '', 'Contents · All walks overview'))
+      frontMatterButton.addEventListener('click', () => renderFrontMatter(book, detail, buttons))
+      list.append(frontMatterButton)
+      buttons.push(frontMatterButton)
+
+      book.walks.forEach((walk) => {
+        const button = element('button', '')
+        button.type = 'button'
+        button.dataset.bookSection = `walk-${walk.number}`
+        button.append(element('strong', '', `${walk.number}. ${walk.title}`), element('span', '', `${walk.distance} · ${walk.start}`))
+        button.addEventListener('click', () => renderWalk(book, walk, detail, buttons))
+        list.append(button)
+        buttons.push(button)
+      })
+
+      bookEntry.addEventListener('toggle', () => {
+        if (!bookEntry.open) return
+        bookList.querySelectorAll('.book-entry').forEach((entry) => {
+          if (entry !== bookEntry) entry.open = false
+        })
+        renderFrontMatter(book, detail, buttons)
+      })
+      bookEntry.append(summary, list)
+      bookList.append(bookEntry)
+      loadCover(book, cover)
+
+      if (bookIndex === 0) renderFrontMatter(book, detail, buttons)
     })
 
-    bookEntry.append(summary, list)
-    browser.replaceChildren(bookEntry, detail)
+    browser.replaceChildren(bookList, detail)
     browser.hidden = false
     status.hidden = true
-    renderFrontMatter(book, detail, buttons)
   }
 
   const load = async () => {
