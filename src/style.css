@@ -176,6 +176,15 @@ button { font: inherit; }
 .photo-grid img, .photo-placeholder { width: 100%; aspect-ratio: 3 / 2; border-radius: 3px; }
 .photo-grid img { display: block; object-fit: cover; }
 .photo-grid figcaption { margin-top: 7px; color: #6a756f; font-family: Georgia, serif; font-size: .8rem; font-style: italic; }
+.photo-empty { display: grid; grid-template-columns: minmax(180px, .8fr) minmax(210px, 1fr); align-items: center; gap: clamp(22px, 5vw, 62px); min-height: 210px; padding: clamp(22px, 4vw, 42px); border: 1px solid rgb(32 49 41 / 11%); border-radius: 3px; background: linear-gradient(135deg, #eee5d8, #f7f1e7); color: #52645b; }
+.photo-empty[hidden] { display: none; }
+.photo-empty svg { display: block; width: 100%; max-width: 320px; margin: auto; fill: none; stroke: #6f8178; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; }
+.photo-empty svg rect { stroke: rgb(82 100 91 / 42%); }
+.photo-empty svg circle { fill: rgb(215 101 63 / 16%); stroke: #d7653f; }
+.photo-empty svg path:last-child { stroke: #d7653f; stroke-width: 1.5; }
+.photo-empty strong, .photo-empty span { display: block; }
+.photo-empty strong { color: #30443a; font-family: Georgia, serif; font-size: clamp(1rem, 2vw, 1.35rem); font-weight: 500; }
+.photo-empty span { max-width: 320px; margin-top: 6px; font-family: Georgia, serif; font-size: .82rem; font-style: italic; line-height: 1.45; }
 .photo-placeholder { display: flex; flex-direction: column; justify-content: space-between; padding: 12px; background: linear-gradient(145deg, #ded8cc, #eee6d8); color: #66716b; }
 .photo-placeholder:nth-child(2) { background: linear-gradient(145deg, #d4ded7, #e9eee9); }
 .photo-placeholder:nth-child(3) { background: linear-gradient(145deg, #e5d4c7, #f2e7dd); }
@@ -286,6 +295,9 @@ button { font: inherit; }
   .detail-card__heading { align-items: flex-start; flex-direction: column; gap: 6px; margin-bottom: 10px; }
   .detail-map { height: 58vw; min-height: 210px; max-height: 300px; }
   .photo-grid { grid-template-columns: 1fr; }
+  .photo-empty { grid-template-columns: 1fr; gap: 14px; min-height: 0; padding: 24px; text-align: center; }
+  .photo-empty svg { max-width: 240px; }
+  .photo-empty span { margin-right: auto; margin-left: auto; }
   .photo-placeholder { aspect-ratio: 16 / 9; }
   .book-library__bar { padding: 6px 12px; }
   .book-library__content { width: min(100% - 22px, 980px); padding-top: 18px; }

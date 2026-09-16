@@ -93,6 +93,7 @@ const elements = {
   profileDistance: document.querySelector('#detail-profile-distance'),
   photoGrid: document.querySelector('#detail-photo-grid'),
   photoNote: document.querySelector('#detail-photo-note'),
+  photoEmpty: document.querySelector('#detail-photo-empty'),
   detailNotes: document.querySelector('#detail-notes'),
   detailNotesCopy: document.querySelector('#detail-notes-copy'),
   detailReferences: document.querySelector('#detail-references'),
@@ -430,9 +431,9 @@ const renderDetailMap = (route, walk) => {
     detailStartMarker.setLngLat(walk.start).addTo(routeMap)
     detailFinishMarker.setLngLat(walk.finish).addTo(routeMap)
     routeMap.fitBounds(boundsFrom(walk.bounds), {
-      padding: window.innerWidth <= 720 ? 28 : 42,
+      padding: window.innerWidth <= 720 ? 42 : 64,
       duration: 0,
-      maxZoom: 15,
+      maxZoom: 14.5,
     })
   }
 
@@ -502,6 +503,8 @@ const renderElevationProfile = (coordinates, walk) => {
 const renderPhotos = (photos = []) => {
   if (photos.length > 0) {
     elements.photoNote.textContent = `${photos.length} ${photos.length === 1 ? 'photograph' : 'photographs'}`
+    elements.photoNote.hidden = false
+    elements.photoEmpty.hidden = true
     elements.photoGrid.hidden = false
     elements.photoGrid.replaceChildren(
       ...photos.map((photo, index) => {
@@ -522,7 +525,9 @@ const renderPhotos = (photos = []) => {
     return
   }
 
-  elements.photoNote.textContent = 'No photographs associated with this walk.'
+  elements.photoNote.textContent = ''
+  elements.photoNote.hidden = true
+  elements.photoEmpty.hidden = false
   elements.photoGrid.replaceChildren()
   elements.photoGrid.hidden = true
 }
@@ -644,9 +649,14 @@ const selectWalk = async (
     startMarker.setLngLat(walk.start).addTo(map)
     finishMarker.setLngLat(walk.finish).addTo(map)
     map.fitBounds(boundsFrom(walk.bounds), {
-      padding: routePadding(),
+      padding: Object.fromEntries(
+        Object.entries(routePadding()).map(([side, value]) => [
+          side,
+          value + (window.innerWidth <= 720 ? 14 : 24),
+        ]),
+      ),
       duration: 900,
-      maxZoom: 15,
+      maxZoom: 14.5,
     })
     if (updateHistory) updateUrl(walk.id)
     hideStatus()
