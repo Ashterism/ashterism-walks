@@ -31,6 +31,8 @@ button { font: inherit; }
   font-style: italic;
 }
 
+.site-header__home { min-width: 0; color: inherit; text-decoration: none; }
+.site-header__home:focus-visible { border-radius: 3px; outline: 2px solid #e5b69f; outline-offset: 4px; }
 .site-header h1 { margin: 0; font-family: Georgia, serif; font-size: clamp(1.4rem, 2.4vw, 1.75rem); font-weight: 500; letter-spacing: -.03em; }
 
 .map-fit-control {
@@ -41,7 +43,6 @@ button { font: inherit; }
 }
 
 .site-header__actions { display: flex; align-items: center; gap: 7px; }
-.site-header > div:first-child { min-width: 0; }
 .site-header h1 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .map-fit-control {
@@ -183,7 +184,7 @@ button { font: inherit; }
 .photo-empty svg circle { fill: rgb(215 101 63 / 16%); stroke: #d7653f; }
 .photo-empty svg path:last-child { stroke: #d7653f; stroke-width: 1.5; }
 .photo-empty strong, .photo-empty span { display: block; }
-.photo-empty strong { color: #30443a; font-family: Georgia, serif; font-size: clamp(1rem, 2vw, 1.35rem); font-weight: 500; }
+.photo-empty strong { color: #30443a; font-family: Georgia, serif; font-size: clamp(.92rem, 1.55vw, 1.12rem); font-weight: 500; }
 .photo-empty span { max-width: 320px; margin-top: 6px; font-family: Georgia, serif; font-size: .82rem; font-style: italic; line-height: 1.45; }
 .photo-placeholder { display: flex; flex-direction: column; justify-content: space-between; padding: 12px; background: linear-gradient(145deg, #ded8cc, #eee6d8); color: #66716b; }
 .photo-placeholder:nth-child(2) { background: linear-gradient(145deg, #d4ded7, #e9eee9); }
