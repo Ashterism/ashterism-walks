@@ -87,6 +87,7 @@ const elements = {
   elevationRange: document.querySelector('#detail-elevation-range'),
   profileDistance: document.querySelector('#detail-profile-distance'),
   photoGrid: document.querySelector('#detail-photo-grid'),
+  photoNote: document.querySelector('#detail-photo-note'),
   detailNotes: document.querySelector('#detail-notes'),
   detailNotesCopy: document.querySelector('#detail-notes-copy'),
   detailReferences: document.querySelector('#detail-references'),
@@ -488,6 +489,8 @@ const renderElevationProfile = (coordinates, walk) => {
 
 const renderPhotos = (photos = []) => {
   if (photos.length > 0) {
+    elements.photoNote.textContent = `${photos.length} ${photos.length === 1 ? 'photograph' : 'photographs'}`
+    elements.photoGrid.hidden = false
     elements.photoGrid.replaceChildren(
       ...photos.map((photo, index) => {
         const figure = document.createElement('figure')
@@ -507,18 +510,9 @@ const renderPhotos = (photos = []) => {
     return
   }
 
-  elements.photoGrid.replaceChildren(
-    ...Array.from({ length: 3 }, (_, index) => {
-      const placeholder = document.createElement('div')
-      placeholder.className = 'photo-placeholder'
-      const label = document.createElement('span')
-      label.textContent = `Photo ${String(index + 1).padStart(2, '0')}`
-      const note = document.createElement('p')
-      note.textContent = 'A moment from the walk will live here.'
-      placeholder.append(label, note)
-      return placeholder
-    }),
-  )
+  elements.photoNote.textContent = 'No photographs associated with this walk.'
+  elements.photoGrid.replaceChildren()
+  elements.photoGrid.hidden = true
 }
 
 const renderNotes = (notes, references = []) => {
@@ -658,6 +652,7 @@ const showAllWalks = () => {
     duration: 900,
     maxZoom: 8,
   })
+  hideStatus()
   updateUrl(null)
 }
 
@@ -742,15 +737,15 @@ map.on('load', async () => {
 
     const searchParams = new URLSearchParams(window.location.search)
     const requestedId = searchParams.get('walk')
-    const initialWalk =
-      walks.find((walk) => walk.id === requestedId) ?? walks[0]
     renderList()
-    await selectWalk(initialWalk.id, {
-      updateHistory: Boolean(requestedId),
-    })
-
-    if (searchParams.get('view') === 'details') {
-      openDetails({ updateHistory: false })
+    const requestedWalk = walks.find((walk) => walk.id === requestedId)
+    if (requestedWalk) {
+      await selectWalk(requestedWalk.id, { updateHistory: true })
+      if (searchParams.get('view') === 'details') {
+        openDetails({ updateHistory: false })
+      }
+    } else {
+      showAllWalks()
     }
   } catch (error) {
     console.error(error)

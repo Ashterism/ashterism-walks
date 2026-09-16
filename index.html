@@ -14,11 +14,18 @@
           <p class="site-header__eyebrow">On foot, here and there</p>
           <h1>Ashterism Walks</h1>
         </div>
-        <button id="view-all" class="view-all" type="button">View all</button>
       </header>
 
       <div class="map-shell">
         <main id="map" aria-label="Map of walking and hiking routes"></main>
+        <button
+          id="view-all"
+          class="map-fit-control"
+          type="button"
+          title="Fit the map to all visible walks"
+        >
+          Fit all walks
+        </button>
 
         <aside class="library" aria-label="Walk library">
           <div class="library__heading">
@@ -127,7 +134,7 @@
                   <p class="detail-card__eyebrow">Along the way</p>
                   <h3 id="photos-heading">Photographs</h3>
                 </div>
-                <p class="photo-note">Photo archive coming next</p>
+                <p id="detail-photo-note" class="photo-note">No photographs associated with this walk.</p>
               </div>
               <div id="detail-photo-grid" class="photo-grid"></div>
             </section>
