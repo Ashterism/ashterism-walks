@@ -11,12 +11,11 @@
   <body>
     <div id="app">
       <header class="site-header">
-        <div>
+        <a class="site-header__home" href="/" aria-label="Ashterism Walks home">
           <p class="site-header__eyebrow">On foot, here and there</p>
           <h1>Ashterism Walks</h1>
-        </div>
+        </a>
         <div class="site-header__actions">
-          <button id="view-all" class="view-all" type="button">View all</button>
           <div class="account-menu">
             <button
               id="account-menu-button"
@@ -38,6 +37,14 @@
 
       <div class="map-shell">
         <main id="map" aria-label="Map of walking and hiking routes"></main>
+        <button
+          id="view-all"
+          class="map-fit-control"
+          type="button"
+          title="Fit the map to all visible walks"
+        >
+          Fit all walks
+        </button>
 
         <aside class="library" aria-label="Walk library">
           <div class="library__heading">
@@ -146,9 +153,22 @@
                   <p class="detail-card__eyebrow">Along the way</p>
                   <h3 id="photos-heading">Photographs</h3>
                 </div>
-                <p class="photo-note">Photo archive coming next</p>
+                <p id="detail-photo-note" class="photo-note" hidden></p>
               </div>
               <div id="detail-photo-grid" class="photo-grid"></div>
+              <div id="detail-photo-empty" class="photo-empty" role="note">
+                <svg viewBox="0 0 320 150" aria-hidden="true">
+                  <rect x="1" y="1" width="318" height="148" rx="8"></rect>
+                  <circle cx="245" cy="42" r="14"></circle>
+                  <path d="M30 119 96 61l45 39 31-27 74 46"></path>
+                  <path d="M30 119h260"></path>
+                  <path d="M58 119c27-17 58-21 91-12 37 10 76 10 118-2"></path>
+                </svg>
+                <div>
+                  <strong>No photographs from this walk</strong>
+                  <span>The route and elevation still tell the story.</span>
+                </div>
+              </div>
             </section>
 
             <section id="detail-notes" class="detail-notes" aria-labelledby="notes-heading" hidden>
