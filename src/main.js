@@ -10,6 +10,11 @@ import {
 
 import 'maplibre-gl/dist/maplibre-gl.css'
 
+import { setupAccountMenu } from './auth.js'
+import { setupBookLibrary } from './book-library.js'
+
+const account = await setupAccountMenu()
+
 const emptyRoute = {
   type: 'Feature',
   properties: {},
@@ -92,7 +97,14 @@ const elements = {
   detailNotesCopy: document.querySelector('#detail-notes-copy'),
   detailReferences: document.querySelector('#detail-references'),
   detailSource: document.querySelector('#detail-source'),
+  bookLibrary: document.querySelector('#book-library'),
+  bookLibraryBack: document.querySelector('#book-library-back'),
 }
+
+const bookLibrary = setupBookLibrary({
+  root: elements.bookLibrary,
+  getAccessToken: () => account?.getAccessToken(),
+})
 
 let walks = []
 let visibleWalks = []
@@ -580,6 +592,31 @@ const closeDetails = ({ updateHistory = true } = {}) => {
   elements.moreDetails.focus({ preventScroll: true })
 }
 
+const openBookLibrary = async () => {
+  if (!account?.isSignedIn()) return
+  elements.detail.hidden = true
+  elements.bookLibrary.hidden = false
+  setBackgroundInert(true)
+  document.body.classList.remove('detail-is-open')
+  document.body.classList.add('book-library-is-open')
+  elements.bookLibrary.scrollTop = 0
+  elements.bookLibraryBack.focus({ preventScroll: true })
+  window.scrollTo(0, 0)
+  requestAnimationFrame(() => window.scrollTo(0, 0))
+  await bookLibrary.load()
+}
+
+const closeBookLibrary = () => {
+  elements.bookLibrary.hidden = true
+  setBackgroundInert(false)
+  document.body.classList.remove('book-library-is-open')
+  document.querySelector('#account-menu-button')?.focus({ preventScroll: true })
+  bookLibrary.clearObjectUrls?.()
+  map.resize()
+}
+
+document.addEventListener('walk-books:open', openBookLibrary)
+
 const selectWalk = async (
   id,
   { updateHistory = true, focusList = false } = {},
@@ -625,8 +662,10 @@ const showAllWalks = () => {
   selectedRoute = null
   syncListSelection()
   elements.detail.hidden = true
+  elements.bookLibrary.hidden = true
   setBackgroundInert(false)
   document.body.classList.remove('detail-is-open')
+  document.body.classList.remove('book-library-is-open')
   elements.panel.hidden = true
   map.getSource('walk').setData(emptyRoute)
   startMarker.remove()
@@ -734,6 +773,7 @@ map.on('load', async () => {
     elements.filterLength.addEventListener('change', applyFilters)
     elements.moreDetails.addEventListener('click', () => openDetails())
     elements.detailBack.addEventListener('click', () => closeDetails())
+    elements.bookLibraryBack.addEventListener('click', closeBookLibrary)
 
     const searchParams = new URLSearchParams(window.location.search)
     const requestedId = searchParams.get('walk')

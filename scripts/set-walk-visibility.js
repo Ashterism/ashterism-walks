@@ -1,6 +1,9 @@
+import fs from 'node:fs'
+
 import {
   assertSafeWalkId,
   loadCanonicalRecords,
+  publicRoutePath,
   writeCanonicalRecord,
 } from './lib/canonical-walks.js'
 
@@ -18,6 +21,11 @@ writeCanonicalRecord({
   ...record,
   local: { ...record.local, visibility },
 })
+
+if (visibility === 'hidden') {
+  fs.rmSync(publicRoutePath(id), { force: true })
+}
+
 await import('./build-catalogue.js')
 
 console.log(`${id} is now ${visibility}`)

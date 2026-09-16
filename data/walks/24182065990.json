@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "24182065990",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "24182065990"
+    },
+    "intervals": {
+      "activityId": "i181663068",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "2816a67318153a6a533eb1cdb5f28c978c0e6f82a99e58789f56665ccdf34346",
+      "snapshot": {
+        "name": "Saint-Saud-Lacoussière Hiking",
+        "type": "Hike",
+        "startDate": "2026-08-31T09:41:57Z",
+        "startDateLocal": "2026-08-31T11:41:57",
+        "distanceM": 4383.68,
+        "movingTimeSeconds": 2981,
+        "elapsedTimeSeconds": 3106,
+        "ascentM": 25,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "f9d6736d457aaa426e1c33f833badac2ffb5a145bcf5a0eecf10bab9968b8422",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "f9d6736d457aaa426e1c33f833badac2ffb5a145bcf5a0eecf10bab9968b8422",
+        "source": "intervals",
+        "capturedAt": "2026-08-31T13:44:45.472Z"
+      }
+    ],
+    "bounds": [
+      0.8190001174807549,
+      45.55695718154311,
+      0.8237967453896999,
+      45.5639152508229
+    ],
+    "start": [
+      0.8237477950751781,
+      45.55945968255401
+    ],
+    "finish": [
+      0.8237627148628235,
+      45.559501592069864
+    ],
+    "descentM": 21
+  },
+  "review": []
+}

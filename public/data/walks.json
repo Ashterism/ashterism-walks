@@ -1,35 +1,155 @@
 {
-  "walkCount": 102,
+  "walkCount": 107,
   "skippedWithoutRoute": 8,
   "walks": [
     {
-      "id": "24139519792",
-      "activity": "walking",
-      "name": "Mialet Walking",
-      "date": "2026-08-27T17:21:11Z",
-      "distanceKm": 1.58,
-      "movingTimeSeconds": 1118,
-      "elapsedTimeSeconds": 1173,
+      "id": "24222202139",
+      "activity": "hiking",
+      "name": "Mialet Hiking",
+      "date": "2026-09-03T11:44:52Z",
+      "distanceKm": 2.8,
+      "movingTimeSeconds": 1732,
+      "elapsedTimeSeconds": 1733,
       "ascentM": 22,
-      "descentM": 15,
+      "descentM": 25,
       "providers": [
         "Garmin"
       ],
       "photos": [],
-      "routeUrl": "/data/routes/24139519792.geojson?v=981e721e2347c436389a64590bf21f7faf726da8e298dcd659c84325a1b5f1de",
+      "routeUrl": "/data/routes/24222202139.geojson?v=87ff285ef6002eb3301549470ea4011247826defb1aac0db06b22b31fb299177",
       "bounds": [
-        0.887611024081707,
-        45.54637142457068,
-        0.8901172131299973,
-        45.54773323237896
+        0.9176239371299744,
+        45.54917139932513,
+        0.9306660108268261,
+        45.55895232595503
       ],
       "start": [
-        0.8887409884482622,
-        45.547210620716214
+        0.9306660108268261,
+        45.553970290347934
       ],
       "finish": [
-        0.888980794698,
-        45.54718396626413
+        0.9176239371299744,
+        45.54917139932513
+      ]
+    },
+    {
+      "id": "24195640827",
+      "activity": "hiking",
+      "name": "Mialet Hiking",
+      "date": "2026-09-01T11:31:08Z",
+      "distanceKm": 3.07,
+      "movingTimeSeconds": 1851,
+      "elapsedTimeSeconds": 1857,
+      "ascentM": 24,
+      "descentM": 25,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24195640827.geojson?v=e447bd07cfd819f65ebe4e1192491b5c398233666fbd384c5e620666a80acb5b",
+      "bounds": [
+        0.9179527591913939,
+        45.54937742650509,
+        0.9328815154731274,
+        45.55894469842315
+      ],
+      "start": [
+        0.9328489098697901,
+        45.55401228368282
+      ],
+      "finish": [
+        0.9179802518337965,
+        45.54937742650509
+      ]
+    },
+    {
+      "id": "24182065990",
+      "activity": "hiking",
+      "name": "Saint-Saud-Lacoussière Hiking",
+      "date": "2026-08-31T09:41:57Z",
+      "distanceKm": 4.38,
+      "movingTimeSeconds": 2981,
+      "elapsedTimeSeconds": 3106,
+      "ascentM": 25,
+      "descentM": 21,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24182065990.geojson?v=f9d6736d457aaa426e1c33f833badac2ffb5a145bcf5a0eecf10bab9968b8422",
+      "bounds": [
+        0.8190001174807549,
+        45.55695718154311,
+        0.8237967453896999,
+        45.5639152508229
+      ],
+      "start": [
+        0.8237477950751781,
+        45.55945968255401
+      ],
+      "finish": [
+        0.8237627148628235,
+        45.559501592069864
+      ]
+    },
+    {
+      "id": "24173191196",
+      "activity": "hiking",
+      "name": "Mialet Hiking",
+      "date": "2026-08-30T12:26:37Z",
+      "distanceKm": 9.1,
+      "movingTimeSeconds": 5834,
+      "elapsedTimeSeconds": 5915,
+      "ascentM": 47,
+      "descentM": 45,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24173191196.geojson?v=bf2141dacbaebd641a50292b8264e25c369196f5d8802223dd6a543d0b6deabf",
+      "bounds": [
+        0.9176717139780521,
+        45.547939259558916,
+        0.9463953226804733,
+        45.56275938637555
+      ],
+      "start": [
+        0.9178603067994118,
+        45.54939645342529
+      ],
+      "finish": [
+        0.9176717139780521,
+        45.549224792048335
+      ]
+    },
+    {
+      "id": "24161644046",
+      "activity": "hiking",
+      "name": "Mialet Hiking",
+      "date": "2026-08-29T13:56:11Z",
+      "distanceKm": 5.11,
+      "movingTimeSeconds": 3393,
+      "elapsedTimeSeconds": 3444,
+      "ascentM": 44,
+      "descentM": 41,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24161644046.geojson?v=28ecee1fc3d59cfbeb088540d5c024c3cea4067f0d1f585f9e5cf53c68d63f60",
+      "bounds": [
+        0.9178992826491594,
+        45.549365943297744,
+        0.9291012771427631,
+        45.562744131311774
+      ],
+      "start": [
+        0.9179012104868889,
+        45.54943844676018
+      ],
+      "finish": [
+        0.9179824311286211,
+        45.549365943297744
       ]
     },
     {
@@ -277,6 +397,57 @@
       "finish": [
         -3.8753155153244734,
         50.544014470651746
+      ]
+    },
+    {
+      "id": "withings-202508110129",
+      "activity": "hiking",
+      "name": "Mount Ijen",
+      "date": "2025-08-11",
+      "distanceKm": 10.02,
+      "movingTimeSeconds": 14032,
+      "elapsedTimeSeconds": 20305,
+      "ascentM": 547,
+      "descentM": 583,
+      "providers": [
+        "Garmin",
+        "Withings (companion recording)",
+        "Google Timeline",
+        "OpenStreetMap"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "companion-withings-garmin-monitoring-google-timeline-openstreetmap",
+        "metricsSource": "Garmin monitoring and reconstructed trail geometry",
+        "routeSource": "OpenStreetMap GPS-surveyed trails anchored by companion Withings GPS and Google Timeline",
+        "label": "Estimated route reconstructed from companion Withings GPS, Garmin monitoring, Google Timeline and OpenStreetMap trail geometry."
+      },
+      "notes": "Night hike from Paltuding up Mount Ijen, down into the crater for the blue fire, back to the rim and along to a sunrise viewpoint, then down to Paltuding. The route is reconstructed from private watch and Timeline evidence using mapped trail geometry.",
+      "references": [
+        {
+          "label": "Mount Ijen trail map — OpenStreetMap",
+          "url": "https://www.openstreetmap.org/#map=15/-8.0612/114.2384"
+        },
+        {
+          "label": "OpenStreetMap copyright and licence",
+          "url": "https://www.openstreetmap.org/copyright"
+        }
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/withings-202508110129.geojson?v=fbd655f68af839bb214825fe992af0811c65ca7f386b3056c3766da545eaadf3",
+      "bounds": [
+        114.2242675,
+        -8.0731404,
+        114.248118,
+        -8.054513
+      ],
+      "start": [
+        114.2242675,
+        -8.0731404
+      ],
+      "finish": [
+        114.2242675,
+        -8.0731404
       ]
     },
     {
