@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "24432669346",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "24432669346"
+    },
+    "intervals": {
+      "activityId": "i188537851",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "57d3b896e0475202e868cbdd9e47695c2c0fb1324d384e4e89d5296d47dbb80d",
+      "snapshot": {
+        "name": "Pensol Hiking",
+        "type": "Hike",
+        "startDate": "2026-09-20T10:36:24Z",
+        "startDateLocal": "2026-09-20T12:36:24",
+        "distanceM": 16095.09,
+        "movingTimeSeconds": 10713,
+        "elapsedTimeSeconds": 11054,
+        "ascentM": 302,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "265816f3a5e56707cce314949db7b419382bafbeb3828c801c7c5104cd3e0569",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "265816f3a5e56707cce314949db7b419382bafbeb3828c801c7c5104cd3e0569",
+        "source": "intervals",
+        "capturedAt": "2026-09-20T15:38:20.006Z"
+      }
+    ],
+    "bounds": [
+      0.7916592713445425,
+      45.5904502607882,
+      0.847426587715745,
+      45.6207809317857
+    ],
+    "start": [
+      0.8269895799458027,
+      45.60929101891816
+    ],
+    "finish": [
+      0.8269858919084072,
+      45.60928339138627
+    ],
+    "descentM": 298
+  },
+  "review": []
+}

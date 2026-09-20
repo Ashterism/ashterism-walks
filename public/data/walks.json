@@ -1,7 +1,37 @@
 {
-  "walkCount": 108,
+  "walkCount": 109,
   "skippedWithoutRoute": 8,
   "walks": [
+    {
+      "id": "24432669346",
+      "activity": "hiking",
+      "name": "Pensol Hiking",
+      "date": "2026-09-20T10:36:24Z",
+      "distanceKm": 16.1,
+      "movingTimeSeconds": 10713,
+      "elapsedTimeSeconds": 11054,
+      "ascentM": 302,
+      "descentM": 298,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24432669346.geojson?v=265816f3a5e56707cce314949db7b419382bafbeb3828c801c7c5104cd3e0569",
+      "bounds": [
+        0.7916592713445425,
+        45.5904502607882,
+        0.847426587715745,
+        45.6207809317857
+      ],
+      "start": [
+        0.8269895799458027,
+        45.60929101891816
+      ],
+      "finish": [
+        0.8269858919084072,
+        45.60928339138627
+      ]
+    },
     {
       "id": "24384503986",
       "activity": "hiking",
