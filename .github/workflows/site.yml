@@ -5,7 +5,9 @@ on:
     branches:
       - main
   schedule:
-    - cron: '17 * * * *'
+    # GitHub's scheduled runs can be delayed for hours. Four offset attempts per
+    # hour keep new Garmin walks moving even when individual triggers are late.
+    - cron: '7,22,37,52 * * * *'
   workflow_dispatch:
     inputs:
       refresh_latest:
