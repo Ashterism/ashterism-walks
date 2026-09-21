@@ -1,7 +1,37 @@
 {
-  "walkCount": 109,
+  "walkCount": 110,
   "skippedWithoutRoute": 8,
   "walks": [
+    {
+      "id": "24443104210",
+      "activity": "hiking",
+      "name": "Saint-Saud-Lacoussière Hiking",
+      "date": "2026-09-21T12:20:10Z",
+      "distanceKm": 3.82,
+      "movingTimeSeconds": 2528,
+      "elapsedTimeSeconds": 2611,
+      "ascentM": 71,
+      "descentM": 73,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24443104210.geojson?v=adfcbdae492d5f7ab738374fbfefdc7280f12fd8566649d71c24f44df5b414ba",
+      "bounds": [
+        0.7954905554652214,
+        45.5393523350358,
+        0.8104506600648165,
+        45.54878231137991
+      ],
+      "start": [
+        0.8097099512815475,
+        45.54557799361646
+      ],
+      "finish": [
+        0.8093455899506807,
+        45.545650413259864
+      ]
+    },
     {
       "id": "24432669346",
       "activity": "hiking",
