@@ -26,7 +26,13 @@ npm run sync:latest
 
 The previous FIT is preserved under `private/garmin/history/` before a changed version replaces it.
 
-The GitHub Actions workflow also provides an hourly sync and a manual **Run workflow** action. Its `refresh_latest` option forces the latest edited activity to be regenerated. The workflow reads the API key from the `INTERVALS_ICU_API_KEY` repository secret and publishes the Vite build to GitHub Pages.
+Cloudflare's `ashterism-walks-sync` Worker dispatches the GitHub Actions workflow every 15 minutes. GitHub performs the FIT conversion, commits changed route data, and publishes the Vite build. The workflow also provides a manual **Run workflow** action; its `refresh_latest` option forces the latest edited activity to be regenerated. The workflow reads the API key from the `INTERVALS_ICU_API_KEY` repository secret.
+
+The scheduler lives under `cloudflare/`. It requires a `GITHUB_TOKEN` Worker secret with **Actions: write** permission for this repository. Deploy it with:
+
+```sh
+npm run scheduler:deploy
+```
 
 On macOS the sync reads the Intervals.icu API key from the `ashterism-walks` / `intervals.icu` Keychain entry. An automated server can instead provide the key through the `INTERVALS_ICU_API_KEY` environment variable.
 

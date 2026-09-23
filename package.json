@@ -20,12 +20,15 @@
     "visibility": "node scripts/set-walk-visibility.js",
     "sync": "node scripts/sync-intervals.js && node scripts/convert-fit.js",
     "sync:latest": "node scripts/sync-intervals.js --refresh-latest && node scripts/convert-fit.js",
+    "scheduler:test": "node --test cloudflare/test/*.test.js",
+    "scheduler:deploy": "wrangler deploy --config cloudflare/wrangler.jsonc",
     "training-context": "node scripts/training-context.js",
     "test": "node --test",
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^8.2.0"
+    "vite": "^8.2.0",
+    "wrangler": "^4.137.0"
   },
   "dependencies": {
     "@garmin/fitsdk": "^21.213.0",
