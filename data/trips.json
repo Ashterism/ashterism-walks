@@ -74,6 +74,24 @@
         "withings-4223438614",
         "withings-4227189222"
       ]
+    },
+    {
+      "id": "pilgrimsleden-dalsland",
+      "name": "Pilgrimsleden — Dalsland",
+      "description": "A three-day hike from Mellerud to Edsleskog, wild camping at Livarebosjön and Tansjön.",
+      "tags": [
+        "dalsland",
+        "long-distance trail",
+        "multi-day",
+        "pilgrimsleden",
+        "sweden",
+        "wild camping"
+      ],
+      "walkIds": [
+        "photo-20220415",
+        "photo-20220416",
+        "photo-20220417"
+      ]
     }
   ]
 }

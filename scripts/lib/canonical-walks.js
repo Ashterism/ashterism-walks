@@ -9,7 +9,7 @@ export const publicCataloguePath = 'public/data/walks.json'
 export const publicTripsPath = 'public/data/trips.json'
 
 export const safeWalkIdPattern =
-  /^(?:\d+|intervals-\d+|strava-\d+|withings-\d+)$/
+  /^(?:\d+|intervals-\d+|photo-\d+|strava-\d+|withings-\d+)$/
 
 export const assertSafeWalkId = (id) => {
   const value = String(id)
@@ -208,6 +208,7 @@ export const resolvePublicFields = (record) => {
   if (record.sources.googleTimeline) providers.push('Google Timeline')
   if (record.sources.rotaVicentina) providers.push('Rota Vicentina')
   if (record.sources.openStreetMap) providers.push('OpenStreetMap')
+  if (record.sources.photoArchive) providers.push('Photo archive')
 
   return {
     id: record.id,

@@ -1,5 +1,5 @@
 {
-  "walkCount": 111,
+  "walkCount": 114,
   "skippedWithoutRoute": 8,
   "walks": [
     {
@@ -1891,6 +1891,165 @@
       "finish": [
         -4.12097736261785,
         50.62913638539612
+      ]
+    },
+    {
+      "id": "photo-20220417",
+      "activity": "hiking",
+      "name": "Pilgrimsleden Dalsland — day 3: Tansjön to Edsleskog",
+      "date": "2022-04-17T12:19:33+02:00",
+      "distanceKm": 10.5,
+      "elapsedTimeSeconds": 13127,
+      "ascentM": null,
+      "descentM": null,
+      "providers": [
+        "OpenStreetMap",
+        "Photo archive"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "photo-gps-openstreetmap",
+        "metricsSource": "Photo timestamps and matched trail geometry",
+        "routeSource": "GPS-tagged photo anchors matched to OpenStreetMap trail geometry",
+        "label": "Estimated route reconstructed from GPS-tagged photos and the mapped Pilgrimsleden trail."
+      },
+      "notes": "The final morning of the Dalsland hike, from the Tansjön camp to the end of the Pilgrimsleden at Edsleskog.",
+      "references": [
+        {
+          "label": "Pilgrimsleden — Dalsland Canal",
+          "url": "https://dalslandskanal.se/en/naturen/pilgrimsleden/"
+        }
+      ],
+      "tags": [
+        "dalsland",
+        "long-distance trail",
+        "multi-day",
+        "pilgrimsleden",
+        "sweden",
+        "wild camping"
+      ],
+      "tripId": "pilgrimsleden-dalsland",
+      "photos": [],
+      "routeUrl": "/data/routes/photo-20220417.geojson?v=d100badd3212163782a7bac3bdf78018229790a3a0eb4a64507f59e973bb429b",
+      "bounds": [
+        12.4065022,
+        58.989312,
+        12.46357,
+        59.0588328
+      ],
+      "start": [
+        12.406937,
+        58.989312
+      ],
+      "finish": [
+        12.46357,
+        59.057175
+      ]
+    },
+    {
+      "id": "photo-20220416",
+      "activity": "hiking",
+      "name": "Pilgrimsleden Dalsland — day 2: Livarebosjön to Tansjön",
+      "date": "2022-04-16T10:20:24+02:00",
+      "distanceKm": 24.71,
+      "elapsedTimeSeconds": 32625,
+      "ascentM": null,
+      "descentM": null,
+      "providers": [
+        "OpenStreetMap",
+        "Photo archive"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "photo-gps-openstreetmap",
+        "metricsSource": "Photo timestamps and matched trail geometry",
+        "routeSource": "GPS-tagged photo anchors matched to OpenStreetMap trail geometry",
+        "label": "Estimated route reconstructed from GPS-tagged photos and the mapped Pilgrimsleden trail."
+      },
+      "notes": "The middle day of the Dalsland hike, continuing north from Livarebosjön to a second hammock camp beside Tansjön.",
+      "references": [
+        {
+          "label": "Pilgrimsleden — Dalsland Canal",
+          "url": "https://dalslandskanal.se/en/naturen/pilgrimsleden/"
+        }
+      ],
+      "tags": [
+        "dalsland",
+        "long-distance trail",
+        "multi-day",
+        "pilgrimsleden",
+        "sweden",
+        "wild camping"
+      ],
+      "tripId": "pilgrimsleden-dalsland",
+      "photos": [],
+      "routeUrl": "/data/routes/photo-20220416.geojson?v=eb7738e0d4742ef9c1389b4e86ee8af466ea6e6ab3e581ee3adeb98383968bd9",
+      "bounds": [
+        12.3936955,
+        58.84183,
+        12.4487127,
+        58.989605
+      ],
+      "start": [
+        12.425405,
+        58.84183
+      ],
+      "finish": [
+        12.4071,
+        58.9894
+      ]
+    },
+    {
+      "id": "photo-20220415",
+      "activity": "hiking",
+      "name": "Pilgrimsleden Dalsland — day 1: Mellerud to Livarebosjön",
+      "date": "2022-04-15T12:19:41+02:00",
+      "distanceKm": 20.89,
+      "elapsedTimeSeconds": 22822,
+      "ascentM": null,
+      "descentM": null,
+      "providers": [
+        "OpenStreetMap",
+        "Photo archive"
+      ],
+      "provenance": {
+        "status": "estimated",
+        "method": "photo-gps-openstreetmap",
+        "metricsSource": "Photo timestamps and matched trail geometry",
+        "routeSource": "GPS-tagged photo anchors matched to OpenStreetMap trail geometry",
+        "label": "Estimated route reconstructed from GPS-tagged photos and the mapped Pilgrimsleden trail."
+      },
+      "notes": "The first day of a three-day hike from Mellerud to Edsleskog, ending with a hammock camp beside Livarebosjön.",
+      "references": [
+        {
+          "label": "Pilgrimsleden — Dalsland Canal",
+          "url": "https://dalslandskanal.se/en/naturen/pilgrimsleden/"
+        }
+      ],
+      "tags": [
+        "dalsland",
+        "long-distance trail",
+        "multi-day",
+        "pilgrimsleden",
+        "sweden",
+        "wild camping"
+      ],
+      "tripId": "pilgrimsleden-dalsland",
+      "photos": [],
+      "routeUrl": "/data/routes/photo-20220415.geojson?v=db4a394922272646443ec10247c285ac558e54863924da53c71103c3c2319358",
+      "bounds": [
+        12.4255922,
+        58.70192,
+        12.4810099,
+        58.8411
+      ],
+      "start": [
+        12.464805,
+        58.70192
+      ],
+      "finish": [
+        12.425975,
+        58.8411
       ]
     },
     {
