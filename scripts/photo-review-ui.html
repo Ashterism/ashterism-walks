@@ -102,6 +102,7 @@
     </div>
     <div class="bulk-actions" aria-label="Actions for selected photographs">
       <p id="selection-count">None selected</p>
+      <button id="select-all" type="button">Select all shown</button>
       <button type="button" data-bulk-action="private" disabled>Confirm private</button>
       <button type="button" data-bulk-action="public" disabled>Make public</button>
       <button type="button" data-bulk-action="reject" disabled>Reject</button>
@@ -176,6 +177,11 @@
       }
       const count = selected.size
       element('selection-count').textContent = count === 0 ? 'None selected' : `${count} selected`
+      element('select-all').disabled = visible.length === 0
+      element('select-all').textContent =
+        visible.length > 0 && visible.every(({ candidate }) => selected.has(candidate.id))
+          ? 'Deselect all shown'
+          : 'Select all shown'
       document.querySelectorAll('[data-bulk-action]').forEach((button) => { button.disabled = count === 0 })
       element('clear-selection').disabled = count === 0
       element('open-one').disabled = count !== 1
@@ -266,6 +272,18 @@
       button.onclick = () => applyBulkAction(button.dataset.bulkAction)
     })
     element('clear-selection').onclick = () => { selected.clear(); renderContactSheet() }
+    element('select-all').onclick = () => {
+      const visible = candidates.filter((candidate) => {
+        const decision = decisionFor(candidate)
+        return contactFilter === 'all' || decision.status === contactFilter
+      })
+      const allSelected = visible.every((candidate) => selected.has(candidate.id))
+      visible.forEach((candidate) => {
+        if (allSelected) selected.delete(candidate.id)
+        else selected.add(candidate.id)
+      })
+      renderContactSheet()
+    }
     element('open-one').onclick = () => {
       const id = [...selected][0]
       openCandidate(candidates.findIndex((candidate) => candidate.id === id))
