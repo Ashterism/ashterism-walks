@@ -9,9 +9,10 @@
     * { box-sizing: border-box; }
     body { margin: 0; }
     button, input { font: inherit; }
-    header { display: flex; justify-content: space-between; gap: 24px; padding: 20px 28px; border-bottom: 1px solid #cfc5b7; background: #f7f2e9; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 20px 28px; border-bottom: 1px solid #cfc5b7; background: #f7f2e9; }
     h1 { margin: 2px 0 0; font: 500 clamp(1.3rem, 2.8vw, 2rem)/1.1 Georgia, serif; }
     .eyebrow, .meta { margin: 0; color: #6b756e; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+    .header-actions { display: flex; align-items: center; gap: 18px; }
     .progress { min-width: 190px; text-align: right; }
     .progress strong { display: block; font-size: 1.35rem; }
     main { display: grid; grid-template-columns: minmax(0, 1fr) 320px; min-height: calc(100vh - 89px); }
@@ -31,13 +32,30 @@
     .navigation { margin-top: auto; }
     .privacy { margin: 0; padding: 12px; border-left: 3px solid #d7653f; background: #efe5d7; color: #5d675f; font: italic .78rem/1.45 Georgia, serif; }
     .saved { min-height: 1.2em; color: #52715f; font-size: .76rem; text-align: center; }
+    dialog { width: min(1180px, calc(100vw - 28px)); max-width: none; height: min(880px, calc(100vh - 28px)); padding: 0; border: 0; border-radius: 6px; background: #f7f2e9; color: inherit; box-shadow: 0 24px 80px rgb(0 0 0 / 42%); }
+    dialog::backdrop { background: rgb(15 24 19 / 78%); }
+    .contact-header { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 22px; border-bottom: 1px solid #d2c8b9; background: #f7f2e9; }
+    .contact-header h2 { margin: 0; font: 500 1.45rem Georgia, serif; }
+    .contact-filters { display: flex; flex-wrap: wrap; gap: 7px; padding: 14px 22px 0; }
+    .contact-filters button { min-height: 36px; padding: 5px 12px; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; padding: 18px 22px 28px; }
+    .contact-card { position: relative; min-height: 0; padding: 0; overflow: hidden; border-color: transparent; background: #19241f; text-align: left; }
+    .contact-card img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+    .contact-card span { position: absolute; right: 7px; bottom: 7px; padding: 3px 7px; border-radius: 999px; background: rgb(247 242 233 / 92%); color: #34473d; font-size: .65rem; font-weight: 800; text-transform: uppercase; }
+    .contact-card[data-status="keep"] { box-shadow: inset 0 0 0 3px #65a87f; }
+    .contact-card[data-status="reject"] { opacity: .55; }
+    .contact-card[data-status="reject"] span { background: rgb(91 50 40 / 94%); color: #fff; }
+    .contact-empty { padding: 40px; color: #667169; text-align: center; }
     @media (max-width: 760px) { main { grid-template-columns: 1fr; } .stage { min-height: 52vh; } .stage img { max-height: 48vh; } }
   </style>
 </head>
 <body>
   <header>
     <div><p class="eyebrow">Private review workspace</p><h1 id="walk-name">Loading…</h1></div>
-    <div class="progress"><strong id="position">—</strong><span id="summary">Finding candidates…</span></div>
+    <div class="header-actions">
+      <button id="view-all" type="button">View all</button>
+      <div class="progress"><strong id="position">—</strong><span id="summary">Finding candidates…</span></div>
+    </div>
   </header>
   <main>
     <section class="stage"><img id="photo" alt="Candidate photograph"></section>
@@ -56,7 +74,7 @@
         <button id="right" type="button">↷ Rotate right</button>
       </div>
       <label>Caption <input id="caption" type="text" placeholder="Optional caption"></label>
-      <p class="privacy">Nothing reviewed here is published. Decisions stay in the private project data until a separate publish step.</p>
+      <p class="privacy"><strong>Safe default:</strong> unreviewed photographs are shown nowhere. “Yes” starts as login-only. A photograph becomes public only when you explicitly choose Public. Nothing is published from this screen.</p>
       <p id="saved" class="saved" aria-live="polite"></p>
       <div class="navigation">
         <button id="previous" type="button">← Previous</button>
@@ -64,10 +82,24 @@
       </div>
     </aside>
   </main>
+  <dialog id="contact-sheet" aria-labelledby="contact-title">
+    <div class="contact-header">
+      <div><p class="eyebrow">Compare the whole set</p><h2 id="contact-title">All candidate photographs</h2></div>
+      <button id="contact-close" type="button">Close</button>
+    </div>
+    <div class="contact-filters" aria-label="Filter photographs">
+      <button type="button" data-filter="all" class="selected">All</button>
+      <button type="button" data-filter="unreviewed">Unreviewed</button>
+      <button type="button" data-filter="keep">Selected</button>
+      <button type="button" data-filter="reject">Skipped</button>
+    </div>
+    <div id="contact-grid" class="contact-grid"></div>
+  </dialog>
   <script type="module">
     const session = await fetch('/api/session').then((response) => response.json())
     const { candidates, review, walk } = session
     let index = 0
+    let contactFilter = 'all'
     const byId = review.decisions || {}
     const element = (id) => document.querySelector(`#${id}`)
     const controls = ['keep', 'reject', 'public', 'private']
@@ -80,6 +112,45 @@
     const updateSummary = () => {
       const kept = Object.values(byId).filter((item) => item.status === 'keep').length
       element('summary').textContent = `${reviewedCount()} reviewed · ${kept} selected`
+    }
+
+    const statusLabel = (decision) => {
+      if (decision.status === 'reject') return 'Skipped'
+      if (decision.status === 'keep') return decision.visibility === 'public' ? 'Public' : 'Login only'
+      return 'Unreviewed'
+    }
+
+    const renderContactSheet = () => {
+      const visible = candidates
+        .map((candidate, candidateIndex) => ({ candidate, candidateIndex, decision: decisionFor(candidate) }))
+        .filter(({ decision }) => contactFilter === 'all' || decision.status === contactFilter)
+      element('contact-grid').replaceChildren(...visible.map(({ candidate, candidateIndex, decision }) => {
+        const button = document.createElement('button')
+        button.type = 'button'
+        button.className = 'contact-card'
+        button.dataset.status = decision.status
+        button.title = `${new Date(candidate.capturedAtIso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} · ${candidate.matchReason}`
+        const image = document.createElement('img')
+        image.src = `/media/${candidate.id}?size=thumb`
+        image.alt = `Candidate ${candidateIndex + 1}`
+        image.loading = 'lazy'
+        image.style.transform = `rotate(${decision.rotation}deg)`
+        const badge = document.createElement('span')
+        badge.textContent = statusLabel(decision)
+        button.append(image, badge)
+        button.onclick = () => {
+          index = candidateIndex
+          element('contact-sheet').close()
+          render()
+        }
+        return button
+      }))
+      if (!visible.length) {
+        const empty = document.createElement('p')
+        empty.className = 'contact-empty'
+        empty.textContent = 'No photographs in this group yet.'
+        element('contact-grid').replaceChildren(empty)
+      }
     }
 
     const render = () => {
@@ -102,6 +173,7 @@
       element('next').disabled = index === candidates.length - 1
       element('saved').textContent = ''
       updateSummary()
+      if (element('contact-sheet').open) renderContactSheet()
     }
 
     const save = async (changes = {}) => {
@@ -123,6 +195,15 @@
     element('left').onclick = () => save({ rotation: (decisionFor(candidates[index]).rotation + 270) % 360 })
     element('right').onclick = () => save({ rotation: (decisionFor(candidates[index]).rotation + 90) % 360 })
     element('caption').onchange = (event) => save({ caption: event.target.value })
+    element('view-all').onclick = () => { renderContactSheet(); element('contact-sheet').showModal() }
+    element('contact-close').onclick = () => element('contact-sheet').close()
+    document.querySelectorAll('[data-filter]').forEach((button) => {
+      button.onclick = () => {
+        contactFilter = button.dataset.filter
+        document.querySelectorAll('[data-filter]').forEach((candidate) => candidate.classList.toggle('selected', candidate === button))
+        renderContactSheet()
+      }
+    })
     element('previous').onclick = () => { index -= 1; render() }
     element('next').onclick = () => { index += 1; render() }
     document.addEventListener('keydown', (event) => {

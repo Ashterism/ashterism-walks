@@ -74,9 +74,10 @@ const json = (response, status, value) => {
   response.end(JSON.stringify(value))
 }
 
-const serveMedia = async (response, candidate) => {
+const serveMedia = async (response, candidate, thumbnail = false) => {
   if (!candidate) return json(response, 404, { error: 'Unknown photograph' })
-  const convert = candidate.extension === '.heic' || candidate.extension === '.heif'
+  const convert =
+    thumbnail || candidate.extension === '.heic' || candidate.extension === '.heif'
   let source = candidate.mediaPath
   let contentType = {
     '.jpg': 'image/jpeg',
@@ -86,10 +87,21 @@ const serveMedia = async (response, candidate) => {
   }[candidate.extension]
 
   if (convert) {
-    source = path.join(cacheDirectory, `${candidate.id}.jpg`)
+    source = path.join(
+      cacheDirectory,
+      `${candidate.id}${thumbnail ? '-thumb' : ''}.jpg`,
+    )
     contentType = 'image/jpeg'
     if (!fs.existsSync(source)) {
-      await execute('/usr/bin/sips', ['-s', 'format', 'jpeg', candidate.mediaPath, '--out', source])
+      await execute('/usr/bin/sips', [
+        ...(thumbnail ? ['-Z', '640'] : []),
+        '-s',
+        'format',
+        'jpeg',
+        candidate.mediaPath,
+        '--out',
+        source,
+      ])
     }
   }
 
@@ -119,7 +131,11 @@ const server = http.createServer(async (request, response) => {
       })
     }
     if (request.method === 'GET' && url.pathname.startsWith('/media/')) {
-      return serveMedia(response, candidateById.get(url.pathname.split('/').pop()))
+      return serveMedia(
+        response,
+        candidateById.get(url.pathname.split('/').pop()),
+        url.searchParams.get('size') === 'thumb',
+      )
     }
     if (request.method === 'POST' && url.pathname === '/api/decision') {
       const decision = await readBody(request)

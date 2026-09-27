@@ -151,4 +151,4 @@ The local review workspace finds candidate images in the verified NAS archive us
 npm run photos:review -- --walk photo-20220417 --archive /Volumes/photo/Photos
 ```
 
-Open `http://127.0.0.1:4175`. Each candidate can be selected or rejected, marked public or login-only, rotated and captioned. Decisions are saved under the Git-ignored `private/photo-reviews/` directory, so review can be stopped and resumed safely. Publishing selected photographs to Ashterix Media is intentionally a separate later step.
+Open `http://127.0.0.1:4175`. The contact-sheet view shows the complete candidate set for comparison; selecting a photograph opens its individual review. Each candidate can be selected or rejected, marked public or login-only, rotated and captioned. Unreviewed photographs are shown nowhere, and a selected photograph defaults to login-only. Decisions are saved under the Git-ignored `private/photo-reviews/` directory, so review can be stopped and resumed safely. Publishing selected photographs to Ashterix Media is intentionally a separate later step.
