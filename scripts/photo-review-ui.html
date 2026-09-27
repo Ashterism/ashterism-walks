@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walk photo review</title>
+  <style>
+    :root { color: #23352c; background: #eee7dc; font: 16px/1.45 Inter, system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    button, input { font: inherit; }
+    header { display: flex; justify-content: space-between; gap: 24px; padding: 20px 28px; border-bottom: 1px solid #cfc5b7; background: #f7f2e9; }
+    h1 { margin: 2px 0 0; font: 500 clamp(1.3rem, 2.8vw, 2rem)/1.1 Georgia, serif; }
+    .eyebrow, .meta { margin: 0; color: #6b756e; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+    .progress { min-width: 190px; text-align: right; }
+    .progress strong { display: block; font-size: 1.35rem; }
+    main { display: grid; grid-template-columns: minmax(0, 1fr) 320px; min-height: calc(100vh - 89px); }
+    .stage { display: grid; place-items: center; min-width: 0; padding: 28px; background: #18231e; overflow: hidden; }
+    .stage img { display: block; max-width: 100%; max-height: calc(100vh - 150px); object-fit: contain; transition: transform .18s ease; }
+    aside { display: flex; flex-direction: column; gap: 19px; padding: 24px; background: #f7f2e9; }
+    .facts { color: #647069; font-size: .82rem; }
+    .facts p { margin: 4px 0; }
+    .actions, .rotate, .navigation { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    button { min-height: 44px; border: 1px solid #aeb8b1; border-radius: 4px; background: #fff; color: inherit; cursor: pointer; }
+    button:hover, button:focus-visible { border-color: #d7653f; outline: none; }
+    button.selected { border-color: #254d3b; background: #dfeadf; box-shadow: inset 0 0 0 1px #254d3b; }
+    button.reject.selected { border-color: #9e432e; background: #f3ded7; box-shadow: inset 0 0 0 1px #9e432e; }
+    label { display: grid; gap: 7px; color: #4f5e56; font-size: .8rem; font-weight: 700; }
+    input { width: 100%; padding: 10px; border: 1px solid #b9b2a7; border-radius: 4px; background: #fff; }
+    .visibility { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .navigation { margin-top: auto; }
+    .privacy { margin: 0; padding: 12px; border-left: 3px solid #d7653f; background: #efe5d7; color: #5d675f; font: italic .78rem/1.45 Georgia, serif; }
+    .saved { min-height: 1.2em; color: #52715f; font-size: .76rem; text-align: center; }
+    @media (max-width: 760px) { main { grid-template-columns: 1fr; } .stage { min-height: 52vh; } .stage img { max-height: 48vh; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div><p class="eyebrow">Private review workspace</p><h1 id="walk-name">Loading…</h1></div>
+    <div class="progress"><strong id="position">—</strong><span id="summary">Finding candidates…</span></div>
+  </header>
+  <main>
+    <section class="stage"><img id="photo" alt="Candidate photograph"></section>
+    <aside>
+      <div class="facts"><p id="time"></p><p id="match"></p><p id="path"></p></div>
+      <div class="actions">
+        <button id="keep" type="button">✓ Yes, use it</button>
+        <button id="reject" class="reject" type="button">✕ No, skip it</button>
+      </div>
+      <div class="visibility">
+        <button id="public" type="button">Public</button>
+        <button id="private" type="button">Login only</button>
+      </div>
+      <div class="rotate">
+        <button id="left" type="button">↶ Rotate left</button>
+        <button id="right" type="button">↷ Rotate right</button>
+      </div>
+      <label>Caption <input id="caption" type="text" placeholder="Optional caption"></label>
+      <p class="privacy">Nothing reviewed here is published. Decisions stay in the private project data until a separate publish step.</p>
+      <p id="saved" class="saved" aria-live="polite"></p>
+      <div class="navigation">
+        <button id="previous" type="button">← Previous</button>
+        <button id="next" type="button">Next →</button>
+      </div>
+    </aside>
+  </main>
+  <script type="module">
+    const session = await fetch('/api/session').then((response) => response.json())
+    const { candidates, review, walk } = session
+    let index = 0
+    const byId = review.decisions || {}
+    const element = (id) => document.querySelector(`#${id}`)
+    const controls = ['keep', 'reject', 'public', 'private']
+
+    const decisionFor = (candidate) => byId[candidate.id] || {
+      status: 'unreviewed', visibility: 'private', rotation: 0, caption: ''
+    }
+
+    const reviewedCount = () => Object.values(byId).filter((item) => item.status !== 'unreviewed').length
+    const updateSummary = () => {
+      const kept = Object.values(byId).filter((item) => item.status === 'keep').length
+      element('summary').textContent = `${reviewedCount()} reviewed · ${kept} selected`
+    }
+
+    const render = () => {
+      const candidate = candidates[index]
+      if (!candidate) return
+      const decision = decisionFor(candidate)
+      element('walk-name').textContent = walk.name
+      element('position').textContent = `${index + 1} / ${candidates.length}`
+      element('photo').src = `/media/${candidate.id}`
+      element('photo').style.transform = `rotate(${decision.rotation}deg)`
+      element('time').textContent = new Date(candidate.capturedAtIso).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })
+      element('match').textContent = `${candidate.matchReason}${candidate.routeDistanceM == null ? '' : ` · ${candidate.routeDistanceM} m from route`}`
+      element('path').textContent = candidate.archiveRelativePath
+      element('caption').value = decision.caption || ''
+      controls.forEach((id) => element(id).classList.remove('selected'))
+      if (decision.status === 'keep') element('keep').classList.add('selected')
+      if (decision.status === 'reject') element('reject').classList.add('selected')
+      element(decision.visibility).classList.add('selected')
+      element('previous').disabled = index === 0
+      element('next').disabled = index === candidates.length - 1
+      element('saved').textContent = ''
+      updateSummary()
+    }
+
+    const save = async (changes = {}) => {
+      const candidate = candidates[index]
+      const decision = { ...decisionFor(candidate), ...changes, id: candidate.id }
+      byId[candidate.id] = decision
+      render()
+      const response = await fetch('/api/decision', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(decision)
+      })
+      if (!response.ok) throw new Error((await response.json()).error)
+      element('saved').textContent = 'Saved privately'
+    }
+
+    element('keep').onclick = () => save({ status: 'keep' })
+    element('reject').onclick = () => save({ status: 'reject' })
+    element('public').onclick = () => save({ visibility: 'public' })
+    element('private').onclick = () => save({ visibility: 'private' })
+    element('left').onclick = () => save({ rotation: (decisionFor(candidates[index]).rotation + 270) % 360 })
+    element('right').onclick = () => save({ rotation: (decisionFor(candidates[index]).rotation + 90) % 360 })
+    element('caption').onchange = (event) => save({ caption: event.target.value })
+    element('previous').onclick = () => { index -= 1; render() }
+    element('next').onclick = () => { index += 1; render() }
+    document.addEventListener('keydown', (event) => {
+      if (event.target.tagName === 'INPUT') return
+      if (event.key === 'ArrowLeft' && index > 0) { index -= 1; render() }
+      if (event.key === 'ArrowRight' && index < candidates.length - 1) { index += 1; render() }
+      if (event.key.toLowerCase() === 'y') save({ status: 'keep' })
+      if (event.key.toLowerCase() === 'n') save({ status: 'reject' })
+      if (event.key.toLowerCase() === 'p') save({ visibility: 'private' })
+    })
+    render()
+  </script>
+</body>
+</html>

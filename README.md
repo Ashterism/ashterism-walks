@@ -142,3 +142,13 @@ Signed-in users also see a `Walk books` entry in the account menu. Its first ver
 - Public filenames use numeric Garmin IDs or neutral provider-prefixed IDs.
 - Generated routes contain route geometry and selected activity statistics, not heart-rate streams, email addresses or original private filenames.
 - Public photo URLs may be recorded in canonical walks. Protected photo metadata will instead be requested from the authenticated photo service when it exists.
+
+## Review photographs for a historical walk
+
+The local review workspace finds candidate images in the verified NAS archive using the walk time window, photo GPS metadata and route proximity. It never reads the live iCloud inbox and does not publish or alter archive files.
+
+```sh
+npm run photos:review -- --walk photo-20220417 --archive /Volumes/photo/Photos
+```
+
+Open `http://127.0.0.1:4175`. Each candidate can be selected or rejected, marked public or login-only, rotated and captioned. Decisions are saved under the Git-ignored `private/photo-reviews/` directory, so review can be stopped and resumed safely. Publishing selected photographs to Ashterix Media is intentionally a separate later step.
