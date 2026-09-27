@@ -42,16 +42,20 @@
     .bulk-actions p { min-width: 112px; margin: 0 8px 0 0; color: #5d6962; font-size: .78rem; font-weight: 750; }
     .bulk-actions button { min-height: 36px; padding: 5px 11px; }
     .bulk-actions button:disabled { cursor: default; opacity: .42; }
-    .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; padding: 18px 22px 28px; }
-    .contact-card { position: relative; min-height: 0; padding: 0; overflow: hidden; border-color: transparent; background: #19241f; text-align: left; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; padding: 18px 22px 28px; }
+    .contact-card { position: relative; min-width: 0; overflow: hidden; border-radius: 4px; background: #19241f; }
+    .contact-card__select { display: block; width: 100%; min-height: 0; padding: 0; overflow: hidden; border: 3px solid transparent; border-radius: 4px; background: #19241f; text-align: left; }
     .contact-card img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
-    .contact-card span { position: absolute; right: 7px; bottom: 7px; padding: 3px 7px; border-radius: 999px; background: rgb(247 242 233 / 92%); color: #34473d; font-size: .65rem; font-weight: 800; text-transform: uppercase; }
-    .contact-card[data-status="keep"] { box-shadow: inset 0 0 0 3px #65a87f; }
-    .contact-card[data-status="reject"] { opacity: .55; }
-    .contact-card[data-status="reject"] span { background: rgb(91 50 40 / 94%); color: #fff; }
-    .contact-card[aria-pressed="true"] { border-color: #ffb36f; box-shadow: inset 0 0 0 4px #ffb36f; opacity: 1; }
+    .contact-card__status { position: absolute; top: 7px; right: 7px; padding: 3px 7px; border-radius: 999px; background: rgb(247 242 233 / 92%); color: #34473d; font-size: .62rem; font-style: normal; font-weight: 800; text-transform: uppercase; pointer-events: none; }
+    .contact-card[data-status="reject"] img { opacity: .5; }
+    .contact-card[data-status="reject"] .contact-card__status { background: rgb(91 50 40 / 94%); color: #fff; }
+    .contact-card[data-selected="true"] .contact-card__select { border-color: #ffb36f; opacity: 1; }
     .contact-card__check { position: absolute; top: 7px; left: 7px; display: grid; width: 25px; height: 25px; place-items: center; border: 2px solid #fff; border-radius: 50%; background: rgb(23 34 29 / 72%); color: transparent; font-size: .8rem; }
-    .contact-card[aria-pressed="true"] .contact-card__check { background: #d7653f; color: #fff; }
+    .contact-card[data-selected="true"] .contact-card__check { background: #d7653f; color: #fff; }
+    .contact-card__states { position: absolute; right: 6px; bottom: 6px; left: 6px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 3px; border-radius: 4px; background: rgb(20 30 25 / 82%); }
+    .contact-card__states button { min-height: 30px; padding: 2px 3px; border: 0; border-radius: 3px; background: transparent; color: #fff; font-size: .61rem; font-weight: 800; }
+    .contact-card__states button:hover, .contact-card__states button:focus-visible { background: rgb(255 255 255 / 18%); }
+    .contact-card__states button[aria-pressed="true"] { background: #f7f2e9; color: #26392f; }
     .contact-empty { padding: 40px; color: #667169; text-align: center; }
     @media (max-width: 760px) { main { grid-template-columns: 1fr; } .stage { min-height: 52vh; } .stage img { max-height: 48vh; } }
   </style>
@@ -143,18 +147,22 @@
         .map((candidate, candidateIndex) => ({ candidate, candidateIndex, decision: decisionFor(candidate) }))
         .filter(({ decision }) => contactFilter === 'all' || decision.status === contactFilter)
       element('contact-grid').replaceChildren(...visible.map(({ candidate, candidateIndex, decision }) => {
+        const card = document.createElement('article')
+        card.className = 'contact-card'
+        card.dataset.status = decision.status
+        card.dataset.selected = String(selected.has(candidate.id))
         const button = document.createElement('button')
         button.type = 'button'
-        button.className = 'contact-card'
-        button.dataset.status = decision.status
+        button.className = 'contact-card__select'
         button.setAttribute('aria-pressed', String(selected.has(candidate.id)))
-        button.title = `${new Date(candidate.capturedAtIso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} · ${candidate.matchReason}`
+        button.title = `Select · ${new Date(candidate.capturedAtIso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} · ${candidate.matchReason}`
         const image = document.createElement('img')
         image.src = `/media/${candidate.id}?size=thumb`
         image.alt = `Candidate ${candidateIndex + 1}`
         image.loading = 'lazy'
         image.style.transform = `rotate(${decision.rotation}deg)`
-        const badge = document.createElement('span')
+        const badge = document.createElement('i')
+        badge.className = 'contact-card__status'
         badge.textContent = statusLabel(decision)
         const check = document.createElement('i')
         check.className = 'contact-card__check'
@@ -167,7 +175,24 @@
           renderContactSheet()
         }
         button.ondblclick = () => openCandidate(candidateIndex)
-        return button
+        const states = document.createElement('div')
+        states.className = 'contact-card__states'
+        states.setAttribute('aria-label', 'Photograph visibility')
+        const choices = [
+          ['Private', { status: 'keep', visibility: 'private' }, decision.status === 'keep' && decision.visibility === 'private'],
+          ['Public', { status: 'keep', visibility: 'public' }, decision.status === 'keep' && decision.visibility === 'public'],
+          ['Not included', { status: 'reject', visibility: 'private' }, decision.status === 'reject'],
+        ]
+        choices.forEach(([label, changes, active]) => {
+          const choice = document.createElement('button')
+          choice.type = 'button'
+          choice.textContent = label
+          choice.setAttribute('aria-pressed', String(active))
+          choice.onclick = () => saveContactDecision(candidate, changes)
+          states.append(choice)
+        })
+        card.append(button, states)
+        return card
       }))
       if (!visible.length) {
         const empty = document.createElement('p')
@@ -215,6 +240,19 @@
       selected.clear()
       renderContactSheet()
       updateSummary()
+    }
+
+    const saveContactDecision = async (candidate, changes) => {
+      const decision = { ...decisionFor(candidate), ...changes, id: candidate.id }
+      byId[candidate.id] = decision
+      renderContactSheet()
+      updateSummary()
+      const response = await fetch('/api/decision', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(decision),
+      })
+      if (!response.ok) throw new Error((await response.json()).error)
     }
 
     const render = () => {
