@@ -38,6 +38,10 @@
     .contact-header h2 { margin: 0; font: 500 1.45rem Georgia, serif; }
     .contact-filters { display: flex; flex-wrap: wrap; gap: 7px; padding: 14px 22px 0; }
     .contact-filters button { min-height: 36px; padding: 5px 12px; }
+    .bulk-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; padding: 12px 22px 0; }
+    .bulk-actions p { min-width: 112px; margin: 0 8px 0 0; color: #5d6962; font-size: .78rem; font-weight: 750; }
+    .bulk-actions button { min-height: 36px; padding: 5px 11px; }
+    .bulk-actions button:disabled { cursor: default; opacity: .42; }
     .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; padding: 18px 22px 28px; }
     .contact-card { position: relative; min-height: 0; padding: 0; overflow: hidden; border-color: transparent; background: #19241f; text-align: left; }
     .contact-card img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
@@ -45,6 +49,9 @@
     .contact-card[data-status="keep"] { box-shadow: inset 0 0 0 3px #65a87f; }
     .contact-card[data-status="reject"] { opacity: .55; }
     .contact-card[data-status="reject"] span { background: rgb(91 50 40 / 94%); color: #fff; }
+    .contact-card[aria-pressed="true"] { border-color: #ffb36f; box-shadow: inset 0 0 0 4px #ffb36f; opacity: 1; }
+    .contact-card__check { position: absolute; top: 7px; left: 7px; display: grid; width: 25px; height: 25px; place-items: center; border: 2px solid #fff; border-radius: 50%; background: rgb(23 34 29 / 72%); color: transparent; font-size: .8rem; }
+    .contact-card[aria-pressed="true"] .contact-card__check { background: #d7653f; color: #fff; }
     .contact-empty { padding: 40px; color: #667169; text-align: center; }
     @media (max-width: 760px) { main { grid-template-columns: 1fr; } .stage { min-height: 52vh; } .stage img { max-height: 48vh; } }
   </style>
@@ -93,6 +100,15 @@
       <button type="button" data-filter="keep">Selected</button>
       <button type="button" data-filter="reject">Skipped</button>
     </div>
+    <div class="bulk-actions" aria-label="Actions for selected photographs">
+      <p id="selection-count">None selected</p>
+      <button type="button" data-bulk-action="private" disabled>Confirm private</button>
+      <button type="button" data-bulk-action="public" disabled>Make public</button>
+      <button type="button" data-bulk-action="reject" disabled>Reject</button>
+      <button type="button" data-bulk-action="unreviewed" disabled>Mark unreviewed</button>
+      <button id="open-one" type="button" disabled>Open one</button>
+      <button id="clear-selection" type="button" disabled>Clear</button>
+    </div>
     <div id="contact-grid" class="contact-grid"></div>
   </dialog>
   <script type="module">
@@ -100,6 +116,7 @@
     const { candidates, review, walk } = session
     let index = 0
     let contactFilter = 'all'
+    const selected = new Set()
     const byId = review.decisions || {}
     const element = (id) => document.querySelector(`#${id}`)
     const controls = ['keep', 'reject', 'public', 'private']
@@ -129,6 +146,7 @@
         button.type = 'button'
         button.className = 'contact-card'
         button.dataset.status = decision.status
+        button.setAttribute('aria-pressed', String(selected.has(candidate.id)))
         button.title = `${new Date(candidate.capturedAtIso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} · ${candidate.matchReason}`
         const image = document.createElement('img')
         image.src = `/media/${candidate.id}?size=thumb`
@@ -137,12 +155,17 @@
         image.style.transform = `rotate(${decision.rotation}deg)`
         const badge = document.createElement('span')
         badge.textContent = statusLabel(decision)
-        button.append(image, badge)
+        const check = document.createElement('i')
+        check.className = 'contact-card__check'
+        check.textContent = '✓'
+        check.setAttribute('aria-hidden', 'true')
+        button.append(image, check, badge)
         button.onclick = () => {
-          index = candidateIndex
-          element('contact-sheet').close()
-          render()
+          if (selected.has(candidate.id)) selected.delete(candidate.id)
+          else selected.add(candidate.id)
+          renderContactSheet()
         }
+        button.ondblclick = () => openCandidate(candidateIndex)
         return button
       }))
       if (!visible.length) {
@@ -151,6 +174,41 @@
         empty.textContent = 'No photographs in this group yet.'
         element('contact-grid').replaceChildren(empty)
       }
+      const count = selected.size
+      element('selection-count').textContent = count === 0 ? 'None selected' : `${count} selected`
+      document.querySelectorAll('[data-bulk-action]').forEach((button) => { button.disabled = count === 0 })
+      element('clear-selection').disabled = count === 0
+      element('open-one').disabled = count !== 1
+    }
+
+    const openCandidate = (candidateIndex) => {
+      index = candidateIndex
+      element('contact-sheet').close()
+      render()
+    }
+
+    const applyBulkAction = async (action) => {
+      const changes = {
+        private: { status: 'keep', visibility: 'private' },
+        public: { status: 'keep', visibility: 'public' },
+        reject: { status: 'reject', visibility: 'private' },
+        unreviewed: { status: 'unreviewed', visibility: 'private' },
+      }[action]
+      const decisions = [...selected].map((id) => {
+        const candidate = candidates.find((item) => item.id === id)
+        const decision = { ...decisionFor(candidate), ...changes, id }
+        byId[id] = decision
+        return decision
+      })
+      const response = await fetch('/api/decisions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ decisions }),
+      })
+      if (!response.ok) throw new Error((await response.json()).error)
+      selected.clear()
+      renderContactSheet()
+      updateSummary()
     }
 
     const render = () => {
@@ -204,6 +262,14 @@
         renderContactSheet()
       }
     })
+    document.querySelectorAll('[data-bulk-action]').forEach((button) => {
+      button.onclick = () => applyBulkAction(button.dataset.bulkAction)
+    })
+    element('clear-selection').onclick = () => { selected.clear(); renderContactSheet() }
+    element('open-one').onclick = () => {
+      const id = [...selected][0]
+      openCandidate(candidates.findIndex((candidate) => candidate.id === id))
+    }
     element('previous').onclick = () => { index -= 1; render() }
     element('next').onclick = () => { index += 1; render() }
     document.addEventListener('keydown', (event) => {

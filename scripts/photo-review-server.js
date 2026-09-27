@@ -115,6 +115,33 @@ const readBody = async (request) => {
   return JSON.parse(Buffer.concat(chunks).toString('utf8'))
 }
 
+const normaliseDecision = (decision) => {
+  const candidate = candidateById.get(decision.id)
+  if (!candidate) throw new Error('Unknown photograph')
+  if (!['unreviewed', 'keep', 'reject'].includes(decision.status)) {
+    throw new Error('Invalid status')
+  }
+  if (!['public', 'private'].includes(decision.visibility)) {
+    throw new Error('Invalid visibility')
+  }
+  const rotation = Number(decision.rotation)
+  if (![0, 90, 180, 270].includes(rotation)) {
+    throw new Error('Invalid rotation')
+  }
+  return {
+    id: decision.id,
+    value: {
+      archiveRelativePath: candidate.archiveRelativePath,
+      capturedAt: candidate.capturedAtIso,
+      status: decision.status,
+      visibility: decision.visibility,
+      rotation,
+      caption: String(decision.caption ?? '').trim(),
+      reviewedAt: new Date().toISOString(),
+    },
+  }
+}
+
 const clientPath = path.resolve('scripts/photo-review-ui.html')
 const server = http.createServer(async (request, response) => {
   try {
@@ -139,29 +166,24 @@ const server = http.createServer(async (request, response) => {
     }
     if (request.method === 'POST' && url.pathname === '/api/decision') {
       const decision = await readBody(request)
-      const candidate = candidateById.get(decision.id)
-      if (!candidate) return json(response, 404, { error: 'Unknown photograph' })
-      if (!['unreviewed', 'keep', 'reject'].includes(decision.status)) {
-        return json(response, 400, { error: 'Invalid status' })
-      }
-      if (!['public', 'private'].includes(decision.visibility)) {
-        return json(response, 400, { error: 'Invalid visibility' })
-      }
-      const rotation = Number(decision.rotation)
-      if (![0, 90, 180, 270].includes(rotation)) {
-        return json(response, 400, { error: 'Invalid rotation' })
-      }
-      review.decisions[decision.id] = {
-        archiveRelativePath: candidate.archiveRelativePath,
-        capturedAt: candidate.capturedAtIso,
-        status: decision.status,
-        visibility: decision.visibility,
-        rotation,
-        caption: String(decision.caption ?? '').trim(),
-        reviewedAt: new Date().toISOString(),
-      }
+      const normalised = normaliseDecision(decision)
+      review.decisions[normalised.id] = normalised.value
       saveReview()
       return json(response, 200, { ok: true, updatedAt: review.updatedAt })
+    }
+    if (request.method === 'POST' && url.pathname === '/api/decisions') {
+      const body = await readBody(request)
+      if (!Array.isArray(body.decisions) || body.decisions.length === 0) {
+        return json(response, 400, { error: 'No decisions supplied' })
+      }
+      const normalised = body.decisions.map(normaliseDecision)
+      normalised.forEach(({ id, value }) => { review.decisions[id] = value })
+      saveReview()
+      return json(response, 200, {
+        ok: true,
+        count: normalised.length,
+        updatedAt: review.updatedAt,
+      })
     }
     return json(response, 404, { error: 'Not found' })
   } catch (error) {
