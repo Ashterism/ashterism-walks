@@ -74,7 +74,7 @@
         <button id="right" type="button">↷ Rotate right</button>
       </div>
       <label>Caption <input id="caption" type="text" placeholder="Optional caption"></label>
-      <p class="privacy"><strong>Safe default:</strong> unreviewed photographs are shown nowhere. “Yes” starts as login-only. A photograph becomes public only when you explicitly choose Public. Nothing is published from this screen.</p>
+      <p class="privacy"><strong>Visibility model:</strong> unreviewed matches will be visible to authorised private accounts with an “Unreviewed” label. “No” hides a photograph. Reviewed photographs remain login-only unless you explicitly choose Public. Nothing is published from this screen.</p>
       <p id="saved" class="saved" aria-live="polite"></p>
       <div class="navigation">
         <button id="previous" type="button">← Previous</button>
@@ -116,8 +116,8 @@
 
     const statusLabel = (decision) => {
       if (decision.status === 'reject') return 'Skipped'
-      if (decision.status === 'keep') return decision.visibility === 'public' ? 'Public' : 'Login only'
-      return 'Unreviewed'
+      if (decision.status === 'keep') return decision.visibility === 'public' ? 'Public' : 'Reviewed private'
+      return 'Unreviewed · private'
     }
 
     const renderContactSheet = () => {
