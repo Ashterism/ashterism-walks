@@ -185,7 +185,7 @@ button { font: inherit; }
 .photo-grid__review-controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 7px; }
 .photo-grid__review-controls button { padding: 6px 4px; border: 1px solid rgb(32 49 41 / 20%); border-radius: 5px; background: #f7f1e7; color: #30443a; cursor: pointer; font-size: .62rem; font-weight: 750; }
 .photo-grid__review-controls button:hover, .photo-grid__review-controls button:focus-visible, .photo-grid__review-controls button[data-selected="true"] { border-color: #d7653f; background: #d7653f; color: #fff; }
-.photo-viewer { width: min(1120px, calc(100% - 28px)); max-width: none; height: min(900px, calc(100% - 28px)); max-height: none; padding: 0; overflow: hidden; border: 1px solid rgb(255 250 241 / 24%); border-radius: 10px; background: #10241d; color: #fffaf1; box-shadow: 0 24px 90px rgb(8 18 14 / 65%); }
+.photo-viewer { width: min(1120px, calc(100dvw - 28px)); max-width: none; height: min(900px, calc(100dvh - 28px)); max-height: calc(100dvh - 28px); padding: 0; overflow: hidden; border: 1px solid rgb(255 250 241 / 24%); border-radius: 10px; background: #10241d; color: #fffaf1; box-shadow: 0 24px 90px rgb(8 18 14 / 65%); }
 .photo-viewer[open] { display: flex; flex-direction: column; }
 .photo-viewer::backdrop { background: rgb(8 18 14 / 88%); backdrop-filter: blur(4px); }
 .photo-viewer__bar { display: flex; flex: 0 0 48px; align-items: center; justify-content: space-between; gap: 16px; padding: 0 14px; border-bottom: 1px solid rgb(255 250 241 / 16%); }
