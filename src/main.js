@@ -96,6 +96,7 @@ const elements = {
   profileDistance: document.querySelector('#detail-profile-distance'),
   photoGrid: document.querySelector('#detail-photo-grid'),
   photoNote: document.querySelector('#detail-photo-note'),
+  photoReview: document.querySelector('#detail-photo-review'),
   photoEmpty: document.querySelector('#detail-photo-empty'),
   detailNotes: document.querySelector('#detail-notes'),
   detailNotesCopy: document.querySelector('#detail-notes-copy'),
@@ -114,7 +115,9 @@ const walkPhotos = setupWalkPhotos({
   grid: elements.photoGrid,
   note: elements.photoNote,
   empty: elements.photoEmpty,
+  reviewRoot: elements.photoReview,
   getAccessToken: () => account?.getAccessToken(),
+  isSignedIn: () => account?.isSignedIn() ?? false,
 })
 
 let walks = []

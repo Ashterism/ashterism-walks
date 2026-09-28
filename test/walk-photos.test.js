@@ -1,7 +1,14 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { mediaRequestUrl } from '../src/walk-photos.js'
+import { mediaRequestUrl, reviewDecisionFor } from '../src/walk-photos.js'
+
+test('unreviewed matched photos default to private', () => {
+  assert.deepEqual(
+    reviewDecisionFor({ review: { decisions: {} } }, { id: 'example' }),
+    { status: 'unreviewed', visibility: 'private', rotation: 0, caption: '' },
+  )
+})
 
 test('routes dev media requests through the same-origin Pages proxy', () => {
   assert.equal(

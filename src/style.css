@@ -178,6 +178,11 @@ button { font: inherit; }
 .photo-grid img { display: block; object-fit: cover; }
 .photo-grid figcaption { margin-top: 7px; color: #6a756f; font-family: Georgia, serif; font-size: .8rem; font-style: italic; }
 .photo-grid__visibility { position: absolute; top: 8px; right: 8px; padding: 4px 7px; border-radius: 999px; background: rgb(23 56 45 / 88%); color: #fffaf1; font-size: .58rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.photo-grid__visibility--review { background: rgb(215 101 63 / 94%); }
+.photo-review { margin: 0 0 14px; padding: 10px 12px; border-left: 3px solid #d7653f; background: rgb(215 101 63 / 8%); color: #52645b; font-size: .72rem; line-height: 1.45; }
+.photo-grid__review-controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 7px; }
+.photo-grid__review-controls button { padding: 6px 4px; border: 1px solid rgb(32 49 41 / 20%); border-radius: 5px; background: #f7f1e7; color: #30443a; cursor: pointer; font-size: .62rem; font-weight: 750; }
+.photo-grid__review-controls button:hover, .photo-grid__review-controls button:focus-visible, .photo-grid__review-controls button[data-selected="true"] { border-color: #d7653f; background: #d7653f; color: #fff; }
 .photo-empty { display: grid; grid-template-columns: minmax(180px, .8fr) minmax(210px, 1fr); align-items: center; gap: clamp(22px, 5vw, 62px); min-height: 210px; padding: clamp(22px, 4vw, 42px); border: 1px solid rgb(32 49 41 / 11%); border-radius: 3px; background: linear-gradient(135deg, #eee5d8, #f7f1e7); color: #52645b; }
 .photo-empty[hidden] { display: none; }
 .photo-empty svg { display: block; width: 100%; max-width: 320px; margin: auto; fill: none; stroke: #6f8178; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; }
