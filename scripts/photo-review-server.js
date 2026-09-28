@@ -171,6 +171,7 @@ const server = http.createServer(async (request, response) => {
       response.setHeader('Vary', 'Origin')
       response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
       response.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+      response.setHeader('Access-Control-Allow-Private-Network', 'true')
     }
     if (request.method === 'OPTIONS') {
       response.writeHead(origin === 'https://dev.walks.ashterism.com' ? 204 : 403)
