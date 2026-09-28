@@ -31,6 +31,20 @@ export const setupWalkPhotos = ({
   let objectUrls = []
   const emptyTitle = empty.querySelector('strong')
   const emptyCopy = empty.querySelector('span')
+  const viewer = document.createElement('dialog')
+  viewer.className = 'photo-viewer'
+  viewer.innerHTML = `
+    <div class="photo-viewer__bar">
+      <p>Photograph</p>
+      <button type="button" aria-label="Close full-size photograph">Close</button>
+    </div>
+    <div class="photo-viewer__stage"><img alt="" /></div>`
+  document.body.append(viewer)
+  const viewerImage = viewer.querySelector('img')
+  viewer.querySelector('button').addEventListener('click', () => viewer.close())
+  viewer.addEventListener('click', (event) => {
+    if (event.target === viewer) viewer.close()
+  })
 
   const clearObjectUrls = () => {
     objectUrls.forEach((url) => URL.revokeObjectURL(url))
@@ -39,12 +53,24 @@ export const setupWalkPhotos = ({
 
   const figureFor = (photo, index, saveDecision) => {
     const figure = document.createElement('figure')
+    const open = document.createElement('button')
+    open.type = 'button'
+    open.className = 'photo-grid__open'
+    open.setAttribute('aria-label', `Open photograph ${index + 1} full size`)
     const image = document.createElement('img')
     image.src = photo.url
     image.alt = photo.alt ?? `Photograph ${index + 1} from this walk`
     image.loading = 'lazy'
     if (photo.rotation) image.style.transform = `rotate(${photo.rotation}deg)`
-    figure.append(image)
+    open.append(image)
+    open.addEventListener('click', () => {
+      viewerImage.src = photo.fullUrl ?? photo.url
+      viewerImage.alt = image.alt
+      if (photo.rotation) viewerImage.style.transform = `rotate(${photo.rotation}deg)`
+      else viewerImage.style.removeProperty('transform')
+      viewer.showModal()
+    })
+    figure.append(open)
     if (photo.reviewStatus === 'unreviewed') {
       const badge = document.createElement('span')
       badge.className = 'photo-grid__visibility photo-grid__visibility--review'
@@ -53,7 +79,7 @@ export const setupWalkPhotos = ({
     } else if (photo.visibility === 'private') {
       const badge = document.createElement('span')
       badge.className = 'photo-grid__visibility'
-      badge.textContent = 'Login only'
+      badge.textContent = 'Private'
       figure.append(badge)
     }
     if (photo.caption) {
@@ -66,7 +92,7 @@ export const setupWalkPhotos = ({
       controls.className = 'photo-grid__review-controls'
       const choices = [
         ['Public', { status: 'keep', visibility: 'public' }],
-        ['Login only', { status: 'keep', visibility: 'private' }],
+        ['Private', { status: 'keep', visibility: 'private' }],
         ['Not included', { status: 'reject', visibility: 'private' }],
       ]
       for (const [label, change] of choices) {
@@ -141,6 +167,7 @@ export const setupWalkPhotos = ({
         return {
           candidateId: candidate.id,
           url: `${LOCAL_REVIEW_ORIGIN}/media/${candidate.id}?size=thumb`,
+          fullUrl: `${LOCAL_REVIEW_ORIGIN}/media/${candidate.id}`,
           alt: `Matched photograph from ${session.walk.name}`,
           capturedAt: candidate.capturedAtIso,
           caption: decision.caption,
@@ -152,7 +179,7 @@ export const setupWalkPhotos = ({
       .filter((photo) => photo.reviewStatus !== 'reject')
 
     reviewRoot.hidden = false
-    reviewRoot.textContent = `${reviewed} of ${session.candidates.length} reviewed. Matched photographs remain login-only until explicitly marked Public.`
+    reviewRoot.textContent = `${reviewed} of ${session.candidates.length} reviewed. Matched photographs remain Private until explicitly marked Public.`
     display(
       photos,
       ` · ${session.candidates.length - reviewed} need review`,
@@ -171,7 +198,7 @@ export const setupWalkPhotos = ({
       ? 'Sign in to see this walk’s photographs'
       : 'No photographs from this walk'
     emptyCopy.textContent = walk.photoManifestAssetId
-      ? 'Public photographs appear for everyone; login-only photographs are fetched securely after sign-in.'
+      ? 'Public photographs appear for everyone; private photographs are fetched securely after sign-in.'
       : 'The route and elevation still tell the story.'
 
     const localSession = await localSessionFor(walk)
@@ -182,12 +209,12 @@ export const setupWalkPhotos = ({
     if (!walk.photoManifestAssetId || !token) {
       display(
         publicPhotos,
-        walk.photoManifestAssetId ? ' · sign in for login-only photographs' : '',
+        walk.photoManifestAssetId ? ' · sign in for private photographs' : '',
       )
       return
     }
 
-    display(publicPhotos, ' · loading login-only photographs…')
+    display(publicPhotos, ' · loading private photographs…')
     try {
       const manifestResponse = await fetch(
         mediaRequestUrl(privateManifestPath(walk.photoManifestAssetId)),
@@ -210,8 +237,8 @@ export const setupWalkPhotos = ({
       if (request !== renderRequest) return
       display([...publicPhotos, ...privatePhotos])
     } catch (error) {
-      console.error('Could not load login-only photographs', error)
-      if (request === renderRequest) display(publicPhotos, ' · login-only photographs unavailable')
+      console.error('Could not load private photographs', error)
+      if (request === renderRequest) display(publicPhotos, ' · private photographs unavailable')
     }
   }
 

@@ -80,7 +80,7 @@ export const setupPhotoPublisher = async ({ account }) => {
     const publicCount = decisions.filter(([, value]) => value.visibility === 'public').length
     const privateCount = decisions.length - publicCount
     const remaining = decisions.filter(([id]) => !existing.assets?.[id]).length
-    summary.textContent = `${decisions.length} approved photos: ${publicCount} public and ${privateCount} login only. ${remaining} still need uploading.`
+    summary.textContent = `${decisions.length} approved photos: ${publicCount} public and ${privateCount} private. ${remaining} still need uploading.`
     progress.max = decisions.length + 1
     progress.value = decisions.length - remaining
     publish.disabled = false
@@ -150,7 +150,7 @@ export const setupPhotoPublisher = async ({ account }) => {
         }
 
         if (!publication.manifestAssetId) {
-          status.textContent = 'Creating the protected login-only manifest…'
+          status.textContent = 'Creating the protected private-photo manifest…'
           const privatePhotos = decisions
             .filter(([, decision]) => decision.visibility === 'private')
             .map(([candidateId]) => publication.assets[candidateId])
@@ -164,7 +164,7 @@ export const setupPhotoPublisher = async ({ account }) => {
             file: manifest,
             token,
             metadata: {
-              title: `${session.walk.name} login-only photo manifest`,
+              title: `${session.walk.name} private photo manifest`,
               visibility: 'authenticated',
               requiredRoles: [privateRole],
               tags: ['walk-photo', session.walk.id, 'manifest'],
