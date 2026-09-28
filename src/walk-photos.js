@@ -29,6 +29,8 @@ export const setupWalkPhotos = ({
 }) => {
   let renderRequest = 0
   let objectUrls = []
+  let viewerPhotos = []
+  let viewerIndex = 0
   const emptyTitle = empty.querySelector('strong')
   const emptyCopy = empty.querySelector('span')
   const viewer = document.createElement('dialog')
@@ -38,12 +40,40 @@ export const setupWalkPhotos = ({
       <p>Photograph</p>
       <button type="button" aria-label="Close full-size photograph">Close</button>
     </div>
-    <div class="photo-viewer__stage"><img alt="" /></div>`
+    <div class="photo-viewer__stage">
+      <button class="photo-viewer__previous" type="button" aria-label="Previous photograph">‹</button>
+      <img alt="" />
+      <button class="photo-viewer__next" type="button" aria-label="Next photograph">›</button>
+    </div>`
   document.body.append(viewer)
+  const viewerTitle = viewer.querySelector('p')
   const viewerImage = viewer.querySelector('img')
-  viewer.querySelector('button').addEventListener('click', () => viewer.close())
+  const viewerClose = viewer.querySelector('.photo-viewer__bar button')
+  const viewerPrevious = viewer.querySelector('.photo-viewer__previous')
+  const viewerNext = viewer.querySelector('.photo-viewer__next')
+  viewerClose.addEventListener('click', () => viewer.close())
   viewer.addEventListener('click', (event) => {
     if (event.target === viewer) viewer.close()
+  })
+
+  const showViewerPhoto = (index) => {
+    if (!viewerPhotos.length) return
+    viewerIndex = (index + viewerPhotos.length) % viewerPhotos.length
+    const photo = viewerPhotos[viewerIndex]
+    viewerImage.src = photo.fullUrl ?? photo.url
+    viewerImage.alt = photo.alt ?? `Photograph ${viewerIndex + 1}`
+    viewerTitle.textContent = `Photograph ${viewerIndex + 1} of ${viewerPhotos.length}`
+    viewerPrevious.hidden = viewerPhotos.length < 2
+    viewerNext.hidden = viewerPhotos.length < 2
+    if (photo.rotation) viewerImage.style.transform = `rotate(${photo.rotation}deg)`
+    else viewerImage.style.removeProperty('transform')
+  }
+
+  viewerPrevious.addEventListener('click', () => showViewerPhoto(viewerIndex - 1))
+  viewerNext.addEventListener('click', () => showViewerPhoto(viewerIndex + 1))
+  viewer.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') showViewerPhoto(viewerIndex - 1)
+    if (event.key === 'ArrowRight') showViewerPhoto(viewerIndex + 1)
   })
 
   const clearObjectUrls = () => {
@@ -64,10 +94,7 @@ export const setupWalkPhotos = ({
     if (photo.rotation) image.style.transform = `rotate(${photo.rotation}deg)`
     open.append(image)
     open.addEventListener('click', () => {
-      viewerImage.src = photo.fullUrl ?? photo.url
-      viewerImage.alt = image.alt
-      if (photo.rotation) viewerImage.style.transform = `rotate(${photo.rotation}deg)`
-      else viewerImage.style.removeProperty('transform')
+      showViewerPhoto(index)
       viewer.showModal()
     })
     figure.append(open)
@@ -115,6 +142,7 @@ export const setupWalkPhotos = ({
     const sorted = [...photos].sort((a, b) =>
       String(a.capturedAt ?? '').localeCompare(String(b.capturedAt ?? '')),
     )
+    viewerPhotos = sorted
     grid.replaceChildren(...sorted.map((photo, index) => figureFor(photo, index, saveDecision)))
     grid.hidden = sorted.length === 0
     empty.hidden = sorted.length > 0
