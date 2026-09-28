@@ -5,20 +5,11 @@
     "activity": "walking",
     "name": "Sunday wander from TateB",
     "date": "2014-08-10T09:01:21Z",
-    "distanceKm": 8.08,
+    "distanceKm": 6.65,
     "movingTimeSeconds": 4695,
     "elapsedTimeSeconds": 32660,
     "ascentM": 54,
-    "descentM": 349,
-    "providers": [
-      "Garmin",
-      "Photo archive"
-    ],
-    "provenance": {
-      "status": "edited",
-      "method": "manual-crop",
-      "label": "Activity route · travel before Westminster removed by Ashterism"
-    }
+    "descentM": 349
   },
   "geometry": {
     "type": "LineString",

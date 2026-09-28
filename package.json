@@ -9,6 +9,7 @@
     "catalogue": "node scripts/build-catalogue.js",
     "convert": "node scripts/convert-fit.js",
     "crop": "node scripts/crop-fit-route.js",
+    "crop:route": "node scripts/crop-route-by-index.js",
     "import:garmin-export": "node scripts/import-garmin-export.js",
     "import:ijen": "node scripts/import-ijen-reconstruction.js",
     "import:photo-trail": "node scripts/import-photo-trail.js",

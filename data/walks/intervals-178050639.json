@@ -5,10 +5,26 @@
     "name": null,
     "activityType": "Walk",
     "visibility": "public",
-    "photos": []
+    "photos": [],
+    "metrics": {
+      "distanceM": 8079
+    },
+    "routeEdit": {
+      "type": "crop-start",
+      "startPointIndex": 218,
+      "reason": "Removed transit recorded before the walk began at Westminster"
+    }
   },
   "sources": {
     "garmin": null,
+    "photoArchive": {
+      "status": "archived",
+      "snapshot": {
+        "date": "2014-08-10",
+        "startDate": "2014-08-10T10:01:21+01:00",
+        "endDate": "2014-08-10T19:05:41+01:00"
+      }
+    },
     "intervals": {
       "activityId": "i178050639",
       "status": "active",
@@ -28,25 +44,30 @@
     }
   },
   "route": {
-    "activeVersion": "ab544638a910767ea51f19121249e56477dac7ef0fcdfe9a982e0ba692bfb204",
-    "source": "intervals",
-    "status": "current",
+    "activeVersion": "bc6c74b96d92ebd64df9d53fc6f0cc780923b45c503c1e9de212e8e9bb50a564",
+    "source": "local-crop",
+    "status": "edited",
     "versions": [
       {
         "checksum": "ab544638a910767ea51f19121249e56477dac7ef0fcdfe9a982e0ba692bfb204",
         "source": "intervals",
         "capturedAt": null
+      },
+      {
+        "checksum": "bc6c74b96d92ebd64df9d53fc6f0cc780923b45c503c1e9de212e8e9bb50a564",
+        "source": "local-crop",
+        "capturedAt": "2026-09-28T10:07:21.834Z"
       }
     ],
     "bounds": [
       -0.12698843143880367,
       51.490661166608334,
-      -0.053502609953284264,
-      51.519708735868335
+      -0.06865600124001503,
+      51.51186696253717
     ],
     "start": [
-      -0.053502609953284264,
-      51.51732115074992
+      -0.12469480745494366,
+      51.500829085707664
     ],
     "finish": [
       -0.06903570145368576,
@@ -54,5 +75,10 @@
     ],
     "descentM": 349
   },
-  "review": []
+  "review": [],
+  "provenance": {
+    "status": "edited",
+    "method": "manual-crop",
+    "label": "Activity route · travel before Westminster removed by Ashterism"
+  }
 }

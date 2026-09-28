@@ -16,6 +16,23 @@ const parseDate = (value) => {
   return Number.isFinite(timestamp) ? timestamp : null
 }
 
+export const capturedAtFromFilename = (filename) => {
+  const match = path.basename(filename).match(
+    /^(\d{4})-(\d{2})-(\d{2})[ _](\d{2})[.:](\d{2})[.:](\d{2})/,
+  )
+  if (!match) return null
+  const [, year, month, day, hour, minute, second] = match
+  const timestamp = new Date(
+    Number(year),
+    Number(month) - 1,
+    Number(day),
+    Number(hour),
+    Number(minute),
+    Number(second),
+  ).getTime()
+  return Number.isFinite(timestamp) ? timestamp : null
+}
+
 export const haversineMetres = (first, second) => {
   const radius = 6371000
   const radians = (degrees) => (degrees * Math.PI) / 180
@@ -83,6 +100,25 @@ export const readPhotoMetadata = (xmpPath, archiveRoot) => {
   }
 }
 
+const readFilenamePhotoMetadata = (mediaPath, archiveRoot) => {
+  const extension = path.extname(mediaPath).toLowerCase()
+  if (!imageExtensions.has(extension)) return null
+  if (fs.existsSync(`${mediaPath}.xmp`)) return null
+  const capturedAt = capturedAtFromFilename(mediaPath)
+  if (!capturedAt) return null
+
+  const archiveRelativePath = path.relative(archiveRoot, mediaPath)
+  return {
+    id: crypto.createHash('sha256').update(archiveRelativePath).digest('hex').slice(0, 24),
+    archiveRelativePath,
+    mediaPath,
+    capturedAt,
+    capturedAtIso: new Date(capturedAt).toISOString(),
+    location: null,
+    extension,
+  }
+}
+
 export const matchPhotoCandidates = ({
   photos,
   routeCoordinates,
@@ -123,6 +159,12 @@ export const matchPhotoCandidates = ({
 export const scanMonth = (monthDirectory, archiveRoot) =>
   fs
     .readdirSync(monthDirectory, { withFileTypes: true })
-    .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith('.xmp'))
-    .map((entry) => readPhotoMetadata(path.join(monthDirectory, entry.name), archiveRoot))
+    .filter((entry) => entry.isFile())
+    .flatMap((entry) => {
+      const entryPath = path.join(monthDirectory, entry.name)
+      if (entry.name.toLowerCase().endsWith('.xmp')) {
+        return [readPhotoMetadata(entryPath, archiveRoot)]
+      }
+      return [readFilenamePhotoMetadata(entryPath, archiveRoot)]
+    })
     .filter(Boolean)

@@ -24,6 +24,7 @@ const walkPath = path.resolve(`data/walks/${walkId}.json`)
 
 if (!fs.existsSync(walkPath)) throw new Error(`Unknown walk: ${walkId}`)
 const walk = JSON.parse(fs.readFileSync(walkPath, 'utf8'))
+const walkName = walk.local.name ?? walk.sources?.intervals?.snapshot?.name ?? walk.id
 const snapshot = walk.sources?.photoArchive?.snapshot
 if (!snapshot?.startDate || !snapshot?.endDate) {
   throw new Error(`${walkId} has no photo-archive time window`)
@@ -181,7 +182,7 @@ const server = http.createServer(async (request, response) => {
     }
     if (request.method === 'GET' && url.pathname === '/api/session') {
       return json(response, 200, {
-        walk: { id: walk.id, name: walk.local.name, date: localDate },
+        walk: { id: walk.id, name: walkName, date: localDate },
         candidates: candidates.map(({ mediaPath, ...candidate }) => candidate),
         review,
       })
@@ -236,6 +237,6 @@ const server = http.createServer(async (request, response) => {
 
 server.listen(port, '127.0.0.1', () => {
   console.log(`Photo review: http://127.0.0.1:${port}`)
-  console.log(`${candidates.length} candidates for ${walk.local.name}`)
+  console.log(`${candidates.length} candidates for ${walkName}`)
   console.log(`Decisions: ${decisionPath}`)
 })

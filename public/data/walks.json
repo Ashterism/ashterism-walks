@@ -1,5 +1,5 @@
 {
-  "walkCount": 114,
+  "walkCount": 113,
   "skippedWithoutRoute": 8,
   "walks": [
     {
@@ -3880,59 +3880,35 @@
       "activity": "walking",
       "name": "Sunday wander from TateB",
       "date": "2014-08-10T09:01:21Z",
-      "distanceKm": 6.65,
+      "distanceKm": 8.08,
       "movingTimeSeconds": 4695,
       "elapsedTimeSeconds": 32660,
       "ascentM": 54,
       "descentM": 349,
       "providers": [
-        "Garmin"
+        "Garmin",
+        "Photo archive"
       ],
+      "provenance": {
+        "status": "edited",
+        "method": "manual-crop",
+        "label": "Activity route · travel before Westminster removed by Ashterism"
+      },
       "photos": [],
-      "routeUrl": "/data/routes/intervals-178050639.geojson?v=ab544638a910767ea51f19121249e56477dac7ef0fcdfe9a982e0ba692bfb204",
+      "routeUrl": "/data/routes/intervals-178050639.geojson?v=bc6c74b96d92ebd64df9d53fc6f0cc780923b45c503c1e9de212e8e9bb50a564",
       "bounds": [
         -0.12698843143880367,
         51.490661166608334,
-        -0.053502609953284264,
-        51.519708735868335
+        -0.06865600124001503,
+        51.51186696253717
       ],
       "start": [
-        -0.053502609953284264,
-        51.51732115074992
+        -0.12469480745494366,
+        51.500829085707664
       ],
       "finish": [
         -0.06903570145368576,
         51.51186696253717
-      ]
-    },
-    {
-      "id": "intervals-178050634",
-      "activity": "walking",
-      "name": "Test walk",
-      "date": "2014-07-20T12:00:33Z",
-      "distanceKm": 2.17,
-      "movingTimeSeconds": 1393,
-      "elapsedTimeSeconds": 19891,
-      "ascentM": 22,
-      "descentM": 251,
-      "providers": [
-        "Garmin"
-      ],
-      "photos": [],
-      "routeUrl": "/data/routes/intervals-178050634.geojson?v=f8fc9fc1abf796732ff0cb8de56946216a27489d59c921a4e452036aed523907",
-      "bounds": [
-        -0.13475216925144196,
-        51.5093148406595,
-        -0.035293176770210266,
-        51.520908856764436
-      ],
-      "start": [
-        -0.04541868343949318,
-        51.51620878838003
-      ],
-      "finish": [
-        -0.050384458154439926,
-        51.51702837087214
       ]
     }
   ]

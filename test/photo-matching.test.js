@@ -2,10 +2,20 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 
 import {
+  capturedAtFromFilename,
   distanceToRoute,
   matchPhotoCandidates,
   routeCoordinatesFrom,
 } from '../scripts/lib/photo-matching.js'
+
+test('reads historical archive timestamps from filenames without sidecars', () => {
+  const timestamp = capturedAtFromFilename('2014-08-10 11.38.12.jpg')
+  const date = new Date(timestamp)
+  assert.deepEqual(
+    [date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()],
+    [2014, 8, 10, 11, 38, 12],
+  )
+})
 
 test('extracts line coordinates from feature collections', () => {
   assert.deepEqual(
