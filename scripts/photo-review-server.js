@@ -47,6 +47,7 @@ const candidates = matchPhotoCandidates({
 
 const privateDirectory = path.resolve('private/photo-reviews')
 const decisionPath = path.join(privateDirectory, `${walkId}.json`)
+const publicationPath = path.join(privateDirectory, `${walkId}.publication.json`)
 const cacheDirectory = path.join(privateDirectory, 'cache', walkId)
 fs.mkdirSync(privateDirectory, { recursive: true })
 fs.mkdirSync(cacheDirectory, { recursive: true })
@@ -60,6 +61,16 @@ const emptyReview = {
 const review = fs.existsSync(decisionPath)
   ? JSON.parse(fs.readFileSync(decisionPath, 'utf8'))
   : emptyReview
+const publication = fs.existsSync(publicationPath)
+  ? JSON.parse(fs.readFileSync(publicationPath, 'utf8'))
+  : {
+      schemaVersion: 1,
+      walkId,
+      collectionId: null,
+      manifestAssetId: null,
+      updatedAt: null,
+      assets: {},
+    }
 const candidateById = new Map(candidates.map((candidate) => [candidate.id, candidate]))
 
 const saveReview = () => {
@@ -67,6 +78,13 @@ const saveReview = () => {
   const temporary = `${decisionPath}.${process.pid}.tmp`
   fs.writeFileSync(temporary, `${JSON.stringify(review, null, 2)}\n`)
   fs.renameSync(temporary, decisionPath)
+}
+
+const savePublication = () => {
+  publication.updatedAt = new Date().toISOString()
+  const temporary = `${publicationPath}.${process.pid}.tmp`
+  fs.writeFileSync(temporary, `${JSON.stringify(publication, null, 2)}\n`)
+  fs.renameSync(temporary, publicationPath)
 }
 
 const json = (response, status, value) => {
@@ -146,6 +164,17 @@ const clientPath = path.resolve('scripts/photo-review-ui.html')
 const server = http.createServer(async (request, response) => {
   try {
     const url = new URL(request.url, `http://127.0.0.1:${port}`)
+    const origin = request.headers.origin
+    if (origin === 'https://dev.walks.ashterism.com') {
+      response.setHeader('Access-Control-Allow-Origin', origin)
+      response.setHeader('Vary', 'Origin')
+      response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+      response.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+    }
+    if (request.method === 'OPTIONS') {
+      response.writeHead(origin === 'https://dev.walks.ashterism.com' ? 204 : 403)
+      return response.end()
+    }
     if (request.method === 'GET' && url.pathname === '/') {
       response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' })
       return response.end(fs.readFileSync(clientPath))
@@ -156,6 +185,19 @@ const server = http.createServer(async (request, response) => {
         candidates: candidates.map(({ mediaPath, ...candidate }) => candidate),
         review,
       })
+    }
+    if (request.method === 'GET' && url.pathname === '/api/publication') {
+      return json(response, 200, publication)
+    }
+    if (request.method === 'POST' && url.pathname === '/api/publication') {
+      const body = await readBody(request)
+      if (body.collectionId) publication.collectionId = String(body.collectionId)
+      if (body.manifestAssetId) publication.manifestAssetId = String(body.manifestAssetId)
+      if (body.asset?.candidateId && body.asset?.record?.assetId) {
+        publication.assets[String(body.asset.candidateId)] = body.asset.record
+      }
+      savePublication()
+      return json(response, 200, publication)
     }
     if (request.method === 'GET' && url.pathname.startsWith('/media/')) {
       return serveMedia(

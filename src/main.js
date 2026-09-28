@@ -12,8 +12,11 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 
 import { setupAccountMenu } from './auth.js'
 import { setupBookLibrary } from './book-library.js'
+import { setupPhotoPublisher } from './photo-publisher.js'
+import { setupWalkPhotos } from './walk-photos.js'
 
 const account = await setupAccountMenu()
+await setupPhotoPublisher({ account })
 
 const emptyRoute = {
   type: 'Feature',
@@ -104,6 +107,13 @@ const elements = {
 
 const bookLibrary = setupBookLibrary({
   root: elements.bookLibrary,
+  getAccessToken: () => account?.getAccessToken(),
+})
+
+const walkPhotos = setupWalkPhotos({
+  grid: elements.photoGrid,
+  note: elements.photoNote,
+  empty: elements.photoEmpty,
   getAccessToken: () => account?.getAccessToken(),
 })
 
@@ -500,38 +510,6 @@ const renderElevationProfile = (coordinates, walk) => {
   elements.profileDistance.textContent = formatDistance(walk.distanceKm)
 }
 
-const renderPhotos = (photos = []) => {
-  if (photos.length > 0) {
-    elements.photoNote.textContent = `${photos.length} ${photos.length === 1 ? 'photograph' : 'photographs'}`
-    elements.photoNote.hidden = false
-    elements.photoEmpty.hidden = true
-    elements.photoGrid.hidden = false
-    elements.photoGrid.replaceChildren(
-      ...photos.map((photo, index) => {
-        const figure = document.createElement('figure')
-        const image = document.createElement('img')
-        image.src = photo.url
-        image.alt = photo.alt ?? `Photograph ${index + 1} from this walk`
-        image.loading = 'lazy'
-        figure.append(image)
-        if (photo.caption) {
-          const caption = document.createElement('figcaption')
-          caption.textContent = photo.caption
-          figure.append(caption)
-        }
-        return figure
-      }),
-    )
-    return
-  }
-
-  elements.photoNote.textContent = ''
-  elements.photoNote.hidden = true
-  elements.photoEmpty.hidden = false
-  elements.photoGrid.replaceChildren()
-  elements.photoGrid.hidden = true
-}
-
 const renderNotes = (notes, references = []) => {
   const hasNotes = typeof notes === 'string' && notes.trim() !== ''
   const safeReferences = references.filter(
@@ -573,7 +551,7 @@ const renderDetail = (walk, route) => {
     `Activity data from ${walk.providers.join(' and ')} · archived by Ashterism`
   renderDetailMap(route, walk)
   renderElevationProfile(coordinates, walk)
-  renderPhotos(walk.photos)
+  walkPhotos.render(walk)
   renderNotes(walk.notes, walk.references)
 }
 

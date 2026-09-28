@@ -79,6 +79,9 @@ for (const record of loadCanonicalRecords()) {
     ...properties,
     ...catalogueMetadata,
     photos: record.local.photos ?? [],
+    ...(record.local.photoManifestAssetId
+      ? { photoManifestAssetId: record.local.photoManifestAssetId }
+      : {}),
     routeUrl: `/data/routes/${record.id}.geojson?v=${activeVersion}`,
     bounds: record.route.bounds,
     start: record.route.start,

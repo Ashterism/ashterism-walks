@@ -18,6 +18,7 @@
     "notes": "node scripts/set-walk-notes.js",
     "overview": "node scripts/set-walk-overview.js",
     "photos:review": "node scripts/photo-review-server.js",
+    "photos:apply": "node scripts/apply-photo-publication.js",
     "rename": "node scripts/rename-walk.js",
     "visibility": "node scripts/set-walk-visibility.js",
     "sync": "node scripts/sync-intervals.js && node scripts/convert-fit.js",
