@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "24542340666",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "24542340666"
+    },
+    "intervals": {
+      "activityId": "i191548176",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "a256046cc669c35ca1921184686f13c4d809e79bf9d2490277ef832069eb416d",
+      "snapshot": {
+        "name": "La Coquille Hiking",
+        "type": "Hike",
+        "startDate": "2026-09-29T14:24:59Z",
+        "startDateLocal": "2026-09-29T16:24:59",
+        "distanceM": 2068.18,
+        "movingTimeSeconds": 1504,
+        "elapsedTimeSeconds": 1577,
+        "ascentM": 35,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "272d4e715f0e476483669392b51f299882f85654801be6dd07f7743f5ea7974a",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "272d4e715f0e476483669392b51f299882f85654801be6dd07f7743f5ea7974a",
+        "source": "intervals",
+        "capturedAt": "2026-09-29T15:00:40.279Z"
+      }
+    ],
+    "bounds": [
+      1.003644559532404,
+      45.5562515091151,
+      1.0079426318407059,
+      45.56292342022061
+    ],
+    "start": [
+      1.0048430878669024,
+      45.556381177157164
+    ],
+    "finish": [
+      1.004507141187787,
+      45.556499445810914
+    ],
+    "descentM": 29
+  },
+  "review": []
+}

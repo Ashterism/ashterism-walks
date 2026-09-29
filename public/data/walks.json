@@ -1,7 +1,37 @@
 {
-  "walkCount": 114,
+  "walkCount": 115,
   "skippedWithoutRoute": 8,
   "walks": [
+    {
+      "id": "24542340666",
+      "activity": "hiking",
+      "name": "La Coquille Hiking",
+      "date": "2026-09-29T14:24:59Z",
+      "distanceKm": 2.07,
+      "movingTimeSeconds": 1504,
+      "elapsedTimeSeconds": 1577,
+      "ascentM": 35,
+      "descentM": 29,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24542340666.geojson?v=272d4e715f0e476483669392b51f299882f85654801be6dd07f7743f5ea7974a",
+      "bounds": [
+        1.003644559532404,
+        45.5562515091151,
+        1.0079426318407059,
+        45.56292342022061
+      ],
+      "start": [
+        1.0048430878669024,
+        45.556381177157164
+      ],
+      "finish": [
+        1.004507141187787,
+        45.556499445810914
+      ]
+    },
     {
       "id": "24468853690",
       "activity": "walking",
