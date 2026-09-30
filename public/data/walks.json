@@ -1,7 +1,37 @@
 {
-  "walkCount": 115,
+  "walkCount": 116,
   "skippedWithoutRoute": 8,
   "walks": [
+    {
+      "id": "24554324507",
+      "activity": "hiking",
+      "name": "Mialet Hiking",
+      "date": "2026-09-30T12:08:06Z",
+      "distanceKm": 3.02,
+      "movingTimeSeconds": 1801,
+      "elapsedTimeSeconds": 1812,
+      "ascentM": 16,
+      "descentM": 21,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24554324507.geojson?v=a8a5d2c1fd8e2d131db214b87c022adf93da41fe6d2f9d5d0edec44814189c5e",
+      "bounds": [
+        0.9175718855112791,
+        45.54911415092647,
+        0.9325431380420923,
+        45.5589332152158
+      ],
+      "start": [
+        0.9325431380420923,
+        45.5546264257282
+      ],
+      "finish": [
+        0.9175718855112791,
+        45.54911415092647
+      ]
+    },
     {
       "id": "24542340666",
       "activity": "hiking",
