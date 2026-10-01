@@ -165,6 +165,11 @@ Use `--archive /another/archive/root` when the archive is not mounted at
 resulting branch is available on the dev site, an account with
 `walks.private_photos` sees the protected candidates immediately.
 
+A server worker can instead set `ZITADEL_MEDIA_CLIENT_ID` and
+`ZITADEL_MEDIA_CLIENT_SECRET` for a dedicated ZITADEL service account with JWT
+access tokens and the `media.editor` role. The command then obtains a short-lived
+Media token itself; the viewer's browser session is never used for uploads.
+
 The local review workspace finds candidate images in the verified NAS archive using the walk time window, photo GPS metadata and route proximity. It never reads the live iCloud inbox and does not publish or alter archive files.
 
 ```sh

@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process'
 
 import { preparePhotoCandidates } from './lib/prepare-photo-candidates.js'
 import { preparePhotoPublication } from './lib/prepare-photo-publication.js'
+import { mediaServiceToken } from './lib/media-service-token.js'
 
 const inputs = process.argv.slice(2)
 const walkId = inputs.find((input) => !input.startsWith('--'))
@@ -25,7 +26,7 @@ console.log(`${result.candidates.length} photo candidates found for ${result.wal
 const prepared = await preparePhotoPublication({
   ...result,
   walkId,
-  token: process.env.ASHTERIX_MEDIA_TOKEN,
+  token: process.env.ASHTERIX_MEDIA_TOKEN ?? await mediaServiceToken(),
   mediaBaseUrl: process.env.ASHTERIX_MEDIA_BASE_URL,
   onProgress: (message) => console.log(`${message}…`),
 })
