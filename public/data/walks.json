@@ -1,7 +1,67 @@
 {
-  "walkCount": 113,
+  "walkCount": 115,
   "skippedWithoutRoute": 8,
   "walks": [
+    {
+      "id": "24554324507",
+      "activity": "hiking",
+      "name": "Mialet Hiking",
+      "date": "2026-09-30T12:08:06Z",
+      "distanceKm": 3.02,
+      "movingTimeSeconds": 1801,
+      "elapsedTimeSeconds": 1812,
+      "ascentM": 16,
+      "descentM": 21,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24554324507.geojson?v=a8a5d2c1fd8e2d131db214b87c022adf93da41fe6d2f9d5d0edec44814189c5e",
+      "bounds": [
+        0.9175718855112791,
+        45.54911415092647,
+        0.9325431380420923,
+        45.5589332152158
+      ],
+      "start": [
+        0.9325431380420923,
+        45.5546264257282
+      ],
+      "finish": [
+        0.9175718855112791,
+        45.54911415092647
+      ]
+    },
+    {
+      "id": "24542340666",
+      "activity": "hiking",
+      "name": "La Coquille Hiking",
+      "date": "2026-09-29T14:24:59Z",
+      "distanceKm": 2.07,
+      "movingTimeSeconds": 1504,
+      "elapsedTimeSeconds": 1577,
+      "ascentM": 35,
+      "descentM": 29,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24542340666.geojson?v=272d4e715f0e476483669392b51f299882f85654801be6dd07f7743f5ea7974a",
+      "bounds": [
+        1.003644559532404,
+        45.5562515091151,
+        1.0079426318407059,
+        45.56292342022061
+      ],
+      "start": [
+        1.0048430878669024,
+        45.556381177157164
+      ],
+      "finish": [
+        1.004507141187787,
+        45.556499445810914
+      ]
+    },
     {
       "id": "24468853690",
       "activity": "walking",
