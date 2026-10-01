@@ -29,7 +29,8 @@
     "training-context": "node scripts/training-context.js",
     "test": "node --test",
     "preview": "vite preview",
-    "photos:prepare": "node scripts/prepare-walk-photos.js"
+    "photos:prepare": "node scripts/prepare-walk-photos.js",
+    "photos:worker": "node scripts/run-photo-worker.js"
   },
   "devDependencies": {
     "vite": "^8.2.0",
