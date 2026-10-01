@@ -1,4 +1,5 @@
 import { execFileSync } from 'node:child_process'
+import path from 'node:path'
 
 import { preparePhotoCandidates } from './lib/prepare-photo-candidates.js'
 import { preparePhotoPublication } from './lib/prepare-photo-publication.js'
@@ -13,7 +14,7 @@ const option = (name, fallback) => {
 
 if (!walkId) {
   throw new Error(
-    'Usage: ASHTERIX_MEDIA_TOKEN=... npm run photos:prepare -- <walk-id> [--archive <path>]',
+    'Usage: npm run photos:prepare -- <walk-id> [--archive <path>] [--state-dir <path>]',
   )
 }
 
@@ -28,6 +29,7 @@ const prepared = await preparePhotoPublication({
   walkId,
   token: process.env.ASHTERIX_MEDIA_TOKEN ?? await mediaServiceToken(),
   mediaBaseUrl: process.env.ASHTERIX_MEDIA_BASE_URL,
+  privateDirectory: path.resolve(option('--state-dir', 'private/photo-reviews')),
   onProgress: (message) => console.log(`${message}…`),
 })
 

@@ -168,7 +168,10 @@ resulting branch is available on the dev site, an account with
 A server worker can instead set `ZITADEL_MEDIA_CLIENT_ID` and
 `ZITADEL_MEDIA_CLIENT_SECRET` for a dedicated ZITADEL service account with JWT
 access tokens and the `media.editor` role. The command then obtains a short-lived
-Media token itself; the viewer's browser session is never used for uploads.
+Media token itself; the viewer's browser session is never used for uploads. On
+HALMAN, pass `--archive /volume1/photo/Photos` and
+`--state-dir /volume1/docker/ashterism-walks-photo-worker/state` so the private
+publication ledger survives code updates.
 
 The local review workspace finds candidate images in the verified NAS archive using the walk time window, photo GPS metadata and route proximity. It never reads the live iCloud inbox and does not publish or alter archive files.
 
