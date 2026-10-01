@@ -28,7 +28,8 @@
     "scheduler:deploy": "wrangler deploy --config cloudflare/wrangler.jsonc",
     "training-context": "node scripts/training-context.js",
     "test": "node --test",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "photos:prepare": "node scripts/prepare-walk-photos.js"
   },
   "devDependencies": {
     "vite": "^8.2.0",

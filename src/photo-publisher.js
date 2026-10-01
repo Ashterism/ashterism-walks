@@ -1,7 +1,15 @@
-import { mediaRequestUrl } from './walk-photos.js'
+import {
+  createMediaCollection,
+  MEDIA_API_BASE_URL,
+  PRIVATE_PHOTO_ROLE,
+  uploadMediaAsset,
+} from './media-publication.js'
 
 const REVIEW_ORIGIN = 'http://127.0.0.1:4175'
-const privateRole = 'walks.private_photos'
+const privateRole = PRIVATE_PHOTO_ROLE
+const mediaBaseUrl = () => window.location.hostname === 'dev.walks.ashterism.com'
+  ? `${window.location.origin}/media-proxy`
+  : MEDIA_API_BASE_URL
 
 const requestJson = async (url, options = {}) => {
   const response = await fetch(url, options)
@@ -18,22 +26,6 @@ const savePublication = (value) => requestJson(`${REVIEW_ORIGIN}/api/publication
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(value),
 })
-
-const mediaRequest = (path, token, options = {}) =>
-  requestJson(mediaRequestUrl(path), {
-    ...options,
-    headers: { ...options.headers, Authorization: `Bearer ${token}` },
-  })
-
-const uploadAsset = async ({ collectionId, file, metadata, token }) => {
-  const body = new FormData()
-  body.append('metadata', JSON.stringify(metadata))
-  body.append('file', file)
-  return mediaRequest(`/v1/collections/${collectionId}/assets`, token, {
-    method: 'POST',
-    body,
-  })
-}
 
 const makeDialog = () => {
   const dialog = document.createElement('dialog')
@@ -92,13 +84,11 @@ export const setupPhotoPublisher = async ({ account }) => {
         let publication = existing
         if (!publication.collectionId) {
           status.textContent = 'Creating the walk photo collection…'
-          const collection = await mediaRequest('/v1/collections', token, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              title: `${session.walk.name} photographs`,
-              description: `Reviewed photographs linked to ${session.walk.id}.`,
-            }),
+          const collection = await createMediaCollection({
+            title: `${session.walk.name} photographs`,
+            description: `Reviewed photographs linked to ${session.walk.id}.`,
+            token,
+            baseUrl: mediaBaseUrl(),
           })
           publication = await savePublication({ collectionId: collection.id })
         }
@@ -115,10 +105,11 @@ export const setupPhotoPublisher = async ({ account }) => {
             { type: 'image/jpeg' },
           )
           const isPublic = decision.visibility === 'public'
-          const asset = await uploadAsset({
+          const asset = await uploadMediaAsset({
             collectionId: publication.collectionId,
             file,
             token,
+            baseUrl: mediaBaseUrl(),
             metadata: {
               title: `${session.walk.name} — photograph ${index + 1}`,
               alt: `Photograph ${index + 1} from ${session.walk.name}`,
@@ -159,10 +150,11 @@ export const setupPhotoPublisher = async ({ account }) => {
             `${session.walk.id}-private-photos.json`,
             { type: 'application/json' },
           )
-          const manifestAsset = await uploadAsset({
+          const manifestAsset = await uploadMediaAsset({
             collectionId: publication.collectionId,
             file: manifest,
             token,
+            baseUrl: mediaBaseUrl(),
             metadata: {
               title: `${session.walk.name} private photo manifest`,
               visibility: 'authenticated',

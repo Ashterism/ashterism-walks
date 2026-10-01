@@ -143,7 +143,27 @@ Signed-in users also see a `Walk books` entry in the account menu. Its first ver
 - Generated routes contain route geometry and selected activity statistics, not heart-rate streams, email addresses or original private filenames.
 - Public photo URLs may be recorded in canonical walks. Protected photo metadata will instead be requested from the authenticated photo service when it exists.
 
-## Review photographs for a historical walk
+## Prepare and review photographs for a walk
+
+The manual preparation command finds matching archive photographs, uploads new
+candidates to Ashterix Media as authenticated assets, creates a protected
+manifest, and updates the canonical walk and public catalogue with only the
+manifest pointer. Candidates remain private and marked `Unreviewed`; the public
+`photos` list stays empty until a photograph is explicitly made public. The
+Git-ignored publication ledger under `private/photo-reviews/` makes a successful
+rerun idempotent.
+
+Copy a current access token from a signed-in Media editor/admin session into the
+environment, then run:
+
+```sh
+ASHTERIX_MEDIA_TOKEN='…' npm run photos:prepare -- intervals-178050639
+```
+
+Use `--archive /another/archive/root` when the archive is not mounted at
+`/Volumes/photo/Photos`. Do not commit or paste the token into a file. After the
+resulting branch is available on the dev site, an account with
+`walks.private_photos` sees the protected candidates immediately.
 
 The local review workspace finds candidate images in the verified NAS archive using the walk time window, photo GPS metadata and route proximity. It never reads the live iCloud inbox and does not publish or alter archive files.
 
@@ -151,4 +171,4 @@ The local review workspace finds candidate images in the verified NAS archive us
 npm run photos:review -- --walk photo-20220417 --archive /Volumes/photo/Photos
 ```
 
-Open `http://127.0.0.1:4175`. The contact-sheet view shows the complete candidate set for comparison. Every thumbnail has direct `Private`, `Public` and `Not included` controls. Select individual thumbnails or use `Select all shown`, which respects the active status filter, then apply the same decisions in bulk when useful. Double-click a thumbnail, or select one and choose `Open one`, for rotation, captioning and closer inspection. When the later media-import step is enabled, untouched matches will be visible only to authorised private accounts and clearly labelled `Unreviewed`; rejected photographs will be hidden everywhere. Reviewed photographs remain private unless explicitly marked public. Decisions are saved under the Git-ignored `private/photo-reviews/` directory, so review can be stopped and resumed safely. Publishing photographs to Ashterix Media is intentionally a separate later step.
+Open `http://127.0.0.1:4175`. The contact-sheet view shows the complete candidate set for comparison. Every thumbnail has direct `Private`, `Public` and `Not included` controls. Select individual thumbnails or use `Select all shown`, which respects the active status filter, then apply the same decisions in bulk when useful. Double-click a thumbnail, or select one and choose `Open one`, for rotation, captioning and closer inspection. Untouched matches are visible only to authorised private accounts and clearly labelled `Unreviewed`; rejected photographs are hidden everywhere. Reviewed photographs remain private unless explicitly marked public. Decisions are saved under the Git-ignored `private/photo-reviews/` directory, so review can be stopped and resumed safely. Rerun `photos:prepare` after changing decisions to update Media metadata and the protected/public associations.
