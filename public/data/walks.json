@@ -1,5 +1,5 @@
 {
-  "walkCount": 115,
+  "walkCount": 116,
   "skippedWithoutRoute": 8,
   "walks": [
     {
@@ -3969,6 +3969,36 @@
       "finish": [
         -0.06903570145368576,
         51.51186696253717
+      ]
+    },
+    {
+      "id": "intervals-178050634",
+      "activity": "walking",
+      "name": "Test walk",
+      "date": "2014-07-20T12:00:33Z",
+      "distanceKm": 2.17,
+      "movingTimeSeconds": 1393,
+      "elapsedTimeSeconds": 19891,
+      "ascentM": 22,
+      "descentM": 251,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/intervals-178050634.geojson?v=f8fc9fc1abf796732ff0cb8de56946216a27489d59c921a4e452036aed523907",
+      "bounds": [
+        -0.13475216925144196,
+        51.5093148406595,
+        -0.035293176770210266,
+        51.520908856764436
+      ],
+      "start": [
+        -0.04541868343949318,
+        51.51620878838003
+      ],
+      "finish": [
+        -0.050384458154439926,
+        51.51702837087214
       ]
     }
   ]
