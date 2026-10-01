@@ -162,7 +162,7 @@ ASHTERIX_MEDIA_TOKEN='…' npm run photos:prepare -- intervals-178050639
 
 Use `--archive /another/archive/root` when the archive is not mounted at
 `/Volumes/photo/Photos`. Do not commit or paste the token into a file. After the
-resulting branch is available on the dev site, an account with
+resulting commit is deployed on Walks, an account with
 `walks.private_photos` sees the protected candidates immediately.
 
 A server worker can instead set `ZITADEL_MEDIA_CLIENT_ID` and
