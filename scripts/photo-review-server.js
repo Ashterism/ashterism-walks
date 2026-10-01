@@ -4,11 +4,7 @@ import http from 'node:http'
 import path from 'node:path'
 import { promisify } from 'node:util'
 
-import {
-  matchPhotoCandidates,
-  routeCoordinatesFrom,
-  scanMonth,
-} from './lib/photo-matching.js'
+import { preparePhotoCandidates } from './lib/prepare-photo-candidates.js'
 
 const execute = promisify(execFile)
 const inputs = process.argv.slice(2)
@@ -18,33 +14,15 @@ const option = (name, fallback) => {
 }
 
 const walkId = option('--walk', 'photo-20220417')
-const archiveRoot = path.resolve(option('--archive', '/Volumes/photo/Photos'))
+const archiveRoot = option('--archive', '/Volumes/photo/Photos')
 const port = Number(option('--port', '4175'))
-const walkPath = path.resolve(`data/walks/${walkId}.json`)
 
-if (!fs.existsSync(walkPath)) throw new Error(`Unknown walk: ${walkId}`)
-const walk = JSON.parse(fs.readFileSync(walkPath, 'utf8'))
-const walkName = walk.local.name ?? walk.sources?.intervals?.snapshot?.name ?? walk.id
-const snapshot = walk.sources?.photoArchive?.snapshot
-if (!snapshot?.startDate || !snapshot?.endDate) {
-  throw new Error(`${walkId} has no photo-archive time window`)
-}
-
-const localDate = snapshot.date ?? snapshot.startDate.slice(0, 10)
-const [year, month] = localDate.split('-')
-const monthDirectory = path.join(archiveRoot, year, month)
-if (!fs.existsSync(monthDirectory)) throw new Error(`Archive month not found: ${monthDirectory}`)
-
-const routePath = path.resolve(
-  `data/route-versions/${walkId}/${walk.route.activeVersion}.geojson`,
-)
-const route = JSON.parse(fs.readFileSync(routePath, 'utf8'))
-const candidates = matchPhotoCandidates({
-  photos: scanMonth(monthDirectory, archiveRoot),
-  routeCoordinates: routeCoordinatesFrom(route),
-  startTime: Date.parse(snapshot.startDate),
-  endTime: Date.parse(snapshot.endDate),
-})
+const {
+  walk,
+  walkName,
+  localDate,
+  candidates,
+} = preparePhotoCandidates({ walkId, archiveRoot })
 
 const privateDirectory = path.resolve('private/photo-reviews')
 const decisionPath = path.join(privateDirectory, `${walkId}.json`)
