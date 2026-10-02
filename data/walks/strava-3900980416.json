@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-3900980416",
+  "local": {
+    "name": "Knapdale",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "3900980416",
+      "status": "archived",
+      "archivedFilename": "strava-3900980416.fit.gz",
+      "snapshot": {
+        "name": "Knapdale",
+        "type": "Walk",
+        "startDate": "2020-08-11T12:40:32.000Z",
+        "startDateLocal": null,
+        "distanceM": 8730,
+        "movingTimeSeconds": 7093,
+        "elapsedTimeSeconds": 11051,
+        "ascentM": 158.5,
+        "descentM": 158,
+        "weather": {
+          "condition": "2.0",
+          "temperatureC": 19.4,
+          "apparentTemperatureC": 19.5,
+          "humidity": 0.81,
+          "windSpeed": 1.9,
+          "windGust": 2.7,
+          "windBearing": 125,
+          "precipitationIntensity": 0,
+          "precipitationProbability": 0.02,
+          "precipitationType": "5.0",
+          "cloudCover": 0.83
+        },
+        "mediaCount": 4
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "b7ef9792383f77005e1e529a666e8a63e8f3c5e520536dd6e27d4f60fec76bd6",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "b7ef9792383f77005e1e529a666e8a63e8f3c5e520536dd6e27d4f60fec76bd6",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      -5.573350712656975,
+      56.044199131429195,
+      -5.539333764463663,
+      56.06687377206981
+    ],
+    "start": [
+      -5.551243694499135,
+      56.06070720590651
+    ],
+    "finish": [
+      -5.551322987303138,
+      56.060491036623716
+    ],
+    "descentM": 158
+  },
+  "review": []
+}

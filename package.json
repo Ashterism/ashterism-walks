@@ -1,0 +1,44 @@
+{
+  "name": "ashterism-walks",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "catalogue": "node scripts/build-catalogue.js",
+    "convert": "node scripts/convert-fit.js",
+    "crop": "node scripts/crop-fit-route.js",
+    "crop:route": "node scripts/crop-route-by-index.js",
+    "import:garmin-export": "node scripts/import-garmin-export.js",
+    "import:ijen": "node scripts/import-ijen-reconstruction.js",
+    "import:photo-trail": "node scripts/import-photo-trail.js",
+    "import:strava": "node scripts/import-strava.js",
+    "import:withings-timeline": "node scripts/import-withings-timeline.js",
+    "migrate:canonical": "node scripts/migrate-canonical.js",
+    "notes": "node scripts/set-walk-notes.js",
+    "overview": "node scripts/set-walk-overview.js",
+    "photos:review": "node scripts/photo-review-server.js",
+    "photos:apply": "node scripts/apply-photo-publication.js",
+    "rename": "node scripts/rename-walk.js",
+    "visibility": "node scripts/set-walk-visibility.js",
+    "sync": "node scripts/sync-intervals.js && node scripts/convert-fit.js",
+    "sync:latest": "node scripts/sync-intervals.js --refresh-latest && node scripts/convert-fit.js",
+    "scheduler:test": "node --test cloudflare/test/*.test.js",
+    "scheduler:deploy": "wrangler deploy --config cloudflare/wrangler.jsonc",
+    "training-context": "node scripts/training-context.js",
+    "test": "node --test",
+    "preview": "vite preview",
+    "photos:prepare": "node scripts/prepare-walk-photos.js",
+    "photos:worker": "node scripts/run-photo-worker.js"
+  },
+  "devDependencies": {
+    "vite": "^8.2.0",
+    "wrangler": "^4.137.0"
+  },
+  "dependencies": {
+    "@garmin/fitsdk": "^21.213.0",
+    "maplibre-gl": "5.24.0",
+    "oidc-client-ts": "^3.5.0"
+  }
+}

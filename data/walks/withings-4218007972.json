@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "id": "withings-4218007972",
+  "local": {
+    "name": "Portugal coast — 14 May 2024",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": [],
+    "notes": "Part of a six-day walk along the Fishermen’s Trail on the Rota Vicentina. This stage followed the official Sagres–Salema section in reverse, from Salema to Sagres.",
+    "references": [
+      {
+        "label": "Fishermen’s Trail — Rota Vicentina",
+        "url": "https://rotavicentina.com/en/fishermens-trail/"
+      },
+      {
+        "label": "Official Sagres–Salema stage",
+        "url": "https://rotavicentina.com/en/walking/sagres-salema-2/"
+      }
+    ]
+  },
+  "sources": {
+    "withings": {
+      "activityIds": [
+        "4218007972",
+        "4218224846",
+        "4218408802"
+      ],
+      "status": "archived",
+      "archivedFilename": "activities.csv",
+      "snapshot": {
+        "name": "Portugal coast — 14 May 2024",
+        "type": "Hike",
+        "startDate": "2024-05-14T08:54:00.000Z",
+        "startDateLocal": "2024-05-14T10:54:00+02:00",
+        "distanceM": 17711.31860351568,
+        "movingTimeSeconds": 17461,
+        "elapsedTimeSeconds": 22860,
+        "ascentM": null,
+        "componentCount": 3
+      },
+      "components": [
+        {
+          "activityId": "4218007972",
+          "from": "2024-05-14T10:54:00+02:00",
+          "to": "2024-05-14T13:00:00+02:00",
+          "distanceM": 6881.8901367188,
+          "movingTimeSeconds": 7441
+        },
+        {
+          "activityId": "4218224846",
+          "from": "2024-05-14T13:10:00+02:00",
+          "to": "2024-05-14T13:18:00+02:00",
+          "distanceM": 546.28002929688,
+          "movingTimeSeconds": 480
+        },
+        {
+          "activityId": "4218408802",
+          "from": "2024-05-14T14:34:00+02:00",
+          "to": "2024-05-14T17:15:00+02:00",
+          "distanceM": 10283.1484375,
+          "movingTimeSeconds": 9540
+        }
+      ]
+    },
+    "googleTimeline": {
+      "status": "archived",
+      "archivedFilename": "location-history.json",
+      "snapshot": {
+        "startDate": "2024-05-14T08:54:00.000Z",
+        "endDate": "2024-05-14T15:15:00.000Z",
+        "pointCount": 38,
+        "lineDistanceM": 16500
+      }
+    },
+    "rotaVicentina": {
+      "status": "reference",
+      "routeId": "801765497",
+      "name": "Sagres » Salema",
+      "direction": "reverse",
+      "url": "https://rotavicentina.com/en/walking/sagres-salema-2/",
+      "snapshot": {
+        "pointCount": 419,
+        "matchedPointCount": 408,
+        "routeDistanceM": 18652,
+        "startAnchorDifferenceM": 19,
+        "finishAnchorDifferenceM": 188,
+        "sourceChecksum": "10665c9548da8636b9da630958e6d0741c6805d14d7edaa2a75d3a3e8d96563a"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "160c4dc955497fea52cfeac877093dbbec6793392584584213b38719e54c6b7d",
+    "source": "rota-vicentina",
+    "status": "estimated",
+    "versions": [
+      {
+        "checksum": "f9468379452dd486fdb21c51a37e5647272842eaf68e004f877289e52b20771f",
+        "source": "google-timeline",
+        "capturedAt": "2026-08-25T20:11:32.405Z"
+      },
+      {
+        "checksum": "160c4dc955497fea52cfeac877093dbbec6793392584584213b38719e54c6b7d",
+        "source": "rota-vicentina",
+        "capturedAt": "2026-08-26T08:02:23.088Z"
+      }
+    ],
+    "bounds": [
+      -8.934039,
+      37.007533,
+      -8.828964,
+      37.066752
+    ],
+    "start": [
+      -8.828964,
+      37.066066
+    ],
+    "finish": [
+      -8.934039,
+      37.007533
+    ],
+    "ascentM": 528,
+    "descentM": 543
+  },
+  "review": [],
+  "provenance": {
+    "status": "estimated",
+    "method": "withings-google-timeline-rota-vicentina",
+    "metricsSource": "Withings",
+    "routeSource": "Official Rota Vicentina GPX matched to Google Timeline anchors",
+    "label": "Estimated route compiled from Withings activity data, Google Timeline anchors and official Rota Vicentina trail geometry."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "4257786853",
+  "local": {
+    "name": "Epping Forest Hiking",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "4257786853",
+      "status": "archived",
+      "archivedFilename": "4257786853_ACTIVITY.fit",
+      "snapshot": {
+        "name": "Epping Forest Other",
+        "type": "Hike",
+        "startDate": "2019-11-16T10:29:37.000Z",
+        "startDateLocal": "2019-11-16T10:29:37.000",
+        "distanceM": 6344.89013671875,
+        "movingTimeSeconds": 5138,
+        "elapsedTimeSeconds": 7356.97314453125,
+        "ascentM": 89.69108200073242
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "ad54d3e98cee7e546604649a071e37941856c551b1e0620fdc2b3250f33e7e63",
+    "source": "garmin",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "ad54d3e98cee7e546604649a071e37941856c551b1e0620fdc2b3250f33e7e63",
+        "source": "garmin",
+        "capturedAt": "2026-08-25T16:50:15.127Z"
+      }
+    ],
+    "bounds": [
+      0.03982585854828358,
+      51.64949697442353,
+      0.0532828364521265,
+      51.681435042992234
+    ],
+    "start": [
+      0.042324503883719444,
+      51.64949697442353
+    ],
+    "finish": [
+      0.051663536578416824,
+      51.681435042992234
+    ],
+    "descentM": 313
+  },
+  "review": []
+}

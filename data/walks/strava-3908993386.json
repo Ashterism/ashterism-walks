@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-3908993386",
+  "local": {
+    "name": "Ariundle ",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "3908993386",
+      "status": "archived",
+      "archivedFilename": "strava-3908993386.fit.gz",
+      "snapshot": {
+        "name": "Ariundle ",
+        "type": "Walk",
+        "startDate": "2020-08-13T11:00:49.000Z",
+        "startDateLocal": null,
+        "distanceM": 6460,
+        "movingTimeSeconds": 5098,
+        "elapsedTimeSeconds": 7334,
+        "ascentM": 116.4,
+        "descentM": 117.2,
+        "weather": {
+          "condition": "2.0",
+          "temperatureC": 22.7,
+          "apparentTemperatureC": 22.9,
+          "humidity": 0.72,
+          "windSpeed": 1.5,
+          "windGust": 2.1,
+          "windBearing": 43,
+          "precipitationIntensity": 0,
+          "precipitationProbability": 0,
+          "precipitationType": null,
+          "cloudCover": 0.33
+        },
+        "mediaCount": 4
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "6cb5f13248b55da3528f72124ce252fb79dfeaa09f6fece728a77101c45b166a",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "6cb5f13248b55da3528f72124ce252fb79dfeaa09f6fece728a77101c45b166a",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      -5.553708728402853,
+      56.71087601222098,
+      -5.519675686955452,
+      56.724860379472375
+    ],
+    "start": [
+      -5.553675033152103,
+      56.71104281209409
+    ],
+    "finish": [
+      -5.553558440878987,
+      56.71087651513517
+    ],
+    "descentM": 117.2
+  },
+  "review": []
+}

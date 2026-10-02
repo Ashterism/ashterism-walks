@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-1600368441",
+  "local": {
+    "name": "Hadrian's Wall — day 2, part 2",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "1600368441",
+      "status": "archived",
+      "archivedFilename": "strava-1600368441.gpx.gz",
+      "snapshot": {
+        "name": "Hadrian's Wall — day 2, part 2",
+        "type": "Hike",
+        "startDate": "2018-05-27T13:48:17.000Z",
+        "startDateLocal": null,
+        "distanceM": 20920,
+        "movingTimeSeconds": 15207,
+        "elapsedTimeSeconds": 20311,
+        "ascentM": 343.9,
+        "descentM": null,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "366097789149dfeb40afb9b749a7208dcabe2da9f3d37ddd42533eb9310aa348",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "366097789149dfeb40afb9b749a7208dcabe2da9f3d37ddd42533eb9310aa348",
+        "source": "strava",
+        "capturedAt": "2026-08-25T14:04:07.852Z"
+      }
+    ],
+    "bounds": [
+      -2.28938,
+      55.012225,
+      -2.021274,
+      55.038945
+    ],
+    "start": [
+      -2.021274,
+      55.012457
+    ],
+    "finish": [
+      -2.289131,
+      55.02491
+    ],
+    "descentM": 321
+  },
+  "review": []
+}

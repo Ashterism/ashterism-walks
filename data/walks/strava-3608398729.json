@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-3608398729",
+  "local": {
+    "name": "Lunch Walk",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "3608398729",
+      "status": "archived",
+      "archivedFilename": "strava-3608398729.fit.gz",
+      "snapshot": {
+        "name": "Lunch Walk",
+        "type": "Walk",
+        "startDate": "2020-06-13T10:17:15.000Z",
+        "startDateLocal": null,
+        "distanceM": 15720,
+        "movingTimeSeconds": 10816,
+        "elapsedTimeSeconds": 16195,
+        "ascentM": 40.4,
+        "descentM": 39.4,
+        "weather": {
+          "condition": "2.0",
+          "temperatureC": 20.9,
+          "apparentTemperatureC": 20.9,
+          "humidity": 0.55,
+          "windSpeed": 4.6,
+          "windGust": 6.8,
+          "windBearing": 141,
+          "precipitationIntensity": 0,
+          "precipitationProbability": 0,
+          "precipitationType": null,
+          "cloudCover": 0.32
+        },
+        "mediaCount": 0
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "600a0023eaa5049eeebf39b03e3bff4706e62a37eecb5b51cb863f3475062909",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "600a0023eaa5049eeebf39b03e3bff4706e62a37eecb5b51cb863f3475062909",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      -0.12768547050654888,
+      51.510488810017705,
+      -0.04026222042739391,
+      51.52022749185562
+    ],
+    "start": [
+      -0.04069908522069454,
+      51.517580738291144
+    ],
+    "finish": [
+      -0.04026222042739391,
+      51.51712358929217
+    ],
+    "descentM": 39.4
+  },
+  "review": []
+}

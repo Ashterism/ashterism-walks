@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-477398329",
+  "local": {
+    "name": "Lunch Ride",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "477398329",
+      "status": "archived",
+      "archivedFilename": "strava-477398329.fit.gz",
+      "snapshot": {
+        "name": "Lunch Ride",
+        "type": "Walk",
+        "startDate": "2016-01-24T12:34:08.000Z",
+        "startDateLocal": null,
+        "distanceM": 7640,
+        "movingTimeSeconds": 4768,
+        "elapsedTimeSeconds": 5261,
+        "ascentM": 69.8,
+        "descentM": null,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "ad45dbc8226540d0caaea8431395053dbf8bc0f4d8a20a565fb68666154b6293",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "ad45dbc8226540d0caaea8431395053dbf8bc0f4d8a20a565fb68666154b6293",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      -0.1270599290728569,
+      51.508065266534686,
+      -0.051001785323023796,
+      51.51757813990116
+    ],
+    "start": [
+      -0.051001785323023796,
+      51.51691655628383
+    ],
+    "finish": [
+      -0.12705028988420963,
+      51.51087169535458
+    ],
+    "descentM": 87
+  },
+  "review": []
+}

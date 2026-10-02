@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "id": "withings-201911101507",
+  "local": {
+    "name": "Blarney Castle grounds",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": [],
+    "notes": "Estimated historical walk through the woodland grounds around Blarney Castle, reconstructed from a Withings walking record and Google Timeline breadcrumbs.",
+    "references": [
+      {
+        "label": "Fishermen’s Trail — Rota Vicentina",
+        "url": "https://rotavicentina.com/en/fishermens-trail/"
+      }
+    ]
+  },
+  "sources": {
+    "withings": {
+      "activityIds": [
+        "201911101507"
+      ],
+      "status": "archived",
+      "archivedFilename": "activities.csv",
+      "snapshot": {
+        "name": "Blarney Castle grounds",
+        "type": "Hike",
+        "startDate": "2019-11-10T14:07:16.000Z",
+        "startDateLocal": "2019-11-10T15:07:16+01:00",
+        "distanceM": 4193,
+        "movingTimeSeconds": null,
+        "elapsedTimeSeconds": 3780,
+        "ascentM": 63,
+        "componentCount": 1
+      },
+      "components": [
+        {
+          "activityId": "201911101507",
+          "from": "2019-11-10T15:07:16+01:00",
+          "to": "2019-11-10T16:10:16+01:00",
+          "distanceM": 4193,
+          "movingTimeSeconds": null
+        }
+      ]
+    },
+    "googleTimeline": {
+      "status": "archived",
+      "archivedFilename": "location-history.json",
+      "snapshot": {
+        "startDate": "2019-11-10T14:07:16.000Z",
+        "endDate": "2019-11-10T15:10:16.000Z",
+        "pointCount": 9,
+        "lineDistanceM": 2942
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "471bcb50c5749a5de5891ce63d9105e18b158de391ed3010c6280976fd584f2e",
+    "source": "google-timeline",
+    "status": "estimated",
+    "versions": [
+      {
+        "checksum": "471bcb50c5749a5de5891ce63d9105e18b158de391ed3010c6280976fd584f2e",
+        "source": "google-timeline",
+        "capturedAt": "2026-08-26T08:31:13.604Z"
+      }
+    ],
+    "bounds": [
+      -8.582474,
+      51.923463,
+      -8.566916,
+      51.933481
+    ],
+    "start": [
+      -8.571146,
+      51.92919
+    ],
+    "finish": [
+      -8.566916,
+      51.933481
+    ],
+    "descentM": null
+  },
+  "review": [],
+  "provenance": {
+    "status": "estimated",
+    "method": "withings-google-timeline",
+    "metricsSource": "Withings",
+    "routeSource": "Google Timeline",
+    "label": "Estimated route compiled from Withings activity data and Google Timeline."
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-3903647883",
+  "local": {
+    "name": "Taynish ",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "3903647883",
+      "status": "archived",
+      "archivedFilename": "strava-3903647883.fit.gz",
+      "snapshot": {
+        "name": "Taynish ",
+        "type": "Walk",
+        "startDate": "2020-08-12T11:06:48.000Z",
+        "startDateLocal": null,
+        "distanceM": 12040,
+        "movingTimeSeconds": 9798,
+        "elapsedTimeSeconds": 17593,
+        "ascentM": 220.5,
+        "descentM": 220.5,
+        "weather": {
+          "condition": "2.0",
+          "temperatureC": 18.7,
+          "apparentTemperatureC": 18.8,
+          "humidity": 0.83,
+          "windSpeed": 2.7,
+          "windGust": 2.8,
+          "windBearing": 322,
+          "precipitationIntensity": 0,
+          "precipitationProbability": 0,
+          "precipitationType": null,
+          "cloudCover": 0.63
+        },
+        "mediaCount": 3
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "0acc06feae67f0686d85dc68e75aeb2cb44ddf8ef890fed138b41c3744b72336",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "0acc06feae67f0686d85dc68e75aeb2cb44ddf8ef890fed138b41c3744b72336",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      -5.653407946228981,
+      55.98362538032234,
+      -5.625952603295445,
+      56.01454169489443
+    ],
+    "start": [
+      -5.631427830085158,
+      56.00625693798065
+    ],
+    "finish": [
+      -5.631271507591009,
+      56.00644209422171
+    ],
+    "descentM": 220.5
+  },
+  "review": []
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-7593388800",
+  "local": {
+    "name": "Lydford Gorge walk",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "7593388800",
+      "status": "archived",
+      "archivedFilename": "strava-7593388800.fit.gz",
+      "snapshot": {
+        "name": "Lydford Gorge walk",
+        "type": "Walk",
+        "startDate": "2022-08-06T11:25:20.000Z",
+        "startDateLocal": null,
+        "distanceM": 4850,
+        "movingTimeSeconds": 4455,
+        "elapsedTimeSeconds": 4879,
+        "ascentM": 122.2,
+        "descentM": 599,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "c3212949d059c7aa8ac2a0a56678fe075d82afc754cfd89b5d6b0a861c911f31",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "c3212949d059c7aa8ac2a0a56678fe075d82afc754cfd89b5d6b0a861c911f31",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      -4.126830110326409,
+      50.62913638539612,
+      -4.111117394641042,
+      50.6406435649842
+    ],
+    "start": [
+      -4.12134038284421,
+      50.62939211726189
+    ],
+    "finish": [
+      -4.12097736261785,
+      50.62913638539612
+    ],
+    "descentM": 599
+  },
+  "review": []
+}

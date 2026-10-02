@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "2681263423",
+  "local": {
+    "name": "Greenwich Hiking",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "2681263423",
+      "status": "archived",
+      "archivedFilename": "2681263423_ACTIVITY.fit",
+      "snapshot": {
+        "name": "Greenwich Other",
+        "type": "Hike",
+        "startDate": "2018-05-07T10:20:21.000Z",
+        "startDateLocal": "2018-05-07T11:20:21.000",
+        "distanceM": 17354.25,
+        "movingTimeSeconds": 11569,
+        "elapsedTimeSeconds": 14275.5986328125,
+        "ascentM": 178.68386101722717
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "8c3d871e44296aa43ac448f1d924a2aac32fd034101bf2aa33377f27e9d8a896",
+    "source": "garmin",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "8c3d871e44296aa43ac448f1d924a2aac32fd034101bf2aa33377f27e9d8a896",
+        "source": "garmin",
+        "capturedAt": "2026-08-25T16:50:15.127Z"
+      }
+    ],
+    "bounds": [
+      0.021448200568556786,
+      51.430906327441335,
+      0.07552614435553551,
+      51.4946486055851
+    ],
+    "start": [
+      0.06293929181993008,
+      51.49454525671899
+    ],
+    "finish": [
+      0.021483320742845535,
+      51.43115057609975
+    ],
+    "descentM": 822
+  },
+  "review": []
+}

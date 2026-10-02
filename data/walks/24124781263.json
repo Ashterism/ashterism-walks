@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "24124781263",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "24124781263"
+    },
+    "intervals": {
+      "activityId": "i180068807",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "845ff485e892320a8c2e4e61933c9b78a64b8d548ae6f98448c8913d713335ac",
+      "snapshot": {
+        "name": "Champs-Romain Hiking",
+        "type": "Hike",
+        "startDate": "2026-08-26T12:45:06Z",
+        "startDateLocal": "2026-08-26T14:45:06",
+        "distanceM": 8509.02,
+        "movingTimeSeconds": 5730,
+        "elapsedTimeSeconds": 5865,
+        "ascentM": 243,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "4c8675652928cb718e43b5a77069c152319cbfbb7d4c4af615fb47c93bb032bf",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "4c8675652928cb718e43b5a77069c152319cbfbb7d4c4af615fb47c93bb032bf",
+        "source": "intervals",
+        "capturedAt": "2026-08-26T15:51:46.190Z"
+      }
+    ],
+    "bounds": [
+      0.7595186121761799,
+      45.516620613634586,
+      0.7818486727774143,
+      45.53763957694173
+    ],
+    "start": [
+      0.7763525750488043,
+      45.5335311871022
+    ],
+    "finish": [
+      0.7762702647596598,
+      45.53317252546549
+    ],
+    "descentM": 245
+  },
+  "review": []
+}

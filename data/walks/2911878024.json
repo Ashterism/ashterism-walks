@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "2911878024",
+  "local": {
+    "name": "Lewes Hiking",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "2911878024",
+      "status": "archived",
+      "archivedFilename": "2911878024_ACTIVITY.fit",
+      "snapshot": {
+        "name": "Lewes Other",
+        "type": "Hike",
+        "startDate": "2018-07-29T09:45:07.000Z",
+        "startDateLocal": "2018-07-29T10:45:07.000",
+        "distanceM": 23471.740234375,
+        "movingTimeSeconds": 16897,
+        "elapsedTimeSeconds": 27108.150390625,
+        "ascentM": 437.4047990143299
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "a98d045a749cb5dde155e4bf9b1595bc084fa6f2c2c8f4df0d7b9c8c58f14dff",
+    "source": "garmin",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "a98d045a749cb5dde155e4bf9b1595bc084fa6f2c2c8f4df0d7b9c8c58f14dff",
+        "source": "garmin",
+        "capturedAt": "2026-08-25T16:50:15.127Z"
+      }
+    ],
+    "bounds": [
+      0.0616973452270031,
+      50.756438383832574,
+      0.1618414744734764,
+      50.85399686358869
+    ],
+    "start": [
+      0.06229321472346783,
+      50.85399686358869
+    ],
+    "finish": [
+      0.10015578009188175,
+      50.77280187048018
+    ],
+    "descentM": 874
+  },
+  "review": []
+}

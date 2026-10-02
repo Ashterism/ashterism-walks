@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "id": "withings-202404131124",
+  "local": {
+    "name": "Bedfordshire walk — 13 April 2024",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": [],
+    "notes": "Estimated historical walk reconstructed from a Withings walking record and Google Timeline breadcrumbs. An earlier London walking fragment from the same day was excluded.",
+    "references": [
+      {
+        "label": "Fishermen’s Trail — Rota Vicentina",
+        "url": "https://rotavicentina.com/en/fishermens-trail/"
+      }
+    ]
+  },
+  "sources": {
+    "withings": {
+      "activityIds": [
+        "202404131124"
+      ],
+      "status": "archived",
+      "archivedFilename": "activities.csv",
+      "snapshot": {
+        "name": "Bedfordshire walk — 13 April 2024",
+        "type": "Hike",
+        "startDate": "2024-04-13T09:24:00.000Z",
+        "startDateLocal": "2024-04-13T11:24:00+02:00",
+        "distanceM": 9897.82421875,
+        "movingTimeSeconds": 7440,
+        "elapsedTimeSeconds": 7680,
+        "ascentM": null,
+        "componentCount": 1
+      },
+      "components": [
+        {
+          "activityId": "202404131124",
+          "from": "2024-04-13T11:24:00+02:00",
+          "to": "2024-04-13T13:32:00+02:00",
+          "distanceM": 9897.82421875,
+          "movingTimeSeconds": 7440
+        }
+      ]
+    },
+    "googleTimeline": {
+      "status": "archived",
+      "archivedFilename": "location-history.json",
+      "snapshot": {
+        "startDate": "2024-04-13T09:24:00.000Z",
+        "endDate": "2024-04-13T11:32:00.000Z",
+        "pointCount": 26,
+        "lineDistanceM": 11293
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "e9b1b4d4a2339670ea33f3aecb316b1c153bcedd848e0654a0df52e6b646ad22",
+    "source": "google-timeline",
+    "status": "estimated",
+    "versions": [
+      {
+        "checksum": "e9b1b4d4a2339670ea33f3aecb316b1c153bcedd848e0654a0df52e6b646ad22",
+        "source": "google-timeline",
+        "capturedAt": "2026-08-26T08:24:34.763Z"
+      }
+    ],
+    "bounds": [
+      -0.459541,
+      51.905968,
+      -0.391073,
+      51.963742
+    ],
+    "start": [
+      -0.459541,
+      51.905968
+    ],
+    "finish": [
+      -0.391073,
+      51.963742
+    ],
+    "descentM": null
+  },
+  "review": [],
+  "provenance": {
+    "status": "estimated",
+    "method": "withings-google-timeline",
+    "metricsSource": "Withings",
+    "routeSource": "Google Timeline",
+    "label": "Estimated route compiled from Withings activity data and Google Timeline."
+  }
+}

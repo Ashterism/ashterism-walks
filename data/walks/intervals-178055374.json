@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "id": "intervals-178055374",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public",
+    "photos": [],
+    "includeInOverview": false
+  },
+  "sources": {
+    "garmin": null,
+    "intervals": {
+      "activityId": "i178055374",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "049c884ad123521058ddec65ca427d96c7e451a189eec28004c6fe74e3408818",
+      "snapshot": {
+        "name": "Ko Samui Walking",
+        "type": "Walk",
+        "startDate": "2024-06-27T23:28:15Z",
+        "startDateLocal": "2024-06-28T06:28:15",
+        "distanceM": 4313.15,
+        "movingTimeSeconds": 3205,
+        "elapsedTimeSeconds": 3550,
+        "ascentM": null,
+        "source": "GARMIN_CONNECT"
+      }
+    },
+    "strava": {
+      "activityId": "11756224631",
+      "status": "archived",
+      "archivedFilename": "intervals-178055374.fit.gz",
+      "snapshot": {
+        "name": "Morning Walk",
+        "type": "Walk",
+        "startDate": "2024-06-27T23:28:15.000Z",
+        "startDateLocal": null,
+        "distanceM": 4310,
+        "movingTimeSeconds": 3214,
+        "elapsedTimeSeconds": 3550,
+        "ascentM": 609.4,
+        "descentM": 34.9,
+        "weather": {
+          "condition": null,
+          "temperatureC": null,
+          "apparentTemperatureC": null,
+          "humidity": null,
+          "windSpeed": null,
+          "windGust": null,
+          "windBearing": null,
+          "precipitationIntensity": null,
+          "precipitationProbability": null,
+          "precipitationType": null,
+          "cloudCover": null
+        },
+        "mediaCount": 0
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "cdcd6252bd91c532f5108a8a602cc934d84d6546c004ee65eaa05b5e8443db64",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "cdcd6252bd91c532f5108a8a602cc934d84d6546c004ee65eaa05b5e8443db64",
+        "source": "intervals",
+        "capturedAt": null
+      },
+      {
+        "checksum": "1afa55155518aa38a9d848ab42ceed57e7d66db0937b06ee92821202f781ec7d",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      100.00518746674061,
+      9.484748393297195,
+      100.02601557411253,
+      9.507679101079702
+    ],
+    "start": [
+      100.02601557411253,
+      9.484748393297195
+    ],
+    "finish": [
+      100.00518780201674,
+      9.502488020807505
+    ],
+    "descentM": null
+  },
+  "review": []
+}

@@ -1,0 +1,46 @@
+{
+  "trail": {
+    "name": "Pilgrimsleden i Dalsland",
+    "relationId": "6796203",
+    "url": "https://www.openstreetmap.org/relation/6796203"
+  },
+  "references": [
+    {
+      "label": "Pilgrimsleden — Dalsland Canal",
+      "url": "https://dalslandskanal.se/en/naturen/pilgrimsleden/"
+    }
+  ],
+  "walks": [
+    {
+      "id": "photo-20220415",
+      "date": "2022-04-15",
+      "name": "Pilgrimsleden Dalsland — day 1: Mellerud to Livarebosjön",
+      "notes": "The first day of a three-day hike from Mellerud to Edsleskog, ending with a hammock camp beside Livarebosjön.",
+      "startTime": "2022-04-15T12:19:41+02:00",
+      "endTime": "2022-04-15T18:40:03+02:00",
+      "startAnchor": [12.464805, 58.70192],
+      "finishAnchor": [12.425975, 58.8411],
+      "photoConnectorUntil": "2022-04-15T13:27:14+02:00"
+    },
+    {
+      "id": "photo-20220416",
+      "date": "2022-04-16",
+      "name": "Pilgrimsleden Dalsland — day 2: Livarebosjön to Tansjön",
+      "notes": "The middle day of the Dalsland hike, continuing north from Livarebosjön to a second hammock camp beside Tansjön.",
+      "startTime": "2022-04-16T10:20:24+02:00",
+      "endTime": "2022-04-16T19:24:09+02:00",
+      "startAnchor": [12.425405, 58.84183],
+      "finishAnchor": [12.4071, 58.9894]
+    },
+    {
+      "id": "photo-20220417",
+      "date": "2022-04-17",
+      "name": "Pilgrimsleden Dalsland — day 3: Tansjön to Edsleskog",
+      "notes": "The final morning of the Dalsland hike, from the Tansjön camp to the end of the Pilgrimsleden at Edsleskog.",
+      "startTime": "2022-04-17T12:19:33+02:00",
+      "endTime": "2022-04-17T15:58:20+02:00",
+      "startAnchor": [12.406937, 58.989312],
+      "finishAnchor": [12.46357, 59.057175]
+    }
+  ]
+}

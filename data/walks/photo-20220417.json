@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "id": "photo-20220417",
+  "local": {
+    "name": "Pilgrimsleden Dalsland — day 3: Tansjön to Edsleskog",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": [],
+    "date": "2022-04-17T12:19:33+02:00",
+    "metrics": {
+      "distanceM": 10497,
+      "elapsedTimeSeconds": 13127
+    },
+    "notes": "The final morning of the Dalsland hike, from the Tansjön camp to the end of the Pilgrimsleden at Edsleskog.",
+    "references": [
+      {
+        "label": "Pilgrimsleden — Dalsland Canal",
+        "url": "https://dalslandskanal.se/en/naturen/pilgrimsleden/"
+      }
+    ]
+  },
+  "sources": {
+    "photoArchive": {
+      "status": "archived",
+      "snapshot": {
+        "date": "2022-04-17",
+        "pointCount": 71,
+        "startDate": "2022-04-17T12:19:33+02:00",
+        "endDate": "2022-04-17T15:58:20+02:00"
+      }
+    },
+    "openStreetMap": {
+      "status": "reference",
+      "relationId": "6796203",
+      "name": "Pilgrimsleden i Dalsland",
+      "url": "https://www.openstreetmap.org/relation/6796203",
+      "snapshot": {
+        "pointCount": 590,
+        "routeDistanceM": 10497,
+        "startAnchorDifferenceM": 41,
+        "finishAnchorDifferenceM": 59,
+        "sourceChecksum": "7b1a654082478bfa6b690ce67c030893b1f5e17c0ea0bce4ffe524685c354e8b"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "d100badd3212163782a7bac3bdf78018229790a3a0eb4a64507f59e973bb429b",
+    "source": "photo-anchors-openstreetmap",
+    "status": "estimated",
+    "versions": [
+      {
+        "checksum": "d100badd3212163782a7bac3bdf78018229790a3a0eb4a64507f59e973bb429b",
+        "source": "photo-anchors-openstreetmap",
+        "capturedAt": "2026-09-24T08:55:50.704Z"
+      }
+    ],
+    "bounds": [
+      12.4065022,
+      58.989312,
+      12.46357,
+      59.0588328
+    ],
+    "start": [
+      12.406937,
+      58.989312
+    ],
+    "finish": [
+      12.46357,
+      59.057175
+    ]
+  },
+  "review": [],
+  "provenance": {
+    "status": "estimated",
+    "method": "photo-gps-openstreetmap",
+    "metricsSource": "Photo timestamps and matched trail geometry",
+    "routeSource": "GPS-tagged photo anchors matched to OpenStreetMap trail geometry",
+    "label": "Estimated route reconstructed from GPS-tagged photos and the mapped Pilgrimsleden trail."
+  }
+}

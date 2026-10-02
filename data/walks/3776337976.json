@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "3776337976",
+  "local": {
+    "name": "Colchester Hiking",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "3776337976",
+      "status": "archived",
+      "archivedFilename": "3776337976_ACTIVITY.fit",
+      "snapshot": {
+        "name": "Colchester Other",
+        "type": "Hike",
+        "startDate": "2019-06-23T08:50:47.000Z",
+        "startDateLocal": "2019-06-23T09:50:47.000",
+        "distanceM": 14026.0302734375,
+        "movingTimeSeconds": 10760,
+        "elapsedTimeSeconds": 18734.703125,
+        "ascentM": 33.087507367134094
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "c6f3a177f76e5a950b5fc39c60606f50733d91ba68d2ce0beba39c7f458c20c5",
+    "source": "garmin",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "c6f3a177f76e5a950b5fc39c60606f50733d91ba68d2ce0beba39c7f458c20c5",
+        "source": "garmin",
+        "capturedAt": "2026-08-25T16:50:15.127Z"
+      }
+    ],
+    "bounds": [
+      0.9243921563029289,
+      51.83785401284695,
+      0.9958744514733553,
+      51.88812917098403
+    ],
+    "start": [
+      0.9572216402739286,
+      51.85617048293352
+    ],
+    "finish": [
+      0.9243921563029289,
+      51.88812917098403
+    ],
+    "descentM": 427
+  },
+  "review": []
+}

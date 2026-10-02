@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "3731138378",
+  "local": {
+    "name": "Wycombe Hiking",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "3731138378",
+      "status": "archived",
+      "archivedFilename": "3731138378_ACTIVITY.fit",
+      "snapshot": {
+        "name": "Wycombe Other",
+        "type": "Hike",
+        "startDate": "2019-06-09T09:03:14.000Z",
+        "startDateLocal": "2019-06-09T10:03:14.000",
+        "distanceM": 21868.880859375,
+        "movingTimeSeconds": 15336,
+        "elapsedTimeSeconds": 21147.642578125,
+        "ascentM": 192.3629264831543
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "8f3a20205502c3069bee6af47de17a30b72e09c0485b909538980a0fa78f3a5b",
+    "source": "garmin",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "8f3a20205502c3069bee6af47de17a30b72e09c0485b909538980a0fa78f3a5b",
+        "source": "garmin",
+        "capturedAt": "2026-08-25T16:50:15.127Z"
+      }
+    ],
+    "bounds": [
+      -0.873233126476407,
+      51.54422211460769,
+      -0.7687853928655386,
+      51.580570405349135
+    ],
+    "start": [
+      -0.7706659566611052,
+      51.570843206718564
+    ],
+    "finish": [
+      -0.7687922660261393,
+      51.57128602266312
+    ],
+    "descentM": 886
+  },
+  "review": []
+}

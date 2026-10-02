@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "id": "photo-20220415",
+  "local": {
+    "name": "Pilgrimsleden Dalsland — day 1: Mellerud to Livarebosjön",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": [],
+    "date": "2022-04-15T12:19:41+02:00",
+    "metrics": {
+      "distanceM": 20891,
+      "elapsedTimeSeconds": 22822
+    },
+    "notes": "The first day of a three-day hike from Mellerud to Edsleskog, ending with a hammock camp beside Livarebosjön.",
+    "references": [
+      {
+        "label": "Pilgrimsleden — Dalsland Canal",
+        "url": "https://dalslandskanal.se/en/naturen/pilgrimsleden/"
+      }
+    ]
+  },
+  "sources": {
+    "photoArchive": {
+      "status": "archived",
+      "snapshot": {
+        "date": "2022-04-15",
+        "pointCount": 116,
+        "startDate": "2022-04-15T12:19:41+02:00",
+        "endDate": "2022-04-15T18:40:03+02:00"
+      }
+    },
+    "openStreetMap": {
+      "status": "reference",
+      "relationId": "6796203",
+      "name": "Pilgrimsleden i Dalsland",
+      "url": "https://www.openstreetmap.org/relation/6796203",
+      "snapshot": {
+        "pointCount": 1562,
+        "routeDistanceM": 20891,
+        "startAnchorDifferenceM": 1119,
+        "finishAnchorDifferenceM": 9,
+        "sourceChecksum": "7b1a654082478bfa6b690ce67c030893b1f5e17c0ea0bce4ffe524685c354e8b"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "db4a394922272646443ec10247c285ac558e54863924da53c71103c3c2319358",
+    "source": "photo-anchors-openstreetmap",
+    "status": "estimated",
+    "versions": [
+      {
+        "checksum": "db4a394922272646443ec10247c285ac558e54863924da53c71103c3c2319358",
+        "source": "photo-anchors-openstreetmap",
+        "capturedAt": "2026-09-24T08:55:50.704Z"
+      }
+    ],
+    "bounds": [
+      12.4255922,
+      58.70192,
+      12.4810099,
+      58.8411
+    ],
+    "start": [
+      12.464805,
+      58.70192
+    ],
+    "finish": [
+      12.425975,
+      58.8411
+    ]
+  },
+  "review": [],
+  "provenance": {
+    "status": "estimated",
+    "method": "photo-gps-openstreetmap",
+    "metricsSource": "Photo timestamps and matched trail geometry",
+    "routeSource": "GPS-tagged photo anchors matched to OpenStreetMap trail geometry",
+    "label": "Estimated route reconstructed from GPS-tagged photos and the mapped Pilgrimsleden trail."
+  }
+}

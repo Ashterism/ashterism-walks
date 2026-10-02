@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "4197566297",
+  "local": {
+    "name": "Mole Valley Hiking",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "4197566297",
+      "status": "archived",
+      "archivedFilename": "4197566297_ACTIVITY.fit",
+      "snapshot": {
+        "name": "Mole Valley Other",
+        "type": "Hike",
+        "startDate": "2019-10-27T10:32:29.000Z",
+        "startDateLocal": "2019-10-27T10:32:29.000",
+        "distanceM": 16803.509765625,
+        "movingTimeSeconds": 13255,
+        "elapsedTimeSeconds": 17872.08984375,
+        "ascentM": 275.1902618408203
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "8ba99432647882c9f6e9fadf6d3f29eadfed33f66abb2ea942ca02583876de0a",
+    "source": "garmin",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "8ba99432647882c9f6e9fadf6d3f29eadfed33f66abb2ea942ca02583876de0a",
+        "source": "garmin",
+        "capturedAt": "2026-08-25T16:50:15.127Z"
+      }
+    ],
+    "bounds": [
+      -0.4488329775631428,
+      51.17303716018796,
+      -0.31815508380532265,
+      51.22366653755307
+    ],
+    "start": [
+      -0.32033815048635006,
+      51.181173054501414
+    ],
+    "finish": [
+      -0.44727327302098274,
+      51.21951003558934
+    ],
+    "descentM": 932
+  },
+  "review": []
+}

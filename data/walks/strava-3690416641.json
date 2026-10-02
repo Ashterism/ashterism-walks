@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "strava-3690416641",
+  "local": {
+    "name": "Morning Walk",
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": null,
+    "strava": {
+      "activityId": "3690416641",
+      "status": "archived",
+      "archivedFilename": "strava-3690416641.fit.gz",
+      "snapshot": {
+        "name": "Morning Walk",
+        "type": "Walk",
+        "startDate": "2020-06-28T09:52:59.000Z",
+        "startDateLocal": null,
+        "distanceM": 16210,
+        "movingTimeSeconds": 12982,
+        "elapsedTimeSeconds": 14553,
+        "ascentM": 284.2,
+        "descentM": 284.6,
+        "weather": {
+          "condition": "1.0",
+          "temperatureC": 17.3,
+          "apparentTemperatureC": 17.3,
+          "humidity": 0.55,
+          "windSpeed": 8.3,
+          "windGust": 12.2,
+          "windBearing": 236,
+          "precipitationIntensity": 0,
+          "precipitationProbability": 0,
+          "precipitationType": null,
+          "cloudCover": 0.2
+        },
+        "mediaCount": 0
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "c669001e1d5f3e3e9d58cf6719ebcbb0ece1c2da03051238dae01fa973bae7f0",
+    "source": "strava",
+    "status": "archived",
+    "versions": [
+      {
+        "checksum": "c669001e1d5f3e3e9d58cf6719ebcbb0ece1c2da03051238dae01fa973bae7f0",
+        "source": "strava",
+        "capturedAt": "2026-08-25T12:53:17.061Z"
+      }
+    ],
+    "bounds": [
+      0.3930149506777525,
+      51.5371707547456,
+      0.45280952006578445,
+      51.56943077221513
+    ],
+    "start": [
+      0.4235193785279989,
+      51.56779093667865
+    ],
+    "finish": [
+      0.423861276358366,
+      51.56784391030669
+    ],
+    "descentM": 284.6
+  },
+  "review": []
+}

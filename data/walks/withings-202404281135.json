@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "id": "withings-202404281135",
+  "local": {
+    "name": "Surrey and Berkshire walk — 28 April 2024",
+    "activityType": "Hike",
+    "visibility": "public",
+    "photos": [],
+    "notes": "Estimated historical walk reconstructed from two Withings walking fragments and Google Timeline breadcrumbs. Earlier London walking and transit fragments from the same day were excluded.",
+    "references": [
+      {
+        "label": "Fishermen’s Trail — Rota Vicentina",
+        "url": "https://rotavicentina.com/en/fishermens-trail/"
+      }
+    ]
+  },
+  "sources": {
+    "withings": {
+      "activityIds": [
+        "202404281135",
+        "202404281421"
+      ],
+      "status": "archived",
+      "archivedFilename": "activities.csv",
+      "snapshot": {
+        "name": "Surrey and Berkshire walk — 28 April 2024",
+        "type": "Hike",
+        "startDate": "2024-04-28T09:35:00.000Z",
+        "startDateLocal": "2024-04-28T11:35:00+02:00",
+        "distanceM": 16121.259277343699,
+        "movingTimeSeconds": 12060,
+        "elapsedTimeSeconds": 15900,
+        "ascentM": null,
+        "componentCount": 2
+      },
+      "components": [
+        {
+          "activityId": "202404281135",
+          "from": "2024-04-28T11:35:00+02:00",
+          "to": "2024-04-28T13:18:00+02:00",
+          "distanceM": 8067.9892578125,
+          "movingTimeSeconds": 6120
+        },
+        {
+          "activityId": "202404281421",
+          "from": "2024-04-28T14:21:00+02:00",
+          "to": "2024-04-28T16:00:00+02:00",
+          "distanceM": 8053.2700195312,
+          "movingTimeSeconds": 5940
+        }
+      ]
+    },
+    "googleTimeline": {
+      "status": "archived",
+      "archivedFilename": "location-history.json",
+      "snapshot": {
+        "startDate": "2024-04-28T09:35:00.000Z",
+        "endDate": "2024-04-28T14:00:00.000Z",
+        "pointCount": 32,
+        "lineDistanceM": 13813
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "398b5b9103aeead9fcf114109af68ac130c429c8ddaa40e212cc6afa45d0dcfe",
+    "source": "google-timeline",
+    "status": "estimated",
+    "versions": [
+      {
+        "checksum": "398b5b9103aeead9fcf114109af68ac130c429c8ddaa40e212cc6afa45d0dcfe",
+        "source": "google-timeline",
+        "capturedAt": "2026-08-26T08:24:34.763Z"
+      }
+    ],
+    "bounds": [
+      -0.636606,
+      51.392179,
+      -0.5928,
+      51.481775
+    ],
+    "start": [
+      -0.633552,
+      51.392179
+    ],
+    "finish": [
+      -0.605734,
+      51.481775
+    ],
+    "descentM": null
+  },
+  "review": [],
+  "provenance": {
+    "status": "estimated",
+    "method": "withings-google-timeline",
+    "metricsSource": "Withings",
+    "routeSource": "Google Timeline",
+    "label": "Estimated route compiled from Withings activity data and Google Timeline."
+  }
+}
