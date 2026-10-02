@@ -218,6 +218,7 @@ export const resolvePublicFields = (record) => {
       snapshot.name ??
       (activity === 'hiking' ? 'Hike' : 'Walk'),
     date: record.local.date ?? snapshot.startDate ?? snapshot.startDateLocal,
+    ...(snapshot.startDateLocal ? { startDateLocal: snapshot.startDateLocal } : {}),
     distanceKm:
       distanceM == null
         ? null
