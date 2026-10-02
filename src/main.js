@@ -158,6 +158,26 @@ const formatDate = (dateString, long = false) =>
     ...(long ? { weekday: 'long' } : {}),
   }).format(new Date(dateString))
 
+const formatLocalTimeRange = (startDateLocal, elapsedTimeSeconds) => {
+  if (!startDateLocal || !Number.isFinite(elapsedTimeSeconds)) return null
+  const match = startDateLocal.match(/T(\d{2}):(\d{2})(?::(\d{2}))?/)
+  if (!match) return null
+
+  const [, hour, minute, second = '00'] = match
+  const startSeconds =
+    Number(hour) * 3600 + Number(minute) * 60 + Number(second)
+  const finishSeconds =
+    (startSeconds + Math.max(0, Math.round(elapsedTimeSeconds))) % 86400
+
+  const time = (totalSeconds) => {
+    const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0')
+    const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0')
+    return `${hours}:${minutes}`
+  }
+
+  return `${time(startSeconds)} - ${time(finishSeconds)}`
+}
+
 const formatDistance = (distanceKm) =>
   Number.isFinite(distanceKm) ? `${distanceKm} km` : '–'
 
@@ -539,7 +559,13 @@ const renderDetail = (walk, route) => {
   const coordinates = route.geometry.coordinates
   elements.detailKind.textContent = walk.activity === 'hiking' ? 'Hiking' : 'Walking'
   elements.detailTitle.textContent = walk.name
-  elements.detailDate.textContent = formatDate(walk.date, true)
+  const localTimeRange = formatLocalTimeRange(
+    walk.startDateLocal,
+    walk.elapsedTimeSeconds,
+  )
+  elements.detailDate.textContent = localTimeRange
+    ? `${formatDate(walk.date, true)} · ${localTimeRange}`
+    : formatDate(walk.date, true)
   elements.detailDistance.textContent = formatDistance(walk.distanceKm)
   elements.detailMoving.textContent = formatDuration(walk.movingTimeSeconds)
   elements.detailElapsed.textContent = formatDuration(walk.elapsedTimeSeconds)
