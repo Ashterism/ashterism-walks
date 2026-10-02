@@ -5,6 +5,7 @@
     "activity": "walking",
     "name": "Mialet Walking",
     "date": "2026-09-23T12:16:29Z",
+    "startDateLocal": "2026-09-23T14:16:29",
     "distanceKm": 3.03,
     "movingTimeSeconds": 1858,
     "elapsedTimeSeconds": 1862,

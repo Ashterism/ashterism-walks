@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "South Hams Hiking",
     "date": "2025-07-23T17:40:39Z",
+    "startDateLocal": "2025-07-23T18:40:39",
     "distanceKm": 6.13,
     "movingTimeSeconds": 4746,
     "elapsedTimeSeconds": 5814,

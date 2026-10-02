@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Pensol Hiking",
     "date": "2026-09-20T10:36:24Z",
+    "startDateLocal": "2026-09-20T12:36:24",
     "distanceKm": 16.1,
     "movingTimeSeconds": 10713,
     "elapsedTimeSeconds": 11054,

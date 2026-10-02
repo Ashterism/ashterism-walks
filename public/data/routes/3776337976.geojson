@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Colchester Hiking",
     "date": "2019-06-23T08:50:47.000Z",
+    "startDateLocal": "2019-06-23T09:50:47.000",
     "distanceKm": 14.03,
     "movingTimeSeconds": 10760,
     "elapsedTimeSeconds": 18734.703125,

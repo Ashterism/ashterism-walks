@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Champs-Romain Hiking",
     "date": "2026-08-26T12:45:06Z",
+    "startDateLocal": "2026-08-26T14:45:06",
     "distanceKm": 8.51,
     "movingTimeSeconds": 5730,
     "elapsedTimeSeconds": 5865,

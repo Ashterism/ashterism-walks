@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Surrey walk — 24 May 2015",
     "date": "2015-05-24T14:49:00.000Z",
+    "startDateLocal": "2015-05-24T16:49:00+02:00",
     "distanceKm": 11.5,
     "movingTimeSeconds": 9540,
     "elapsedTimeSeconds": 10500,

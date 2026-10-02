@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Greenwich Hiking",
     "date": "2018-05-07T10:20:21.000Z",
+    "startDateLocal": "2018-05-07T11:20:21.000",
     "distanceKm": 17.35,
     "movingTimeSeconds": 11569,
     "elapsedTimeSeconds": 14275.5986328125,

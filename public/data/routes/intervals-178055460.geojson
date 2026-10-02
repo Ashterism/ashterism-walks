@@ -5,6 +5,7 @@
     "activity": "walking",
     "name": "Ko Samui Walking",
     "date": "2024-07-07T00:32:45Z",
+    "startDateLocal": "2024-07-07T07:32:45",
     "distanceKm": 5.87,
     "movingTimeSeconds": 4603,
     "elapsedTimeSeconds": 4992,

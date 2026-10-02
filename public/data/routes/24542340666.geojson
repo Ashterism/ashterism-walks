@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "La Coquille Hiking",
     "date": "2026-09-29T14:24:59Z",
+    "startDateLocal": "2026-09-29T16:24:59",
     "distanceKm": 2.07,
     "movingTimeSeconds": 1504,
     "elapsedTimeSeconds": 1577,

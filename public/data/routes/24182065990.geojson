@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Saint-Saud-Lacoussière Hiking",
     "date": "2026-08-31T09:41:57Z",
+    "startDateLocal": "2026-08-31T11:41:57",
     "distanceKm": 4.38,
     "movingTimeSeconds": 2981,
     "elapsedTimeSeconds": 3106,

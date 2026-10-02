@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Newham Hiking",
     "date": "2024-08-25T09:06:06Z",
+    "startDateLocal": "2024-08-25T10:06:06",
     "distanceKm": 24.91,
     "movingTimeSeconds": 16110,
     "elapsedTimeSeconds": 18763,

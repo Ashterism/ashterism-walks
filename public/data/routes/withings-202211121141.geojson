@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "South Devon walk — 12 November 2022",
     "date": "2022-11-12T10:41:00.000Z",
+    "startDateLocal": "2022-11-12T11:41:00+01:00",
     "distanceKm": 6.18,
     "movingTimeSeconds": 6463,
     "elapsedTimeSeconds": 6660,

@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Kinsale walk",
     "date": "2019-11-09T12:54:08.000Z",
+    "startDateLocal": "2019-11-09T13:54:08+01:00",
     "distanceKm": 7.01,
     "movingTimeSeconds": null,
     "elapsedTimeSeconds": 7260,

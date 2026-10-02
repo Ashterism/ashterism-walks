@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "High Peak Hiking",
     "date": "2024-10-11T07:15:53Z",
+    "startDateLocal": "2024-10-11T08:15:53",
     "distanceKm": 18.36,
     "movingTimeSeconds": 15091,
     "elapsedTimeSeconds": 21089,

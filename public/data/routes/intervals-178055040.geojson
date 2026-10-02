@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Dartford Hiking",
     "date": "2019-04-22T10:06:23Z",
+    "startDateLocal": "2019-04-22T11:06:23",
     "distanceKm": 13.37,
     "movingTimeSeconds": 9828,
     "elapsedTimeSeconds": 10517,

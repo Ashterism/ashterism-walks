@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Torbay Hiking",
     "date": "2026-08-16T14:27:14Z",
+    "startDateLocal": "2026-08-16T15:27:14",
     "distanceKm": 4.2,
     "movingTimeSeconds": 2980,
     "elapsedTimeSeconds": 3174,

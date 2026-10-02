@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Roydon to Sawbridge",
     "date": "2026-08-14T09:39:12Z",
+    "startDateLocal": "2026-08-14T10:39:12",
     "distanceKm": 20.93,
     "movingTimeSeconds": 14854,
     "elapsedTimeSeconds": 20422,

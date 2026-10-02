@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Mialet Hiking",
     "date": "2026-08-30T12:26:37Z",
+    "startDateLocal": "2026-08-30T14:26:37",
     "distanceKm": 9.1,
     "movingTimeSeconds": 5834,
     "elapsedTimeSeconds": 5915,

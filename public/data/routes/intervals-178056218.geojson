@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Calderdale Hiking",
     "date": "2024-10-13T06:54:51Z",
+    "startDateLocal": "2024-10-13T07:54:51",
     "distanceKm": 33.31,
     "movingTimeSeconds": 26229,
     "elapsedTimeSeconds": 34502,

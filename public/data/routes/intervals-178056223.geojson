@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Craven Hiking",
     "date": "2024-10-14T06:13:37Z",
+    "startDateLocal": "2024-10-14T07:13:37",
     "distanceKm": 24.05,
     "movingTimeSeconds": 19058,
     "elapsedTimeSeconds": 25533,

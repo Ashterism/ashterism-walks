@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Portugal coast — 14 May 2024",
     "date": "2024-05-14T08:54:00.000Z",
+    "startDateLocal": "2024-05-14T10:54:00+02:00",
     "distanceKm": 17.71,
     "movingTimeSeconds": 17461,
     "elapsedTimeSeconds": 22860,

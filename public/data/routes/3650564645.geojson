@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "South Oxfordshire Hiking",
     "date": "2019-05-12T10:19:43.000Z",
+    "startDateLocal": "2019-05-12T11:19:43.000",
     "distanceKm": 18.65,
     "movingTimeSeconds": 13673,
     "elapsedTimeSeconds": 19965.23046875,

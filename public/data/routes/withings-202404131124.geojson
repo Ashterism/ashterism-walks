@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Bedfordshire walk — 13 April 2024",
     "date": "2024-04-13T09:24:00.000Z",
+    "startDateLocal": "2024-04-13T11:24:00+02:00",
     "distanceKm": 9.9,
     "movingTimeSeconds": 7440,
     "elapsedTimeSeconds": 7680,

@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Waverley Hiking",
     "date": "2019-10-06T10:15:22.000Z",
+    "startDateLocal": "2019-10-06T11:15:22.000",
     "distanceKm": 13.38,
     "movingTimeSeconds": 10200,
     "elapsedTimeSeconds": 16010.4150390625,

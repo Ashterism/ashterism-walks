@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Mole Valley Hiking",
     "date": "2019-10-27T10:32:29.000Z",
+    "startDateLocal": "2019-10-27T10:32:29.000",
     "distanceKm": 16.8,
     "movingTimeSeconds": 13255,
     "elapsedTimeSeconds": 17872.08984375,

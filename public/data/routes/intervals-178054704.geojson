@@ -5,6 +5,7 @@
     "activity": "walking",
     "name": "West Midlands Other",
     "date": "2017-12-24T11:24:53Z",
+    "startDateLocal": "2017-12-24T11:24:53",
     "distanceKm": 8.04,
     "movingTimeSeconds": 3699,
     "elapsedTimeSeconds": 11069,

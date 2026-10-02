@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Mount Ijen",
     "date": "2025-08-11",
+    "startDateLocal": "2025-08-11T01:29:20+07:00",
     "distanceKm": 10.02,
     "movingTimeSeconds": 14032,
     "elapsedTimeSeconds": 20305,

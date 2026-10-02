@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Wycombe Hiking",
     "date": "2019-06-09T09:03:14.000Z",
+    "startDateLocal": "2019-06-09T10:03:14.000",
     "distanceKm": 21.87,
     "movingTimeSeconds": 15336,
     "elapsedTimeSeconds": 21147.642578125,

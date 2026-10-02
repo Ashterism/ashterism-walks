@@ -5,6 +5,7 @@
     "activity": "walking",
     "name": "Test walk",
     "date": "2014-07-20T12:00:33Z",
+    "startDateLocal": "2014-07-20T13:00:33",
     "distanceKm": 2.17,
     "movingTimeSeconds": 1393,
     "elapsedTimeSeconds": 19891,

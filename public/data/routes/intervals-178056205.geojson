@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Kirklees Hiking",
     "date": "2024-10-12T09:35:04Z",
+    "startDateLocal": "2024-10-12T10:35:04",
     "distanceKm": 29.48,
     "movingTimeSeconds": 22213,
     "elapsedTimeSeconds": 27797,

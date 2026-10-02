@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Epping Forest Hiking",
     "date": "2019-11-16T10:29:37.000Z",
+    "startDateLocal": "2019-11-16T10:29:37.000",
     "distanceKm": 6.34,
     "movingTimeSeconds": 5138,
     "elapsedTimeSeconds": 7356.97314453125,

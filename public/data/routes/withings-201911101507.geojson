@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Blarney Castle grounds",
     "date": "2019-11-10T14:07:16.000Z",
+    "startDateLocal": "2019-11-10T15:07:16+01:00",
     "distanceKm": 4.19,
     "movingTimeSeconds": null,
     "elapsedTimeSeconds": 3780,

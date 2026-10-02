@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Surrey and Berkshire walk — 28 April 2024",
     "date": "2024-04-28T09:35:00.000Z",
+    "startDateLocal": "2024-04-28T11:35:00+02:00",
     "distanceKm": 16.12,
     "movingTimeSeconds": 12060,
     "elapsedTimeSeconds": 15900,

@@ -5,6 +5,7 @@
     "activity": "hiking",
     "name": "Lewes Hiking",
     "date": "2018-07-29T09:45:07.000Z",
+    "startDateLocal": "2018-07-29T10:45:07.000",
     "distanceKm": 23.47,
     "movingTimeSeconds": 16897,
     "elapsedTimeSeconds": 27108.150390625,
