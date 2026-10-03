@@ -7,6 +7,7 @@ import { mediaServiceToken } from './lib/media-service-token.js'
 import { addedWalkIds, isRecentWalk } from './lib/new-walk-photo-worker.js'
 import { preparePhotoCandidates } from './lib/prepare-photo-candidates.js'
 import { preparePhotoPublication } from './lib/prepare-photo-publication.js'
+import { requestPhotoRefresh } from './lib/walk-photo-refresh.js'
 
 const option = (name) => {
   const index = process.argv.indexOf(name)
@@ -14,6 +15,7 @@ const option = (name) => {
 }
 const archiveRoot = option('--archive')
 const stateRoot = option('--state-dir')
+const refreshQueueRoot = option('--refresh-queue') ?? path.join(path.dirname(path.resolve(archiveRoot ?? '.')), '.walk-photo-refresh')
 if (!archiveRoot || !stateRoot) {
   throw new Error('Usage: node scripts/run-photo-worker.js --archive /volume1/photo/Photos --state-dir /volume1/docker/ashterism-walks-photo-worker/state')
 }
@@ -77,6 +79,11 @@ try {
     for (const walkId of [...state.pendingWalkIds]) {
       let result
       try {
+        const walk = readJson(path.join('data/walks', `${walkId}.json`))
+        if (!requestPhotoRefresh({ walk, queueRoot: refreshQueueRoot, retry: true }).ready) {
+          console.log(`${walkId}: awaiting targeted iCloud refresh and archive ingest; will retry`)
+          continue
+        }
         result = preparePhotoCandidates({ walkId, archiveRoot })
       } catch (error) {
         console.warn(`${walkId}: waiting for route/archive: ${error.message}`)
