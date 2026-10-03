@@ -9,6 +9,7 @@ import {
   providerStatusFor,
   preserveRouteAfterInvalidCandidate,
   readJson,
+  routeAfterProviderRefresh,
   routeVersionPath,
   sha256,
   withProviderStatus,
@@ -235,7 +236,7 @@ for (const metadata of manifest.activities) {
         })
       }
 
-      route = {
+      route = routeAfterProviderRefresh(record, {
         activeVersion: checksum,
         source: 'intervals',
         status: 'current',
@@ -244,10 +245,11 @@ for (const metadata of manifest.activities) {
         start: candidate.start,
         finish: candidate.finish,
         descentM: candidate.descentM,
-      }
+      })
       review.delete('route-unavailable')
       review.delete('source-route-invalid')
-      convertedCount += 1
+      if (route.activeVersion === checksum) convertedCount += 1
+      else preservedRouteCount += 1
     } else if (route?.activeVersion) {
       route = preserveRouteAfterInvalidCandidate(route)
       review.add('source-route-invalid')

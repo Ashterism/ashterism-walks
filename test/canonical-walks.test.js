@@ -6,8 +6,19 @@ import {
   preserveRouteAfterInvalidCandidate,
   providerStatusFor,
   resolvePublicFields,
+  routeAfterProviderRefresh,
   withProviderStatus,
 } from '../scripts/lib/canonical-walks.js'
+
+test('activity sync retains an explicit local GPS correction while archiving provider versions', () => {
+  const corrected = { activeVersion: 'corrected', source: 'local-gps-correction', status: 'edited',
+    bounds: [0, 0, 1, 1], versions: [{ checksum: 'corrected' }] }
+  const incoming = { activeVersion: 'provider', source: 'intervals', status: 'current',
+    bounds: [0, 0, 9, 9], versions: [{ checksum: 'corrected' }, { checksum: 'provider' }] }
+  assert.deepEqual(routeAfterProviderRefresh({ local: { routeEdit: { type: 'remove-gps-spike' } }, route: corrected }, incoming),
+    { ...corrected, versions: incoming.versions })
+  assert.equal(routeAfterProviderRefresh({ local: {}, route: corrected }, incoming), incoming)
+})
 
 const record = {
   id: '123',

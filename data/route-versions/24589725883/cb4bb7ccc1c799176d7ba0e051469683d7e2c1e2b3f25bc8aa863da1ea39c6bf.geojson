@@ -1,25 +1,6 @@
 {
   "type": "Feature",
-  "properties": {
-    "id": "24589725883",
-    "activity": "hiking",
-    "name": "Mialet Hiking",
-    "date": "2026-10-03T12:01:57Z",
-    "startDateLocal": "2026-10-03T14:01:57",
-    "distanceKm": 2.95,
-    "movingTimeSeconds": 1738,
-    "elapsedTimeSeconds": 1758,
-    "ascentM": 17,
-    "descentM": 23,
-    "providers": [
-      "Garmin"
-    ],
-    "provenance": {
-      "status": "edited",
-      "method": "manual-gps-correction",
-      "label": "Activity route · GPS spike near the start removed by Ashterism"
-    }
-  },
+  "properties": {},
   "geometry": {
     "type": "LineString",
     "coordinates": [

@@ -278,3 +278,10 @@ export const preserveRouteAfterInvalidCandidate = (route) =>
   route?.activeVersion
     ? { ...route, status: 'cached-after-invalid-source' }
     : null
+
+// Provider refreshes still archive their route versions, but an explicit local
+// route correction owns the displayed geometry until deliberately changed.
+export const routeAfterProviderRefresh = (record, providerRoute) =>
+  record.local.routeEdit && record.route?.activeVersion
+    ? { ...record.route, versions: providerRoute.versions }
+    : providerRoute

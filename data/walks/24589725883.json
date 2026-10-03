@@ -6,7 +6,21 @@
     "activityType": null,
     "visibility": "public",
     "photos": [],
-    "photoManifestAssetId": "6b738b17-8fdf-4b96-82a0-80a3b92d297a"
+    "photoManifestAssetId": "6b738b17-8fdf-4b96-82a0-80a3b92d297a",
+    "metrics": {
+      "distanceM": 2952
+    },
+    "routeEdit": {
+      "type": "remove-gps-spike",
+      "sourceVersion": "082054f1ac41a69d868253b4891069555d4b56c549a721209a78aab810e3a76f",
+      "removedPointIndexes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "reason": "Removed the erroneous inland GPS excursion at the start; Ash confirmed walking along the water."
+    }
   },
   "sources": {
     "garmin": {
@@ -31,21 +45,26 @@
     }
   },
   "route": {
-    "activeVersion": "082054f1ac41a69d868253b4891069555d4b56c549a721209a78aab810e3a76f",
-    "source": "intervals",
-    "status": "current",
+    "activeVersion": "cb4bb7ccc1c799176d7ba0e051469683d7e2c1e2b3f25bc8aa863da1ea39c6bf",
+    "source": "local-gps-correction",
+    "status": "edited",
     "versions": [
       {
         "checksum": "082054f1ac41a69d868253b4891069555d4b56c549a721209a78aab810e3a76f",
         "source": "intervals",
         "capturedAt": "2026-10-03T12:45:28.310Z"
+      },
+      {
+        "checksum": "cb4bb7ccc1c799176d7ba0e051469683d7e2c1e2b3f25bc8aa863da1ea39c6bf",
+        "source": "local-gps-correction",
+        "capturedAt": "2026-10-03T17:13:42.403Z"
       }
     ],
     "bounds": [
       0.9179767314344645,
       45.549045503139496,
-      0.937091326341033,
-      45.560092851519585
+      0.9324221033602953,
+      45.55894469842315
     ],
     "start": [
       0.9324221033602953,
@@ -57,5 +76,10 @@
     ],
     "descentM": 23
   },
-  "review": []
+  "review": [],
+  "provenance": {
+    "status": "edited",
+    "method": "manual-gps-correction",
+    "label": "Activity route · GPS spike near the start removed by Ashterism"
+  }
 }
