@@ -11,6 +11,34 @@ export const mediaRequestUrl = (path, location = window.location) => {
 const privateManifestPath = (assetId) => `/v1/assets/${assetId}/content`
 const privateDisplayPath = (assetId) => `/v1/assets/${assetId}/variants/display`
 
+export const privatePhotoFailureFor = (error) => {
+  if (error.status === 401) return {
+    title: 'Your photo sign-in needs refreshing',
+    copy: 'Sign out, then sign in again to renew access to private photographs.',
+    note: ' · private photo access rejected (401)',
+  }
+  if (error.status === 403) return {
+    title: 'Photo access was denied',
+    copy: 'You are signed in, but the media service has not granted this account access to these photographs.',
+    note: ' · private photo permission denied (403)',
+  }
+  return {
+    title: 'Private photographs could not be loaded',
+    copy: error.status
+      ? `The ${error.stage === 'manifest' ? 'photo list' : 'image'} request returned ${error.status}. Your sign-in is still active.`
+      : 'The media request could not complete. Your sign-in is still active; please try again shortly.',
+    note: ` · private photographs unavailable${error.status ? ` (${error.stage}: ${error.status})` : ' (connection failed)'}`,
+  }
+}
+
+const assertMediaResponse = (response, stage) => {
+  if (!response.ok) {
+    const error = new Error(`${stage} request failed: ${response.status}`)
+    Object.assign(error, { status: response.status, stage })
+    throw error
+  }
+}
+
 export const reviewDecisionFor = (session, candidate) =>
   session.review?.decisions?.[candidate.id] ?? {
     status: 'unreviewed',
@@ -242,13 +270,15 @@ export const setupWalkPhotos = ({
       return
     }
 
+    emptyTitle.textContent = 'Loading this walk’s photographs'
+    emptyCopy.textContent = 'Fetching private photographs securely using your sign-in.'
     display(publicPhotos, ' · loading private photographs…')
     try {
       const manifestResponse = await fetch(
         mediaRequestUrl(privateManifestPath(walk.photoManifestAssetId)),
         { headers: { Authorization: `Bearer ${token}` }, cache: 'no-store' },
       )
-      if (!manifestResponse.ok) throw new Error(`Manifest request failed: ${manifestResponse.status}`)
+      assertMediaResponse(manifestResponse, 'manifest')
       const manifest = await manifestResponse.json()
       const privatePhotos = await Promise.all(
         (manifest.photos ?? []).map(async (photo) => {
@@ -256,7 +286,7 @@ export const setupWalkPhotos = ({
             headers: { Authorization: `Bearer ${token}` },
             cache: 'no-store',
           })
-          if (!response.ok) throw new Error(`Photo request failed: ${response.status}`)
+          assertMediaResponse(response, 'image')
           const url = URL.createObjectURL(await response.blob())
           objectUrls.push(url)
           return { ...photo, url, visibility: 'private' }
@@ -266,7 +296,12 @@ export const setupWalkPhotos = ({
       display([...publicPhotos, ...privatePhotos])
     } catch (error) {
       console.error('Could not load private photographs', error)
-      if (request === renderRequest) display(publicPhotos, ' · private photographs unavailable')
+      if (request === renderRequest) {
+        const failure = privatePhotoFailureFor(error)
+        emptyTitle.textContent = failure.title
+        emptyCopy.textContent = failure.copy
+        display(publicPhotos, failure.note)
+      }
     }
   }
 

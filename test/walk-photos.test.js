@@ -1,7 +1,15 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { mediaRequestUrl, reviewDecisionFor } from '../src/walk-photos.js'
+import { mediaRequestUrl, privatePhotoFailureFor, reviewDecisionFor } from '../src/walk-photos.js'
+
+test('photo failures distinguish sign-in, permission, missing-image and connection errors', () => {
+  assert.match(privatePhotoFailureFor({ status: 401 }).copy, /Sign out, then sign in/)
+  assert.match(privatePhotoFailureFor({ status: 403 }).copy, /You are signed in/)
+  assert.match(privatePhotoFailureFor({ status: 404, stage: 'image' }).copy, /image request returned 404/)
+  assert.match(privatePhotoFailureFor({ status: 500, stage: 'manifest' }).note, /manifest: 500/)
+  assert.match(privatePhotoFailureFor(new TypeError('Failed to fetch')).note, /connection failed/)
+})
 
 test('unreviewed matched photos default to private', () => {
   assert.deepEqual(
