@@ -12,6 +12,37 @@ signing in is only for viewing and review, never for authorising the upload.
 
 ## What exists on `main`
 
+### Private-photo access and HEIC repair (4 October 2026)
+
+The uploaded Mialet manifests now exist. A successful sign-in alone is not proof
+that Media roles appear in the access token. ZITADEL cross-project role assertion
+can filter Media roles to the role names of the authenticating Walks project
+([upstream issue 12673](https://github.com/zitadel/zitadel/issues/12673)). The current
+workaround is to disable automatic "Return user roles during authentication" on
+the **Walks** project, retain the explicit all-project roles scope and Media
+audience scope, and sign in again. Do not remove the user's Media assignments or
+relax Media's private-asset checks.
+
+HALMAN's bundled Sharp failed decoding an uploaded `image/heic` original, and
+Media silently saved `variants: {}`. The manifest then loaded but the display
+image returned 404. The guarded installer at
+`scripts/halman/install-media-heic-support.sh` patches the supplied Media source
+and pins `heic-convert` 2.1.0 in its package/lockfile. Only HEIC/HEIF web-variant
+inputs are decoded to lossless PNG before the existing Sharp WebP generation;
+originals, asset IDs, permissions, and review metadata are unchanged. Failed HEIC
+conversion now fails the upload rather than recording an unusable success.
+
+The installer builds before stopping Media, then runs the repair with the API
+stopped to avoid metadata races, and restarts it even if repair fails. Supply
+explicit manifest UUIDs: there is no historical/library-wide scan. The repair
+reuses Media's updated variant generator, skips healthy variants, atomically
+updates each asset's metadata, and retains the old metadata and variant files.
+Rerunning it is safe. Source/package/lockfile backups use
+`.before-heic-support`; repaired metadata backups are stored beside the asset.
+The Media service source is currently NAS-local, so this repository tracks the
+guarded source patch and deployment/repair tooling. Changed source anchors abort
+the patch; conversion on the actual NAS still requires deployment verification.
+
 - Candidate matching, including a time window derived from a newly synced
   Intervals walk when no historical photo-archive snapshot exists.
 - A manual `photos:prepare` command that uploads to Media, records
