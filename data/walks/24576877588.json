@@ -5,7 +5,8 @@
     "name": null,
     "activityType": null,
     "visibility": "public",
-    "photos": []
+    "photos": [],
+    "photoManifestAssetId": "0453ea37-e404-49e8-ae9c-cec15401ff5c"
   },
   "sources": {
     "garmin": {
