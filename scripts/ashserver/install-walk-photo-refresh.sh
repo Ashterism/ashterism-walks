@@ -14,15 +14,16 @@ command -v flock >/dev/null
 command -v tmux >/dev/null
 bash -n "$source_dir/run_icloud_sync.sh"
 
-# Confirm timestamp support in the installed/pinned downloader before replacing
-# the wrapper. This is read-only: no login, enumeration or download takes place.
+# Check the pinned executable's capture-filter options before replacing the
+# wrapper. The image ships standalone binaries, not a Python interpreter.
+# This is read-only: no login, enumeration or download takes place.
 image='icloudpd/icloudpd@sha256:af2bf40cb2c1d42051793b4c3c04c825950697d7fedcd12bd8455d6952395801'
-docker run --rm --entrypoint python3 "$image" -c '
-from icloudpd.base import skip_created_generator
-value = skip_created_generator("skip-created-before", "2026-10-02T09:10:21+00:00")
-assert value.isoformat() == "2026-10-02T09:10:21+00:00", value
-print("Pinned iCloudPD supports explicit UTC capture windows")
-'
+help_output=$(docker run --rm "$image" icloudpd --help)
+if [[ "$help_output" != *--skip-created-before* || "$help_output" != *--skip-created-after* ]]; then
+  echo 'Pinned iCloudPD does not advertise the required capture-date filters.' >&2
+  exit 1
+fi
+echo 'Pinned iCloudPD capture-date filter options confirmed'
 
 umask 007
 mkdir -p /mnt/photo/.walk-photo-refresh/requests /mnt/photo/.walk-photo-refresh/results

@@ -94,7 +94,7 @@ git clone https://github.com/Ashterism/ashterism-walks.git /home/ash/ashterism-w
 bash /home/ash/ashterism-walks/scripts/ashserver/install-walk-photo-refresh.sh
 ```
 
-The installer checks UTC-filter support in the pinned image without accessing
+The installer checks capture-date filter options in the pinned image without accessing
 iCloud, checks the archive mount, preserves the original wrapper, and installs
 two files under `/home/ash/photo-tools`. The shared request/result directories
 must be writable by HALMAN's `ash` account and ashserver's CIFS mount identity.
