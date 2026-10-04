@@ -12,6 +12,31 @@ signing in is only for viewing and review, never for authorising the upload.
 
 ## What exists on `main`
 
+### Live review mode
+
+Signed-in Media editors/admins now see **Review photographs** above the gallery
+on the live Walks site. This toggles Public / Private / Not included controls on
+each photograph; **Done reviewing** returns to the ordinary gallery. Decisions
+are saved immediately through Media's existing writer-protected PATCH endpoint,
+not browser-local storage or the laptop-local review server. The UI reads role
+hints from both the ID profile and access token; Media verifies the token and
+enforces writer roles independently. Viewing permission alone cannot edit.
+
+Public explicitly approves a photo and makes its Media asset public. Private
+approves it while retaining authenticated access. Not included keeps the asset
+private and hides it from the ordinary gallery; it never deletes the original.
+Rejected assets remain in the protected manifest so review mode can restore them.
+
+The scheduled HALMAN worker reconciles Media decisions against its existing
+private publication ledgers, updates the canonical public photo list and protected
+manifest, rebuilds the catalogue, and commits/pushes the results. This runs on the
+existing ten-minute schedule; public catalogue changes also wait for deployment.
+No new service, server deployment, upload of original photos, or browser-held
+service credentials is required. The UI uses current Media metadata immediately,
+so badges and decisions do not wait for a replacement manifest. If a poll races
+with another review, the next poll catches the newer decision: reconciliation
+never PATCHes photo assets or overwrites the user's Media decision.
+
 ### Private-photo access and HEIC repair (4 October 2026)
 
 The uploaded Mialet manifests now exist. A successful sign-in alone is not proof

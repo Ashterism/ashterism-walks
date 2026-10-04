@@ -1,3 +1,5 @@
+import { canReviewPhotos, photoFromAsset, savePhotoReview } from './photo-review.js'
+
 export const MEDIA_API_BASE_URL = 'https://media.ashterism.com'
 export const LOCAL_REVIEW_ORIGIN = 'http://127.0.0.1:4175'
 
@@ -54,11 +56,17 @@ export const setupWalkPhotos = ({
   reviewRoot,
   getAccessToken,
   isSignedIn,
+  getRoles,
 }) => {
   let renderRequest = 0
   let objectUrls = []
   let viewerPhotos = []
   let viewerIndex = 0
+  let reviewMode = false
+  let currentWalkId = null
+  let loadedPhotos = []
+  let savingReview = false
+  let reviewMessage = ''
   const emptyTitle = empty.querySelector('strong')
   const emptyCopy = empty.querySelector('span')
   const viewer = document.createElement('dialog')
@@ -142,7 +150,7 @@ export const setupWalkPhotos = ({
       caption.textContent = photo.caption
       figure.append(caption)
     }
-    if (saveDecision) {
+    if (saveDecision && (photo.assetId || photo.candidateId)) {
       const controls = document.createElement('div')
       controls.className = 'photo-grid__review-controls'
       const choices = [
@@ -158,6 +166,7 @@ export const setupWalkPhotos = ({
           photo.reviewStatus === change.status &&
           (change.status === 'reject' || photo.visibility === change.visibility),
         )
+        button.disabled = savingReview
         button.addEventListener('click', () => saveDecision(photo, change))
         controls.append(button)
       }
@@ -245,6 +254,11 @@ export const setupWalkPhotos = ({
   }
 
   const render = async (walk) => {
+    if (currentWalkId !== walk.id) {
+      currentWalkId = walk.id
+      reviewMode = false
+      reviewMessage = ''
+    }
     const request = ++renderRequest
     clearObjectUrls()
     reviewRoot.hidden = true
@@ -280,8 +294,15 @@ export const setupWalkPhotos = ({
       )
       assertMediaResponse(manifestResponse, 'manifest')
       const manifest = await manifestResponse.json()
+      const sources = [...new Map([...publicPhotos.filter(photo => photo.assetId), ...(manifest.photos ?? [])]
+        .map(photo => [photo.assetId, photo])).values()]
       const privatePhotos = await Promise.all(
-        (manifest.photos ?? []).map(async (photo) => {
+        sources.map(async (photo) => {
+          const metadataResponse = await fetch(mediaRequestUrl(`/v1/assets/${photo.assetId}`), {
+            headers: { Authorization: `Bearer ${token}` }, cache: 'no-store',
+          })
+          assertMediaResponse(metadataResponse, 'image')
+          const currentPhoto = photoFromAsset(photo, await metadataResponse.json())
           const response = await fetch(mediaRequestUrl(privateDisplayPath(photo.assetId)), {
             headers: { Authorization: `Bearer ${token}` },
             cache: 'no-store',
@@ -289,11 +310,12 @@ export const setupWalkPhotos = ({
           assertMediaResponse(response, 'image')
           const url = URL.createObjectURL(await response.blob())
           objectUrls.push(url)
-          return { ...photo, url, visibility: 'private' }
+          return { ...currentPhoto, url }
         }),
       )
       if (request !== renderRequest) return
-      display([...publicPhotos, ...privatePhotos])
+      loadedPhotos = [...publicPhotos.filter(photo => !photo.assetId), ...privatePhotos]
+      renderMediaReview(walk)
     } catch (error) {
       console.error('Could not load private photographs', error)
       if (request === renderRequest) {
@@ -303,6 +325,53 @@ export const setupWalkPhotos = ({
         display(publicPhotos, failure.note)
       }
     }
+  }
+
+  const renderMediaReview = (walk) => {
+    const editor = canReviewPhotos(getRoles?.())
+    if (!editor) reviewMode = false
+    emptyTitle.textContent = 'No included photographs'
+    emptyCopy.textContent = editor
+      ? 'Use Review photographs to include a photograph again.'
+      : 'No photographs from this walk are currently included.'
+    reviewRoot.replaceChildren()
+    reviewRoot.hidden = !editor
+    if (editor) {
+      const toggle = document.createElement('button')
+      toggle.type = 'button'
+      toggle.className = 'photo-review__toggle'
+      toggle.textContent = reviewMode ? 'Done reviewing' : 'Review photographs'
+      toggle.setAttribute('aria-pressed', String(reviewMode))
+      toggle.disabled = savingReview
+      toggle.addEventListener('click', () => {
+        reviewMode = !reviewMode
+        renderMediaReview(walk)
+      })
+      const message = document.createElement('span')
+      message.setAttribute('role', 'status')
+      message.textContent = reviewMessage || (reviewMode
+        ? 'Choose Public, Private or Not included below each photograph. Originals are never deleted.'
+        : 'Photographs remain private until explicitly marked Public.')
+      reviewRoot.append(toggle, message)
+    }
+    display(loadedPhotos.filter(photo => reviewMode || photo.reviewStatus !== 'reject'),
+      reviewMode ? ' · review mode' : '', reviewMode && editor ? async (photo, change) => {
+        if (savingReview) return
+        savingReview = true
+        reviewMessage = 'Saving…'
+        renderMediaReview(walk)
+        try {
+          const asset = await savePhotoReview({ photo, change, token: getAccessToken?.() })
+          if (currentWalkId !== walk.id) return
+          loadedPhotos = loadedPhotos.map(item => item.assetId === photo.assetId ? photoFromAsset(item, asset) : item)
+          reviewMessage = 'Saved. The public site will update after the next photo-worker run and deployment.'
+        } catch (error) {
+          if (currentWalkId === walk.id) reviewMessage = `Could not save: ${error.message}`
+        } finally {
+          savingReview = false
+          if (currentWalkId === walk.id) renderMediaReview(walk)
+        }
+      } : null)
   }
 
   return { render, clear: clearObjectUrls }

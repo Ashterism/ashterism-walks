@@ -118,6 +118,7 @@ const walkPhotos = setupWalkPhotos({
   reviewRoot: elements.photoReview,
   getAccessToken: () => account?.getAccessToken(),
   isSignedIn: () => account?.isSignedIn() ?? false,
+  getRoles: () => account?.getRoles() ?? [],
 })
 
 let walks = []

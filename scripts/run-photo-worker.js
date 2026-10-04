@@ -8,6 +8,7 @@ import { addedWalkIds, isRecentWalk } from './lib/new-walk-photo-worker.js'
 import { preparePhotoCandidates } from './lib/prepare-photo-candidates.js'
 import { preparePhotoPublication } from './lib/prepare-photo-publication.js'
 import { requestPhotoRefresh } from './lib/walk-photo-refresh.js'
+import { reconcilePhotoReviews } from './lib/reconcile-photo-reviews.js'
 
 const option = (name) => {
   const index = process.argv.indexOf(name)
@@ -58,6 +59,30 @@ try {
 
   git('fetch', 'origin', branch)
   git('rebase', `origin/${branch}`)
+  const publicationDirectory = path.join(stateDirectory, 'publication-ledger')
+  let reviewToken
+  if (fs.existsSync(publicationDirectory)) {
+    for (const file of fs.readdirSync(publicationDirectory).filter(file => file.endsWith('.publication.json'))) {
+      const publicationPath = path.join(publicationDirectory, file)
+      const walkId = readJson(publicationPath).walkId
+      try {
+        const walk = readJson(path.join('data/walks', `${walkId}.json`))
+        reviewToken ??= await mediaServiceToken()
+        const changed = await reconcilePhotoReviews({ walk, publicationPath, token: reviewToken })
+        if (changed) {
+          execFileSync(process.execPath, ['scripts/build-catalogue.js'], { stdio: 'inherit' })
+          git('add', '--', `data/walks/${walkId}.json`, 'public/data/walks.json')
+          if (spawnSync('git', ['diff', '--cached', '--quiet']).status === 1) {
+            git('commit', '-m', `Apply photo review for ${walkId}`)
+          }
+        }
+      } catch (error) {
+        console.warn(`${walkId}: photo review reconciliation failed: ${error.message}`)
+      }
+    }
+  }
+  // Also retry previously created local commits if a previous push failed.
+  git('push', 'origin', 'HEAD:main')
   const head = git('rev-parse', 'HEAD')
   if (!fs.existsSync(statePath)) {
     saveState({ schemaVersion: 1, seenCommit: head, pendingWalkIds: [] })

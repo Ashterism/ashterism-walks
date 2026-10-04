@@ -6,9 +6,16 @@ import {
   ZITADEL_MEDIA_AUDIENCE_SCOPE,
   ZITADEL_PROJECT_ROLES_SCOPE,
   rolesFromProfile,
+  rolesFromAccessToken,
   safeReturnUrl,
 } from '../src/auth.js'
 import { BOOK_CATALOGUE_ASSET_ID, mediaUrl } from '../src/book-library.js'
+
+test('review UI reads Media roles from the access token even when the ID profile omits them', () => {
+  const payload = Buffer.from(JSON.stringify({ 'urn:zitadel:iam:org:project:389018638520205980:roles': { 'media.editor': {} } })).toString('base64url')
+  assert.deepEqual(rolesFromAccessToken(`header.${payload}.signature`), ['media.editor'])
+  assert.deepEqual(rolesFromAccessToken('invalid'), [])
+})
 
 test('requests a media API audience and project roles during sign-in', () => {
   const scopes = OIDC_SCOPE.split(' ')

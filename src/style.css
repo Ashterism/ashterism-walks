@@ -182,6 +182,8 @@ button { font: inherit; }
 .photo-grid__visibility { position: absolute; top: 8px; right: 8px; padding: 4px 7px; border-radius: 999px; background: rgb(23 56 45 / 88%); color: #fffaf1; font-size: .58rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 .photo-grid__visibility--review { background: rgb(215 101 63 / 94%); }
 .photo-review { margin: 0 0 14px; padding: 10px 12px; border-left: 3px solid #d7653f; background: rgb(215 101 63 / 8%); color: #52645b; font-size: .72rem; line-height: 1.45; }
+.photo-review__toggle { margin: 0 12px 6px 0; padding: 8px 12px; border: 1px solid #17382d; border-radius: 5px; background: #17382d; color: #fffaf1; cursor: pointer; font: inherit; font-weight: 750; }
+.photo-review button:disabled, .photo-grid__review-controls button:disabled { opacity: .55; cursor: wait; }
 .photo-grid__review-controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 7px; }
 .photo-grid__review-controls button { padding: 6px 4px; border: 1px solid rgb(32 49 41 / 20%); border-radius: 5px; background: #f7f1e7; color: #30443a; cursor: pointer; font-size: .62rem; font-weight: 750; }
 .photo-grid__review-controls button:hover, .photo-grid__review-controls button:focus-visible, .photo-grid__review-controls button[data-selected="true"] { border-color: #d7653f; background: #d7653f; color: #fff; }

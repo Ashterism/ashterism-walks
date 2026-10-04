@@ -33,6 +33,22 @@ export const rolesFromProfile = (profile = {}) => {
   return []
 }
 
+// UI capability hints only. Media verifies the signed access token and enforces
+// writer roles on every PATCH; decoding claims here does not authorise a write.
+export const rolesFromAccessToken = (token) => {
+  try {
+    const encoded = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')
+    const claims = JSON.parse(atob(encoded))
+    const roles = rolesFromProfile(claims)
+    for (const [key, value] of Object.entries(claims)) {
+      if (/^urn:zitadel:iam:org:project:[^:]+:roles$/.test(key)) {
+        roles.push(...rolesFromProfile({ [roleClaim]: value }))
+      }
+    }
+    return [...new Set(roles)]
+  } catch { return [] }
+}
+
 export const safeReturnUrl = (candidate, origin = window.location.origin) => {
   try {
     const url = new URL(candidate ?? '/', origin)
@@ -177,7 +193,9 @@ export const setupAccountMenu = async () => {
 
   return {
     getAccessToken: () => (user && !user.expired ? user.access_token : null),
-    getRoles: () => rolesFromProfile(user?.profile),
+    getRoles: () => user && !user.expired
+      ? [...new Set([...rolesFromProfile(user.profile), ...rolesFromAccessToken(user.access_token)])]
+      : [],
     isSignedIn: () => Boolean(user && !user.expired),
   }
 }
