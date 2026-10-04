@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "24603622266",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "24603622266"
+    },
+    "intervals": {
+      "activityId": "i193430167",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "5bccad3e7fc2a4feaae3659cd8ebe8fc8633cd054e295ad174bb54921198dab9",
+      "snapshot": {
+        "name": "Mialet Hiking",
+        "type": "Hike",
+        "startDate": "2026-10-04T12:30:46Z",
+        "startDateLocal": "2026-10-04T14:30:46",
+        "distanceM": 9008.99,
+        "movingTimeSeconds": 5671,
+        "elapsedTimeSeconds": 5687,
+        "ascentM": 55,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "b8b935949e40f3fe5691677206db826844cf21a7e7f4b4252a4a78a6ada25e84",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "b8b935949e40f3fe5691677206db826844cf21a7e7f4b4252a4a78a6ada25e84",
+        "source": "intervals",
+        "capturedAt": "2026-10-04T14:15:26.105Z"
+      }
+    ],
+    "bounds": [
+      0.9176781680434942,
+      45.547939259558916,
+      0.9464399144053459,
+      45.56275175884366
+    ],
+    "start": [
+      0.9178374242037535,
+      45.5493697989732
+    ],
+    "finish": [
+      0.9178083389997482,
+      45.54905313067138
+    ],
+    "descentM": 53
+  },
+  "review": []
+}
