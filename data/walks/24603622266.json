@@ -5,8 +5,105 @@
     "name": null,
     "activityType": null,
     "visibility": "public",
-    "photos": [],
-    "photoManifestAssetId": "ecfb73f6-dd59-401b-862e-e465012ddd90"
+    "photos": [
+      {
+        "assetId": "98f591d0-a6b2-440d-920a-4ab0284cb24f",
+        "url": "https://media.ashterism.com/v1/assets/98f591d0-a6b2-440d-920a-4ab0284cb24f/variants/display",
+        "alt": "Photograph 1 from Mialet Hiking",
+        "capturedAt": "2026-10-04T12:42:59.000Z"
+      },
+      {
+        "assetId": "10c00b78-5ce5-4c83-a367-22ef11e93981",
+        "url": "https://media.ashterism.com/v1/assets/10c00b78-5ce5-4c83-a367-22ef11e93981/variants/display",
+        "alt": "Photograph 2 from Mialet Hiking",
+        "capturedAt": "2026-10-04T12:43:02.000Z"
+      },
+      {
+        "assetId": "de49437f-b7f4-4b77-ac51-105c1ccd1487",
+        "url": "https://media.ashterism.com/v1/assets/de49437f-b7f4-4b77-ac51-105c1ccd1487/variants/display",
+        "alt": "Photograph 3 from Mialet Hiking",
+        "capturedAt": "2026-10-04T12:47:02.000Z"
+      },
+      {
+        "assetId": "d71da01f-cd86-47d9-a1f2-7aa304b46e48",
+        "url": "https://media.ashterism.com/v1/assets/d71da01f-cd86-47d9-a1f2-7aa304b46e48/variants/display",
+        "alt": "Photograph 4 from Mialet Hiking",
+        "capturedAt": "2026-10-04T12:55:55.000Z"
+      },
+      {
+        "assetId": "4cd3998e-d045-4a55-aa7a-83452cf6e357",
+        "url": "https://media.ashterism.com/v1/assets/4cd3998e-d045-4a55-aa7a-83452cf6e357/variants/display",
+        "alt": "Photograph 5 from Mialet Hiking",
+        "capturedAt": "2026-10-04T12:57:36.000Z"
+      },
+      {
+        "assetId": "41ce7d86-0bec-496f-8590-20e2b775dada",
+        "url": "https://media.ashterism.com/v1/assets/41ce7d86-0bec-496f-8590-20e2b775dada/variants/display",
+        "alt": "Photograph 6 from Mialet Hiking",
+        "capturedAt": "2026-10-04T13:06:03.000Z"
+      },
+      {
+        "assetId": "95fb3d0e-22b6-40ae-a9a4-a6c62172590c",
+        "url": "https://media.ashterism.com/v1/assets/95fb3d0e-22b6-40ae-a9a4-a6c62172590c/variants/display",
+        "alt": "Photograph 7 from Mialet Hiking",
+        "capturedAt": "2026-10-04T13:09:54.000Z"
+      },
+      {
+        "assetId": "b259c6b3-a07e-4da3-932a-04065ca4fc62",
+        "url": "https://media.ashterism.com/v1/assets/b259c6b3-a07e-4da3-932a-04065ca4fc62/variants/display",
+        "alt": "Photograph 8 from Mialet Hiking",
+        "capturedAt": "2026-10-04T13:16:39.000Z"
+      },
+      {
+        "assetId": "73a6b639-2f4f-4f16-a3b0-c9b9f69e371a",
+        "url": "https://media.ashterism.com/v1/assets/73a6b639-2f4f-4f16-a3b0-c9b9f69e371a/variants/display",
+        "alt": "Photograph 9 from Mialet Hiking",
+        "capturedAt": "2026-10-04T13:24:43.000Z"
+      },
+      {
+        "assetId": "07f5cdd3-1c8a-4eaf-9bb2-ac7c41136e55",
+        "url": "https://media.ashterism.com/v1/assets/07f5cdd3-1c8a-4eaf-9bb2-ac7c41136e55/variants/display",
+        "alt": "Photograph 10 from Mialet Hiking",
+        "capturedAt": "2026-10-04T13:24:47.000Z"
+      },
+      {
+        "assetId": "2082420d-d5d5-4277-a907-0fbbbf67180c",
+        "url": "https://media.ashterism.com/v1/assets/2082420d-d5d5-4277-a907-0fbbbf67180c/variants/display",
+        "alt": "Photograph 11 from Mialet Hiking",
+        "capturedAt": "2026-10-04T13:33:24.000Z"
+      },
+      {
+        "assetId": "db6190b3-edfa-4f2a-ae8d-d7ee33c75ca7",
+        "url": "https://media.ashterism.com/v1/assets/db6190b3-edfa-4f2a-ae8d-d7ee33c75ca7/variants/display",
+        "alt": "Photograph 12 from Mialet Hiking",
+        "capturedAt": "2026-10-04T13:34:52.000Z"
+      },
+      {
+        "assetId": "60759233-1898-4ef0-914a-46badd8d40df",
+        "url": "https://media.ashterism.com/v1/assets/60759233-1898-4ef0-914a-46badd8d40df/variants/display",
+        "alt": "Photograph 13 from Mialet Hiking",
+        "capturedAt": "2026-10-04T13:43:12.000Z"
+      },
+      {
+        "assetId": "55792f1d-092f-4ca3-a713-fb7c332de19b",
+        "url": "https://media.ashterism.com/v1/assets/55792f1d-092f-4ca3-a713-fb7c332de19b/variants/display",
+        "alt": "Photograph 14 from Mialet Hiking",
+        "capturedAt": "2026-10-04T13:49:42.000Z"
+      },
+      {
+        "assetId": "8e15b387-5123-498a-a9f5-124159314324",
+        "url": "https://media.ashterism.com/v1/assets/8e15b387-5123-498a-a9f5-124159314324/variants/display",
+        "alt": "Photograph 15 from Mialet Hiking",
+        "capturedAt": "2026-10-04T14:00:17.000Z"
+      },
+      {
+        "assetId": "b6d5b016-af2f-48b3-8f88-4885aa7ec1b6",
+        "url": "https://media.ashterism.com/v1/assets/b6d5b016-af2f-48b3-8f88-4885aa7ec1b6/variants/display",
+        "alt": "Photograph 16 from Mialet Hiking",
+        "capturedAt": "2026-10-04T14:00:20.000Z"
+      }
+    ],
+    "photoManifestAssetId": "d6e13a55-48d7-4026-8c01-556d873fe859"
   },
   "sources": {
     "garmin": {
