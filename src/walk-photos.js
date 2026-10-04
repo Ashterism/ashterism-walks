@@ -3,6 +3,15 @@ import { canReviewPhotos, photoFromAsset, savePhotoReview } from './photo-review
 export const MEDIA_API_BASE_URL = 'https://media.ashterism.com'
 export const LOCAL_REVIEW_ORIGIN = 'http://127.0.0.1:4175'
 
+export const publicPhotoEta = (savedAt = new Date()) => {
+  const base = savedAt instanceof Date ? savedAt : new Date(savedAt)
+  if (Number.isNaN(base.getTime())) throw new Error('Invalid save time')
+  const expected = new Date(base.getTime() + 30 * 60000)
+  const buffered = new Date(base.getTime() + 45 * 60000)
+  const format = (value) => value.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  return { expected, buffered, expectedLabel: format(expected), bufferedLabel: format(buffered) }
+}
+
 export const mediaRequestUrl = (path, location = window.location) => {
   if (!path?.startsWith('/v1/')) throw new Error('Invalid Ashterix Media path')
   return location.hostname === 'dev.walks.ashterism.com'
@@ -375,7 +384,10 @@ export const setupWalkPhotos = ({
       }
       if (currentWalkId === walk.id) reviewMessage = failures.length
         ? `${saved} saved; ${failures.length} could not be saved. ${failures[0]}`
-        : `Saved ${saved} ${saved === 1 ? 'photograph' : 'photographs'}. The public site will update after the next photo-worker run and deployment.`
+        : (() => {
+          const eta = publicPhotoEta()
+          return `Saved ${saved} ${saved === 1 ? 'photograph' : 'photographs'}. Expected publicly by about ${eta.expectedLabel}; allow until ${eta.bufferedLabel} before checking.`
+        })()
     } finally {
       savingReview = false
       if (currentWalkId === walk.id) renderMediaReview(walk)
