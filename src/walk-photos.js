@@ -54,6 +54,7 @@ export const setupWalkPhotos = ({
   note,
   empty,
   reviewRoot,
+  reviewToggle,
   getAccessToken,
   isSignedIn,
   getRoles,
@@ -262,6 +263,10 @@ export const setupWalkPhotos = ({
     const request = ++renderRequest
     clearObjectUrls()
     reviewRoot.hidden = true
+    if (reviewToggle) reviewToggle.hidden = true
+    reviewRoot.className = 'photo-review'
+    reviewRoot.inert = false
+    reviewRoot.setAttribute('aria-hidden', 'false')
     reviewRoot.textContent = ''
     const publicPhotos = walk.photos ?? []
     emptyTitle.textContent = walk.photoManifestAssetId
@@ -332,30 +337,53 @@ export const setupWalkPhotos = ({
     if (!editor) reviewMode = false
     emptyTitle.textContent = 'No included photographs'
     emptyCopy.textContent = editor
-      ? 'Use Review photographs to include a photograph again.'
+      ? 'Use Review photos to include a photograph again.'
       : 'No photographs from this walk are currently included.'
     reviewRoot.replaceChildren()
     reviewRoot.hidden = !editor
-    if (editor) {
-      const toggle = document.createElement('button')
-      toggle.type = 'button'
-      toggle.className = 'photo-review__toggle'
-      toggle.textContent = reviewMode ? 'Done reviewing' : 'Review photographs'
-      toggle.setAttribute('aria-pressed', String(reviewMode))
-      toggle.disabled = savingReview
-      toggle.addEventListener('click', () => {
+    reviewRoot.className = 'photo-review photo-review--accordion'
+    reviewRoot.dataset.open = String(reviewMode)
+    reviewRoot.inert = !reviewMode
+    reviewRoot.setAttribute('aria-hidden', String(!reviewMode))
+    reviewRoot.setAttribute('role', 'region')
+    reviewRoot.setAttribute('aria-labelledby', 'detail-photo-review-toggle')
+    if (reviewToggle) {
+      reviewToggle.hidden = !editor
+      reviewToggle.disabled = savingReview
+      reviewToggle.textContent = 'Review photos'
+      reviewToggle.dataset.open = String(reviewMode)
+      reviewToggle.setAttribute('aria-expanded', String(reviewMode))
+      reviewToggle.onclick = () => {
         reviewMode = !reviewMode
         renderMediaReview(walk)
+      }
+    }
+    if (editor) {
+      const inner = document.createElement('div')
+      inner.className = 'photo-review__inner'
+      const content = document.createElement('div')
+      content.className = 'photo-review__content'
+      const done = document.createElement('button')
+      done.type = 'button'
+      done.className = 'photo-review__done'
+      done.textContent = 'Done reviewing'
+      done.disabled = savingReview
+      done.addEventListener('click', () => {
+        reviewMode = false
+        renderMediaReview(walk)
+        reviewToggle?.focus()
       })
       const message = document.createElement('span')
       message.setAttribute('role', 'status')
       message.textContent = reviewMessage || (reviewMode
         ? 'Choose Public, Private or Not included below each photograph. Originals are never deleted.'
         : 'Photographs remain private until explicitly marked Public.')
-      reviewRoot.append(toggle, message)
+      content.append(message, done)
+      inner.append(content)
+      reviewRoot.append(inner)
     }
     display(loadedPhotos.filter(photo => reviewMode || photo.reviewStatus !== 'reject'),
-      reviewMode ? ' · review mode' : '', reviewMode && editor ? async (photo, change) => {
+      '', reviewMode && editor ? async (photo, change) => {
         if (savingReview) return
         savingReview = true
         reviewMessage = 'Saving…'

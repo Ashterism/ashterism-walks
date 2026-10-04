@@ -14,9 +14,10 @@ signing in is only for viewing and review, never for authorising the upload.
 
 ### Live review mode
 
-Signed-in Media editors/admins now see **Review photographs** above the gallery
-on the live Walks site. This toggles Public / Private / Not included controls on
-each photograph; **Done reviewing** returns to the ordinary gallery. Decisions
+Signed-in Media editors/admins now see a subtle **Review photos** disclosure
+below the count in the gallery heading. Opening it slides down the review panel
+and reveals Public / Private / Not included controls on each photograph;
+**Done reviewing** collapses the panel and returns to the ordinary gallery. Decisions
 are saved immediately through Media's existing writer-protected PATCH endpoint,
 not browser-local storage or the laptop-local review server. The UI reads role
 hints from both the ID profile and access token; Media verifies the token and
