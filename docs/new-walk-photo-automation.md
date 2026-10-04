@@ -18,6 +18,11 @@ Signed-in Media editors/admins now see a subtle **Review photos** disclosure
 below the count in the gallery heading. Opening it slides down the review panel
 and reveals Public / Private / Not included controls on each photograph;
 **Done reviewing** collapses the panel and returns to the ordinary gallery. Decisions
+can also be applied in bulk: select individual checkboxes or **Select all**, then
+**Mark Public** or **Mark Private** in the panel. Successful saves clear their
+selection; failed items remain selected for retry and the status reports partial
+failure. Selection resets when switching walks. These bulk actions use the same
+writer-protected Media updates as the per-photo controls. Decisions
 are saved immediately through Media's existing writer-protected PATCH endpoint,
 not browser-local storage or the laptop-local review server. The UI reads role
 hints from both the ID profile and access token; Media verifies the token and

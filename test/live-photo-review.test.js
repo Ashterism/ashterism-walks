@@ -60,3 +60,58 @@ test('live gallery offers a review toggle, persists choices and can undo rejecti
   assert.equal(grid.children[0].children.length, 2) // image and Private badge
   gallery.clear()
 })
+
+test('bulk review selects all, saves public/private, and leaves failed photos selected for retry', async t => {
+  const originals = { document: globalThis.document, window: globalThis.window, fetch: globalThis.fetch }
+  globalThis.document = { body: new Element(), createElement: () => new Element() }
+  globalThis.window = { location: { hostname: 'walks.ashterism.com' } }
+  t.after(() => Object.assign(globalThis, originals))
+  const assets = Object.fromEntries(['a', 'b'].map(id => [id, { id, visibility: 'authenticated', requiredRoles: ['walks.private_photos'], custom: { reviewStatus: 'unreviewed' } }]))
+  let failB = false
+  globalThis.fetch = async (url, options = {}) => {
+    const id = /\/assets\/([^/]+)/.exec(url)?.[1]
+    if (options.method === 'PATCH') {
+      if (failB && id === 'b') return { ok: false, status: 500, json: async () => ({ error: 'temporary error' }) }
+      assets[id] = { ...assets[id], ...JSON.parse(options.body) }
+    }
+    return { ok: true, json: async () => id === 'manifest' ? { photos: ['a', 'b'].map(assetId => ({ assetId })) } : assets[id], blob: async () => new Blob(['image']) }
+  }
+  const grid = new Element(), reviewRoot = new Element(), reviewToggle = new Element()
+  const gallery = setupWalkPhotos({ grid, reviewRoot, reviewToggle, empty: new Element(), note: new Element(), getAccessToken: () => 'token', getRoles: () => ['media.editor'] })
+  const walk = { id: '123', photoManifestAssetId: 'manifest', photos: [] }
+  const content = () => reviewRoot.children[0].children[0]
+  const tool = text => content().children[0].children.find(child => child.textContent === text)
+  await gallery.render(walk)
+  reviewToggle.onclick()
+  assert.equal(tool('Mark Public').disabled, true)
+  tool('Select all').events.click()
+  assert.ok(tool('2 selected'))
+  assert.equal(grid.children.every(figure => figure.dataset.selected === 'true'), true)
+  await tool('Mark Public').events.click()
+  assert.equal(assets.a.visibility, 'public')
+  assert.equal(assets.b.visibility, 'public')
+  assert.deepEqual(assets.a.requiredRoles, [])
+  assert.ok(tool('0 selected'))
+  tool('Select all').events.click()
+  failB = true
+  await tool('Mark Private').events.click()
+  assert.equal(assets.a.visibility, 'authenticated')
+  assert.equal(assets.b.visibility, 'public')
+  assert.ok(tool('1 selected'))
+  assert.match(content().children[1].textContent, /1 saved; 1 could not be saved/)
+  failB = false
+  await tool('Mark Private').events.click()
+  assert.equal(assets.b.visibility, 'authenticated')
+  assert.ok(tool('0 selected'))
+  const checkbox = grid.children[0].children.find(child => child.className === 'photo-grid__select').children[0]
+  checkbox.checked = true
+  checkbox.events.change()
+  assert.ok(tool('1 selected'))
+  tool('Clear selection').events.click()
+  assert.ok(tool('0 selected'))
+  tool('Select all').events.click()
+  await gallery.render({ ...walk, id: '456' })
+  assert.equal(reviewRoot.dataset.open, 'false')
+  assert.ok(tool('0 selected'))
+  gallery.clear()
+})

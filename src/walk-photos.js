@@ -68,6 +68,7 @@ export const setupWalkPhotos = ({
   let loadedPhotos = []
   let savingReview = false
   let reviewMessage = ''
+  const selectedPhotos = new Set()
   const emptyTitle = empty.querySelector('strong')
   const emptyCopy = empty.querySelector('span')
   const viewer = document.createElement('dialog')
@@ -135,6 +136,25 @@ export const setupWalkPhotos = ({
       viewer.showModal()
     })
     figure.append(open)
+    if (saveDecision && photo.assetId) {
+      const select = document.createElement('label')
+      select.className = 'photo-grid__select'
+      const checkbox = document.createElement('input')
+      checkbox.type = 'checkbox'
+      checkbox.checked = selectedPhotos.has(photo.assetId)
+      checkbox.dataset.assetId = photo.assetId
+      checkbox.disabled = savingReview
+      checkbox.setAttribute('aria-label', `Select photograph ${index + 1}`)
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) selectedPhotos.add(photo.assetId)
+        else selectedPhotos.delete(photo.assetId)
+        renderMediaReview(currentReviewWalk)
+        grid.querySelector(`input[data-asset-id="${photo.assetId}"]`)?.focus?.()
+      })
+      figure.dataset.selected = String(checkbox.checked)
+      select.append(checkbox)
+      figure.append(select)
+    }
     if (photo.reviewStatus === 'unreviewed') {
       const badge = document.createElement('span')
       badge.className = 'photo-grid__visibility photo-grid__visibility--review'
@@ -259,6 +279,7 @@ export const setupWalkPhotos = ({
       currentWalkId = walk.id
       reviewMode = false
       reviewMessage = ''
+      selectedPhotos.clear()
     }
     const request = ++renderRequest
     clearObjectUrls()
@@ -332,7 +353,37 @@ export const setupWalkPhotos = ({
     }
   }
 
+  let currentReviewWalk
+  const saveMediaDecisions = async (photos, change, walk) => {
+    if (savingReview || !photos.length) return
+    savingReview = true
+    const token = getAccessToken?.()
+    let saved = 0
+    const failures = []
+    try {
+      for (const [index, photo] of photos.entries()) {
+        if (currentWalkId !== walk.id) break
+        reviewMessage = `Saving ${index + 1} of ${photos.length}…`
+        renderMediaReview(walk)
+        try {
+          const asset = await savePhotoReview({ photo, change, token })
+          saved++
+          if (currentWalkId !== walk.id) break
+          loadedPhotos = loadedPhotos.map(item => item.assetId === photo.assetId ? photoFromAsset(item, asset) : item)
+          selectedPhotos.delete(photo.assetId)
+        } catch (error) { failures.push(error.message) }
+      }
+      if (currentWalkId === walk.id) reviewMessage = failures.length
+        ? `${saved} saved; ${failures.length} could not be saved. ${failures[0]}`
+        : `Saved ${saved} ${saved === 1 ? 'photograph' : 'photographs'}. The public site will update after the next photo-worker run and deployment.`
+    } finally {
+      savingReview = false
+      if (currentWalkId === walk.id) renderMediaReview(walk)
+    }
+  }
+
   const renderMediaReview = (walk) => {
+    currentReviewWalk = walk
     const editor = canReviewPhotos(getRoles?.())
     if (!editor) reviewMode = false
     emptyTitle.textContent = 'No included photographs'
@@ -363,6 +414,31 @@ export const setupWalkPhotos = ({
       inner.className = 'photo-review__inner'
       const content = document.createElement('div')
       content.className = 'photo-review__content'
+      const toolbar = document.createElement('div')
+      toolbar.className = 'photo-review__tools'
+      const selectable = loadedPhotos.filter(photo => photo.assetId)
+      const selected = selectable.filter(photo => selectedPhotos.has(photo.assetId))
+      const addTool = (text, action, disabled = false) => {
+        const button = document.createElement('button')
+        button.type = 'button'
+        button.textContent = text
+        button.disabled = savingReview || disabled
+        button.addEventListener('click', action)
+        toolbar.append(button)
+      }
+      addTool('Select all', () => {
+        selectable.forEach(photo => selectedPhotos.add(photo.assetId))
+        renderMediaReview(walk)
+      }, !selectable.length)
+      addTool('Clear selection', () => {
+        selectedPhotos.clear()
+        renderMediaReview(walk)
+      }, !selected.length)
+      const count = document.createElement('span')
+      count.textContent = `${selected.length} selected`
+      toolbar.append(count)
+      addTool('Mark Public', () => saveMediaDecisions(selected, { status: 'keep', visibility: 'public' }, walk), !selected.length)
+      addTool('Mark Private', () => saveMediaDecisions(selected, { status: 'keep', visibility: 'private' }, walk), !selected.length)
       const done = document.createElement('button')
       done.type = 'button'
       done.className = 'photo-review__done'
@@ -378,28 +454,12 @@ export const setupWalkPhotos = ({
       message.textContent = reviewMessage || (reviewMode
         ? 'Choose Public, Private or Not included below each photograph. Originals are never deleted.'
         : 'Photographs remain private until explicitly marked Public.')
-      content.append(message, done)
+      content.append(toolbar, message, done)
       inner.append(content)
       reviewRoot.append(inner)
     }
     display(loadedPhotos.filter(photo => reviewMode || photo.reviewStatus !== 'reject'),
-      '', reviewMode && editor ? async (photo, change) => {
-        if (savingReview) return
-        savingReview = true
-        reviewMessage = 'Saving…'
-        renderMediaReview(walk)
-        try {
-          const asset = await savePhotoReview({ photo, change, token: getAccessToken?.() })
-          if (currentWalkId !== walk.id) return
-          loadedPhotos = loadedPhotos.map(item => item.assetId === photo.assetId ? photoFromAsset(item, asset) : item)
-          reviewMessage = 'Saved. The public site will update after the next photo-worker run and deployment.'
-        } catch (error) {
-          if (currentWalkId === walk.id) reviewMessage = `Could not save: ${error.message}`
-        } finally {
-          savingReview = false
-          if (currentWalkId === walk.id) renderMediaReview(walk)
-        }
-      } : null)
+      '', reviewMode && editor ? (photo, change) => saveMediaDecisions([photo], change, walk) : null)
   }
 
   return { render, clear: clearObjectUrls }
