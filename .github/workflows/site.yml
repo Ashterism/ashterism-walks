@@ -17,17 +17,21 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: ashterism-walks-site
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Serialize repository writes without holding the lock during Pages deployment.
+    concurrency:
+      group: ashterism-walks-build
+      cancel-in-progress: false
 
     steps:
       - name: Check out the site
         uses: actions/checkout@v6
+        with:
+          # Queued dispatches may predate the previous sync's data commit.
+          ref: ${{ github.ref_name }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
@@ -81,6 +85,11 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    timeout-minutes: 10
+    # A newer build supersedes a stuck/waiting deployment, never the sync job.
+    concurrency:
+      group: ashterism-walks-pages
+      cancel-in-progress: true
 
     steps:
       - name: Deploy to GitHub Pages

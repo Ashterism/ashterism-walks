@@ -34,6 +34,21 @@ The scheduler lives under `cloudflare/`. It requires a `GITHUB_TOKEN` Worker sec
 npm run scheduler:deploy
 ```
 
+Sync/build and Pages deployment use separate job concurrency groups. Sync/build
+is serialized without cancelling an active data commit; deployment lets a newer
+build supersede a stalled deployment. A Pages environment wait must never hold
+the sync lock. Running build/deploy jobs have 15/10-minute timeouts (environment
+approval waits are not covered by job timeouts).
+
+If activities stop appearing, check Cloudflare `sync_dispatch_started` and
+`sync_dispatch_completed`, then GitHub workflow runs, including `waiting` runs.
+On 11 October 2026, a Pages deployment waiting since 6 October held the old
+workflow-wide concurrency lock: later 15-minute dispatches replaced pending
+runs without running sync. Cancelling that stale run restored sync and imported
+three walks. Intervals credentials and the data commit/push were healthy.
+For recovery, cancel a confirmed stale deployment and dispatch `site.yml` on
+`main`; verify the sync log, canonical `data/walks/` commit, and Pages deployment.
+
 On macOS the sync reads the Intervals.icu API key from the `ashterism-walks` / `intervals.icu` Keychain entry. An automated server can instead provide the key through the `INTERVALS_ICU_API_KEY` environment variable.
 
 ## Generate private training context
