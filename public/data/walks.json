@@ -1,7 +1,100 @@
 {
-  "walkCount": 119,
+  "walkCount": 122,
   "skippedWithoutRoute": 8,
   "walks": [
+    {
+      "id": "24684359207",
+      "activity": "hiking",
+      "name": "Mialet Hiking",
+      "date": "2026-10-11T09:18:58Z",
+      "startDateLocal": "2026-10-11T11:18:58",
+      "distanceKm": 9,
+      "movingTimeSeconds": 5991,
+      "elapsedTimeSeconds": 6086,
+      "ascentM": 59,
+      "descentM": 58,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24684359207.geojson?v=7a423670f9af4c28e028e444adbd11715d60d6b6eb471e4753324f03d7c6f9a4",
+      "bounds": [
+        0.9175966959446669,
+        45.54791637696326,
+        0.9464149363338947,
+        45.562728876248
+      ],
+      "start": [
+        0.917837843298912,
+        45.54942696355283
+      ],
+      "finish": [
+        0.9176020603626966,
+        45.549068385735154
+      ]
+    },
+    {
+      "id": "24664388379",
+      "activity": "hiking",
+      "name": "Mialet Hiking",
+      "date": "2026-10-09T14:51:29Z",
+      "startDateLocal": "2026-10-09T16:51:29",
+      "distanceKm": 3.02,
+      "movingTimeSeconds": 1803,
+      "elapsedTimeSeconds": 1805,
+      "ascentM": 17,
+      "descentM": 19,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24664388379.geojson?v=7ecc40b21e61df8232cc73a5ed03c0b381e1a73a6963b41ea1a2ee23b61347a7",
+      "bounds": [
+        0.9175993781536818,
+        45.54901884868741,
+        0.932430736720562,
+        45.55894084274769
+      ],
+      "start": [
+        0.932430736720562,
+        45.5545920599252
+      ],
+      "finish": [
+        0.9175993781536818,
+        45.54901884868741
+      ]
+    },
+    {
+      "id": "24627470055",
+      "activity": "hiking",
+      "name": "Mialet Hiking",
+      "date": "2026-10-06T14:02:10Z",
+      "startDateLocal": "2026-10-06T16:02:10",
+      "distanceKm": 3.01,
+      "movingTimeSeconds": 1801,
+      "elapsedTimeSeconds": 1807,
+      "ascentM": 17,
+      "descentM": 21,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24627470055.geojson?v=40b64ec8f2df6c9035a6fc7a9cbbb249d248d903ff000415c7d39cb8ae231570",
+      "bounds": [
+        0.917826946824789,
+        45.54906075820327,
+        0.9325439762324095,
+        45.558929443359375
+      ],
+      "start": [
+        0.9325439762324095,
+        45.55451578460634
+      ],
+      "finish": [
+        0.917826946824789,
+        45.54906075820327
+      ]
+    },
     {
       "id": "24603622266",
       "activity": "hiking",
