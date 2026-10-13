@@ -356,7 +356,7 @@ const clearSelection = () => {
   updateUrl(null)
 }
 
-const applyFilters = () => {
+const applyFilters = ({ fitMap = true } = {}) => {
   const year = elements.filterYear.value
   const length = elements.filterLength.value
   visibleWalks = walks.filter(
@@ -377,7 +377,7 @@ const applyFilters = () => {
     syncListSelection()
   }
 
-  if (visibleWalks.length > 0) showAllWalks()
+  if (fitMap && visibleWalks.length > 0) showAllWalks()
 }
 
 const syncListSelection = ({ focus = false } = {}) => {
@@ -796,7 +796,7 @@ map.on('load', async () => {
     })
 
     elements.viewAll.addEventListener('click', showAllWalks)
-    document.addEventListener('walk-preferences:change', applyFilters)
+    document.addEventListener('walk-preferences:change', () => applyFilters({ fitMap: false }))
     elements.filterYear.addEventListener('change', applyFilters)
     elements.filterLength.addEventListener('change', applyFilters)
     elements.moreDetails.addEventListener('click', () => openDetails())

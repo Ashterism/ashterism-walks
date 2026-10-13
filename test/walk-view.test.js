@@ -11,13 +11,14 @@ class Element {
   children = []
   dataset = {}
   attributes = {}
+  events = {}
   selectedOptions = [{ textContent: 'Under 5 km' }]
   classList = { add() {}, remove() {} }
   append(...children) { this.children.push(...children) }
   replaceChildren(...children) { this.children = children }
   setAttribute(name, value) { this.attributes[name] = value }
   removeAttribute(name) { delete this.attributes[name] }
-  addEventListener() {}
+  addEventListener(event, callback) { this.events[event] = callback }
   scrollIntoView() {}
   focus() {}
   getBoundingClientRect() { return { right: 300, height: 300 } }
@@ -31,6 +32,7 @@ class Bounds {
 class FakeMap {
   sources = new Map()
   events = {}
+  camera = { center: [0, 20], zoom: 1.5 }
   addControl() {}
   addLayer() {}
   addSource(id, source) { this.sources.set(id, { ...source, setData(data) { this.data = data } }) }
@@ -38,7 +40,7 @@ class FakeMap {
   on(event, ...args) { this.events[event] = args.at(-1) }
   once() {}
   loaded() { return true }
-  fitBounds(bounds) { this.lastFit = bounds }
+  fitBounds(bounds) { this.lastFit = bounds; this.fitCalls = (this.fitCalls ?? 0) + 1; this.camera = { center: bounds.points[0], zoom: 8 } }
   resize() {}
 }
 class Marker {
@@ -80,23 +82,50 @@ test('map markers, list, counts, selection and fit bounds use the same preferenc
   const assertView = (ids, count) => {
     assert.deepEqual(shown(), ids); assert.deepEqual(markers(), ids)
     assert.equal(get('#walk-count').textContent, count)
-    assert.deepEqual(view.map.lastFit.points, records.filter((walk) => ids.includes(walk.id)).map((walk) => walk.start))
   }
   assertView(['1', '4'], '2 mapped routes')
+  assert.deepEqual(view.map.lastFit.points, [[1, 1], [4, 1]])
+  const initialFitCalls = view.map.fitCalls
+  const initialCamera = structuredClone(view.map.camera)
   await view.selectWalk('2'); assert.equal(view.selected(), null)
   showWalks = true; listeners['walk-preferences:change']()
   assertView(['1', '2', '3', '4'], '4 mapped routes')
+  assert.equal(view.map.fitCalls, initialFitCalls, 'showing walks must preserve map position')
+  assert.deepEqual(view.map.camera, initialCamera, 'showing walks must preserve map centre and zoom')
   await view.selectWalk('3'); view.openDetails()
   assert.equal(get('#detail-kind').textContent, 'WALKING · POST-RUN')
   assert.equal(get('#walk-detail').hidden, false)
+  const selectedFitCalls = view.map.fitCalls
+  const selectedCamera = structuredClone(view.map.camera)
   showWalks = false; listeners['walk-preferences:change']()
   assertView(['1', '4'], '2 mapped routes')
+  assert.equal(view.map.fitCalls, selectedFitCalls, 'hiding a selected walk must preserve map position')
+  assert.deepEqual(view.map.camera, selectedCamera, 'hiding a selected walk must preserve centre and zoom')
   assert.equal(view.selected(), null); assert.equal(get('#walk-detail').hidden, true)
-  get('#filter-year').value = '2026'; get('#filter-length').value = 'under-5'
   showWalks = true; listeners['walk-preferences:change']()
+  assert.equal(view.map.fitCalls, selectedFitCalls, 'showing walks again must preserve map position')
+  assert.deepEqual(view.map.camera, selectedCamera)
+  await view.selectWalk('2')
+  const selectedVisibleFitCalls = view.map.fitCalls
+  const selectedVisibleCamera = structuredClone(view.map.camera)
+  showWalks = false; listeners['walk-preferences:change']()
+  assert.equal(view.selected(), null); assert.equal(view.map.fitCalls, selectedVisibleFitCalls)
+  assert.deepEqual(view.map.camera, selectedVisibleCamera)
+  showWalks = true; listeners['walk-preferences:change']()
+  assert.equal(view.map.fitCalls, selectedVisibleFitCalls)
+  assert.deepEqual(view.map.camera, selectedVisibleCamera)
+  get('#filter-year').value = '2026'; get('#filter-length').value = 'under-5'
+  get('#filter-year').events.change(); get('#filter-length').events.change()
   assertView(['1', '2', '3'], '3 of 4 routes')
+  const filteredFitCalls = view.map.fitCalls
+  assert.deepEqual(view.map.lastFit.points, [[1, 1], [2, 1], [3, 1]], 'year and length filters retain their existing auto-fit')
   showWalks = false; listeners['walk-preferences:change']()
   assertView(['1'], '1 of 2 route')
+  assert.equal(view.map.fitCalls, filteredFitCalls, 'preference change after filters must not refit')
+  assert.deepEqual(view.map.lastFit.points, [[1, 1], [2, 1], [3, 1]])
+  const filterFitCalls = view.map.fitCalls
+  get('#view-all').events.click()
+  assert.equal(view.map.fitCalls, filterFitCalls + 1, 'Fit all walks button continues to fit the map')
   await view.selectWalk('1'); view.openDetails()
   assert.equal(get('#detail-kind').textContent, 'Hiking')
 })
