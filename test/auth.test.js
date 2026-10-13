@@ -3,6 +3,7 @@ import test from 'node:test'
 
 import {
   OIDC_SCOPE,
+  ZITADEL_PROJECT_ID,
   ZITADEL_MEDIA_AUDIENCE_SCOPE,
   ZITADEL_PROJECT_ROLES_SCOPE,
   rolesFromProfile,
@@ -21,6 +22,7 @@ test('requests a media API audience and project roles during sign-in', () => {
   const scopes = OIDC_SCOPE.split(' ')
 
   assert.ok(scopes.includes(ZITADEL_MEDIA_AUDIENCE_SCOPE))
+  assert.ok(scopes.includes(`urn:zitadel:iam:org:project:id:${ZITADEL_PROJECT_ID}:aud`))
   assert.ok(scopes.includes(ZITADEL_PROJECT_ROLES_SCOPE))
 })
 

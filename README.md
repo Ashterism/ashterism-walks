@@ -195,3 +195,31 @@ npm run photos:review -- --walk photo-20220417 --archive /Volumes/photo/Photos
 ```
 
 Open `http://127.0.0.1:4175`. The contact-sheet view shows the complete candidate set for comparison. Every thumbnail has direct `Private`, `Public` and `Not included` controls. Select individual thumbnails or use `Select all shown`, which respects the active status filter, then apply the same decisions in bulk when useful. Double-click a thumbnail, or select one and choose `Open one`, for rotation, captioning and closer inspection. Untouched matches are visible only to authorised private accounts and clearly labelled `Unreviewed`; rejected photographs are hidden everywhere. Reviewed photographs remain private unless explicitly marked public. Decisions are saved under the Git-ignored `private/photo-reviews/` directory, so review can be stopped and resumed safely. Rerun `photos:prepare` after changing decisions to update Media metadata and the protected/public associations.
+
+### Walk viewing preference
+
+Signed-in users can change **Settings → Show walks** in the account menu. It is
+OFF by default; signed-out visitors always use that default. Garmin walking
+activities (including explicitly marked post-run walks) are hidden while hikes
+and historical/non-Garmin routes retain their existing behaviour. The published
+catalogue and photo-worker eligibility are unchanged.
+
+The existing `ashterism-walks-sync` Worker exposes only `GET` and `PUT
+/api/preferences`. The `WALK_PREFERENCES` KV binding stores one `showWalks`
+boolean per verified ZITADEL subject. The Worker validates RS256 signatures,
+issuer, expiry and the Walks project audience (`388903513951875876`) using
+ZITADEL JWKS. The browser requests that audience alongside its existing Media
+scope; sessions created before this change may need sign-out/sign-in once.
+`WALKS_ORIGINS` permits the production Walks origin and the two Vite localhost
+origins only. Preference responses are private/no-store. Saves update the view
+immediately and roll back with an error if persistence fails. Cloudflare KV is
+eventually consistent: another device/region may take about a minute to observe
+a recent save. Each sign-in restores the saved value; there is no browser-stored
+preference and no polling of other devices.
+
+To label an activity manually, set `local.postRun` to the boolean `true` in its
+canonical record and run `npm run catalogue`. The generated public field
+`postRun: true` makes a walking detail heading show `WALKING · POST-RUN` using
+the existing typography. No automatic detection or activity reclassification
+is performed. `npm run scheduler:deploy` deploys the existing Worker with its
+committed KV binding and preserves the 15-minute activity-sync cron.

@@ -1,3 +1,4 @@
+import { createWalkPreferences } from './walk-preferences.js'
 import { UserManager, WebStorageStateStore } from 'oidc-client-ts'
 
 export const ZITADEL_AUTHORITY = 'https://ashterix-mkjzns.eu1.zitadel.cloud'
@@ -13,6 +14,7 @@ export const OIDC_SCOPE = [
   'profile',
   'email',
   ZITADEL_MEDIA_AUDIENCE_SCOPE,
+  `urn:zitadel:iam:org:project:id:${ZITADEL_PROJECT_ID}:aud`,
   ZITADEL_PROJECT_ROLES_SCOPE,
 ].join(' ')
 
@@ -92,6 +94,9 @@ export const setupAccountMenu = async () => {
   const walkBooks = document.querySelector('#account-walk-books')
   const signIn = document.querySelector('#account-sign-in')
   const signOut = document.querySelector('#account-sign-out')
+  const settings = document.querySelector('#account-settings')
+  const showWalks = document.querySelector('#show-walks')
+  const preferenceStatus = document.querySelector('#walk-preference-status')
 
   if (!button || !panel || !status || !walkBooks || !signIn || !signOut) return null
 
@@ -99,6 +104,19 @@ export const setupAccountMenu = async () => {
   const manager = configured ? createManager() : null
   let user = null
   let authError = null
+  let displayedShowWalks = false
+  const preferences = createWalkPreferences({
+    getAccessToken: () => user && !user.expired ? user.access_token : null,
+    onChange: (state) => {
+      if (showWalks) { showWalks.checked = state.showWalks; showWalks.disabled = state.busy }
+      if (preferenceStatus) preferenceStatus.textContent = state.error || (state.busy ? 'Saving or loading…' : '')
+      if (displayedShowWalks !== state.showWalks) {
+        displayedShowWalks = state.showWalks
+        document.dispatchEvent(new CustomEvent('walk-preferences:change'))
+      }
+    },
+  })
+  showWalks?.addEventListener('change', () => preferences.set(showWalks.checked))
 
   const close = () => {
     panel.hidden = true
@@ -117,6 +135,7 @@ export const setupAccountMenu = async () => {
     signIn.hidden = authenticated || !configured
     walkBooks.hidden = !authenticated
     signOut.hidden = !authenticated
+    if (settings) settings.hidden = !authenticated
   }
 
   button.addEventListener('click', () => {
@@ -148,6 +167,7 @@ export const setupAccountMenu = async () => {
   })
 
   signOut.addEventListener('click', async () => {
+    preferences.reset()
     status.textContent = 'Signing out…'
     await manager.signoutRedirect()
   })
@@ -178,20 +198,25 @@ export const setupAccountMenu = async () => {
     user = loadedUser
     authError = null
     render()
+    void preferences.load()
   })
   manager.events.addUserUnloaded(() => {
     user = null
+    preferences.reset()
     render()
   })
   manager.events.addAccessTokenExpired(async () => {
     await manager.removeUser()
     user = null
+    preferences.reset()
     render()
   })
 
   render()
+  await preferences.load()
 
   return {
+    getShowWalks: preferences.getShowWalks,
     getAccessToken: () => (user && !user.expired ? user.access_token : null),
     getRoles: () => user && !user.expired
       ? [...new Set([...rolesFromProfile(user.profile), ...rolesFromAccessToken(user.access_token)])]

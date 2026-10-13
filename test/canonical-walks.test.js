@@ -286,3 +286,11 @@ test('official route metadata can supply estimated elevation and attribution', (
   assert.equal(publicWalk.descentM, 416)
   assert.ok(publicWalk.providers.includes('Rota Vicentina'))
 })
+
+test('explicit local post-run flag is published without changing classification or routes', () => {
+  const flagged = { ...record, local: { ...record.local, postRun: true } }
+  const normal = resolvePublicFields(record)
+  assert.deepEqual(resolvePublicFields(flagged), { ...normal, postRun: true })
+  assert.equal(Object.hasOwn(normal, 'postRun'), false)
+  assert.equal(Object.hasOwn(resolvePublicFields({ ...flagged, local: { ...flagged.local, postRun: false } }), 'postRun'), false)
+})

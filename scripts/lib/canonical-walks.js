@@ -213,6 +213,7 @@ export const resolvePublicFields = (record) => {
   return {
     id: record.id,
     activity,
+    ...(record.local.postRun === true ? { postRun: true } : {}),
     name:
       record.local.name ??
       snapshot.name ??

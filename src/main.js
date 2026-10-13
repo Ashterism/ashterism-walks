@@ -10,6 +10,8 @@ import {
 
 import 'maplibre-gl/dist/maplibre-gl.css'
 
+import { activityLabel, isWalkVisible } from './walk-visibility.js'
+
 import { setupAccountMenu } from './auth.js'
 import { setupBookLibrary } from './book-library.js'
 import { setupPhotoPublisher } from './photo-publisher.js'
@@ -278,11 +280,12 @@ const walkStartFeatures = (candidates) => ({
 })
 
 const updateWalkCount = () => {
-  const filtered = visibleWalks.length !== walks.length
+  const availableCount = walks.filter((walk) => isWalkVisible(walk, account?.getShowWalks() ?? false)).length
+  const filtered = visibleWalks.length !== availableCount
   const routeLabel = visibleWalks.length === 1 ? 'route' : 'routes'
   elements.count.textContent = filtered
-    ? `${visibleWalks.length} of ${walks.length} ${routeLabel}`
-    : `${walks.length} mapped ${walks.length === 1 ? 'route' : 'routes'}`
+    ? `${visibleWalks.length} of ${availableCount} ${routeLabel}`
+    : `${availableCount} mapped ${availableCount === 1 ? 'route' : 'routes'}`
 }
 
 const updateFilterStatus = () => {
@@ -344,6 +347,9 @@ const clearSelection = () => {
   selectedId = null
   selectedRoute = null
   elements.panel.hidden = true
+  elements.detail.hidden = true
+  setBackgroundInert(false)
+  document.body.classList.remove('detail-is-open')
   map.getSource('walk').setData(emptyRoute)
   startMarker.remove()
   finishMarker.remove()
@@ -355,6 +361,7 @@ const applyFilters = () => {
   const length = elements.filterLength.value
   visibleWalks = walks.filter(
     (walk) =>
+      isWalkVisible(walk, account?.getShowWalks() ?? false) &&
       (year === 'all' || String(new Date(walk.date).getFullYear()) === year) &&
       matchesLengthFilter(walk, length),
   )
@@ -560,7 +567,7 @@ const renderNotes = (notes, references = []) => {
 
 const renderDetail = (walk, route) => {
   const coordinates = route.geometry.coordinates
-  elements.detailKind.textContent = walk.activity === 'hiking' ? 'Hiking' : 'Walking'
+  elements.detailKind.textContent = activityLabel(walk)
   elements.detailTitle.textContent = walk.name
   const localTimeRange = formatLocalTimeRange(
     walk.startDateLocal,
@@ -636,7 +643,7 @@ const selectWalk = async (
   id,
   { updateHistory = true, focusList = false } = {},
 ) => {
-  const walk = walks.find((candidate) => candidate.id === id)
+  const walk = visibleWalks.find((candidate) => candidate.id === id)
   if (!walk) return
 
   const request = ++routeRequest
@@ -721,7 +728,7 @@ map.on('load', async () => {
     const catalogue = await fetchJson(`/data/walks.json?v=${Date.now()}`)
     walks = catalogue.walks
     if (walks.length === 0) throw new Error('The walk catalogue is empty')
-    visibleWalks = walks
+    visibleWalks = walks.filter((walk) => isWalkVisible(walk, account?.getShowWalks() ?? false))
 
     updateWalkCount()
 
@@ -739,7 +746,7 @@ map.on('load', async () => {
 
     map.addSource('walk-starts', {
       type: 'geojson',
-      data: walkStartFeatures(walks),
+      data: walkStartFeatures(visibleWalks),
     })
 
     map.addLayer({
@@ -789,6 +796,7 @@ map.on('load', async () => {
     })
 
     elements.viewAll.addEventListener('click', showAllWalks)
+    document.addEventListener('walk-preferences:change', applyFilters)
     elements.filterYear.addEventListener('change', applyFilters)
     elements.filterLength.addEventListener('change', applyFilters)
     elements.moreDetails.addEventListener('click', () => openDetails())
@@ -798,7 +806,7 @@ map.on('load', async () => {
     const searchParams = new URLSearchParams(window.location.search)
     const requestedId = searchParams.get('walk')
     renderList()
-    const requestedWalk = walks.find((walk) => walk.id === requestedId)
+    const requestedWalk = visibleWalks.find((walk) => walk.id === requestedId)
     if (requestedWalk) {
       await selectWalk(requestedWalk.id, { updateHistory: true })
       if (searchParams.get('view') === 'details') {
