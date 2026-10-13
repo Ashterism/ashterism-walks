@@ -1,3 +1,5 @@
+import { handlePreferences } from './preferences.js'
+
 const dispatchUrl =
   'https://api.github.com/repos/Ashterism/ashterism-walks/actions/workflows/site.yml/dispatches'
 
@@ -23,7 +25,10 @@ export const dispatchSync = async (githubToken, fetchImpl = fetch) => {
 }
 
 export default {
-  async fetch() {
+  async fetch(request, env) {
+    if (request && new URL(request.url).pathname === '/api/preferences') {
+      return handlePreferences(request, env)
+    }
     return Response.json({
       service: 'ashterism-walks-sync',
       status: 'ok',
