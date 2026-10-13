@@ -4,7 +4,7 @@
   "local": {
     "name": null,
     "activityType": "Walk",
-    "visibility": "public",
+    "visibility": "private",
     "photos": []
   },
   "sources": {
