@@ -12,6 +12,7 @@ import {
   intervalsApiRoot,
   requestIntervals,
 } from './lib/intervals-api.js'
+import { isPostRunWalk } from './lib/post-run-matching.js'
 
 const archiveDirectory = 'private/garmin/activities'
 const historyDirectory = 'private/garmin/history'
@@ -191,6 +192,7 @@ for (const activity of eligibleActivities) {
       : null,
     providerFingerprint: fingerprint,
     type: activity.effectiveType,
+    postRun: isPostRunWalk(activity, observedActivities),
     startDate: activity.start_date ?? activity.start_date_local,
     startDateLocal: activity.start_date_local ?? null,
     name: activity.name ?? null,

@@ -8,6 +8,7 @@ export const addedWalkIds = (diff) => [...new Set(diff.split('\n').flatMap((line
 }))]
 
 export const isRecentWalk = (walk, now = Date.now()) => {
+  if (walk.postRun === true) return false
   try {
     const started = Date.parse(photoWindowFor(walk).startDate)
     return Number.isFinite(started) && started <= now + 86400000 && started >= now - 7 * 86400000

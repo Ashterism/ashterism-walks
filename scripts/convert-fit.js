@@ -16,6 +16,7 @@ import {
   writeCanonicalRecord,
   writeJsonIfChanged,
 } from './lib/canonical-walks.js'
+import { preserveManualPostRun } from './lib/post-run-matching.js'
 
 const archiveDirectory = 'private/garmin/activities'
 const manifestPath = 'private/garmin/manifest.json'
@@ -265,7 +266,7 @@ for (const metadata of manifest.activities) {
   const previousIntervals = record.sources.intervals
   const previousStatus = previousIntervals?.status
   record = {
-    ...record,
+    ...preserveManualPostRun(record, metadata.postRun === true),
     sources: {
       ...record.sources,
       garmin:
