@@ -3,10 +3,11 @@
   "id": "24664388379",
   "local": {
     "name": null,
-    "activityType": null,
+    "activityType": "Walk",
     "visibility": "public",
     "photos": [],
-    "photoManifestAssetId": "5228812a-10b8-4f69-bd11-972c3164dfb2"
+    "photoManifestAssetId": "5228812a-10b8-4f69-bd11-972c3164dfb2",
+    "postRun": true
   },
   "sources": {
     "garmin": {

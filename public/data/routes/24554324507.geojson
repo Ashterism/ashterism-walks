@@ -2,7 +2,8 @@
   "type": "Feature",
   "properties": {
     "id": "24554324507",
-    "activity": "hiking",
+    "activity": "walking",
+    "postRun": true,
     "name": "Mialet Hiking",
     "date": "2026-09-30T12:08:06Z",
     "startDateLocal": "2026-09-30T14:08:06",

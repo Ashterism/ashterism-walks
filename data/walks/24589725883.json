@@ -3,7 +3,7 @@
   "id": "24589725883",
   "local": {
     "name": null,
-    "activityType": null,
+    "activityType": "Walk",
     "visibility": "public",
     "photos": [],
     "photoManifestAssetId": "6b738b17-8fdf-4b96-82a0-80a3b92d297a",
@@ -20,7 +20,8 @@
         4
       ],
       "reason": "Removed the erroneous inland GPS excursion at the start; Ash confirmed walking along the water."
-    }
+    },
+    "postRun": true
   },
   "sources": {
     "garmin": {

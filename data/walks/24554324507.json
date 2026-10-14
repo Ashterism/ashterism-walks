@@ -3,9 +3,10 @@
   "id": "24554324507",
   "local": {
     "name": null,
-    "activityType": null,
+    "activityType": "Walk",
     "visibility": "public",
-    "photos": []
+    "photos": [],
+    "postRun": true
   },
   "sources": {
     "garmin": {
