@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "24755894108",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "24755894108"
+    },
+    "intervals": {
+      "activityId": "i198304633",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "af07ea3930850c36c1ab341868c4ce6923562dbd2f0fc17a3cfd9acaade60ed7",
+      "snapshot": {
+        "name": "Bussière-Galant Hiking",
+        "type": "Hike",
+        "startDate": "2026-10-17T10:49:47Z",
+        "startDateLocal": "2026-10-17T12:49:47",
+        "distanceM": 8535.97,
+        "movingTimeSeconds": 5745,
+        "elapsedTimeSeconds": 6161,
+        "ascentM": 243,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "b613db07c2a9e270e02f06de484ba414fb22d31d97eceb0be428f24346f0f787",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "b613db07c2a9e270e02f06de484ba414fb22d31d97eceb0be428f24346f0f787",
+        "source": "intervals",
+        "capturedAt": "2026-10-17T12:45:54.446Z"
+      }
+    ],
+    "bounds": [
+      1.0492969304323196,
+      45.58634941466153,
+      1.0707945004105568,
+      45.609016343951225
+    ],
+    "start": [
+      1.0660573840141296,
+      45.586456283926964
+    ],
+    "finish": [
+      1.066078506410122,
+      45.58634941466153
+    ],
+    "descentM": 258
+  },
+  "review": []
+}
