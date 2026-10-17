@@ -34,6 +34,11 @@ test('review reconciliation publishes only approved public images, retains priva
   assert.equal(saved.decisions.c.status, 'reject')
   await reconcilePhotoReviews(options)
   assert.equal(uploaded, 1)
+  const stablePublication = fs.readFileSync(publicationPath, 'utf8')
+  const stableReview = fs.readFileSync(path.join(dir, '123.json'), 'utf8')
+  await reconcilePhotoReviews(options)
+  assert.equal(fs.readFileSync(publicationPath, 'utf8'), stablePublication)
+  assert.equal(fs.readFileSync(path.join(dir, '123.json'), 'utf8'), stableReview)
   // Undo rejection; no originals or image assets are recreated.
   assets.c.custom.reviewStatus = 'keep'
   await reconcilePhotoReviews(options)

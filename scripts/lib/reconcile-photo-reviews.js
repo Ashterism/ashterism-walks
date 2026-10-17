@@ -31,6 +31,7 @@ export const reconcilePhotoReviews = async ({
 }) => {
   const publication = readJson(publicationPath)
   if (publication.walkId !== walk.id) throw new Error('Publication ledger walk mismatch')
+  const previousPublication = structuredClone(publication)
   const photos = []
   for (const [candidateId, previous] of Object.entries(publication.assets ?? {})) {
     const asset = await request(`/v1/assets/${previous.assetId}`, token)
@@ -72,17 +73,30 @@ export const reconcilePhotoReviews = async ({
   walk.local.photoManifestAssetId = manifestAssetId
   // Write private state before the canonical file. Reconstruct the canonical
   // fields on every poll, so an interrupted write remains recoverable.
-  publication.assets = Object.fromEntries(photos.map(({ candidateId, ...photo }) => [candidateId, photo]))
-  Object.assign(publication, { manifestAssetId, manifestFingerprint, remoteReviewFingerprint: reviewFingerprint, updatedAt: new Date().toISOString() })
-  savePrivate(publicationPath, publication)
+  const nextPublication = {
+    ...publication,
+    assets: Object.fromEntries(photos.map(({ candidateId, ...photo }) => [candidateId, photo])),
+    manifestAssetId,
+    manifestFingerprint,
+    remoteReviewFingerprint: reviewFingerprint,
+  }
+  const publicationChanged = JSON.stringify(previousPublication) !== JSON.stringify(nextPublication)
+  if (publicationChanged) {
+    nextPublication.updatedAt = new Date().toISOString()
+    Object.assign(publication, nextPublication)
+    savePrivate(publicationPath, publication)
+  }
   const reviewPath = publicationPath.replace(/\.publication\.json$/, '.json')
   const review = fs.existsSync(reviewPath) ? readJson(reviewPath) : { schemaVersion: 1, walkId: walk.id, decisions: {} }
+  const previousDecisions = JSON.stringify(review.decisions ?? {})
   for (const photo of photos) review.decisions[photo.candidateId] = {
     ...review.decisions[photo.candidateId], archiveRelativePath: photo.archiveRelativePath,
     capturedAt: photo.capturedAt, status: photo.reviewStatus,
     visibility: photo.visibility, rotation: photo.rotation, caption: photo.caption,
   }
-  review.updatedAt = new Date().toISOString()
-  savePrivate(reviewPath, review)
+  if (JSON.stringify(review.decisions) !== previousDecisions) {
+    review.updatedAt = new Date().toISOString()
+    savePrivate(reviewPath, review)
+  }
   return writeWalk(walk)
 }

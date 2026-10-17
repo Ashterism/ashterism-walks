@@ -4,7 +4,12 @@ import path from 'node:path'
 
 import { readJson } from './lib/canonical-walks.js'
 import { mediaServiceToken } from './lib/media-service-token.js'
-import { addedWalkIds, isRecentWalk } from './lib/new-walk-photo-worker.js'
+import {
+  addedWalkIds,
+  isRecentWalk,
+  prunePhotoRetries,
+  queuePhotoRetry,
+} from './lib/new-walk-photo-worker.js'
 import { preparePhotoCandidates } from './lib/prepare-photo-candidates.js'
 import { preparePhotoPublication } from './lib/prepare-photo-publication.js'
 import { requestPhotoRefresh } from './lib/walk-photo-refresh.js'
@@ -29,8 +34,12 @@ fs.mkdirSync(stateDirectory, { recursive: true, mode: 0o700 })
 
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim()
 const saveState = (state) => {
+  const contents = `${JSON.stringify(state, null, 2)}\n`
+  if (fs.existsSync(statePath) && fs.readFileSync(statePath, 'utf8') === contents) {
+    return
+  }
   const temporary = `${statePath}.${process.pid}.tmp`
-  fs.writeFileSync(temporary, `${JSON.stringify(state, null, 2)}\n`, { mode: 0o600 })
+  fs.writeFileSync(temporary, contents, { mode: 0o600 })
   fs.renameSync(temporary, statePath)
 }
 
@@ -85,7 +94,12 @@ try {
   git('push', 'origin', 'HEAD:main')
   const head = git('rev-parse', 'HEAD')
   if (!fs.existsSync(statePath)) {
-    saveState({ schemaVersion: 1, seenCommit: head, pendingWalkIds: [] })
+    saveState({
+      schemaVersion: 1,
+      seenCommit: head,
+      pendingWalkIds: [],
+      retryUntilByWalkId: {},
+    })
     console.log(`Watching new walks after ${head}`)
   } else {
     const state = readJson(statePath)
@@ -96,9 +110,10 @@ try {
     const diff = git('diff', '--name-status', '--diff-filter=A', `${state.seenCommit}..${head}`, '--', 'data/walks')
     for (const id of addedWalkIds(diff)) {
       const walk = readJson(path.join('data/walks', `${id}.json`))
-      if (isRecentWalk(walk) && !state.pendingWalkIds.includes(id)) state.pendingWalkIds.push(id)
+      if (isRecentWalk(walk)) queuePhotoRetry(state, id)
     }
     state.seenCommit = head
+    prunePhotoRetries(state)
     saveState(state)
 
     for (const walkId of [...state.pendingWalkIds]) {
@@ -126,17 +141,24 @@ try {
         privateDirectory: path.join(stateDirectory, 'publication-ledger'),
         onProgress: (message) => console.log(`${walkId}: ${message}`),
       })
-      execFileSync(process.execPath, ['scripts/build-catalogue.js'], { stdio: 'inherit' })
-      git('add', '--', `data/walks/${walkId}.json`, 'public/data/walks.json')
-      if (spawnSync('git', ['diff', '--cached', '--quiet']).status === 1) {
-        git('commit', '-m', `Prepare private photos for ${walkId}`)
-        git('push', 'origin', 'HEAD:main')
+      if (prepared.walkChanged) {
+        execFileSync(process.execPath, ['scripts/build-catalogue.js'], { stdio: 'inherit' })
+        git('add', '--', `data/walks/${walkId}.json`, 'public/data/walks.json')
+        if (spawnSync('git', ['diff', '--cached', '--quiet']).status === 1) {
+          git('commit', '-m', `Prepare private photos for ${walkId}`)
+          git('push', 'origin', 'HEAD:main')
+        }
       }
-      state.pendingWalkIds = state.pendingWalkIds.filter((id) => id !== walkId)
       state.seenCommit = git('rev-parse', 'HEAD')
       saveState(state)
-      console.log(`${walkId}: ${prepared.manifest.photos.length} private photos prepared`)
+      if (prepared.uploaded || prepared.updated || prepared.walkChanged) {
+        console.log(`${walkId}: ${prepared.manifest.photos.length} private photos prepared; retrying for up to 48 hours`)
+      } else {
+        console.log(`${walkId}: no photo changes; retry remains active for up to 48 hours`)
+      }
     }
+    prunePhotoRetries(state)
+    saveState(state)
   }
 } finally {
   fs.unlinkSync(lockPath)
