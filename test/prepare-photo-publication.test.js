@@ -153,6 +153,8 @@ test('discovers late photo candidates without replacing prior assets or review d
   const second = await prepare(structuredClone(savedWalk), candidates)
   const photoUploadsAfter = requests.filter(request => request.type === 'upload' && request.metadata.custom?.candidateId).length
   assert.equal(second.uploaded, 38)
+  assert.equal(second.updated, 0)
+  assert.equal(requests.some(request => request.type === 'patch'), false, 'existing Media decisions are never overwritten by a stale ledger')
   assert.equal(photoUploadsAfter - photoUploadsBefore, 38)
   assert.deepEqual(second.manifest.photos.map(photo => photo.candidateId).includes(candidates[0].id), false)
   assert.ok(second.manifest.photos.some(photo => photo.candidateId === candidates[1].id && photo.reviewStatus === 'keep'))

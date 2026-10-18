@@ -5,7 +5,6 @@ import path from 'node:path'
 import {
   createMediaCollection,
   MEDIA_API_BASE_URL,
-  patchMediaAsset,
   PRIVATE_PHOTO_ROLE,
   uploadMediaAsset,
 } from '../../src/media-publication.js'
@@ -73,14 +72,6 @@ const publicationRecord = ({ asset, candidate, decision, metadata }) => ({
   archiveRelativePath: candidate.archiveRelativePath,
 })
 
-const recordNeedsPatch = (record, decision, metadata) =>
-  record.visibility !== (metadata.visibility === 'public' ? 'public' : 'private') ||
-  record.reviewStatus !== decision.status ||
-  record.caption !== decision.caption ||
-  record.rotation !== (decision.rotation ?? 0) ||
-  record.alt !== metadata.alt ||
-  record.archiveRelativePath !== metadata.custom.archiveRelativePath
-
 const manifestPayload = ({ walkId, candidates, decisions, assets }) => ({
   schemaVersion: 1,
   walkId,
@@ -111,7 +102,6 @@ export const preparePhotoPublication = async ({
   writeWalk = writeCanonicalRecord,
   createCollection = createMediaCollection,
   uploadAsset = uploadMediaAsset,
-  patchAsset = patchMediaAsset,
 }) => {
   if (!token) {
     throw new Error(
@@ -160,7 +150,6 @@ export const preparePhotoPublication = async ({
   }
 
   let uploaded = 0
-  let updated = 0
   for (const [index, candidate] of included.entries()) {
     const decision = decisions[candidate.id]
     const metadata = assetMetadata({ walkId, walkName, candidate, decision, index })
@@ -189,23 +178,8 @@ export const preparePhotoPublication = async ({
       continue
     }
 
-    if (recordNeedsPatch(existing, decision, metadata)) {
-      onProgress(`Updating photograph ${index + 1} of ${included.length}`)
-      const asset = await patchAsset({
-        assetId: existing.assetId,
-        metadata,
-        token,
-        baseUrl: mediaBaseUrl,
-      })
-      publication.assets[candidate.id] = publicationRecord({
-        asset,
-        candidate,
-        decision,
-        metadata,
-      })
-      updated += 1
-      savePublication()
-    }
+    // Media is the source of truth for existing assets. Ingestion only creates
+    // missing assets and never replays stale ledger values into Media.
   }
 
   const manifest = manifestPayload({
@@ -275,7 +249,7 @@ export const preparePhotoPublication = async ({
     publication,
     manifest,
     uploaded,
-    updated,
+    updated: 0,
     reused: included.length - uploaded,
     walkChanged,
   }

@@ -18,12 +18,14 @@ test('live gallery offers a review toggle, persists choices and can undo rejecti
   globalThis.document = document
   globalThis.window = { location: { hostname: 'walks.ashterism.com' } }
   t.after(() => Object.assign(globalThis, originals))
-  let asset = { id: 'image', visibility: 'authenticated', requiredRoles: ['walks.private_photos'], tags: ['walk-photo'], custom: { reviewStatus: 'unreviewed' } }
+  let asset = { id: 'image', visibility: 'authenticated', requiredRoles: ['walks.private_photos'], tags: ['walk-photo'], custom: { reviewStatus: 'unreviewed' }, variants: { thumb: { url: '/v1/assets/image/variants/thumb' }, display: { url: '/v1/assets/image/variants/display' } } }
   let patches = 0
+  let listings = 0
+  let listingOptions
   globalThis.fetch = async (url, options = {}) => {
+    if (url.includes('/v1/assets?')) { listings++; listingOptions = options; return { ok: true, json: async () => ({ assets: [asset] }) } }
     if (options.method === 'PATCH') { patches++; asset = { ...asset, ...JSON.parse(options.body) } }
-    const value = url.includes('/manifest/content')
-      ? { photos: [{ assetId: 'image', candidateId: 'candidate', reviewStatus: 'unreviewed' }] } : asset
+    const value = asset
     return { ok: true, json: async () => value, blob: async () => new Blob(['image']) }
   }
   const grid = new Element(), reviewRoot = new Element(), reviewToggle = new Element()
@@ -31,6 +33,7 @@ test('live gallery offers a review toggle, persists choices and can undo rejecti
   const gallery = setupWalkPhotos({ grid, reviewRoot, reviewToggle, empty: new Element(), note: new Element(), getAccessToken: () => 'token', isSignedIn: () => true, getRoles: () => roles })
   const walk = { id: '123', photoManifestAssetId: 'manifest', photos: [] }
   await gallery.render(walk)
+  assert.equal(listingOptions.headers.Authorization, 'Bearer token')
   assert.equal(reviewToggle.textContent, 'Review photos')
   assert.equal(reviewToggle.attributes['aria-expanded'], 'false')
   assert.equal(reviewRoot.dataset.open, 'false')
@@ -43,6 +46,7 @@ test('live gallery offers a review toggle, persists choices and can undo rejecti
   assert.deepEqual(controls.children.map(button => button.textContent), ['Public', 'Private', 'Not included'])
   await controls.children[2].events.click()
   assert.equal(patches, 1)
+  assert.ok(listings >= 2, 'review change reloads the Media listing')
   assert.equal(asset.custom.reviewStatus, 'reject')
   reviewToggle.onclick()
   assert.equal(grid.children.length, 0)
@@ -66,15 +70,16 @@ test('bulk review selects all, saves public/private, and leaves failed photos se
   globalThis.document = { body: new Element(), createElement: () => new Element() }
   globalThis.window = { location: { hostname: 'walks.ashterism.com' } }
   t.after(() => Object.assign(globalThis, originals))
-  const assets = Object.fromEntries(['a', 'b'].map(id => [id, { id, visibility: 'authenticated', requiredRoles: ['walks.private_photos'], custom: { reviewStatus: 'unreviewed' } }]))
+  const assets = Object.fromEntries(['a', 'b'].map(id => [id, { id, visibility: 'authenticated', requiredRoles: ['walks.private_photos'], custom: { reviewStatus: 'unreviewed' }, variants: { thumb: { url: `/v1/assets/${id}/variants/thumb` }, display: { url: `/v1/assets/${id}/variants/display` } } }]))
   let failB = false
   globalThis.fetch = async (url, options = {}) => {
     const id = /\/assets\/([^/]+)/.exec(url)?.[1]
+    if (url.includes('/v1/assets?')) return { ok: true, json: async () => ({ assets: Object.values(assets) }) }
     if (options.method === 'PATCH') {
       if (failB && id === 'b') return { ok: false, status: 500, json: async () => ({ error: 'temporary error' }) }
       assets[id] = { ...assets[id], ...JSON.parse(options.body) }
     }
-    return { ok: true, json: async () => id === 'manifest' ? { photos: ['a', 'b'].map(assetId => ({ assetId })) } : assets[id], blob: async () => new Blob(['image']) }
+    return { ok: true, json: async () => assets[id], blob: async () => new Blob(['image']) }
   }
   const grid = new Element(), reviewRoot = new Element(), reviewToggle = new Element()
   const gallery = setupWalkPhotos({ grid, reviewRoot, reviewToggle, empty: new Element(), note: new Element(), getAccessToken: () => 'token', getRoles: () => ['media.editor'] })
@@ -113,5 +118,30 @@ test('bulk review selects all, saves public/private, and leaves failed photos se
   await gallery.render({ ...walk, id: '456' })
   assert.equal(reviewRoot.dataset.open, 'false')
   assert.ok(tool('0 selected'))
+  gallery.clear()
+})
+
+test('signed-out visitors use the same live listing and receive only the public result', async t => {
+  const originals = { document: globalThis.document, window: globalThis.window, fetch: globalThis.fetch }
+  globalThis.document = { body: new Element(), createElement: () => new Element() }
+  globalThis.window = { location: { hostname: 'walks.ashterism.com' } }
+  t.after(() => Object.assign(globalThis, originals))
+  const calls = []
+  globalThis.fetch = async (url, options = {}) => {
+    calls.push({ url, options })
+    return { ok: true, json: async () => ({ assets: [{
+      id: 'public-photo', visibility: 'public', caption: '', alt: 'Ridge', custom: { reviewStatus: 'keep' },
+      variants: { thumb: { url: '/v1/assets/public-photo/variants/thumb' }, display: { url: '/v1/assets/public-photo/variants/display' } },
+    }] }) }
+  }
+  const grid = new Element()
+  const gallery = setupWalkPhotos({ grid, reviewRoot: new Element(), reviewToggle: new Element(), empty: new Element(), note: new Element(), getAccessToken: () => null, getRoles: () => [] })
+  await gallery.render({ id: '24755894108', photos: [], photoManifestAssetId: 'legacy-manifest' })
+  assert.equal(grid.children.length, 1)
+  assert.match(calls[0].url, /siteId=ashterism-walks/)
+  assert.match(calls[0].url, /objectType=walk/)
+  assert.match(calls[0].url, /objectId=24755894108/)
+  assert.equal(calls[0].options.cache, 'no-store')
+  assert.equal(calls[0].options.headers.Authorization, undefined)
   gallery.clear()
 })

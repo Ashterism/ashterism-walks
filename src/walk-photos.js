@@ -21,6 +21,9 @@ export const mediaRequestUrl = (path, location = window.location) => {
 
 const privateManifestPath = (assetId) => `/v1/assets/${assetId}/content`
 const privateDisplayPath = (assetId) => `/v1/assets/${assetId}/variants/display`
+const walkAssetsPath = (walkId) => `/v1/assets?${new URLSearchParams({
+  siteId: 'ashterism-walks', objectType: 'walk', objectId: String(walkId),
+})}`
 
 export const privatePhotoFailureFor = (error) => {
   if (error.status === 401) return {
@@ -36,7 +39,7 @@ export const privatePhotoFailureFor = (error) => {
   return {
     title: 'Private photographs could not be loaded',
     copy: error.status
-      ? `The ${error.stage === 'manifest' ? 'photo list' : 'image'} request returned ${error.status}. Your sign-in is still active.`
+      ? `The ${error.stage === 'manifest' || error.stage === 'gallery' ? 'photo list' : 'image'} request returned ${error.status}. Your sign-in is still active.`
       : 'The media request could not complete. Your sign-in is still active; please try again shortly.',
     note: ` · private photographs unavailable${error.status ? ` (${error.stage}: ${error.status})` : ' (connection failed)'}`,
   }
@@ -311,53 +314,83 @@ export const setupWalkPhotos = ({
     if (localSession && renderLocalReview(localSession, walk)) return
 
     const token = getAccessToken?.()
-    if (!walk.photoManifestAssetId || !token) {
-      display(
-        publicPhotos,
-        walk.photoManifestAssetId ? ' · sign in for private photographs' : '',
-      )
-      return
-    }
-
     emptyTitle.textContent = 'Loading this walk’s photographs'
-    emptyCopy.textContent = 'Fetching private photographs securely using your sign-in.'
-    display(publicPhotos, ' · loading private photographs…')
+    emptyCopy.textContent = 'Loading the current gallery from Ashterix Media.'
+    display([], ' · loading photographs…')
     try {
-      const manifestResponse = await fetch(
-        mediaRequestUrl(privateManifestPath(walk.photoManifestAssetId)),
-        { headers: { Authorization: `Bearer ${token}` }, cache: 'no-store' },
-      )
-      assertMediaResponse(manifestResponse, 'manifest')
-      const manifest = await manifestResponse.json()
-      const sources = [...new Map([...publicPhotos.filter(photo => photo.assetId), ...(manifest.photos ?? [])]
-        .map(photo => [photo.assetId, photo])).values()]
-      const privatePhotos = await Promise.all(
-        sources.map(async (photo) => {
+      const headers = token ? { Authorization: `Bearer ${token}` } : {}
+      let response = await fetch(mediaRequestUrl(walkAssetsPath(walk.id)), { headers, cache: 'no-store' })
+      let authNote = ''
+      if (token && response.status === 401) {
+        response = await fetch(mediaRequestUrl(walkAssetsPath(walk.id)), { cache: 'no-store' })
+        authNote = ' · private photo sign-in needs refreshing'
+      }
+      if (response.status === 404) {
+        // Keep the previous deployment-backed gallery available until the Media
+        // listing route is deployed and verified.
+        if (!walk.photoManifestAssetId || !token) {
+          display(publicPhotos, walk.photoManifestAssetId ? ' · sign in for private photographs' : '')
+          return
+        }
+        const manifestResponse = await fetch(
+          mediaRequestUrl(privateManifestPath(walk.photoManifestAssetId)),
+          { headers: { Authorization: `Bearer ${token}` }, cache: 'no-store' },
+        )
+        assertMediaResponse(manifestResponse, 'manifest')
+        const manifest = await manifestResponse.json()
+        const sources = [...new Map([...publicPhotos.filter(photo => photo.assetId), ...(manifest.photos ?? [])]
+          .map(photo => [photo.assetId, photo])).values()]
+        loadedPhotos = await Promise.all(sources.map(async photo => {
           const metadataResponse = await fetch(mediaRequestUrl(`/v1/assets/${photo.assetId}`), {
             headers: { Authorization: `Bearer ${token}` }, cache: 'no-store',
           })
           assertMediaResponse(metadataResponse, 'image')
           const currentPhoto = photoFromAsset(photo, await metadataResponse.json())
-          const response = await fetch(mediaRequestUrl(privateDisplayPath(photo.assetId)), {
-            headers: { Authorization: `Bearer ${token}` },
-            cache: 'no-store',
+          const imageResponse = await fetch(mediaRequestUrl(privateDisplayPath(photo.assetId)), {
+            headers: { Authorization: `Bearer ${token}` }, cache: 'no-store',
           })
-          assertMediaResponse(response, 'image')
-          const url = URL.createObjectURL(await response.blob())
+          assertMediaResponse(imageResponse, 'image')
+          const url = URL.createObjectURL(await imageResponse.blob())
           objectUrls.push(url)
           return { ...currentPhoto, url }
-        }),
-      )
+        }))
+        loadedPhotos = [...publicPhotos.filter(photo => !photo.assetId), ...loadedPhotos]
+      } else {
+        assertMediaResponse(response, 'gallery')
+        const listing = await response.json()
+        loadedPhotos = await Promise.all((listing.assets ?? []).map(async asset => {
+          const photo = photoFromAsset({
+            assetId: asset.id,
+            candidateId: asset.custom?.candidateId,
+            capturedAt: asset.custom?.capturedAt,
+            url: asset.variants?.thumb?.url ?? asset.variants?.display?.url,
+            fullUrl: asset.variants?.display?.url,
+          }, asset)
+          const displayPath = asset.variants?.display?.url
+          if (!displayPath) return null
+          if (asset.visibility === 'public') {
+            return { ...photo, url: mediaRequestUrl(photo.url), fullUrl: mediaRequestUrl(displayPath) }
+          }
+          if (!token) return null
+          const imageResponse = await fetch(mediaRequestUrl(displayPath), {
+            headers: { Authorization: `Bearer ${token}` }, cache: 'no-store',
+          })
+          assertMediaResponse(imageResponse, 'image')
+          const url = URL.createObjectURL(await imageResponse.blob())
+          objectUrls.push(url)
+          return { ...photo, url, fullUrl: url }
+        })).then(photos => photos.filter(Boolean))
+      }
       if (request !== renderRequest) return
-      loadedPhotos = [...publicPhotos.filter(photo => !photo.assetId), ...privatePhotos]
+      display(loadedPhotos, token ? authNote : ' · sign in for private photographs')
       renderMediaReview(walk)
     } catch (error) {
-      console.error('Could not load private photographs', error)
+      console.error('Could not load walk photographs', error)
       if (request === renderRequest) {
         const failure = privatePhotoFailureFor(error)
         emptyTitle.textContent = failure.title
         emptyCopy.textContent = failure.copy
-        display(publicPhotos, failure.note)
+        display([], failure.note)
       }
     }
   }
@@ -385,12 +418,11 @@ export const setupWalkPhotos = ({
       if (currentWalkId === walk.id) reviewMessage = failures.length
         ? `${saved} saved; ${failures.length} could not be saved. ${failures[0]}`
         : (() => {
-          const eta = publicPhotoEta()
-          return `Saved ${saved} ${saved === 1 ? 'photograph' : 'photographs'}. Expected publicly by about ${eta.expectedLabel}; allow until ${eta.bufferedLabel} before checking.`
+          return `Saved ${saved} ${saved === 1 ? 'photograph' : 'photographs'}. Refreshing the gallery now.`
         })()
     } finally {
       savingReview = false
-      if (currentWalkId === walk.id) renderMediaReview(walk)
+      if (currentWalkId === walk.id) await render(walk)
     }
   }
 
