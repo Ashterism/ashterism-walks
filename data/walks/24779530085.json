@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "24779530085",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public",
+    "photos": [],
+    "postRun": true
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "24779530085"
+    },
+    "intervals": {
+      "activityId": "i199070199",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "15f9e4af7e7faa79ba20c65f150c9cf794711baab5af92f5988572013be2e1ba",
+      "snapshot": {
+        "name": "Mialet Walking",
+        "type": "Walk",
+        "startDate": "2026-10-19T13:56:43Z",
+        "startDateLocal": "2026-10-19T15:56:43",
+        "distanceM": 2444.63,
+        "movingTimeSeconds": 1439,
+        "elapsedTimeSeconds": 1448,
+        "ascentM": 13,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "c169e81f821bc192f2500490acf8bf81fd5f491b9017259d2d1abc7b3d8a632c",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "c169e81f821bc192f2500490acf8bf81fd5f491b9017259d2d1abc7b3d8a632c",
+        "source": "intervals",
+        "capturedAt": "2026-10-19T15:00:24.417Z"
+      }
+    ],
+    "bounds": [
+      0.9176028147339821,
+      45.54906075820327,
+      0.9289780631661415,
+      45.55896372534335
+    ],
+    "start": [
+      0.9285776596516371,
+      45.556999174878
+    ],
+    "finish": [
+      0.9176028147339821,
+      45.54906075820327
+    ],
+    "descentM": 15
+  },
+  "review": []
+}
