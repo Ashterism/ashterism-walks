@@ -1,7 +1,39 @@
 {
-  "walkCount": 124,
+  "walkCount": 125,
   "skippedWithoutRoute": 8,
   "walks": [
+    {
+      "id": "24906433255",
+      "activity": "walking",
+      "postRun": true,
+      "name": "Abu Dhabi Walking",
+      "date": "2026-10-30T14:54:41Z",
+      "startDateLocal": "2026-10-30T18:54:41",
+      "distanceKm": 1.01,
+      "movingTimeSeconds": 679,
+      "elapsedTimeSeconds": 681,
+      "ascentM": 3,
+      "descentM": 1,
+      "providers": [
+        "Garmin"
+      ],
+      "photos": [],
+      "routeUrl": "/data/routes/24906433255.geojson?v=1b724a5a100e9554ce2bb9c85f4fff2918cdbed5e1f6db558e8d71cfb6dad3c2",
+      "bounds": [
+        54.59251779131591,
+        24.485176065936685,
+        54.599254578351974,
+        24.489562986418605
+      ],
+      "start": [
+        54.59251779131591,
+        24.48883811943233
+      ],
+      "finish": [
+        54.59837716072798,
+        24.485509833320975
+      ]
+    },
     {
       "id": "24779530085",
       "activity": "walking",

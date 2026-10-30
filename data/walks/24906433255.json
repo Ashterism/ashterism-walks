@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "24906433255",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public",
+    "photos": [],
+    "postRun": true
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "24906433255"
+    },
+    "intervals": {
+      "activityId": "i203597105",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "a625a20d84434bad840394629192dbde2568aaa38fabfae36a8eea541c2ba0de",
+      "snapshot": {
+        "name": "Abu Dhabi Walking",
+        "type": "Walk",
+        "startDate": "2026-10-30T14:54:41Z",
+        "startDateLocal": "2026-10-30T18:54:41",
+        "distanceM": 1005.82,
+        "movingTimeSeconds": 679,
+        "elapsedTimeSeconds": 681,
+        "ascentM": 3,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "1b724a5a100e9554ce2bb9c85f4fff2918cdbed5e1f6db558e8d71cfb6dad3c2",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "1b724a5a100e9554ce2bb9c85f4fff2918cdbed5e1f6db558e8d71cfb6dad3c2",
+        "source": "intervals",
+        "capturedAt": "2026-10-30T16:00:31.235Z"
+      }
+    ],
+    "bounds": [
+      54.59251779131591,
+      24.485176065936685,
+      54.599254578351974,
+      24.489562986418605
+    ],
+    "start": [
+      54.59251779131591,
+      24.48883811943233
+    ],
+    "finish": [
+      54.59837716072798,
+      24.485509833320975
+    ],
+    "descentM": 1
+  },
+  "review": []
+}
