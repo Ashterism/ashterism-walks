@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="Plan the drive from Mialet to Ouistreham, ferry to Portsmouth and onward drive to Torquay." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/trips/assets/trips.css" />
+    <script src="/trips/assets/france-to-stmarychurch.js" defer></script>
+    <title>France to St Marychurch · Trips</title>
+  </head>
+  <body>
+    <main class="page">
+      <a class="back" href="/trips/">← All trips</a>
+      <header class="hero">
+        <p class="eyebrow">23–29 November 2026 · One way</p>
+        <h1>France to<br class="small-break" /> St Marychurch</h1>
+        <p class="intro">A road, a crossing, then the last stretch home.</p>
+        <div class="route-line" aria-label="Mialet to Ouistreham to Portsmouth to Torquay">
+          <span>Mialet</span><i></i><span>Ouistreham</span><i></i><span>Portsmouth</span><i></i><span>Torquay</span>
+        </div>
+      </header>
+
+      <section class="planner card" aria-labelledby="planner-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">Your plan</p><h2 id="planner-title">Move the times around</h2></div>
+          <p class="zone-note">France is CET (UTC+1); the UK is GMT (UTC+0).</p>
+        </div>
+        <div class="controls">
+          <label>Drive starts in France on<input id="start-date" type="date" min="2026-11-23" max="2026-11-29" value="2026-11-24" /></label>
+          <label>At<input id="start-time" type="time" value="07:00" /></label>
+          <label>Drive to port estimate<input id="drive-france" type="number" min="1" max="18" step="0.25" value="6.5" /><small>hours · check Google Maps before setting off</small></label>
+          <label>Ferry date<input id="ferry-date" type="date" min="2026-11-23" max="2026-11-29" value="2026-11-24" /></label>
+          <label class="wide">Caen → Portsmouth sailing<select id="sailing"></select></label>
+          <label>Time to unload after landing<input id="unload-time" type="number" min="0" max="180" step="5" value="30" /><small>minutes · planning allowance</small></label>
+          <label>Drive to Torquay estimate<input id="drive-uk" type="number" min="1" max="10" step="0.25" value="3.75" /><small>hours · check Google Maps before setting off</small></label>
+        </div>
+        <p class="plan-alert" id="plan-alert" role="status" aria-live="polite"></p>
+        <ol class="timeline" id="timeline" aria-live="polite"></ol>
+        <p class="small-note">The two drive durations are editable planning estimates; Google Maps shows the current route and traffic estimate. Ferry times are local at each port. Vehicle check-in at Ouistreham is at least 60 minutes before sailing (90 minutes with a pet); use the time on your ticket if it asks you to arrive earlier.</p>
+      </section>
+
+      <section class="leg card">
+        <div class="leg-title"><span class="leg-number">01</span><div><p class="eyebrow">Drive · France</p><h2>Mialet to Ouistreham</h2></div></div>
+        <p class="address">Imp. de Grafeuille, 24450 Mialet → Brittany Ferries terminal, Ouistreham (Caen)</p>
+        <div class="map-wrap"><iframe title="Google Maps directions from Mialet to Brittany Ferries Caen terminal" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?output=embed&amp;saddr=Imp.%20de%20Grafeuille%2C%2024450%20Mialet%2C%20France&amp;daddr=Brittany%20Ferries%20Terminal%2C%2014150%20Ouistreham%2C%20France&amp;dirflg=d"></iframe></div>
+        <a class="map-link" target="_blank" rel="noreferrer" href="https://www.google.com/maps/dir/?api=1&amp;origin=Imp.%20de%20Grafeuille%2C%2024450%20Mialet%2C%20France&amp;destination=Brittany%20Ferries%20Terminal%2C%2014150%20Ouistreham%2C%20France&amp;travelmode=driving">Open route options in Google Maps ↗</a>
+      </section>
+
+      <section class="leg card ferry-card">
+        <div class="leg-title"><span class="leg-number">02</span><div><p class="eyebrow">Ferry · France to England</p><h2>Caen (Ouistreham) to Portsmouth</h2></div></div>
+        <p class="address">Brittany Ferries · Caen/Ouistreham → Portsmouth (the supplied screenshots show the reverse direction). Around 6 hours by day; the overnight crossing is longer.</p>
+        <div class="fare-grid" aria-label="Official Brittany Ferries advertised calendar fares">
+          <div><b>Mon 23</b><span>from £134</span></div><div><b>Tue 24</b><span>from £78</span></div><div><b>Wed 25</b><span>from £134</span></div><div><b>Thu 26</b><span>from £78</span></div><div><b>Fri 27</b><span>from £153</span></div><div><b>Sat 28</b><span>from £134</span></div><div><b>Sun 29</b><span>from £134</span></div>
+        </div>
+        <p class="small-note">Official date-level “from” prices shown in the Brittany Ferries booking calendar on 12 Nov 2026, for a standard car and two people. They can change and do not confirm space on a particular sailing; cabin, vehicle and passenger details affect the total.</p>
+        <a class="map-link" target="_blank" rel="noreferrer" href="https://www.brittany-ferries.co.uk/journey-planner?ap=GBPME&amp;ca=CAR&amp;ct=BOTH&amp;cv=false&amp;date=2026-11-24&amp;dp=FROUI&amp;pa=false&amp;ts=CAR">Check Caen → Portsmouth sailings and live price with Brittany Ferries ↗</a>
+      </section>
+
+      <section class="leg card">
+        <div class="leg-title"><span class="leg-number">03</span><div><p class="eyebrow">Drive · England</p><h2>Portsmouth to Torquay</h2></div></div>
+        <p class="address">Portsmouth International Port → 8 Livvy Dean, St Marychurch, Torquay TQ1 4FY</p>
+        <div class="map-wrap"><iframe title="Google Maps directions from Portsmouth International Port to 8 Livvy Dean, Torquay" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?output=embed&amp;saddr=Portsmouth%20International%20Port%2C%20George%20Byng%20Way%2C%20Portsmouth%20PO2%208SP&amp;daddr=8%20Livvy%20Dean%2C%20St%20Marychurch%2C%20Torquay%20TQ1%204FY&amp;dirflg=d"></iframe></div>
+        <a class="map-link" target="_blank" rel="noreferrer" href="https://www.google.com/maps/dir/?api=1&amp;origin=Portsmouth%20International%20Port%2C%20George%20Byng%20Way%2C%20Portsmouth%20PO2%208SP&amp;destination=8%20Livvy%20Dean%2C%20St%20Marychurch%2C%20Torquay%20TQ1%204FY&amp;travelmode=driving">Open route options in Google Maps ↗</a>
+      </section>
+
+      <footer class="sources"><p>Schedule pattern checked against the winter 2026/27 timetable on 2 Nov 2026. Particular dates can vary, so confirm before booking.</p><a href="https://www.brittany-ferries.co.uk/ferry-routes/ferries-france/caen-portsmouth/about">Brittany Ferries · Caen to Portsmouth</a><a href="https://portsmouth-ferries.co.uk/timetable/">Winter timetable reference</a><a href="https://www.brittany-ferries.co.uk/information/travel-advice/travelling-with-a-vehicle">Brittany Ferries · vehicle check-in</a></footer>
+    </main>
+  </body>
+</html>
