@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "25083291224",
+  "local": {
+    "name": null,
+    "activityType": null,
+    "visibility": "public",
+    "photos": []
+  },
+  "sources": {
+    "garmin": {
+      "activityId": "25083291224"
+    },
+    "intervals": {
+      "activityId": "i210220908",
+      "status": "active",
+      "statusChangedAt": null,
+      "fingerprint": "6b26f33af3ed9dc9597a0bc21bdba64722730cabfd0f8cb59c79ef12bfae5c9a",
+      "snapshot": {
+        "name": "Al Ain Hiking",
+        "type": "Hike",
+        "startDate": "2026-11-15T06:02:29Z",
+        "startDateLocal": "2026-11-15T10:02:29",
+        "distanceM": 4191.26,
+        "movingTimeSeconds": 3598,
+        "elapsedTimeSeconds": 8262,
+        "ascentM": 565,
+        "source": "GARMIN_CONNECT"
+      }
+    }
+  },
+  "route": {
+    "activeVersion": "8b0e4d2e8e831df77b3a8a9a6c087680a7d952aa69bd1a6aa89d5ac74383f11c",
+    "source": "intervals",
+    "status": "current",
+    "versions": [
+      {
+        "checksum": "8b0e4d2e8e831df77b3a8a9a6c087680a7d952aa69bd1a6aa89d5ac74383f11c",
+        "source": "intervals",
+        "capturedAt": "2026-11-15T08:30:23.983Z"
+      }
+    ],
+    "bounds": [
+      55.74863813817501,
+      24.082946721464396,
+      55.76513288542628,
+      24.100883407518268
+    ],
+    "start": [
+      55.74937432073057,
+      24.100883407518268
+    ],
+    "finish": [
+      55.76361844316125,
+      24.083852721378207
+    ],
+    "descentM": 32
+  },
+  "review": []
+}
