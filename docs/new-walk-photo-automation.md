@@ -142,6 +142,30 @@ month are still absent, a pending walk requests another refresh after thirty
 minutes, allowing for late iCloud uploads. Photos remain authenticated/private
 and unreviewed; the public photo array remains empty until review.
 
+## iCloud authentication alerts
+
+The ashserver watcher uses the existing Healthchecks check whose private ping URL
+is stored in `/home/ash/.config/photo-ingest/healthchecks-icloud-url`. The
+source-controlled wrapper preserves its success heartbeat and now sends that
+same check a failure signal when iCloudPD reports either
+`Authentication required for Account` or `Invalid email/password combination`.
+Other download failures do not produce an authentication alert. The failure
+ping includes the recovery command, but never includes the Apple password or
+the private Healthchecks URL. Healthchecks sends the alert through the existing
+check integrations.
+
+To reauthenticate, SSH to ashserver and run:
+
+```sh
+photo-ingest icloud-auth
+```
+
+Enter the Apple password and any verification code at the terminal prompt.
+The command retains iCloud session cookies; it does not store the Apple
+password. The next successful full watcher pass sends the existing success
+heartbeat and returns the Healthchecks check to its normal state. A successful
+targeted window download alone does not clear the full-watcher check.
+
 ## Deploy the refresh
 
 The source is committed to `Ashterism/ashterism-walks`. The ashserver photo-tools
