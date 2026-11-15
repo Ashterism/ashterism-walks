@@ -147,17 +147,15 @@ run_icloudpd() {
     fi
   fi
 
-  if [[ "$mode" == watch-pass ]]; then
-    # tee writes asynchronously. Wait briefly for a definitive auth message
-    # before deciding whether this needs the immediate Healthchecks alert.
-    for ((i=0; i<20; i++)); do
-      if grep -Eiq 'Authentication required for Account\\.|Invalid email/password combination' "$log_file"; then
-        notify_authentication_failure
-        break
-      fi
-      sleep 0.25
-    done
-  fi
+  # tee writes asynchronously. Wait briefly for a definitive auth message
+  # before deciding whether this needs the immediate Healthchecks alert.
+  for ((i=0; i<20; i++)); do
+    if grep -Eiq 'Authentication required for Account\\.|Invalid email/password combination' "$log_file"; then
+      notify_authentication_failure
+      break
+    fi
+    sleep 0.25
+  done
   return "$status"
 }
 
