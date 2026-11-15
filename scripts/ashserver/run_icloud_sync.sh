@@ -109,10 +109,90 @@ docker_options=(
   -v "$inbox_dir:/inbox"
   -v /mnt/photo/Photos:/mnt/photo/Photos:ro
 )
-if [[ -t 0 ]]; then
-  docker_options+=(-it)
-  docker run "${docker_options[@]}" "$image" icloudpd "${options[@]}"
-else
-  docker run "${docker_options[@]}" "$image" icloudpd "${options[@]}" </dev/null
-fi
+notify_authentication_failure() {
+  local ping_file="$config_dir/healthchecks-icloud-url"
+  local monitor_log=/home/ash/photo-ingest-reports/scheduler/healthchecks.log
+  local ping_url
+  if [[ ! -s "$ping_file" ]]; then
+    echo "$(date --iso-8601=seconds) iCloud auth failure alert skipped: Healthchecks URL missing" >> "$monitor_log"
+    return 0
+  fi
+
+  ping_url=$(<"$ping_file")
+  ping_url=${ping_url%/}
+  if curl -fsS --max-time 10 --retry 2 \
+      -o /dev/null \
+      --data-binary "iCloud authentication is required. SSH to ashserver and run: photo-ingest icloud-auth. Enter the Apple password and any verification code in that terminal; the password is not sent to Healthchecks." \
+      "$ping_url/fail"; then
+    echo "iCloud Healthchecks authentication failure alert sent"
+  else
+    echo "$(date --iso-8601=seconds) iCloud Healthchecks authentication failure ping failed" >> "$monitor_log"
+  fi
+}
+
+run_icloudpd() {
+  local status
+  if [[ -t 0 ]]; then
+    docker_options+=(-it)
+    if docker run "${docker_options[@]}" "$image" icloudpd "${options[@]}"; then
+      return 0
+    else
+      status=$?
+    fi
+  else
+    if docker run "${docker_options[@]}" "$image" icloudpd "${options[@]}" </dev/null; then
+      return 0
+    else
+      status=$?
+    fi
+  fi
+
+  if [[ "$mode" == watch-pass ]]; then
+    # tee writes asynchronously. Wait briefly for a definitive auth message
+    # before deciding whether this needs the immediate Healthchecks alert.
+    for ((i=0; i<20; i++)); do
+      if grep -Eiq 'Authentication required for Account\\.|Invalid email/password combination' "$log_file"; then
+        notify_authentication_failure
+        break
+      fi
+      sleep 0.25
+    done
+  fi
+  return "$status"
+}
+
+run_icloudpd
 echo "Finished iCloud $mode download at $(date --iso-8601=seconds)"
+
+# Only a genuinely completed watcher pass counts as success.
+# An Apple indexing response must never generate a success heartbeat.
+if [[ "$mode" == watch-pass ]]; then
+  ping_file="$config_dir/healthchecks-icloud-url"
+  monitor_log=/home/ash/photo-ingest-reports/scheduler/healthchecks.log
+
+  # Allow the existing tee logger to finish writing.
+  for ((i=0; i<20; i++)); do
+    if grep -qF "All photos and videos have been downloaded" "$log_file"; then
+      break
+    fi
+    sleep 0.25
+  done
+
+  if grep -qF "All photos and videos have been downloaded" "$log_file" \
+      && ! grep -qF "has not finished indexing yet" "$log_file"; then
+    if [[ -s "$ping_file" ]]; then
+      if curl -fsS --max-time 10 --retry 2 \
+          -o /dev/null \
+          --data-binary "iCloud watch-pass completed successfully at $(date --iso-8601=seconds)" \
+          "$(<"$ping_file")"; then
+        echo "iCloud Healthchecks success heartbeat sent"
+      else
+        echo "$(date --iso-8601=seconds) iCloud Healthchecks ping failed" >> "$monitor_log"
+      fi
+    else
+      echo "$(date --iso-8601=seconds) iCloud Healthchecks URL missing" >> "$monitor_log"
+    fi
+  else
+    echo "iCloud check incomplete; no success heartbeat sent"
+  fi
+fi
