@@ -11,6 +11,11 @@ on:
         required: false
         type: boolean
         default: false
+      force_deploy:
+        description: Publish current main without running provider sync
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -19,6 +24,8 @@ permissions:
 
 jobs:
   build:
+    outputs:
+      should_publish: ${{ steps.publication.outputs.should_publish }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     # Serialize repository writes without holding the lock during Pages deployment.
@@ -27,11 +34,18 @@ jobs:
       cancel-in-progress: false
 
     steps:
+      - name: Reject incompatible manual inputs
+        if: github.event_name == 'workflow_dispatch' && inputs.force_deploy && (inputs.refresh_latest || github.ref != 'refs/heads/main')
+        run: |
+          echo "force_deploy requires main and cannot be combined with refresh_latest" >&2
+          exit 1
+
       - name: Check out the site
         uses: actions/checkout@v6
         with:
           # Queued dispatches may predate the previous sync's data commit.
-          ref: ${{ github.ref_name }}
+          # Deploy-only recovery always targets the current production branch.
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.force_deploy && 'main' || github.ref_name }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
@@ -43,19 +57,19 @@ jobs:
         run: npm ci
 
       - name: Run ordinary sync
-        if: github.event_name == 'workflow_dispatch' && !inputs.refresh_latest
+        if: github.event_name == 'workflow_dispatch' && !inputs.refresh_latest && !inputs.force_deploy
         run: npm run sync
         env:
           INTERVALS_ICU_API_KEY: ${{ secrets.INTERVALS_ICU_API_KEY }}
 
       - name: Refresh latest edited activity
-        if: github.event_name == 'workflow_dispatch' && inputs.refresh_latest
+        if: github.event_name == 'workflow_dispatch' && inputs.refresh_latest && !inputs.force_deploy
         run: npm run sync:latest
         env:
           INTERVALS_ICU_API_KEY: ${{ secrets.INTERVALS_ICU_API_KEY }}
 
       - name: Commit changed route data
-        if: github.event_name != 'push'
+        if: github.event_name == 'workflow_dispatch' && !inputs.force_deploy
         run: |
           if [ -z "$(git status --porcelain -- data public/data)" ]; then
             echo "No route changes"
@@ -68,13 +82,48 @@ jobs:
           git commit -m "Update Garmin walking routes"
           git push
 
+      - name: Check live publication
+        id: publication
+        shell: bash
+        run: |
+          fingerprint="$(node scripts/publication-revision.js fingerprint)"
+          commit="$(git rev-parse HEAD)"
+          echo "fingerprint=$fingerprint" >> "$GITHUB_OUTPUT"
+          echo "commit=$commit" >> "$GITHUB_OUTPUT"
+
+          should_publish=true
+          # Main pushes keep their normal publish behaviour. Explicit recovery
+          # bypasses the marker check and never runs provider sync.
+          if [ "${GITHUB_EVENT_NAME}" != push ] && [ "${{ inputs.force_deploy || false }}" != true ]; then
+            marker_url="https://walks.ashterism.com/ashterism-revision.json?run=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+            if marker="$(curl --fail --silent --max-time 5 -H 'Cache-Control: no-cache' "$marker_url" 2>/dev/null)"; then
+              if printf '%s' "$marker" | node scripts/publication-revision.js matches "$fingerprint"; then
+                should_publish=false
+              fi
+            fi
+          fi
+
+          echo "should_publish=$should_publish" >> "$GITHUB_OUTPUT"
+          if [ "$should_publish" = true ]; then
+            echo "Live publication is missing, invalid, or differs; publishing for recovery."
+          else
+            echo "Live publication matches; skipping Pages build and deploy."
+          fi
+
       - name: Build the site
+        if: steps.publication.outputs.should_publish == 'true'
         run: npm run build
 
+      - name: Write publication marker
+        if: steps.publication.outputs.should_publish == 'true'
+        run: node scripts/publication-revision.js write dist/ashterism-revision.json
+
       - name: Configure GitHub Pages
+        if: steps.publication.outputs.should_publish == 'true'
         uses: actions/configure-pages@v5
 
       - name: Upload GitHub Pages artifact
+        if: steps.publication.outputs.should_publish == 'true'
         uses: actions/upload-pages-artifact@v4
         with:
           path: dist
@@ -85,6 +134,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    if: needs.build.result == 'success' && needs.build.outputs.should_publish == 'true'
     timeout-minutes: 10
     # A newer build supersedes a stuck/waiting deployment, never the sync job.
     concurrency:

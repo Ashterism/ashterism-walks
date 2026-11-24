@@ -22,7 +22,7 @@ test('a waiting Pages deployment cannot hold the activity sync lock', () => {
 })
 
 test('queued syncs check out the branch head instead of the stale dispatch SHA', () => {
-  assert.match(build, /uses: actions\/checkout@v6\n        with:\n(?:          #.*\n)*          ref: \$\{\{ github.ref_name \}\}/)
+  assert.match(build, /uses: actions\/checkout@v6\n        with:\n(?:          #.*\n)*          ref: \$\{\{ github\.event_name == 'workflow_dispatch' && inputs\.force_deploy && 'main' \|\| github\.ref_name \}\}/)
 })
 
 test('Cloudflare remains the scheduler and sync retains permission to commit data', () => {
@@ -32,4 +32,19 @@ test('Cloudflare remains the scheduler and sync retains permission to commit dat
   assert.match(build, /run: npm run sync\n/)
   assert.match(build, /git add data public\/data\n/)
   assert.match(build, /git push\n/)
+})
+
+test('publication marker gates all Pages work and deploy-only recovery skips provider sync', () => {
+  assert.match(workflow, /^  push:\n    branches:\n      - main/m)
+  assert.match(workflow, /force_deploy:/)
+  assert.match(workflow, /inputs\.force_deploy && \(inputs\.refresh_latest \|\| github\.ref != 'refs\/heads\/main'\)/)
+  assert.match(workflow, /Run ordinary sync[\s\S]*if: github\.event_name == 'workflow_dispatch' && !inputs\.refresh_latest && !inputs\.force_deploy/)
+  assert.match(workflow, /git push\n/)
+  assert.match(workflow, /Check live publication[\s\S]*ashterism-revision\.json/)
+  assert.match(workflow, /\[ "\$\{GITHUB_EVENT_NAME\}" != push \]/)
+  assert.match(workflow, /inputs\.force_deploy \|\| false/)
+  assert.match(workflow, /Build the site\n        if: steps\.publication\.outputs\.should_publish == 'true'/)
+  assert.match(workflow, /Configure GitHub Pages\n        if: steps\.publication\.outputs\.should_publish == 'true'/)
+  assert.match(workflow, /Upload GitHub Pages artifact\n        if: steps\.publication\.outputs\.should_publish == 'true'/)
+  assert.match(workflow, /needs\.build\.outputs\.should_publish == 'true'/)
 })

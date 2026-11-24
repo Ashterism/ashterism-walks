@@ -24,6 +24,15 @@ export const dispatchSync = async (githubToken, fetchImpl = fetch) => {
   }
 }
 
+export const isDispatchHour = (scheduledTime) => {
+  const hour = Number(new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/London',
+    hour: '2-digit',
+    hourCycle: 'h23',
+  }).format(new Date(scheduledTime)))
+  return hour >= 6 && hour <= 23
+}
+
 export default {
   async fetch(request, env) {
     if (request && new URL(request.url).pathname === '/api/preferences') {
@@ -32,12 +41,16 @@ export default {
     return Response.json({
       service: 'ashterism-walks-sync',
       status: 'ok',
-      schedule: 'every 15 minutes',
+      schedule: 'hourly; dispatch 06:00–23:00 Europe/London',
     })
   },
 
   async scheduled(controller, env) {
     const startedAt = new Date(controller.scheduledTime).toISOString()
+    if (!isDispatchHour(controller.scheduledTime)) {
+      console.log(JSON.stringify({ event: 'sync_dispatch_skipped', startedAt, reason: 'outside_dispatch_window' }))
+      return
+    }
     console.log(JSON.stringify({ event: 'sync_dispatch_started', startedAt }))
 
     await dispatchSync(env.GITHUB_TOKEN)
