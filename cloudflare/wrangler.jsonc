@@ -7,7 +7,7 @@
   "kv_namespaces": [{ "binding": "WALK_PREFERENCES", "id": "8298aced912a4fe29fa441653d881643" }],
   "vars": { "WALKS_ORIGINS": "https://walks.ashterism.com,http://localhost:5173,http://127.0.0.1:5173" },
   "triggers": {
-    "crons": ["*/15 * * * *"]
+    "crons": ["0 * * * *"]
   },
   "observability": {
     "enabled": true,

@@ -222,4 +222,43 @@ canonical record and run `npm run catalogue`. The generated public field
 `postRun: true` makes a walking detail heading show `WALKING · POST-RUN` using
 the existing typography. No automatic detection or activity reclassification
 is performed. `npm run scheduler:deploy` deploys the existing Worker with its
-committed KV binding and preserves the 15-minute activity-sync cron.
+committed KV binding and hourly activity-sync cron.
+
+### Activity sync and site publishing
+
+The existing Cloudflare Worker checks hourly. It dispatches the GitHub sync
+workflow only when the scheduled hour falls between 06:00 and 23:00 in
+`Europe/London`; the schedule uses its intended time even if Cloudflare starts
+the event late. This reduces scheduled dispatches from 96 to 18 per day. Daytime
+activity updates can now take up to about an hour to appear; updates after 23:00
+wait until the 06:00 window. The separate HALMAN photo worker is unchanged.
+
+The workflow still syncs and reconciles on every ordinary manual dispatch. It
+checks the live site's small `ashterism-revision.json` marker against the
+checked-out build inputs. A match skips the Vite build and Pages jobs. A missing,
+invalid, unreachable or different marker causes a build and deploy, which also
+recovers from an interrupted publication. The marker records the build-input
+fingerprint and the actual checked-out commit; it contains no private data.
+Ordinary pushes to `main` still publish.
+
+Use **Run workflow** for manual sync or enable **Refresh the latest edited
+activity** when needed. If provider sync is unavailable but the current `main`
+site needs recovery, enable **Publish current main without running provider
+sync** (`force_deploy`). Do not combine it with refresh-latest. The deploy-only
+option still uses the normal Pages path and does not access provider credentials.
+Build/sync and Pages retain independent concurrency groups so a waiting Pages
+deployment cannot block the next sync.
+
+If an activity fails to appear, check the Cloudflare scheduled-dispatch logs,
+the GitHub sync run and commit/push result, and then the Pages publication. A
+successful data commit with an interrupted deployment is repaired by the next
+successful sync's marker check; `force_deploy` is the immediate recovery path.
+To roll back, revert the relevant source change and let the normal authorized
+release process publish it; if the Worker schedule itself needs rollback,
+redeploy the previous Worker version/configuration while retaining its current
+bindings and secrets.
+
+GitHub reports standard hosted runner jobs in this public repository as free.
+The repository billing view previously showed $26.90 gross metered usage and
+$28.31 free usage across repositories; those figures do not establish an
+account-level net charge or cash savings.
